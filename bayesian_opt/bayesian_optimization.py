@@ -30,7 +30,7 @@ print("deleted df sucessfully")
 
 ##################################
 
-n = 100
+n = 10
 df_pca, features_pca = dim_reduction(df1,features,n)
 del df1
 
@@ -65,7 +65,7 @@ params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500
 
 
 gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
-gbm_bo.maximize(init_points = 100, n_iter = 20) #
+gbm_bo.maximize(init_points = 10, n_iter = 5) #
 print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']

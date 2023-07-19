@@ -8,7 +8,7 @@ output_file = 'bayes_opt_output.txt'
 total_path = path + input_script
 
 # Execute the Python script and capture its output
-result = subprocess.run(['python', total_path], capture_output=True, text=True)
+result = subprocess.run([version, total_path], capture_output=True, text=True)
 output_text = result.stdout
 
 # Write the output to a text file

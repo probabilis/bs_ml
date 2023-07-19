@@ -47,8 +47,8 @@ def gbm_reg_bo(learning_rate,max_depth,n_estimators,colsample_bytree):
     X ...           input df / vector over the features room
     Y ...           target variables to learn the model
     ---------------
-    return: dupel
-    estimators & params from best model
+    return: scalar
+    score from best model
     """
     params_gbm = {}
     params_gbm['max_depth'] = round(max_depth)

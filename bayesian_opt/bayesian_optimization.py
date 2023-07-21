@@ -70,11 +70,9 @@ print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']
 params_gbm['max_depth'] = round(params_gbm['max_depth'])
-params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'])
+params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'], 1)
 print(params_gbm)
 
-
-#data = {"best_models": best_models, "times": times}
-data = pd.DataFrame(params_gbm)
-data.to_csv("round_infos.csv")
+data = pd.DataFrame([params_gbm])
+data.to_csv("round_infos_bayes.csv")
 

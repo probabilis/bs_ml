@@ -43,7 +43,7 @@ fig.set_size_inches(18,14)
 fig.tight_layout()
 plt.savefig("gbm_decision_tree_comparison.png")
 plt.show()
-
+print("hi")
 #############################
 max_depth = 1
 

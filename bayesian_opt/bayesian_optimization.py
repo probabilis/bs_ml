@@ -69,7 +69,8 @@ gbm_bo.maximize(init_points = 10, n_iter = 5) #
 print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']
-#params_gbm['max_depth'] = round(params_gbm['max_depth'])
+params_gbm['max_depth'] = round(params_gbm['max_depth'])
+params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'])
 print(params_gbm)
 
 

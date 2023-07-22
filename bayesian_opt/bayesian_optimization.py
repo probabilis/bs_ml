@@ -73,6 +73,11 @@ params_gbm['max_depth'] = round(params_gbm['max_depth'])
 params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'], 1)
 print(params_gbm)
 
+from datetime import time
+today = time.today()
+
+name = f"round_infos_bayes_{today}_n={n}"
+
 data = pd.DataFrame([params_gbm])
-data.to_csv("round_infos_bayes.csv")
+data.to_csv(name + ".csv")
 

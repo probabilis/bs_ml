@@ -79,5 +79,5 @@ today = time.today()
 name = f"round_infos_bayes_{today}_n={n}"
 
 data = pd.DataFrame([params_gbm])
-data.to_csv(name + ".csv")
+data.to_csv("output/" + name + ".csv")
 

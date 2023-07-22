@@ -1,5 +1,5 @@
 import subprocess
-from datetime import time
+from datetime import date
 
 version = "python3"
 
@@ -7,7 +7,7 @@ input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization.py'
 
 output_path = "outputs/"
-output_file = f'bayes_opt_output_{time.today()}.txt'
+output_file = f'bayes_opt_output_{date.today()}.txt'
 
 ###########################################
 

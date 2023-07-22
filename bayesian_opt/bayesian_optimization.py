@@ -7,6 +7,7 @@ import numpy as np
 from lightgbm import LGBMRegressor
 from bayes_opt import BayesianOptimization
 import time
+from datetime import date
 import os
 from sklearn.model_selection import cross_val_score
 from pca_dimensional_reduction import dim_reduction
@@ -73,8 +74,7 @@ params_gbm['max_depth'] = round(params_gbm['max_depth'])
 params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'], 1)
 print(params_gbm)
 
-from datetime import time
-today = time.today()
+today = date.today()
 
 name = f"round_infos_bayes_{today}_n={n}"
 

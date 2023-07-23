@@ -19,6 +19,10 @@ eras = df.erano
 
 ###########################
 
+df_, eras_ = era_splitting(df, eras)
+
+del df
+
 params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500,3000), "colsample_bytree":(0.1,0.8)}
 
 crossvalidators = [
@@ -37,6 +41,7 @@ def cross_validation(X,Y,crossvalidators):
         print('-------')
     return
 
+cross_validation(df_[features],df_[target], crossvalidators)
 
 
 

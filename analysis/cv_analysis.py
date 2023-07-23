@@ -35,6 +35,7 @@ def cross_validation(X,Y,crossvalidators):
         score = cross_val_score(LGBMRegressor(**params_gbm),X,Y, cv = cv, n_jobs = 1, groups = eras, scoring = metrics.make_scorer(correlation_score, greater_is_better = True))
         print(np.mean(score))
         print('-------')
+    return
 
 
 

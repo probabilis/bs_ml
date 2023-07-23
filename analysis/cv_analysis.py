@@ -32,6 +32,7 @@ path_params = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs
 params_gbm = pd.read_csv(path_params + "/round_infos_bayes_2023-07-22_n=10.csv")
 params_gbm.replace(0,float("NaN"), inplace = True)
 params_gbm.dropna(how = 'all', axis = 1, inplace = True)
+params_gbm = params_gbm.to_dict()
 print(params_gbm)
 
 ###########################

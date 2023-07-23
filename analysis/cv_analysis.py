@@ -5,10 +5,10 @@ from sklearn import model_selection, metrics
 from lightgbm import LGBMRegressor
 from sklearn.model_selection import cross_val_score
 
-sys.path.append('/bs_ml/')
+sys.path.append('../')
 from utils import path, features, target, eras, correlation_score
 
-sys.path.append('/bs_ml/preprocessing')
+#sys.path.append('/bs_ml/preprocessing')
 from preprocessing.cross_validators import era_splitting, TimeSeriesSplitGroups 
 
 

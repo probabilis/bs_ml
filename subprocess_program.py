@@ -10,7 +10,7 @@ input_path = "analysis/"
 input_file = 'cv_analysis.py'
 
 output_path = "outputs/"
-output_file = f'bayes_opt_output_{date.today()}.txt'
+output_file = f'cv_analysis_output_{date.today()}.txt'
 
 ###########################################
 

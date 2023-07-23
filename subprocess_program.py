@@ -3,8 +3,11 @@ from datetime import date
 
 version = "python3"
 
-input_path = "bayesian_opt/"
-input_file = 'bayesian_optimization.py'
+#input_path = "bayesian_opt/"
+#input_file = 'bayesian_optimization.py'
+
+input_path = "analysis/"
+input_file = 'cv_analysis.py'
 
 output_path = "outputs/"
 output_file = f'bayes_opt_output_{date.today()}.txt'

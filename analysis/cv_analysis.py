@@ -29,7 +29,7 @@ colnames = ["learning_rate","n_estimators","max_depth","colsample_bytree",]
 
 import os
 path_params = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml", "outputs")
-params_gbm = pd.read_csv(path_params + "/round_infos_bayes_2023-07-22_n=10.csv", names = colnames)
+params_gbm = pd.read_csv(path_params + "/round_infos_bayes_2023-07-22_n=10.csv", names = colnames, usecols = colnames)
 print(params_gbm)
 
 ###########################

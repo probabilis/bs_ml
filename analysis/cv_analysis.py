@@ -27,7 +27,7 @@ del df
 
 import os
 path_params = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml", "outputs")
-params_gbm = pd.read_csv("round_infos_bayes_2023-07-22_n=10.csv")
+params_gbm = pd.read_csv(path_params + "round_infos_bayes_2023-07-22_n=10.csv")
 print(params_gbm)
 
 ###########################

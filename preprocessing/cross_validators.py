@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
 from sklearn import model_selection
 
-def era_splitting(df, eras , window):
+def era_splitting(df, eras):
     """
     params: df, window 
     df ...           input df / vector over the features room

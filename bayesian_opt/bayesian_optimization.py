@@ -42,7 +42,7 @@ Y = df_pca[target]
 
 def gbm_reg_bo(learning_rate,max_depth,n_estimators,colsample_bytree):
     """
-    params: module, dict, df, df 
+    params: module, dict, df 
     regressor ...   type of regression module e.g.: CatBoost, LightGBM, XGBoost
     params ...      given hyperparameters to analyze
     X ...           input df / vector over the features room

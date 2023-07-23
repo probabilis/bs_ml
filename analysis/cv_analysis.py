@@ -23,8 +23,14 @@ df_, eras_ = era_splitting(df, eras)
 
 del df
 
-params_gbm = pd.read_csv("/outputs/round_infos_bayes_2023-07-22_n=10.csv")
+###########################
+
+import os
+path_params = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml", "outputs")
+params_gbm = pd.read_csv("round_infos_bayes_2023-07-22_n=10.csv")
 print(params_gbm)
+
+###########################
 
 crossvalidators = [
     model_selection.KFold(5),   #classical 5 kFold CV

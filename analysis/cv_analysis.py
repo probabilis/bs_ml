@@ -32,7 +32,7 @@ crossvalidators = [
     TimeSeriesSplitGroups(5) #classical time series split with eras + boundaries
 ]
 
-def cross_validation(X,Y,crossvalidators):
+def cross_validation(X,Y,eras, crossvalidators):
 
     for cv in crossvalidators:
         print(cv)
@@ -41,7 +41,7 @@ def cross_validation(X,Y,crossvalidators):
         print('-------')
     return
 
-cross_validation(df_[features],df_[target], crossvalidators)
+cross_validation(df_[features],df_[target],eras_, crossvalidators)
 
 
 

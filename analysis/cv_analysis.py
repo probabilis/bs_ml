@@ -23,7 +23,8 @@ df_, eras_ = era_splitting(df, eras)
 
 del df
 
-params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500,3000), "colsample_bytree":(0.1,0.8)}
+params_gbm = pd.read_csv("/outputs/outputs/round_infos_bayes_2023-07-22_n=10.csv")
+print(params_gbm)
 
 crossvalidators = [
     model_selection.KFold(5),   #classical 5 kFold CV

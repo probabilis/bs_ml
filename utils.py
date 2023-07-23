@@ -5,11 +5,6 @@ import numpy as np
 #initialization
 
 path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
-df = pd.read_parquet(path)
-features = [f for f in df if f.startswith("feature")]
-target = "target"
-df["erano"] = df.era.astype(int)
-eras = df.erano
 
 #functions
 

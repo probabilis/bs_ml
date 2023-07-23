@@ -6,15 +6,16 @@ from lightgbm import LGBMRegressor
 from sklearn.model_selection import cross_val_score
 
 sys.path.append('../')
-from utils import path, features, target, eras, correlation_score
-
-#sys.path.append('/bs_ml/preprocessing')
+from utils import path, correlation_score
 from preprocessing.cross_validators import era_splitting, TimeSeriesSplitGroups 
-
 
 ###########################
 
 df = pd.read_parquet(path)
+features = [f for f in df if f.startswith("feature")]
+target = "target"
+df["erano"] = df.era.astype(int)
+eras = df.erano
 
 ###########################
 

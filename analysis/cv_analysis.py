@@ -23,7 +23,7 @@ df_, eras_ = era_splitting(df, eras)
 
 del df
 
-params_gbm = pd.read_csv("/outputs/outputs/round_infos_bayes_2023-07-22_n=10.csv")
+params_gbm = pd.read_csv("/outputs/round_infos_bayes_2023-07-22_n=10.csv")
 print(params_gbm)
 
 crossvalidators = [

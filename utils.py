@@ -17,10 +17,21 @@ def correlation_score(y, y_pred):
 	return np.corrcoef(y, y_pred)[0,1]
 
 
+def get_biggest_change_features(corrs, n):
+    all_eras = corrs.index.sort_values()
+    h1_eras = all_eras[: len(all_eras) // 2]
+    h2_eras = all_eras[len(all_eras) // 2 :]
+
+    h1_corr_means = corrs.loc[h1_eras, :].mean()
+    h2_corr_means = corrs.loc[h2_eras, :].mean()
+
+    corr_diffs = h2_corr_means - h1_corr_means
+    worst_n = corr_diffs.abs().sort_values(ascending=False).head(n).index.tolist()
+    return worst_n7
+
 
 
 MODEL_FOLDER = "models"
-
 
 def save_model(model, mtype, params): 
     if mtype == "LGBM":
@@ -41,6 +52,7 @@ def save_model(model, mtype, params):
         except Exception as ex:
             pass
         model.save_model(f"{MODEL_FOLDER}/{mtype}_{params}.json", format = "json")
+
 
 
 

@@ -5,12 +5,12 @@ from sklearn import model_selection
 
 def era_splitting(df, eras):
     """
-    params: df, window 
+    params: df, eras 
     df ...           input df / vector over the features room
-    eras ...
+    eras ...         timeline in data
     window ...       overlapping window length
     ---------------
-    return: df
+    return: dupel -> reduced df with splitted eras
     """
     df = df[eras.isin(np.arange(1,575,4))]
     eras = eras[eras.isin(np.arange(1,575,4))]

@@ -1,0 +1,12 @@
+KFold(n_splits=5, random_state=None, shuffle=False)
+0.05035582061621226
+-------
+KFold(n_splits=5, random_state=None, shuffle=True)
+0.053941490255545024
+-------
+GroupKFold(n_splits=5)
+0.051890480693377615
+-------
+TimeSeriesSplitGroups(n_splits=5)
+0.04482068582308219
+-------

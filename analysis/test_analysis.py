@@ -1,6 +1,6 @@
-import pandas as pd 
-import numpy as np
-
+import sys
+import pandas as pd
+sys.path.append('../')
 from utils import path
 
 

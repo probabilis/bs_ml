@@ -7,11 +7,14 @@ import numpy as np
 
 path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
 
+###########
 #functions
+
 
 def numerai_score(y, y_pred):
 	rank_pred = y_pred.groupby(eras).apply(lambda x: x.rank(pct = True, method = "first") )
 	return np.corrcoef(y, rank_pred)[0,1]
+
 
 def correlation_score(y, y_pred):
 	return np.corrcoef(y, y_pred)[0,1]
@@ -27,7 +30,7 @@ def get_biggest_change_features(corrs, n):
 
     corr_diffs = h2_corr_means - h1_corr_means
     worst_n = corr_diffs.abs().sort_values(ascending=False).head(n).index.tolist()
-    return worst_n7
+    return worst_n
 
 
 

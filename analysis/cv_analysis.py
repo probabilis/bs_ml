@@ -45,7 +45,7 @@ def cross_validation(X,Y,eras, crossvalidators):
         print(np.mean(score))
         print('-------')
 
-cross_validation(df_[features],df_[target],eras_, crossvalidators)
+out = cross_validation(df_[features],df_[target],eras_, crossvalidators)
 
 
 

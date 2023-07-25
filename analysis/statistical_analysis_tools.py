@@ -21,7 +21,14 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-def plot_statistics(df,statistic):
+def plot_statistics(df, statistic, name, path = None):
+	"""
+    params: df, statistic
+    df ...          input statistics df / vector over the features room
+    statistic ...	str / type of statistical test
+    ---------------
+    return: plot of statistical test
+    """
 	df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y='feature_' + str(statistic))
 	plt.xlabel('$\\mu$ / 1')
 	plt.yticks(ticks=[])
@@ -29,6 +36,7 @@ def plot_statistics(df,statistic):
 	plt.title(statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
+	fig.savefig(f"{path}/{name}.png")
 	plt.show()
 	return
 

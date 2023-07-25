@@ -15,9 +15,10 @@ df, features, target, eras = loading_dataset()
 #############################################
 
 df_st = statistics(df, features)
+print(df_st)
 
+"""
 x = df[features[1]]
-
 
 mean, var = overall_statistics(df, features)
 print(mean, var)
@@ -36,6 +37,5 @@ plot_statistics(df_st,'variance')
 
 histogram(df_st['feature_mean'], 'mean')
 histogram(df_st['feature_variance'], 'variance')
-
-
+"""
 

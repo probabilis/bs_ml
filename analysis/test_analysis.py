@@ -4,12 +4,12 @@ sys.path.append('../')
 from utils import path, get_biggest_change_features
 
 
-df = pd.read_parquet(path)
-features = [f for f in df if f.startswith("feature")]
-target = "target"
-df["erano"] = df.era.astype(int)
-eras = df.erano
+sys.path.append('../')
+from data_loading import loading_dataset
 
+path = "Documents/bachelor"
+filename = "train.parquet"
+df, features, target, eras = loading_dataset(path, filename)
 
 def feature_corr(df, era_col, target_col):
     all_feature_corrs = df.groupby(era_col).apply(

@@ -63,19 +63,21 @@ st = time.time()
 
 params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500,3000), "colsample_bytree":(0.1,0.8)}
 
+init_points = 20 ; n_iter = 10
 
 gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
-gbm_bo.maximize(init_points = 20, n_iter = 10) #
+gbm_bo.maximize(init_points = init_points, n_iter = n_iter) #
 print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']
 params_gbm['max_depth'] = round(params_gbm['max_depth'])
+params_gbm['learning_rate'] = round(params_gbm['learning_rate'], 2)
 params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'], 1)
+params_gbm['n_estimators'] = round(params_gbm['n_estimators'], 1)
 print(params_gbm)
 
-today = date.today()
 
-name = f"round_infos_bayes_{today}_n={n}"
+name = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
 
 data = pd.DataFrame([params_gbm])
-data.to_csv(repo_path + "outputs/" + name + ".csv")
+data.to_csv(repo_path + "models/" + name + ".csv")

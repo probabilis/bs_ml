@@ -25,7 +25,7 @@ def plot_statistics(df,statistic):
 	return
 
 def round_int(x):
-    if x in [float("-inf"),float("inf")]: return float("nan")
+    if x in [float("-inf"),float("inf")]: return int(10e+6)
     return int(round(x))
 
 def histogram(x, name):

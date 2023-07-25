@@ -12,6 +12,7 @@ import os
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
+sys.path.append('../preprocessing')
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
 

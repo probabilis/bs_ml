@@ -23,7 +23,7 @@ result = subprocess.run([version, total_ipath], capture_output=True, text=True)
 output_text = result.stdout
 
 # Write the output to a text file
-with open(total_opath, 'wb') as file:
+with open(total_opath, 'w') as file:
     file.write(output_text)
 
 print(f"Output written to {total_opath}.")

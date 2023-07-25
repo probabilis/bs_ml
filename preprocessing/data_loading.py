@@ -33,7 +33,7 @@ def loading_dataset(dir_path, filename):
     target ....     target vector
     eras   ...      eras vector
     """
-    path_ = os.path.join(os.path.expanduser('~'), dir_path, "train.parquet")
+    path_ = os.path.join(os.path.expanduser('~'), dir_path, filename)
     df = pd.read_parquet(path_)
     print("Loaded dataframe from path : ", path_)
 

@@ -24,10 +24,14 @@ def plot_statistics(df,statistic):
 	plt.show()
 	return
 
+def round_int(x):
+    if x in [float("-inf"),float("inf")]: return float("nan")
+    return int(round(x))
+
 def histogram(x, name):
 	q25, q75 = np.percentile(x, [25, 75])
 	bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
-	bins = round((x.max() - x.min()) / bin_width)
+	bins = round_int((x.max() - x.min()) / bin_width)
 	plt.hist(x, density=True, bins = bins)
 	plt.title(name)
 	fig = plt.gcf()

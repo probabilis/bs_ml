@@ -8,8 +8,8 @@ version = "python3"
 #input_path = "analysis/"
 #input_file = 'cv_analysis.py'
 
-input_path = input("Enter your input path of input file starting at bs_ml/...")
-input_file = input("Enter your input file.")
+input_path = input("Enter your input path of input file starting at bs_ml/.. : ")
+input_file = input("Enter your input file : ") + ".py"
 
 output_path = "outputs/"
 output_file = f'{input_file}_output_{date.today()}.txt'

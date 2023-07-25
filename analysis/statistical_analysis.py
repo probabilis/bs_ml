@@ -3,6 +3,8 @@ import pandas as pd
 from pyarrow.parquet import ParquetFile
 import pyarrow as pa
 import matplotlib.pyplot as plt
+import sys
+sys.path.append('../')
 from utils import loading_dataset
 from statistical_analysis_tools import statistics, plot_statistics, histogram, overall_statistics
 

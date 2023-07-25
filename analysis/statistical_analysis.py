@@ -17,25 +17,23 @@ df, features, target, eras = loading_dataset()
 df_st = statistics(df, features)
 print(df_st)
 
-"""
-x = df[features[1]]
-
 mean, var = overall_statistics(df, features)
 print(mean, var)
 
+x = df[features[0]]
 var = np.var(x)
 mean = np.mean(x)
-print('var : ',var)
-print('mean : ', mean)
+print('var of ' + str(x),var)
+print('mean of ' + str(x), mean)
 
-histogram(x, features[1])
-x.plot(kind = 'box')
-plt.show()
 
-plot_statistics(df_st,'mean')
-plot_statistics(df_st,'variance')
+#histogram(x, features[0])
+#x.plot(kind = 'box')
+#plt.show()
 
-histogram(df_st['feature_mean'], 'mean')
-histogram(df_st['feature_variance'], 'variance')
-"""
+plot_statistics(df_st,'mean', "train_df_features_mean", path = "bs_ml/figures")
+#plot_statistics(df_st,'variance')
+
+#histogram(df_st['feature_mean'], 'mean')
+#histogram(df_st['feature_variance'], 'variance')
 

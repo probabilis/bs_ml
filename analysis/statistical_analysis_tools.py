@@ -21,8 +21,8 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-import sys
-sys.path.append('../')
+import os
+my_path = os.path.abspath(__file__)
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""
@@ -39,7 +39,7 @@ def plot_statistics(df, statistic, name, path_ = None):
 	plt.title(statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(f"{path_}/{name}.png")
+	fig.savefig(my_path - "/analysis" + f"{path_}/{name}.png")
 	plt.show()
 	return
 

@@ -46,3 +46,52 @@ def overall_statistics(df, features):
 	df_mean = np.mean(means)
 	df_var = np.var(variances)
 	return df_mean, df_var
+
+def get_similar_value_cols(df, percent=70):
+    """
+    :param df: input data in the form of a dataframe
+    :param percent: integer value for the threshold for finding similar values in columns
+    :return: sim_val_cols: list of columns where a singular value occurs more than the threshold
+    """
+    count = 0
+    sim_val_cols = []
+    for col in df.columns:
+        percent_vals = (df[col].value_counts()/len(df)*100).values
+        # filter columns where more than 90% values are same and leave out binary encoded columns
+        if percent_vals[0] > percent and len(percent_vals) > 2:
+            sim_val_cols.append(col)
+            count += 1
+    print("Total columns with majority singular value shares: ", count)
+    return sim_val_cols
+
+def get_skewed_columns(df,skew_limit = 0.2):
+    """
+    :param df: dataframe where the skewed columns need to determined
+    :param skew_limit: scalar which defines a limit above which we will log transform
+    :return: skew_cols: dataframe with the skewed columns
+    """
+    skew_vals = df.skew()
+    # Showing the skewed columns
+    skew_cols = (skew_vals
+                 .sort_values(ascending=False)
+                 .to_frame()
+                 .rename(columns={0: 'Skew'})
+                 .query('abs(Skew) > {}'.format(skew_limit)))
+    return skew_cols
+"""
+skews = get_skewed_columns(df[features])
+first = skews.index[0]
+print(first)
+x = df[first]
+#feature_suppressed_unremovable_telephone
+
+from scipy.stats import shapiro, norm
+#my_data = norm.rvs(size=500)
+shap = shapiro(x)
+print('shap :', shap)
+
+histogram(x, first)
+x.plot(kind = 'box')
+plt.show()
+
+"""

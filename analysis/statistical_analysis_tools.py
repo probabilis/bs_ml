@@ -23,7 +23,7 @@ def statistics(df, features):
 
 import os
 
-my_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
+repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""
@@ -40,7 +40,8 @@ def plot_statistics(df, statistic, name, path_ = None):
 	plt.title(statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(my_path + f"{path_}/{name}.png")
+	fig.savefig(repo_path + f"{path_}/{name}.png")
+	fig.tight_layout()
 	plt.show()
 	return
 
@@ -48,7 +49,14 @@ def round_int(x):
     if x in [float("-inf"),float("inf")]: return int(10e+6)
     return int(round(x))
 
-def histogram(x, name):
+def histogram(x, name, path_ = None):
+	"""
+    params: x, name
+    x ...       input statistics array / e.g.: vector over one feature room
+    name ...	str / name of statistical input variable
+    ---------------
+    return: plot of histogram diagram
+    """
 	q25, q75 = np.percentile(x, [25, 75])
 	bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
 	bins = round_int((x.max() - x.min()) / bin_width)
@@ -57,6 +65,7 @@ def histogram(x, name):
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
 	fig.tight_layout()
+	fig.savefig(repo_path + f"{path_}/{name}.png")
 	plt.show()
 
 def overall_statistics(df, features):

@@ -1,11 +1,7 @@
 import sys
 import pandas as pd
 sys.path.append('../')
-from utils import path, get_biggest_change_features
-
-
-sys.path.append('../preprocessing/')
-from data_loading import loading_dataset
+from utils import loading_dataset, get_biggest_change_features
 
 df, features, target, eras = loading_dataset()
 

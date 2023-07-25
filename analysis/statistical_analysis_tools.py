@@ -62,6 +62,7 @@ def histogram(x, name, path_ = None):
 	if bin_width < 10e-2:
 		bin_width = 0.1
 	bins = abs(round_int((x.max() - x.min()) / bin_width))
+	print(bins)
 	plt.hist(x, density=True, bins = bins)
 	plt.title(name)
 	fig = plt.gcf()
@@ -71,6 +72,14 @@ def histogram(x, name, path_ = None):
 	plt.show()
 
 def overall_statistics(df, features):
+	"""
+    params: df, statistic
+    df ...          input statistics df / vector over the features room
+    features ...	str / features vector
+    ---------------
+    return: scalar dupel 
+    df_mean, df_var
+    """
 	variances = np.zeros(len(features), dtype = object)
 	means = np.zeros(len(features), dtype = object)
 	for f, feature in enumerate(features):
@@ -113,20 +122,3 @@ def get_skewed_columns(df,skew_limit = 0.2):
                  .rename(columns={0: 'Skew'})
                  .query('abs(Skew) > {}'.format(skew_limit)))
     return skew_cols
-"""
-skews = get_skewed_columns(df[features])
-first = skews.index[0]
-print(first)
-x = df[first]
-#feature_suppressed_unremovable_telephone
-
-from scipy.stats import shapiro, norm
-#my_data = norm.rvs(size=500)
-shap = shapiro(x)
-print('shap :', shap)
-
-histogram(x, first)
-x.plot(kind = 'box')
-plt.show()
-
-"""

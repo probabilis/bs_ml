@@ -16,7 +16,7 @@ from sklearn.model_selection import cross_val_score
 sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset
+from utils import loading_dataset, repo_path
 
 ####################################
 
@@ -65,7 +65,7 @@ params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500
 
 
 gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
-gbm_bo.maximize(init_points = 10, n_iter = 5) #
+gbm_bo.maximize(init_points = 20, n_iter = 10) #
 print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']
@@ -78,5 +78,4 @@ today = date.today()
 name = f"round_infos_bayes_{today}_n={n}"
 
 data = pd.DataFrame([params_gbm])
-data.to_csv("outputs/" + name + ".csv")
-
+data.to_csv(repo_path + "outputs/" + name + ".csv")

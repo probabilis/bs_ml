@@ -27,7 +27,7 @@ mean = np.mean(x)
 print('var : ',var)
 print('mean : ', mean)
 
-histogram(x, features[k])
+histogram(x, features[1])
 x.plot(kind = 'box')
 plt.show()
 

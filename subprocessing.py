@@ -1,5 +1,7 @@
 import subprocess
+import sys
 
+sys.path.append('../')
 path_ = "bayesian_opt/"
 program = "bayesian_optimization.py"
 

@@ -31,7 +31,7 @@ print('mean of ' + str(x), mean)
 #x.plot(kind = 'box')
 #plt.show()
 
-plot_statistics(df_st,'mean', "train_df_features_mean", path_ = "bs_ml/figures")
+plot_statistics(df_st,'mean', "train_df_features_mean", path_ = "/figures")
 #plot_statistics(df_st,'variance')
 
 #histogram(df_st['feature_mean'], 'mean')

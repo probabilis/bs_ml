@@ -22,8 +22,8 @@ def statistics(df, features):
 	return df_statistics
 
 import os
-my_path = os.path.abspath(__file__)
-my_path = my_path.replace(f"/analysis{__file__}","")
+
+my_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""

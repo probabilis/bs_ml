@@ -21,7 +21,7 @@ print(dfv["target"])
 
 ###########
 
-def loading_dataset(dir_path, filename):
+def loading_dataset(filename = "train.parquet"):
     """
     params: path, filename 
     path ...        str / relative path folders for file 
@@ -33,7 +33,7 @@ def loading_dataset(dir_path, filename):
     target ....     target vector
     eras   ...      eras vector
     """
-    path_ = os.path.join(os.path.expanduser('~'), dir_path, filename)
+    path_ = os.path.join(os.path.expanduser('~'), "Documents","bachelor", filename)
     df = pd.read_parquet(path_)
     print("Loaded dataframe from path : ", path_)
 

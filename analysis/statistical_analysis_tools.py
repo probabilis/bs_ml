@@ -59,6 +59,8 @@ def histogram(x, name, path_ = None):
     """
 	q25, q75 = np.percentile(x, [25, 75])
 	bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
+	if bin_width < 10e-2:
+		bin_width = 0.1
 	bins = round_int((x.max() - x.min()) / bin_width)
 	plt.hist(x, density=True, bins = bins)
 	plt.title(name)

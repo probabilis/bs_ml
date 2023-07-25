@@ -6,8 +6,6 @@ version = "python3"
 sys.path.append('../')
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
-#input_path = "analysis/"
-#input_file = 'cv_analysis.py'
 
 #input_path = input("Enter your input path of input file starting at bs_ml/.. : ")
 #input_file = input("Enter your input file : ")
@@ -25,7 +23,7 @@ result = subprocess.run([version, total_ipath], capture_output=True, text=True)
 output_text = result.stdout
 
 # Write the output to a text file
-with open(total_opath, 'w') as file:
+with open(total_opath, 'wb') as file:
     file.write(output_text)
 
 print(f"Output written to {total_opath}.")

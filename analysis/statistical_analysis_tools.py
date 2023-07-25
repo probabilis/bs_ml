@@ -23,6 +23,7 @@ def statistics(df, features):
 
 import os
 my_path = os.path.abspath(__file__)
+my_path = my_path.replace("/analysis","")
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""
@@ -39,7 +40,7 @@ def plot_statistics(df, statistic, name, path_ = None):
 	plt.title(statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(my_path - "/analysis" + f"{path_}/{name}.png")
+	fig.savefig(my_path + f"{path_}/{name}.png")
 	plt.show()
 	return
 

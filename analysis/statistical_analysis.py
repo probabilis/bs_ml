@@ -28,7 +28,7 @@ print('mean of ' + str(x), mean)
 
 plot_statistics(df_st,'mean', "train_df_features_mean", path_ = "/figures")
 plot_statistics(df_st,'variance', "train_df_features_variance", path_ = "/figures")
-
+"""
 histogram(df_st['feature_mean'], "train_df_hist_mean", path_ = "/figures")
 histogram(df_st['feature_variance'], "train_df_hist_var", path_ = "/figures")
 
@@ -36,7 +36,7 @@ histogram(x, features[0])
 x.plot(kind = 'box')
 plt.show()
 
-"""
+
 skews = get_skewed_columns(df[features])
 first = skews.index[0]
 print(first)

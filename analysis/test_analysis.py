@@ -10,6 +10,14 @@ df, features, target, eras = loading_dataset()
 #############################################
 
 def feature_corr(df, era_col, target_col):
+    """
+    params: df, era_col, target_col 
+    era_col ...     era column
+    target_col ...  target column
+    ---------------
+    return: all_feature_corr
+    df ...          dataframe with correlation from all features  
+    """
     all_feature_corrs = df.groupby(era_col).apply(
     lambda era: era[features].corrwith(era[target_col]))
     return all_feature_corrs

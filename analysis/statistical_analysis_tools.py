@@ -3,6 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def statistics(df, features):
+	"""
+    params: df, features
+    df ...          input df / vector over the features room
+    features ...	str / features of df
+    ---------------
+    return: df_statistics
+    df ...          dataframe with statistics of   
+    """
 	variances = np.zeros(len(features), dtype = object)
 	means = np.zeros(len(features), dtype = object)
 	for f,feature in enumerate(features):

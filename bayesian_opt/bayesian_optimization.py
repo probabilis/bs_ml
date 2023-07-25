@@ -9,25 +9,17 @@ from bayes_opt import BayesianOptimization
 import time
 from datetime import date
 import os
+import sys
 from sklearn.model_selection import cross_val_score
 from pca_dimensional_reduction import dim_reduction
 
 ####################################
+sys.path.append('../')
+from data_loading import loading_dataset
 
-path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
-print(path)
-
-df = pd.read_parquet(path)
-
-features = [f for f in df if f.startswith("feature")]
-target = "target"
-df["erano"] = df.era.astype(int)
-eras = df.erano
-
-df1 = df[eras<=eras.median()]
-
-del df
-print("deleted df sucessfully")
+path = "Documents/bachelor"
+filename = "train.parquet"
+df, features, target, eras = loading_dataset(path,filename)
 
 ##################################
 

@@ -21,7 +21,10 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-def plot_statistics(df, statistic, name, path = None):
+import sys
+sys.path.append('../')
+
+def plot_statistics(df, statistic, name, path_ = None):
 	"""
     params: df, statistic
     df ...          input statistics df / vector over the features room
@@ -36,7 +39,7 @@ def plot_statistics(df, statistic, name, path = None):
 	plt.title(statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(f"{path}/{name}.png")
+	fig.savefig(f"{path_}/{name}.png")
 	plt.show()
 	return
 

@@ -6,7 +6,7 @@ from sklearn import model_selection
 def era_splitting(df, eras):
     """
     params: df, eras 
-    df ...           input df / vector over the features room
+
     eras ...         timeline in data
     window ...       overlapping window length
     ---------------

@@ -9,23 +9,30 @@ from bayes_opt import BayesianOptimization
 import time
 from datetime import date
 import os
+import gc
 import sys
 from sklearn.model_selection import cross_val_score
 from pca_dimensional_reduction import dim_reduction
+from preprocessing.cross_validators import era_splitting
+
+sys.path.append('../')
+from utils import loading_dataset
 
 ####################################
-sys.path.append('../')
-from data_loading import loading_dataset
 
-path = "Documents/bachelor"
-filename = "train.parquet"
-df, features, target, eras = loading_dataset(path,filename)
+df, features, target, eras = loading_dataset()
+
+#############################################
+
+df_, eras_ = era_splitting(df, eras)
+
+del df ; gc.collect()
 
 ##################################
 
 n = 10
-df_pca, features_pca = dim_reduction(df1,features,n)
-del df1
+df_pca, features_pca = dim_reduction(df_,features,n)
+del df_
 
 ##################################
 

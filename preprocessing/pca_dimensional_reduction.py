@@ -1,15 +1,20 @@
 import pandas as pd
+import numpy as np
 import time
 
 from sklearn.decomposition import PCA
 
 
-def dim_reduction(df, features, n):
+def dim_reduction(df, features, target, n):
 	"""
-	input df ... dataframe
-	input features ... feature vector
-	param n ... reduction size
-	"""
+	input df ...		dataframe
+	input features ... 	feature vector
+	input target ...	target vector
+	param n ... 		reduction size
+    ---------------
+    return: df & array as dupel 
+    pca_df, pca_features  
+    """
 	pca = PCA(n_components = n)
 	st = time.time()
 	pca_df = pca.fit_transform(df[features])
@@ -23,3 +28,4 @@ def dim_reduction(df, features, n):
 	pca_ls = pca.explained_variance_ratio_
 	print('PCA / information lost: ', 1-np.sum(pca_ls))
 	return pca_df, pca_features
+

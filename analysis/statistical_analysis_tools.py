@@ -23,7 +23,7 @@ def statistics(df, features):
 
 import os
 my_path = os.path.abspath(__file__)
-my_path = my_path.replace("/analysis","")
+my_path = my_path.replace(f"/analysis{__file__}","")
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""

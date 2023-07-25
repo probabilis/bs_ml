@@ -12,8 +12,8 @@ import os
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
-from pca_dimensional_reduction import dim_reduction
 from preprocessing.cross_validators import era_splitting
+from preprocessing.pca_dimensional_reduction import dim_reduction
 
 sys.path.append('../')
 from utils import loading_dataset
@@ -30,8 +30,8 @@ del df ; gc.collect()
 
 ##################################
 
-n = 10
-df_pca, features_pca = dim_reduction(df_,features,n)
+n = 100
+df_pca, features_pca = dim_reduction(df_,features,target,n)
 del df_
 
 ##################################

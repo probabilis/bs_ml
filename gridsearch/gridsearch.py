@@ -6,30 +6,25 @@ from sklearn.model_selection import GridSearchCV
 from xgboost import XGBRegressor
 import time
 import os
+import sys
+from preprocessing.pca_dimensional_reduction import dim_reduction
 
-from pca_dimensional_reduction import dim_reduction
+sys.path.append('../')
+from utils import loading_dataset
 
 ####################################
 
-path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
-print(path)
+df, features, target, eras = loading_dataset()
 
-df = pd.read_parquet(path)
+#############################################
 
-features = [f for f in df if f.startswith("feature")]
-target = "target"
-df["erano"] = df.era.astype(int)
-eras = df.erano
-
-#df1 = df[eras<=eras.median()]
 df1 = df[eras<=5]
-
 del df
 print("loaded df sucessfully")
 
 #################################
 n = 5 
-df_pca, features_pca  = dim_reduction(df1,features,n)
+df_pca, features_pca  = dim_reduction(df1,features,target,n)
 del df1
 print("deledted df sucessfully")
 ##################################

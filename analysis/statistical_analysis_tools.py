@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
+sys.path.append('../')
+from utils import repo_path
 
 def statistics(df, features):
 	"""
@@ -22,8 +25,6 @@ def statistics(df, features):
 	return df_statistics
 
 import os
-
-repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
 
 def plot_statistics(df, statistic, name, path_ = None):
 	"""

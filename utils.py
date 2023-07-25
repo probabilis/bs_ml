@@ -9,10 +9,31 @@ import scipy
 ##########################
 #initialization
 
-path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
+path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
 
 ##########################
 #functions
+
+def loading_dataset():
+    """
+    params: path, filename 
+    path ...        str / relative path folders for file 
+    filename ...    str / filename of df
+    ---------------
+    return: df, features, target, eras
+    df ...          Dataframe
+    features ...    features vector
+    target ....     target vector
+    eras   ...      eras vector
+    """
+    df = pd.read_parquet(path_)
+    print("Loaded dataframe from path : ", path_)
+
+    features = [f for f in df if f.startswith("feature")]
+    target = "target"
+    df["erano"] = df.era.astype(int)
+    eras = df.erano
+    return df, features, target, eras
 
 
 def numerai_score(y, y_pred, eras):

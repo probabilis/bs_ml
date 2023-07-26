@@ -13,7 +13,7 @@ import gc
 import sys
 from sklearn.model_selection import cross_val_score
 
-sys.path.append('../')
+#sys.path.append('../')
 
 
 from preprocessing.cross_validators import era_splitting

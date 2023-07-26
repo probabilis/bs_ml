@@ -13,6 +13,7 @@ from datetime import date
 import os
 import gc
 import sys
+import csv
 from sklearn.model_selection import cross_val_score
 
 sys.path.append('../')
@@ -43,10 +44,10 @@ init_points = 10 ; n_iter = 5
 
 filename_params = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
 
-import csv
+
 
 filename = repo_path + "/models/" + filename_params + ".csv"
 
 with open(filename, 'r') as data:
-    for line in csv.reader(data):
+    for line in csv.DictReader(data):
         print(line)

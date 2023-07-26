@@ -6,7 +6,6 @@ version = "python3"
 
 parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 sys.path.append(parentddir + "/bs_ml")
-print(parentddir + "/bs_ml")
 #sys.path.append('../')
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
@@ -29,6 +28,7 @@ output_text = result.stdout
 # Write the output to a text file
 with open(total_opath, 'w') as file:
     try:
+        print(output_text)
         file.write(output_text)
         if result.returncode != 0: 
             file.write(f"Script execution error (return code: {result.returncode})")

@@ -6,7 +6,8 @@ version = "python3"
 
 parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 sys.path.append(parentddir + "/bs_ml")
-#sys.path.append('../')
+
+
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
 
@@ -29,7 +30,7 @@ with open(total_opath, 'w') as file:
     try:
         result = subprocess.run([version, total_ipath], text=True, stderr = subprocess.STDOUT, stdout = subprocess.PIPE)
         output_text = result.stdout
-        
+
         print(output_text)
         file.write(output_text)
         if result.returncode != 0: 

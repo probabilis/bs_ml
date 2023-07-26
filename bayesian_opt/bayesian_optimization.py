@@ -20,10 +20,7 @@ from bs_ml.preprocessing.cross_validators import era_splitting
 from bs_ml.preprocessing.pca_dimensional_reduction import dim_reduction
 from bs_ml.utils import loading_dataset, repo_path
 
-
-
-
-####################################
+#############################################
 
 df, features, target, eras = loading_dataset()
 

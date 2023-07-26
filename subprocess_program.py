@@ -22,7 +22,7 @@ total_ipath = input_path + input_file + ".py"
 total_opath = output_path + output_file
 
 # Execute the Python script and capture its output
-result = subprocess.run([version, total_ipath], capture_output=True, text=True, stderr = subprocess.STDOUT, stdout = subprocess.PIPE)
+result = subprocess.run([version, total_ipath], text=True, stderr = subprocess.STDOUT, stdout = subprocess.PIPE) #capture_output=True,
 output_text = result.stdout
 
 # Write the output to a text file

@@ -4,9 +4,10 @@ import sys
 import os
 version = "python3"
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-print(sys.path.append(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append('../')
+parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+sys.path.append(parentddir)
+print(parentddir)
+#sys.path.append('../')
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
 

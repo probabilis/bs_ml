@@ -1,9 +1,11 @@
 import subprocess
 from datetime import date
 import sys
+import os
 version = "python3"
 
-#sys.path.append('../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+print(sys.path.append(os.path.dirname(os.path.abspath(__file__))))
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
 

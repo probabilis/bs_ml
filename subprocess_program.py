@@ -6,6 +6,7 @@ version = "python3"
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 print(sys.path.append(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append('../')
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
 

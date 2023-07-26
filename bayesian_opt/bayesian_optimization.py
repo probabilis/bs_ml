@@ -13,7 +13,9 @@ import gc
 import sys
 from sklearn.model_selection import cross_val_score
 
-sys.path.append('../')
+#sys.path.append('../')
+#sys.path.insert(0, '/home/Documents/bachelor/bs_ml')
+sys.path.insert(0, '/home/Documents/bachelor/bs_ml/preprocessing')
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
 from utils import loading_dataset, repo_path

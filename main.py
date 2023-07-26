@@ -39,7 +39,7 @@ del df_
 
 #############################################
 
-init_points = 20 ; n_iter = 10
+init_points = 10 ; n_iter = 5
 
 filename_params = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
 

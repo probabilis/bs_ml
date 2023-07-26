@@ -82,4 +82,4 @@ print(params_gbm)
 name = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
 
 data = pd.DataFrame([params_gbm])
-data.to_csv(repo_path + "models/" + name + ".csv")
+data.to_csv(repo_path + "/models/" + name + ".csv")

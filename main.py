@@ -50,4 +50,6 @@ filename = repo_path + "/models/" + filename_params + ".csv"
 
 with open(filename, 'r') as data:
     for line in csv.DictReader(data):
-        print(line)
+        params = line
+
+print(params)

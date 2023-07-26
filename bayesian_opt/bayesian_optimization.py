@@ -20,6 +20,10 @@ from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
 from utils import loading_dataset, repo_path
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+print ( sys.path.append(os.path.dirname(os.path.abspath(__file__))) )
+
+
 ####################################
 
 df, features, target, eras = loading_dataset()

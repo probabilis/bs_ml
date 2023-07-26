@@ -3,7 +3,7 @@ from datetime import date
 import sys
 version = "python3"
 
-sys.path.append('../')
+#sys.path.append('../')
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'
 

@@ -45,7 +45,7 @@ filename_params = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={
 
 import csv
 
-filename = repo_path + "models/" + filename_params + ".csv"
+filename = repo_path + "/models/" + filename_params + ".csv"
 
 with open(filename, 'r') as data:
     for line in csv.reader(data):

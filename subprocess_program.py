@@ -5,6 +5,7 @@ import os
 version = "python3"
 
 parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+print(parentddir)
 sys.path.append(parentddir + "/bs_ml")
 
 

@@ -14,8 +14,10 @@ input_file = 'bayesian_optimization'
 #input_path = input("Enter your input path of input file starting at bs_ml/.. : ")
 #input_file = input("Enter your input file : ")
 
+from bayesian_opt.bayesian_optimization import init_points, n_iter
+
 output_path = "outputs/"
-output_file = f'{input_file}_output_{date.today()}.txt'
+output_file = f'{input_file}_output_ip={init_points}_ni={n_iter}_{date.today()}.txt'
 
 ###########################################
 

@@ -2,10 +2,14 @@ import subprocess
 from datetime import date
 import sys
 import os
+from pathlib import Path
 version = "python3"
 
 parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+parentddir2 = Path(__file__).resolve().parent.parent
+
 print(parentddir)
+print(parentddir2)
 sys.path.append(parentddir + "/bs_ml")
 
 

@@ -1,17 +1,16 @@
 import subprocess
 from datetime import date
-import sys
-import os
+import sys, os
 from pathlib import Path
 version = "python3"
 
-parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
-parentddir2 = Path(__file__).resolve().parent.parent
-parentddir3 = Path(__file__).resolve().parent
-print(parentddir)
-print(parentddir2)
-print(parentddir3)
-sys.path.append(parentddir + "/bs_ml")
+#old version of getting path
+#parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+#sys.path.append(parentddir + "/bs_ml")
+
+
+parentddir = Path(__file__).resolve().parent
+
 
 
 input_path = "bayesian_opt/"

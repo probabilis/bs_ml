@@ -7,7 +7,7 @@ version = "python3"
 
 parentddir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 parentddir2 = Path(__file__).resolve().parent.parent
-parentddir3 = Path(__file__).resolve().parent.parent
+parentddir3 = Path(__file__).resolve().parent
 print(parentddir)
 print(parentddir2)
 print(parentddir3)

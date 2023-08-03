@@ -1,0 +1,10 @@
+Loaded dataframe from path :  /root/Documents/bachelor/train.parquet
+time needed for reduction: 41.34419584274292 sec
+PCA / information lost:  0.20400831328635327
+|   iter    |  target   | colsam... | learni... | max_depth | n_esti... |
+-------------------------------------------------------------------------
+| [0m1        [0m | [0m-0.002585[0m | [0m0.5285   [0m | [0m0.03367  [0m | [0m4.925    [0m | [0m2.423e+03[0m |
+| [0m2        [0m | [0m-0.02301 [0m | [0m0.1329   [0m | [0m0.1322   [0m | [0m7.129    [0m | [0m2.986e+03[0m |
+=========================================================================
+It takes 6.059340083599091 minutes
+{'colsample_bytree': 0.5, 'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 2423.2}

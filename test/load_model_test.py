@@ -14,8 +14,8 @@ X_seq = X.reshape(-1,1)
 """
 import sys
 from pathlib import Path
-parentdir = Path(__file__).resolve().parent.parent
-sys.path.append(parentdir + "/")
+parentdir = Path(__file__).resolve().parent.parent + "/"
+sys.path.append(parentdir)
 print( parentdir )
 from preprocessing.cross_validators import era_splitting
 from utils import loading_dataset, repo_path

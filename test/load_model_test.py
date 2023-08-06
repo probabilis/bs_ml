@@ -17,7 +17,7 @@ from pathlib import Path
 parentdir = Path(__file__).resolve().parent.parent
 sys.path.append(parentdir)
 print( parentdir )
-from preprocessing.cross_validators import era_splitting
+from bs_ml.preprocessing.cross_validators import era_splitting
 from utils import loading_dataset, repo_path
 
 df, features, target, eras = loading_dataset()

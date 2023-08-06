@@ -28,13 +28,13 @@ print(df)
 
 #fn = "CatBoost_{'learning_rate': 0.01, 'max_depth': 1, 'n_estimators': 500, 'rsm': 0.1}.json"
 
-lgbm = LGBMRegressor()
+model = LGBMRegressor()
 
-lgbm.train(df[features],df[target])
+model.fit(df[features],df[target])
 
 #cb.load_model(fn, "json")  # load model
 
-Y_pred = lgbm.predict(df[features])
+Y_pred = model.predict(df[features])
 print(Y_pred)
 
 plotext.scatter(Y_pred)

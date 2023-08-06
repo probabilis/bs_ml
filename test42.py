@@ -19,22 +19,24 @@ sys.path.append(parentdir)
 print( parentdir )
 from preprocessing.cross_validators import era_splitting
 from utils import loading_dataset, repo_path
-
+import gc
 df, features, target, eras = loading_dataset()
 
 print(df)
 
-#cb = CatBoostRegressor()
+df_, eras_ = era_splitting(df, eras)
 
-#fn = "CatBoost_{'learning_rate': 0.01, 'max_depth': 1, 'n_estimators': 500, 'rsm': 0.1}.json"
+del df ; gc.collect()
 
 model = LGBMRegressor()
 
-model.fit(df[features],df[target])
+print(df_)
+
+model.fit(df_[features],df_[target])
 
 #cb.load_model(fn, "json")  # load model
 
-Y_pred = model.predict(df[features])
+Y_pred = model.predict(df_[features])
 print(Y_pred)
 
 plotext.scatter(Y_pred)

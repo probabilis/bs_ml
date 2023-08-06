@@ -13,7 +13,9 @@ X = np.linspace(x_min,x_max,N)
 X_seq = X.reshape(-1,1)
 """
 import sys
-sys.path.append('../bs_ml/')
+from pathlib import Path
+parentddir = Path(__file__).resolve().parent
+
 from preprocessing.cross_validators import era_splitting
 from utils import loading_dataset, repo_path
 

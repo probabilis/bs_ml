@@ -13,9 +13,9 @@ X = np.linspace(x_min,x_max,N)
 X_seq = X.reshape(-1,1)
 """
 import sys
-sys.path.append('../')
-from bs_ml.preprocessing.cross_validators import era_splitting
-from bs_ml.utils import loading_dataset, repo_path
+sys.path.append('../bs_ml/')
+from preprocessing.cross_validators import era_splitting
+from utils import loading_dataset, repo_path
 
 df, features, target, eras = loading_dataset()
 

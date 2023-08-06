@@ -10,8 +10,7 @@ version = "python3"
 
 
 parentddir = Path(__file__).resolve().parent
-
-
+sys.path.append(parentddir)
 
 input_path = "bayesian_opt/"
 input_file = 'bayesian_optimization'

@@ -31,7 +31,7 @@ del df ; gc.collect()
 
 ##################################
 
-n = 100
+n = len(features)
 df_pca, features_pca = dim_reduction(df_,features,target,n)
 del df_
 

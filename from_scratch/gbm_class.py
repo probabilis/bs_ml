@@ -1,5 +1,10 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
 from sklearn.tree import DecisionTreeRegressor
 import numpy as np
+import pandas as pd
 
 class GradientBoosting():
 	"""
@@ -15,7 +20,10 @@ class GradientBoosting():
         scalar for the stagewise approximation
     max_depth : int
         maximimal depth of the tree
-
+	X : DataFrame
+		input dataframe for training
+	Y : DataFrame
+		output dataframe for training
     Methods
     -------
     fit(X,Y):
@@ -23,22 +31,60 @@ class GradientBoosting():
 	predict(X,Y):
 		predicts the function through the regression model built up on the training
 	"""
-	def __init__(self, n_trees, learning_rate, max_depth):
-		self.n_trees = n_trees
+	def __init__(self, learning_rate : float, max_depth : int ,n_trees : int, 
+	      		X : pd.DataFrame, Y : pd.DataFrame):
+
+		#hyperparameter asssignment
 		self.learning_rate = learning_rate
 		self.max_depth = max_depth 
+		self.n_trees = n_trees
+		#input and output dataframe assignment
+		self.X = X
+		self.Y = Y
 
-	def fit(self, x, y):
+	def fit(self, X : pd.DataFrame, Y : pd.DataFrame):
+		"""
+		fitting stagewise the regression tree through given data
+
+		...
+
+		Params
+		------
+		X : pd.DataFrame
+			input df / vector over the features room
+		Y : pd.DataFrame
+			target variables to learn the model         
+		---------------
+		return : None
+			None / only training the model
+		"""
 		self.trees = []
-		self.F_0 = y.mean()
+		self.F_0 = Y.mean()
 		F_m = self.F_0
+		self.X = X
+		self.Y = Y
 
+		#stagewise iteration for n < n_trees
 		for _ in range(self.n_trees):
+			y_tilde = Y - F_m
 			tree = DecisionTreeRegressor(max_depth = self.max_depth)
-			tree.fit(x, y - F_m)
-			F_m += self.learning_rate * tree.predict(x)
+			tree.fit(X, y_tilde)
+			F_m += self.learning_rate * tree.predict(X)
 			self.trees.append(tree)
 
-	def predict(self, x):
-		y_hat = self.F_0 + self.learning_rate * np.sum([tree.predict(x) for tree in self.trees], axis = 0)
+	def predict(self, X : pd.DataFrame):
+		"""
+		predicting stagewise the regression tree through given input and output data
+
+		...
+
+		Params
+		------
+		X : pd.DataFrame
+			input df / vector over the features room
+		---------------
+		return : array
+			y_hat / predicted output df
+		"""
+		y_hat = self.F_0 + self.learning_rate * np.sum([tree.predict(X) for tree in self.trees], axis = 0)
 		return y_hat

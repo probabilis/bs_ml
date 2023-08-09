@@ -2,7 +2,27 @@ from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 
 class GradientBoosting():
+	"""
+	A class to apply the Gradient Boosting Framework proposed from Friedman et al.
 
+    ...
+
+    Attributes
+    ----------
+    n_trees : int
+        number of weak/base learners 
+    learning_rate : float
+        scalar for the stagewise approximation
+    max_depth : int
+        maximimal depth of the tree
+
+    Methods
+    -------
+    fit(X,Y):
+        fits the regression trees to data deening on number of trees.
+	predict(X,Y):
+		predicts the function through the regression model built up on the training
+	"""
 	def __init__(self, n_trees, learning_rate, max_depth):
 		self.n_trees = n_trees
 		self.learning_rate = learning_rate

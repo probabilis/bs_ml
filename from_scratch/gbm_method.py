@@ -8,9 +8,8 @@ from math import *
 from gradient_boosting_from_scratch import gbm
 from pathlib import Path
 
-parentddir = Path(__file__).resolve().parent
-sys.path.append(parentddir)
-from bs_ml.utils import repo_path
+import os
+repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
 
 ########################################
 

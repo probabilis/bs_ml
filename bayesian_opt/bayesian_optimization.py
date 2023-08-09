@@ -8,7 +8,6 @@ from lightgbm import LGBMRegressor
 from bayes_opt import BayesianOptimization
 import time
 from datetime import date
-import os
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
@@ -31,7 +30,7 @@ del df ; gc.collect()
 
 ##################################
 
-n = len(features)
+n = 1000
 df_pca, features_pca = dim_reduction(df_,features,target,n)
 del df_
 

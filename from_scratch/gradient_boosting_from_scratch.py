@@ -2,7 +2,6 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-import sklearn
 from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 

@@ -6,8 +6,10 @@ import matplotlib.pyplot as plt
 from math import * 
 
 from gradient_boosting_from_scratch import gbm
+from pathlib import Path
 
-sys.path.append('../')
+parentddir = Path(__file__).resolve().parent
+sys.path.append(parentddir)
 from bs_ml.utils import repo_path
 
 ########################################

@@ -24,11 +24,15 @@ from bs_ml.preprocessing.pca_dimensional_reduction import dim_reduction
 from bs_ml.utils import loading_dataset, repo_path
 
 #############################################
+#############################################
+#############################################
 
+#loading dataset
 df, features, target, eras = loading_dataset()
 
 #############################################
 
+#splitting the eras
 df_, eras_ = era_splitting(df, eras)
 
 del df ; gc.collect()
@@ -41,11 +45,10 @@ del df_
 
 #############################################
 
+#loading the specific hyperparameter configuration from bayesian optimization
 init_points = 10 ; n_iter = 5
 
 filename_params = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
-
-
 
 filename = repo_path + "/models/" + filename_params + ".csv"
 

@@ -1,4 +1,4 @@
-import sklearn
+import sys
 from sklearn import tree
 from sklearn.tree import DecisionTreeRegressor, export_graphviz
 import numpy as np
@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 from math import * 
 
 from gradient_boosting_from_scratch import gbm
+
+sys.path.append('../')
+from bs_ml.utils import repo_path
 
 ########################################
 
@@ -41,7 +44,7 @@ plt.legend()
 fig = plt.gcf()
 fig.set_size_inches(18,14)
 fig.tight_layout()
-plt.savefig("gbm_decision_tree_comparison.png")
+plt.savefig(repo_path + "/figures/" + "gbm_decision_tree_comparison.png")
 plt.show()
 print("hi")
 #############################
@@ -65,5 +68,5 @@ for i in range(k):
 		axs[i][j].legend()
 
 fig.tight_layout()
-plt.savefig("gbm_with_decision_tree_various_parameters.png")
+plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_various_parameters.png")
 plt.show()

@@ -4,13 +4,29 @@ MN: 12030366
 """
 import pandas as pd
 import numpy as np
-from collections import Counter
 
 ####################################
 
 class DecisionTreeRegressorScratch():
 	"""
-	Class for growing a regression Decision Tree by Scratch
+	A class for growing a regression decision tree from scratch 
+    ...
+
+    Attributes
+    ----------
+    n_trees : int
+        number of weak/base learners 
+    learning_rate : float
+        scalar for the stagewise approximation
+    max_depth : int
+        maximimal depth of the tree
+
+    Methods
+    -------
+    fit(X,Y):
+        fits the regression trees to data deening on number of trees.
+	predict(X,Y):
+		predicts the function through the regression model built up on the training
 	"""
 	def __init__(self, X : pd.DataFrame, Y : list, min_samples_split = None, 
 		max_depth = None, depth = None, node_type = None, rule = None):

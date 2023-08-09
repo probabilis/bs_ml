@@ -20,7 +20,10 @@ class DecisionTreeRegressorScratch():
         scalar for the stagewise approximation
     max_depth : int
         maximimal depth of the tree
-
+	X : DataFrame
+		input vector for training
+	Y : DataFrame
+		output vector for training
     Methods
     -------
     fit(X,Y):
@@ -69,20 +72,58 @@ class DecisionTreeRegressorScratch():
 
 	@staticmethod 
 	def get_mse(y_true, y_hat):
-		r = np.sum( (y_true - y_hat)**2 )
-		return r / len(y_true)
+		"""
+		calculating the mean square error for given y_true and y_hat
+
+		...
+
+		Params
+		------
+		y_true : array
+			given output df / vector 
+		y_hat : array
+			predicted output df / vector
+		---------------
+		return : array
+			mse  / mse for given y_true and y_hat
+		"""
+		res = np.sum( (y_true - y_hat)**2 )
+		mse = res / len(y_true)
+		return mse
 
 	@staticmethod
 	def ma(x, window):
 		"""
-		Calculating Moving Average through convulation with one position overlap
+		calculating moving average through convolution with one position overlap
+		
+		...
+
+		Params
+		x : DataFrame 
+			input df / vector over the features room
+		window : int 
+			convolution window
+		---------------
+		return: array
+			moving_average / over given window for input DF x
 		"""
-		return np.convolve(x, np.ones(window), 'valid') / window 
+
+		moving_average = np.convolve(x, np.ones(window), 'valid') / window 
+		return moving_average
 
 	def best_split(self):
 		"""
-		By giving the features as input dataframe X and targets Y the best splits
+		by giving the features as input dataframe X and targets Y the best splits
 		are calculated for the decision tree
+
+		...
+
+		Params
+		------
+
+		---------------
+		return : dupel
+		(best_feature, best_value) / features and values with highest mse score
 		"""
 		df = self.X.copy()
 		df['Y'] = self.Y
@@ -125,6 +166,15 @@ class DecisionTreeRegressorScratch():
 	def grow_tree(self):
 		"""
 		Recursive function for creating the decision tree
+
+		...
+
+		Params
+		------
+
+		---------------
+		return : None
+			None / only growing the tree
 		"""
 		df = self.X.copy()
 		df['Y'] = self.Y
@@ -170,7 +220,20 @@ class DecisionTreeRegressorScratch():
 
 	def fit(self, X : pd.DataFrame):
 		"""
-		Fitting the input data
+		fitting the regression tree through given data
+
+		...
+
+		Params
+		------
+		X : pd.DataFrame
+			input df / vector over the features room
+		Y : pd.DataFrame
+			target variables to learn the model
+
+		---------------
+		return: list
+			predictions / returning the calculated predictions for Y
 		"""
 		predictions = []
 		for _, x in X.iterrows():
@@ -184,6 +247,17 @@ class DecisionTreeRegressorScratch():
 	def predict(self, values : dict):
 		"""
 		Method for predicting the functional for the given input feature space
+		
+		...
+		
+		Params
+		------
+		values : dict
+			specific hyperparameter for the regression tree
+
+		---------------
+		return: array
+			self.y_hat / returning the calculated y_hats
 		"""
 		xnode = self
 		while xnode.depth < xnode.max_depth:

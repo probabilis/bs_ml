@@ -14,8 +14,9 @@ def gbm(learning_rate, max_depth, n_trees, x,y):
 	trees = []
 
 	for _ in range(n_trees):
+		y_tilde = y - F_m
 		tree = DecisionTreeRegressor(max_depth = max_depth)
-		tree.fit(x,y - F_m)
+		tree.fit(x, y_tilde)
 		F_m += learning_rate * tree.predict(x)
 		trees.append(tree)
 

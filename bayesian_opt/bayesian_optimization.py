@@ -8,7 +8,6 @@ from lightgbm import LGBMRegressor
 from bayes_opt import BayesianOptimization
 import time
 from datetime import date
-import os
 import gc
 import sys
 from sklearn.model_selection import cross_val_score

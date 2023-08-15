@@ -13,4 +13,16 @@
   isbn   = {9781315139470},
 }
 
+@Article{Friedman2001,
+  author    = {Jerome H. Friedman},
+  journal   = {The Annals of Statistics},
+  title     = {Greedy function approximation: A gradient boosting machine.},
+  year      = {2001},
+  month     = {oct},
+  number    = {5},
+  volume    = {29},
+  doi       = {10.1214/aos/1013203451},
+  publisher = {Institute of Mathematical Statistics},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

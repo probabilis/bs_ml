@@ -13,7 +13,7 @@ x_min = 0
 x_max = 2 * np.pi
 N = 100
 
-X = np.linspace(x_min,x_max,100)
+X = np.linspace(x_min ,x_max , N)
 Y = np.sin(X)
 X = X.reshape(-1,1)
 
@@ -27,19 +27,17 @@ y_pred_scratch = model_scratch.fit(pd.DataFrame(X))
 
 ################################################
 
-print("hola")
-
 fig, ax = plt.subplots(1)
 fig.set_size_inches(12,8)
 
 fig.suptitle("Decision Tree Regressor from Scratch comparison with SKLEARN module")
 ax.set_title("max depth $d_{max}$ = " + str(max_depth))
-ax.scatter(X, Y, color = 'gray')
-ax.plot(X, y_pred, color = 'salmon', label = 'SKLEARN')
-ax.plot(X, y_pred_scratch, color = 'mediumseagreen', label = 'SCRATCH')
+ax.plot(X, Y, color = 'gray')
+ax.plot(X, y_pred, color = 'salmon', linestyle = ':', linewidth = 3, label = 'SKLEARN')
+ax.plot(X, y_pred_scratch, color = 'mediumseagreen', linestyle = '--',linewidth = 3, label = 'SCRATCH')
 ax.legend()
 fig.tight_layout()
-plt.savefig("decision_tree_regressor_comparison.png")
+#plt.savefig("decision_tree_regressor_comparison.png")
 plt.show()
 
 from sklearn import tree
@@ -55,5 +53,5 @@ tree.plot_tree(model)
 fig = plt.gcf()
 #fig.set_size_inches(16,14)
 fig.tight_layout()
-plt.savefig("decision_tree_plot.png")
+#plt.savefig("decision_tree_plot.png")
 plt.show()

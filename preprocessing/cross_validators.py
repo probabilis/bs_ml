@@ -1,7 +1,14 @@
-import pandas as pd
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
 import numpy as np
 from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
-from sklearn import model_selection
+
+"""
+Ref: 
+https://github.com/numerai/example-scripts/blob/master/analysis_and_tips.ipynb
+"""
 
 def era_splitting(df, eras):
     """
@@ -15,6 +22,16 @@ def era_splitting(df, eras):
     df = df[eras.isin(np.arange(1,575,4))]
     eras = eras[eras.isin(np.arange(1,575,4))]
     return df, eras
+
+"""
+Reference at Scikit:
+https://scikit-learn.org/stable/modules/cross_validation.html
+
+TimeSeriesSplitGroups Class is written by Numerai. All Rights reserved.
+
+Because the TimeSeriesSplit class in sklearn does not use groups and won't respect era boundries, we implement
+a version that will
+"""
 
 class TimeSeriesSplitGroups(_BaseKFold):
 

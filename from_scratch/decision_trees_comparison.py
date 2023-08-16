@@ -1,3 +1,7 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
 import sklearn
 from sklearn.tree import DecisionTreeRegressor, export_graphviz
 from decision_regression_tree_from_scratch import DecisionTreeRegressorScratch

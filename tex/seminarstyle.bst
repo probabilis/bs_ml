@@ -1,7 +1,7 @@
 %%
 %% This is file `seminarstyle.bst',
 %% generated with the docstrip utility.
-%% *** Style erstellt von Stefan Topolovec für SE Wissenschaftliches Arbeiten und Präsentationstechnik 10/2015 ***
+%% *** Style erstellt von Stefan Topolovec fÃ¼r SE Wissenschaftliches Arbeiten und PrÃ¤sentationstechnik 10/2015 ***
 %%
 %% The original source files were:
 %%

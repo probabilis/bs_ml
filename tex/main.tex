@@ -1,0 +1,429 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath}
+%\usepackage{german}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage[skip=5pt,font=scriptsize,justification=justified,singlelinecheck=false]{caption}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{accents}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{comment} 
+%\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage{upgreek}
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\usepackage{caption}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{biblatex}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%\usepackage{algcompatible}
+\usepackage{algpseudocode}
+\addbibresource{literatur.bib}
+%\usepackage{subfigure}
+\DeclareUnicodeCharacter{2212}{-}
+\usepackage[labelfont={bf,sf},font={small},%
+labelsep=space]{caption}
+\usepackage{doi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ein Makro für Bezug auf Abbildungen
+\newcommand{\fref}[1]{\figurename\ \ref{#1}}
+% Ein Makro für Bezug auf Seiten
+\newcommand{\pref}[1]{\pagename\ \pageref{#1}}
+% Ein Makro fuer Bezug auf eine Section
+\newcommand{\sref}[1]{section\ \ref{#1}}
+% Ein Makro fuer Bezug auf Zeile in Codelistings
+\newcommand{\lref}[1]{Line\ \ref{#1}}
+% Ein Makro fuer Bezug auf ein Listing
+\newcommand{\Lref}[1]{Listing\ \ref{#1}}
+% Ein Makro fuer Bezug auf Tabellen
+\newcommand{\tref}[1]{\tablename\ \ref{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\ihead{Maximilian Gschaider}
+    \chead{Gradient Boosting Machine}
+    \ohead{15.08.2023}
+\cfoot*{\pagemark}%
+
+\newpage 
+\thispagestyle{empty}
+
+\newpage
+\clearpage
+
+\title{Gradient Boosting Machine: \\ Decision Tree Regressor}
+\author{\\Technische Universität Graz\\
+Institut für Physik \\
+\\\\Maximilian Gschaider\\ \href{mailto:gschaider@student.tugraz.at}{gschaider@student.tugraz.at} \\}
+\date{01.01.2023}
+\maketitle
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\clearpage
+\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand\h{$h(\vec{x};\vec{a}_m)$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+When dealing with tabular data ...
+
+Tabular Data Analysis \\
+Effizienz - Methodik - Hürden \\
+
+\section{Methodology}
+
+The basic methodology and learning algorithms of GBM's algorithms, as originally derived by Friedman et al. \cite{Friedman2001}. This overview is considered as an introduction and therefore the strict mathematical proofs of algorithms and their properties are not covered fully.
+
+\subsection{Function estimation}
+In the function estimation or $"$predictive learning$"$ problem, one has a system of $"$input$"$ or $"$explanatory$"$ variables $\vec{x} = \{x_1,...,x_n\}$ and a depending $"$output$"$ or $"$response$"$ variable $y$. By using this training sample $\{y,\vec{x_n}\}$ with the known $(y,\vec{x})$- values one can obtain an estimate or approximation $\tilde{F}(\vec{x})$ of the function $F(\vec{x})$ mapping $\vec{x}$ to $y$ which minimizes the expected value of some specified loss function $L(y,F(\vec{x})$ over the joint distribution of all $(y,\vec{x})$ -values:
+\begin{equation}
+    F = \underset{F}{\arg\min} E_{y,\vec{x}} L(y,F(\vec{x})) = \underset{F}{\arg\min} E_{\vec{x}} [E_y (L(y,F(\vec{x})))|\vec{x}]
+\end{equation}
+Typically used loss functions for regression problems $L(y,F)$ include squared-error $(y - F)^2$ and absolute-error $|y - F|$ for $y \in R^1$.
+Often the function to be determined $F(\vec{x})$ is restricted to a set of linear combination of parameterized class of functions $F(\vec{x},\vec{P})$, where $\vec{P} = \{P_1,P_2,..\}$ is a discrete set of parameters whose joint values identify individual class members:
+\begin{equation}
+    F(\vec{x};\{\beta_m, \vec{a}_m\}_1^M) = \sum_{m=1}^{M} \beta_m h(\vec{x};\vec{a}_m)
+    \label{eq: param_approx_function}
+\end{equation}
+The function $h(\vec{x};\vec{a}_m)$ is called a generic function and is usually a simple parameterized function of the input variables $\vec{x}$ by specific parameters $\vec{a} = \{a_1,a_2,...\}$. Depending on the joint values $\vec{a}_m$ chosen for these parameters the individual terms will differ. Expansions like (\ref{eq: param_approx_function}) are the basis of many function approximation methods such as neural networks or support vector machines. When working with a continuous domain of the variables the generic functions $h(\vec{x};\vec{a}_m)$ are often used as small regression trees, such as those produced by \textit{CART}$^{TM}$. For such regression trees the parameters $\vec{a}_m$ are the splitting variables, split locations and the terminal node means of the individual trees.
+
+\newpage
+\subsection{Numerical optimization}
+
+By choosing a parameterized model $F(\vec{x};\vec{P})$ the function optimization problem becomes a parameter optimization problem:
+\begin{equation}
+    \label{eq: argmin_P}
+    \vec{P}^{\ast} = \underset{P}{\arg\min} \Phi(\vec{P})
+\end{equation}
+where
+\begin{center}
+    $\Phi(\vec{P}) = E_{y,\vec{x}} L(y,F(\vec{x};\vec{P})) $
+\end{center}
+is the risk function for the parameter optimization and $E_{y,\vec{x}}$ defines the expectation over all output values $y$ and input vectors $\vec{x}$. From this it is evident that the following structure can be derived
+\begin{center}
+    $F^{\ast}(\vec{x}) = F(\vec{x};P^{\ast})$
+\end{center}
+For most function estimations $F(\vec{x};P^{\ast})$ and loss functions $L$ suitable numerical optimizations methods must be applied to solve (\ref{eq: argmin_P}). By expressing the solution for the parameters in the form 
+\begin{equation}
+    \label{eq: lc_par}
+    P^{\ast} = \sum_{m=0}^{M} \vec{p}_m
+\end{equation}
+of a linear combination, where $\vec{p}_0$ is an inital guesss and $\{\vec{p_m}\}_1^M$ are successive increments ($"$steps$"$ or $"$boosts$"$), each based on the sequence of preceding steps. The prescription for computing each steps $p_m$ is defined by the optimization method.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Steepest-descent}
+
+Steepest-descent is an unconstrained optimization technique and often used at numerical minimization methods. Therefore the increments $\{p\}_1^M$ (\ref{eq: lc_par}) are defined as follows. First the current gradient $\vec{g}_m$ is computed:
+\begin{center}
+    $\vec{g}_m = \{g_{jm}\} = \nabla \Phi(\vec{P}) = \{ [\frac{\partial \Phi(\vec{P})}{\partial P_j}]_{P=P_{m-1}} \}$ with $P_{m-1} = \sum_{m=0}^{m-1} \vec{p}_i$
+\end{center}
+The incremental step is taken to be
+\begin{center}
+    \label{eq: gradient}
+    $\vec{p}_m = - \rho_m \vec{g}_m$ with $\rho_m = \underset{\rho}{\arg\min} \Phi(\vec{P}_{m-1} - \rho \vec{g}_m)$.
+\end{center}
+The $"$steepest-descent$"$ is now defined by the negative gradient \text{-}$\vec{g}_m$ direction (\ref{eq: gradient}) and is called the $"$line search$"$ along that direction.
+
+\section{Numerical optimization in function space}
+
+By shifting the parametric input to $"$nonparametric$"$ and applying numerical optimization in function space we consider $F(\vec{x})$ evaluated at each point $\vec{x}$ to be a $"$parameter$"$ and seek to minimize
+\begin{center}
+    $\Phi(F) = E_{y,\vec{x}} L(y,F(\vec{x}) = E_{\vec{x}}[E_y(L(y,F(\vec{x})))|\vec{x}]$
+\end{center}
+whereby the expectation $E_{y,\vec{x}}$ can be split up by chaining up the expectation $E_{\vec{x}}$ with respect to the expectation $E_y$ over the loss function given by the input vector $\vec{x}$. \\
+This can be shortened by evaluating directly at each individual $\vec{x}$ with respect to $F(\vec{x})$
+\begin{center}
+    $\Phi(F(\vec{x})) = E_y [L(y,F(\vec{x}))|\vec{x}]$
+\end{center}
+Theoretically there are an infinite number of such parameters in function space, but in data sets are only a finite number $\{F(\vec{x}_i)\}_1^N$ given. Following the numerical optimization paradigm we take solutions to be 
+\begin{center}
+    $F^{\ast}(\vec{x}) = \sum_{m=0}^{M} f_m(\vec{x})$
+\end{center}
+where $f_0(\vec{x})$ is an initial guess and $\{f_m(\vec{x})\}_1^M$ are incremental functions ($"$steps$"$ or $"$boosts$"$) defined by the optimization method.By using again the steepest-descent method the $m$-th incremental function results to
+\begin{equation}
+    \label{eq: incr_function}
+    f_m(\vec{x}) = - \rho_m g_m(\vec{x})
+\end{equation}
+and with the definition of the gradient 
+\begin{center}
+    $g_m(\vec{x}) = [\frac{\partial \Phi(F(\vec{x}))}{\partial F(\vec{x})}]_{F(\vec{x}) = F_{m-1}(\vec{x})} = [\frac{\partial E_y [L(y,F(\vec{x})|\vec{x}]}{\partial F(\vec{x})}]_{F(\vec{x}) = F_{m-1}(\vec{x})}$  
+\end{center} 
+and the total accumulation over all incremental functions 
+\begin{center}    
+    $F_{m-1} = \sum_{m=0}^{m-1} f_i(\vec{x})$
+\end{center}
+One can now assume that the following function suffices regularity and consequently differentiation and integration can be interchanged by integrating the expectation value $E_y$ over the function values $F(\vec{x})$. 
+\begin{equation}
+    g_m(\vec{x}) = E_y [\frac{\partial L(y, F(\vec{x}))}{\partial F(\vec{x})} | \vec{x}]_{F(\vec{x}) = F_{m-1}(\vec{x})}
+\end{equation}
+Again the factor $\rho_m$ in (\ref{eq: incr_function}) is given by the minimizing the line search
+\begin{equation}
+    \rho_m = \underset{\rho}{\arg\min} E_{y,\vec{x}} L[y,F_{m-1}(\vec{x}) - \rho \vec{g}_m(\vec{x})]
+\end{equation}
+
+\newpage
+\section{Barriers with finite data and GB design}
+When dealing with a finite data-set the non-parametric approach breaks down because the joint distribution of $(y,\vec{x})$ is estimated only by this discrete set of data samples $\{y_i,\vec{x}_i\}_1^N$. This is because the expectation $E_y[\cdot|\vec{x}]$ cannot be estimated accurately by its data value at each specific $\vec{x}_i$. Although it is not possible, one would also like to estimate $F^{\ast}(\vec{x})$ at $\vec{x}$ values other than the given training sample points.
+Therefore strength and stability for the system must be borrowed from nearby data points by imposing smoothness on the solution. 
+Friedman et al. supposed here an elegant way for providing a solution to this problem by assuming a parameterized form such as (\ref{eq: param_approx_function}) and performing a parameter optimization as discussed in chapter [\#] to minimize the corresponding data based estimate of the expected loss
+\begin{center}
+    \label{eq: greedy_stagewise}
+    $\{\beta_m,\vec{a}_m\}_1^M = \underset{ \{\beta'_m,\vec{a}'_m \} }{\arg\min} 
+    \sum_{i=1}^N L
+    \left(y_i,\sum_{m=1}^M\beta'_{m} h(\vec{x}_i;\vec{a}'_m)\right)$
+\end{center}
+Due the fact that the summation over all $m$ in the argument of the loss function will be computationally impractical a $"$greedy-stagewise$"$ approach will be implemented. Therefore for $m$ = 1,2,...,$M$ the following simplification will be used
+\begin{equation}
+        \{\beta_m,\vec{a}_m\} = \underset{ \{\beta,\vec{a} \} }{\arg\min} 
+    \sum_{i=1}^N L
+    (y_i,F_{m-1}(\vec{x_i}) + \beta h(\vec{x}_i;\vec{a}))
+\end{equation}
+for evaluating the stagewise function 
+\begin{equation}
+    F_m(\vec{x}) = F_{m-1}(\vec{x}) + \beta_m h(\vec{x};\vec{a_m}).
+\end{equation}
+It must be noted that this \textit{stagewise} strategy is different from a stepwise approach that reconfigure previously entered terms when new ones are added. The function $h(\vec{x};\vec{a}_m)$ is called a $"$weak$"$ or $"$base learner$"$. \\
+It can be assumed that for a particular loss $L(y,F)$ and base learner $h(\vec{x};vec{a}_m)$ the solution to (\ref{eq: greedy_stagewise}) is difficult to obtain, like Friedman mentioned in his official paper.
+\\
+\textit{Given any approximator $F_{m-1}(\vec{x})$ the function $\beta_m h(\vec{x};\vec{a})$ can be viewed the best greedy step towards the data based estimate of $F^{\ast}(\vec{x})$, under the constraint that the step 'direction' $h(\vec{x};\vec{a}_m)$ be a member of the parameterized class of functions $h(\vec{x};\vec{a})$}. It can therefore be considered the steepest descent under that constraint.
+\\
+By the general construction, the data-based analogue of the unconstrained negative gradient,
+\begin{center}
+    $
+        - g_m(\vec{x}_i) = - [\frac{\partial L(y_i, F(\vec{x}_i))}{\partial F(\vec{x}_i)}]_{F(\vec{x}) = F_{m-1}(\vec{x})}
+    $
+\end{center}
+gives the best steepest-descent step direction $-\vec{g}_m = \{-g_m(\vec{x}_i\}_1^N$ in the $N$-dimensional data space at $F_{m-1}$.
+But this gradient is defined only at the data points $\{\vec{x}_i\}_1^N$ and cannot be generalized to other $\vec{x}$-values. 
+To bypass this limitation one can generalize the solution by choosing that member of the parameterized class $h(\vec{x};\vec{a}_m)$ that produces $\vec{h}_{m} = \{h(\vec{x}_i ;\vec{a})\}_1^N$ most parallel to $-\vec{g}_m \in R^N$. \textit{This is the $h(\vec{x};\vec{a})$ most highly correlated with $- g_m(\vec{x})$ over the data distribution}, as Friedman et al. \cite{Friedman2001} proposed. This workaround for gaining information about the gradient can be obtained from the minimization of the solution
+\begin{equation}
+    \vec{a}_m = \underset{ \vec{a}, \beta }{\arg\min} 
+    \sum_{i=1}^N [g_{m}(\vec{x_i}) - \beta h(\vec{x}_i;\vec{a})]^2
+\end{equation}
+This constrained negative gradient $h(\vec{x};\vec{a})$ is used in place of the unconstrained one $-\vec{g}_m(\vec{x})$ in the steepest-descent strategy. Afterwards the line search is evaluated in respect to the minimization criteria
+\begin{equation}
+        \rho_m = \underset{\rho}{\arg\min} \sum_{i=1}^N L[y_i,F_{m-1}(\vec{x}_i) + \rho h(\vec{x}_i;\vec{a}_m)]
+\end{equation}
+and then the approximation updated
+\begin{equation}
+    F_{m} = F_{m-1}(\vec{x}) + \rho_m h(\vec{x};\vec{a}_m)
+\end{equation}
+Basically, instead of obtaining the solution under a smoothness constraint, the constraint is applied to the unconstrained (rough) solution by fitting $h(\vec{x};\vec{a})$ to the $"$pseudo-responses$"$ $\{\tilde{y}_i = - g_m(\vec{x}_i)\}_{i=1}^N$.
+This permits the replacement of the difficult function minimization problem by least-squares function minimization, followed by only a single parameter optimization based on the original criterion, as stated by Friedman et al. \cite{Friedman2001}.\\
+So for any base learner function $h(\vec{x};\vec{a})$ for which a implementable least-squares algorithm exists for solving, one can use this approach to minimize any differentiable loss or objective function $L(y,F)$.
+As shown, this is achieved with a forward stage-wise additive modeling method by using steepest-descent (\ref{alg: gb_algo}). 
+\begin{algorithm}
+\caption{Gradient-boosting}
+\label{alg: gb_algo}
+    $F_0(\vec{x}) = \underset{\rho}{\arg\min} \sum_{i=1}^N L(y_i,\rho)$ \\
+    \For{$m = 1$ to $M$}
+    {$\tilde{y}_i = [\frac{\partial L(y_i, F(\vec{x}_i))}{\partial F(\vec{x}_i)}]_{F(\vec{x}) = F_{m-1}(\vec{x})} \qquad i = 1,..,N$
+    $\vec{a}_m = \underset{ \vec{a}, \beta }{\arg\min} 
+    \sum_{i=1}^N [\tilde{y}_i - \beta h(\vec{x}_i;\vec{a})]^2$
+    $\rho_m = \underset{\rho}{\arg\min} \sum_{i=1}^N L[y_i,F_{m-1}(\vec{x}_i) + \rho h(\vec{x}_i;\vec{a}_m)]$
+    $F_{m} = F_{m-1}(\vec{x}) + \rho_m h(\vec{x};\vec{a}_m)$
+    }
+\end{algorithm}
+
+
+In general can any fitting criterion be used that estimates the conditional expectation (given $\vec{x} $) to evaluate the (smooth) negative gradient at line 4 of the Gradient Boosting Generic Algorithm.
+Because of the universal and efficient computational properties of least-squares implementations one will select it when dealing with regression tasks.
+\section{Loss function and additive modeling}
+In mathematical optimization a loss function is a function that maps an event or values of one or more variables onto a real number intuitively representing some $"$cost$"$ associated with the event. Through optimization one can seek to minimize the loss function. \\
+In this paper we will focus only on quadratic loss-functions, because of the usability in regression tasks.
+\subsection{Least-squares regression}
+Defining the loss function as $L(y,F) = \frac{1}{2} (y - F)^2$ results in quadratic residuals with symmetric properties. Therefor the $"$pseudo-responses$"$ in line 3 of the GB-Algorithm (\ref{alg: gb_ls_algo}) results to $\tilde{y}_i = y_i - F_{m-1}(\vec{x}_i)$. The minimization in line 4 results in fitting the current residuals and the line search in line 5 produces the result $\rho_m = \beta_m$, where the parameter minimization of $\beta_m$ is included in line 4. This results in the classical gradient boosting algorithm with least-squares regression which follows the usual stagewise approach by iteratively fitting the current residuals.
+\begin{algorithm}
+\caption{Gradient boosting with least-squares regression}
+\label{alg: gb_ls_algo}
+    $F_0(\vec{x}) = \bar{y}$ \\
+    \For{$m = 1$ to $M$}
+    {
+    $\tilde{y}_i = y_i - F_{m-1}(\vec{x}_i) \qquad i = 1,..,N$
+    $\{\rho_m, \vec{a}_m \} = \underset{ \vec{a}, \rho }{\arg\min} 
+    \sum_{i=1}^N [\tilde{y}_i - \rho h(\vec{x}_i;\vec{a})]^2$
+    $F_{m} = F_{m-1}(\vec{x}) + \rho_m h(\vec{x};\vec{a}_m)$
+    }
+\end{algorithm}
+
+\newpage
+\subsection{Regression tree}
+
+A regression tree is a tree model where the target variable can take continuous values. More generally, the concept of regression tree can be extended to any kind of object equipped with pairwise dissimilarities such as categorical sequences. The \textbf{term classification and regression tree (CART)} analysis is an umbrella term used to refer either regression or classification predictions. Gradient boosting because of its ensemble properties creates multiple decision trees based on the given hyperparameters. By incrementally building an ensemble by training each new instance to emphasize the training instances previously mismodeled. 
+A decision tree is a simple representation for classifying examples. Assume that all the input features $\vec{x} = \{x_1,...,x_n\}$ have finite discrete domains and there's a single target feature $C_y$ called the $"$classification$"$. 
+Each element of the domain of the classification is called a $"$class$"$. A decision tree is a tree in which each internal (non-leaf) node is labeledwith an input feature. The links coming from a node labeled with an input feature are labeled with each of the possible values of the target feature or the link leads to a subordinate decision node on a different input feature. Each leaf of the tree is labeled with a class or a probability distribution over the classes, signifying that the date set has been classified by the tree into either a specific class, or into a particular probability distribution. 
+The tree is built by splitting the source set, constituting the root node of the tree, into subsets, which constitute the successor children.
+
+
+The splitting is based on a set of splitting rules based on classification features. This process is repeated on each derived subset in a recursive manner called recursive partitioning. The recursion is completed when the subset at a node has all the same values of the target variable $y$ or when splitting no longer adds value to the predictions. This process of $"$top-down induction of decision trees$"$ is an example of a greedy algorithm and it is by far the most common strategy for learning decision trees from data.
+\begin{center}
+$\mathcal{D} = \{(x^{(i)},y_i)\}_{i=1}^n$ is the training's data-set with input variables $x^{(i)} = (x_1^{i} ,...,x_n^{i}) \in \mathcal{X}$ and output variables $y \in \mathcal{Y}$.
+\end{center}
+
+\subsubsection{Decision trees}
+There are different algorithms for constructing decision trees by choosing a variable at each step that best splits the set of items. These generally measure the $"$homogeneity$"$ of the target variable within the subsets. Depending on the discrete or continuous properties of the data-set one can use different metrics like positive correctness, gini-impurity, information gain, variance reduction or measure of goodness.
+Introduced in CART, variance reduction is often used where the target variable is continuous ($\mathcal{Y} \subseteq \mathbb{R}$), so the output has quantitative properties.\\
+A decision tree $T$ is presentable via a function $f_T : \mathcal{X} \rightarrow \mathcal{Y}$ which assigns each input a prediction of the output. The CART algorithm finds self-reliant the branches (nodes) and splitting rules for optimal allocation. 
+Therefore the mean square root deviation is used for the error function,
+\begin{center}
+    $E(T,\mathcal{D}) = \frac{1}{m} \sum_{i=1}^m (f_T(x^{(i)}) - y_i)^2$
+\end{center}
+which has then be minimized. For each leaf $l$ a subset $R_l$ will be assigned, that for each $L$ leafs associated disjoint sets form a partition of $D$. One can now search an estimated value for all $x^{(i)} \in \mathcal{R}_l$ that best approximates the true value $\{y_i | x^{(i)} \in R_l\}$. 
+The estimator 
+\begin{center}
+    $f_T(x^{(i)} \in R_l) = \bar{E}[y_i | x^{(i)} \in R_l] = \hat{c}_l$
+\end{center}
+provides a solution. Because the computational effort for calculation all possible trees is not efficient feasible one can use a greedy algorithm. 
+\textit{
+One starts with a tree which consists of only one node and then successively find locally optimal branching.
+}At each node the individual property $j$ will be calculated which splits the entry in two disjoint regions of the parent nodes the best. For non-ordinal features one can use the following metric
+\begin{equation}
+    \underset{ j,s }{\min} \left( 
+    \underset{ c_1 }{\min} 
+    \sum_{x^{(i)} \in R_1(j,s)} (y_i - c_1)^2 + 
+    \underset{ c_2 }{\min} 
+    \sum_{x^{(i)} \in R_2(j,s)} (y_i - c_2)^2
+    \right)
+\end{equation}
+whereby $\hat{c}_k = \bar{E}[y_i | x^{(i)} \in R_k(j,s)]_{k = 1,2}$ in each case minimizes the two sums. Based on the single node each step two new nodes will be added which in turn are branched further until a termination condition (e.g.: the maximum path length from root to leaves / = max tree depth) is met. Here is a simplified tree-growing algorithm from sketch \ref{alg: tree_growing_algo}:
+\begin{algorithm}
+\caption{Simplified tree-growing algorithm sketch}\label{alg: tree_growing_algo}
+    Assign all training data to the root node \\
+    Define the root node as a terminal node \\
+    \underline{SPLIT:} \\
+    $NewSplits \gets 0$ \\
+    \For{every terminal node in the tree}
+    {
+        \eIf{the terminal node sample size is too small or all instances in the node belong to the same target class}
+        {\textbf{end}}
+        {Find the attribute that best seperates the node into two child nodes using an allowable splitting rule}
+        $NewSplits \gets NewSplits + 1$\;
+    }
+\end{algorithm}
+So decision trees are very $"$natural$"$ constructions, in particular when explanatory variables are categorical (and even better, when they're binary). The created models are invariant under transformations in the predictor space \cite{Breiman1984}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\subsubsection{Regression boosted trees}
+For simplification we consider the special case where each base learner is an $J$-terminal node regression tree \cite{Breiman1984}.Each regression tree model itself has the additive form 
+\begin{equation}
+    h(\vec{x};\{b_j,R_j\}_1^J) = \sum_{j=1}^J b_j \mathds{1}(\vec{x} \in \mathbb{R})
+\end{equation}
+Here $\{R_j\}_1^J$ are disjoint regions that collectively cover the space of all joint values of the predictor variables $\vec{x}$ \cite{Friedman2001}. These regions are represented by the terminal nodes of the corresponding tree. The indicator function $\mathds{1}$ has the value 1 if its argument is true and zero otherwise. The $"$parameters$"$ of this base learner are the coefficients $\{b_j\}_1^J$ and the quantities that define the boundaries of the regions $\{R_j\}_1^J$. These are the splitting variables and the values of those variables that represent the splits at the nonterminal nodes of the tree. Because of the regions are disjoint is equivalent to the prediction rule: if $\vec{x} \in \mathbb{R_j}$
+then $h(\vec{x}) = b_j$.
+For a regression tree the update at line 6 in algorithm (\ref{alg: gb_algo}) becomes
+\begin{equation}
+    F_m(\vec{x}) = F_{m-1}(\vec{x}) + \rho_m \sum_{j=1}^J b_{jm} \mathds{1}(\vec{x} \in \mathbb{R}_{jm})
+\end{equation}
+Here $\{\mathbb{R}_{jm})\}_1^J$ are the regions defined by the terminal nodes of the tree at the $m$-th iteration. They are constructed to predict the pseudo-responses $\{\tidle{y}\}_1^N$ (line 3) by least-squares (line 4). The $\{b_{jm}\}$ are the corresponding least-squares coefficients,
+\begin{center}
+    $b_{jm} = \bar{E}_{\vec{x}_i \in R_{jm}}[\tilde{y}_i]$
+\end{center}
+The scaling factor $\rho_m$ is the solution to the $"$line search$"$ at line 5.
+The forward iteration can be also expressed as 
+\begin{equation}
+        F_m(\vec{x}) = F_{m-1}(\vec{x}) + \sum_{j=1}^J \gamma_{jm} \mathds{1}(\vec{x} \in R_{jm})
+\end{equation}
+with the coefficents $\gamma_{jm} = \rho \cdot b_{jm}$. This can be viewed as adding $J$ separate basis functions at each step $\{\mathds{1}(\vec{x} \in R_{jm})\}_1^J$ instead of a single additive one. By using the optimal coefficients for each of these separate basis functions  one can further improve the quality of the fit.
+These coefficients are the solution to 
+\begin{center}
+    $\{\gamma_{jm}\}_1^J = \underset{\{\gamma_j\}_1^J}{\arg\min} \sum_{i=1}^N L\left(y_i,F_{m-1}(\vec{x}_i) + \sum_{j=1}^J \gamma_j \mathds{1}(\vec{x} \in R_{jm})\right)$
+\end{center}
+Owing to the disjoint nature of the regions produced by regression trees this reduces to
+\begin{equation}
+        \label{eq: gamma_jm}
+        \gamma_{jm} = \underset{\gamma}{\arg\min} \sum_{\vec{x}_i \in R_{jm}} L\left(y_i,F_{m-1}(\vec{x}_i) + \gamma\right)
+\end{equation}
+This is just the optimal constant update in each terminal node region, based on the loss function $L$ given the current approximation $F_{m-1}(\vec{x})$.
+For the case of LSD (least-squares deviation) regression (\ref{eq: gamma_jm}) becomes 
+\begin{center}
+    $\gamma_{jm} = \bar{E}_{\vec{x}_i \in R_{jm}}\{y_i - F_{m-1}(\vec{x}_i)\}$
+\end{center}
+which is simply the arithmetic mean of the current residuals in the $j$-th terminal node at the $m$-th iteration. At each iteration a regression tree is built to best predict the sign of the current residuals $y_i - F_{m-1}(\vec{x}_i)$ based on a least-squared criterion. Then the approximation is updated by adding the \textit{arithmetic mean} of the residuals in each of the derived terminal nodes.
+\begin{algorithm}
+\caption{LSD tree-boost}\label{alg: lsd_tree_boost_algo}
+    $F_0(\vec{x}) = mean\{y_i\}_1^N$ \\
+    \For{$m = 1$ to $M$}
+    {
+    $\tidle{y}_i = \sum_{i=1}^N (y_i - F_{m-1}(\vec{x})$
+    $\{R_{jm}\} = J-\text{terminal node } tree(\{\tilde{y}_i,\vec{x}_i\}_1^N$
+    $\gamma_{jm} = \bar{E}_{\vec{x}_i \in R_{jm}}\{y_i - F_{m-1}(\vec{x}_i)\} , j = 1,..,J$
+    $F_m(\vec{x}) = F_{m-1}(\vec{x}) + \sum_{j=1}^J \gamma_{jm} \mathds{1}(\vec{x} \in R_{jm})$
+    }
+\end{algorithm}
+The trees use only order information on the individual input variables $\vec{x}_j$ and the pseudoresponses $\tilde{y}_i$ have a discrete set of values compared to the least-absolute deviation error function (LAD) where the output would be strict binary. Therefore the terminal node updates are based on the mean.
+\newpage
+\subsection{Regularization}
+When predicting an output through fitting the training data too closely one can get a problem with overfitting the model. Reducing the expected loss on the training data beyond some point causes the prediction-expected loss to stop decreasing and often to start increasing again. 
+Regulariation methods attept to prevent such $"$overfitting$"$ by constraining the fitting procedure, as Friedman et al. \cite{Friedman2001} proposed originally.
+For additive expansions a natural regularization parameter is the number of components $M$. This is similar to stepwise regression where the $\{h(\vec{x};\vec{a}_m)\}_1^M$ are considered explanatory variables that are sequentially entered. Through the adjustment of $M$ the regularization degree to which expected loss on the training data can be minimized. The best value for $M$ can be estimated by some model selection method such as cross-validation (CV) by \textit{Gridsearch}- or \textit{Bayesian-Optimization}. \\
+\textit{Regularizing by controlling the number of terms in the expansion places an
+implicit prior belief that $"$sparse$"$ approximations involving fewer terms are
+likely to provide better prediction. However, it has often been found that regularization through shrinkage provides superior results to that obtained by
+restricting the number of components [Copas (1983)]}, as Friedman \cite{Friedman2001} described.
+When working with additive models in a forward stagewise manner a simple shrinkage strategy is to replace line 6 of the generic algorithm (\ref{alg: gb_algo}) with
+\begin{equation}
+    \label{eq: gb_algo_shrinkage}
+    F_m(\vec{x}) = F_{m-1}(\vec{x}) + \nu \cdot \rho_{m} h(\vec{x};\vec{a}_m) \qquad 0 < \nu \leq 1
+\end{equation}
+(equally for all other algorithms). Consequentially each update is simply scaled by the value of the $"$learning rate$"$ parameter $\nu$.
+Introducing shrinkage into gradient boosting [\ref{eq: gb_algo_shrinkage}] in this manner provides two regularization parameters, the learning rate $\nu$ and the number of components $M$. Each one can control the degree of fit and thus affect the best value for the other one. Decreasing the value $\nu$ increases the best value for $M$. Ideally one should estimate optimal values for both by minimizing a model selection criterion jointly with respect to the values of the two parameters. But one has to consider the proportional increase in computation when increasing the size of $M$.
+
+\newpage
+\section{Cross validation}
+
+Cross validation or out-of-sample testing is any of various similar model validation techniqes for assesing how to results of a statistical analysis will generalize to an independent data set. It is a resampling method that uses different portions of the data to test and train a model in different iterations. It is mainly used in settings where the goal is prediction and one wants to estimate how accurately a predictive model will perform in practice. Usually one have a dataset of \textit{known data} on which training is run (training dataset) and a dataset of \textit{unknown data} against which the model is tested (validation dataset).
+Therefore the goal of cross-validation is to test the model's ability to predict new data what was not used in estimating it in order to flag problems like overfitting or selection bias. \\
+One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on the training set and validating the analysis on the validation set.
+To reduce variability in most methods multiple rounds of cross-validation are performed using different partitions. So to sum up CV averages measures of fitness in prediction to derive a more accurate estimate of model prediction performance via a specific metric.
+
+There are two types of cross validation methods which have to be distinguished: exhaustive and non-exhaustive strategies. An exhaustive cross-validation method learns and tests on all possible ways to divide the original sample into training and validation set. Non-exhaustive cross validation methods do not compute all ways of splitting the original sample. These methods are approximations of leave-$p$-out cross-validation.
+
+\subsection{$k$-fold cross-validation}
+In $k$-fold cross-validation the original sample is randomly partitioned into $k$ equal size subsamples.
+Of the $k$ subsamples, a single subsample is retrained as the validation data for testing the model and the remaining $k - 1$ subsamples are used as training data. This cross validation process is then repeated $k$ times with each of the $k$ subsamples used exactly once as the validation data. The $k$ results can then be averaged to produce a single estimation. One advantage of this method over repeated random sub-sampling is that all observations are used for both training and validation and each observation is used for validation exactly once.
+
+
+
+\subsection{Gridsearch}\\
+
+\subsection{Bayesian Optimization}\\
+\subsubsection{Gaussian Processes} \\
+
+\section{PCA}
+Dimensionality Reduction for accelerating hypertuning \\
+\section{Neutralizing}
+
+\section{Results and Model Interpretation}
+Scores \\
+Partial Dependence \\
+\section{Comparison with a DL Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Literatur}
+\printbibliography
+\newpage
+\listoffigures
+\end{document}

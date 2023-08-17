@@ -3,7 +3,6 @@ Author: Maximilian Gschaider
 MN: 12030366
 """
 import pandas as pd
-import numpy as np
 from lightgbm import LGBMRegressor
 from bayes_opt import BayesianOptimization
 import time

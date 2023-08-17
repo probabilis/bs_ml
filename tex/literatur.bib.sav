@@ -25,4 +25,12 @@
   publisher = {Institute of Mathematical Statistics},
 }
 
+@Standard{Scikit2023,
+  organization = {Scikit},
+  title        = {Cross validation},
+  author       = {Scikit},
+  url          = {https://scikit-learn.org/stable/modules/cross_validation.html},
+  year         = {2023},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

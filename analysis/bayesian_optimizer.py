@@ -36,13 +36,21 @@ params_gbm = {"learning_rate":(0.01,0.15),"max_depth":(1,10),"n_estimators":(500
 
 
 gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
-gbm_bo.maximize(init_points = 20, n_iter = 30)
+gbm_bo.maximize(init_points = 2, n_iter = 3)
 print('It takes %s minutes' %((time.time()-st)/60))
 
 params_gbm = gbm_bo.max['params']
+
 params_gbm['max_depth'] = round(params_gbm['max_depth'])
 params_gbm['n_estimators'] = round(params_gbm['n_estimators'])
 #params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'])
+
+df = pd.DataFrame()
+
+for i, res in enumerate(gbm_bo.res):
+    df = pd.concat([df, pd.DataFrame([res])], ignore_index=True)
+    print("Iteration {}: \n\t{}".format(i, res))
+
 print(params_gbm)
 
 lgbm = LGBMRegressor(**params_gbm)
@@ -52,8 +60,6 @@ Y_pred = lgbm.predict(X)
 plt.plot(X,Y_pred)
 plt.plot(X,Y)
 plt.show()
-
-
 
 #best_models, times = model_optimizer(models, params, df1[features], df1[target])
 #print(best_models)

@@ -33,4 +33,28 @@
   year         = {2023},
 }
 
+@InProceedings{Snoek2012,
+  author    = {Snoek, Jasper and Larochelle, Hugo and Adams, Ryan P},
+  booktitle = {Advances in Neural Information Processing Systems},
+  title     = {Practical Bayesian Optimization of Machine Learning Algorithms},
+  year      = {2012},
+  editor    = {F. Pereira and C.J. Burges and L. Bottou and K.Q. Weinberger},
+  publisher = {Curran Associates, Inc.},
+  volume    = {25},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2012/file/05311655a15b75fab86956663e1819cd-Paper.pdf},
+}
+
+@Article{Stander2002,
+  author    = {Nielen Stander and K.J. Craig},
+  journal   = {Engineering Computations},
+  title     = {On the robustness of a simple domain reduction scheme for simulation-based optimization},
+  year      = {2002},
+  month     = {jun},
+  number    = {4},
+  pages     = {431--450},
+  volume    = {19},
+  doi       = {10.1108/02644400210430190},
+  publisher = {Emerald},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

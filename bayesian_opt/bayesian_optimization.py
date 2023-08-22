@@ -68,7 +68,7 @@ params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,
 init_points = 10 ; n_iter = 30
 
 pbounds = params_gbm
-bounds_transformer = SequentialDomainReductionTransformer(minimum_window=0.5)
+bounds_transformer = SequentialDomainReductionTransformer() #minimum_window=0.5
 
 
 def sdr_switch( SDR ):

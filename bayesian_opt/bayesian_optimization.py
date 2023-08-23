@@ -35,7 +35,7 @@ def pca(df,n):
     del df
     return df_pca, features_pca
 
-df_pca, features_pca = pca(df_,n=200)
+df_pca, features_pca = pca(df_,n=100)
 gc.collect()
 
 

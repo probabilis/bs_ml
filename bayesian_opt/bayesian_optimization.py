@@ -29,9 +29,15 @@ del df ; gc.collect()
 
 ##################################
 
-n = 300
-df_pca, features_pca = dim_reduction(df_,features,target,n)
-del df_
+def pca(df,n):
+
+    df_pca, features_pca = dim_reduction(df,features,target,n)
+    del df
+    return df_pca, features_pca
+
+df_pca, features_pca = pca(df_,n=200)
+gc.collect()
+
 
 
 ##################################

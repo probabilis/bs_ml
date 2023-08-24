@@ -13,9 +13,11 @@ from sklearn.model_selection import cross_val_score
 
 sys.path.append('../')
 
-from bs_ml.preprocessing.cross_validators import era_splitting
-from bs_ml.preprocessing.pca_dimensional_reduction import dim_reduction
-from bs_ml.utils import loading_dataset, repo_path
+#bs_ml.
+
+from preprocessing.cross_validators import era_splitting
+from preprocessing.pca_dimensional_reduction import dim_reduction
+from utils import loading_dataset, repo_path
 
 #############################################
 
@@ -35,7 +37,7 @@ def pca(df,n):
     del df
     return df_pca, features_pca
 
-df_pca, features_pca = pca(df_,n=100)
+df_pca, features_pca = pca(df_, n=100)
 gc.collect()
 
 

@@ -31,13 +31,13 @@ del df ; gc.collect()
 
 ##################################
 
-def pca(df,n):
+#def pca(df,n):
 
-    df_pca, features_pca = dim_reduction(df,features,target,n)
-    del df
-    return df_pca, features_pca
+df_pca, features_pca = dim_reduction(df_,features,target,n=100)
+del df_ 
+#return df_pca, features_pca
 
-df_pca, features_pca = pca(df_, n=100)
+#df_pca, features_pca = pca(df_, n=100)
 gc.collect()
 
 

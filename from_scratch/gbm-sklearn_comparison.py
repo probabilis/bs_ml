@@ -1,7 +1,6 @@
 from gbm_class import GradientBoosting
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error
-from sklearn.tree import DecisionTreeRegressor
 
 import matplotlib.pyplot as plt
 import numpy as np

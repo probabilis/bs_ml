@@ -26,21 +26,15 @@ df, features, target, eras = loading_dataset()
 #############################################
 
 df_, eras_ = era_splitting(df, eras)
-
 del df ; gc.collect()
 
 ##################################
 
-#def pca(df,n):
+n = 100
 
-df_pca, features_pca = dim_reduction(df_,features,target,n=100)
-del df_ 
-#return df_pca, features_pca
+df_pca, features_pca = dim_reduction(df_,features,target,n=n)
 
-#df_pca, features_pca = pca(df_, n=100)
-gc.collect()
-
-
+del df_ ; gc.collect()
 
 ##################################
 

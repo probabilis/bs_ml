@@ -12,8 +12,18 @@ x_max = 2*pi
 N = 100
 
 X = np.linspace(x_min,x_max,N).reshape(-1,1)
-Y = np.sin(X)
+
+##################################
+
+def f(x, noise):
+    return (10 - np.sin(x) + 0.3 * x + np.log(x) + noise * np.random.randn(*x.shape))
+
+##################################
+
+Y = f(X, noise = 2)
 Y = np.ravel(Y)
+
+print(Y)
 
 ##################################
 
@@ -22,7 +32,7 @@ alpha = 0.2
 deep = 1
 
 sklearn_gbm = GradientBoostingRegressor(n_estimators = n, learning_rate = alpha, max_depth = deep)
-self_gbm = GradientBoosting(n_trees = n, learning_rate = alpha, max_depth = deep)
+self_gbm = GradientBoosting(n_trees = n, learning_rate = alpha, max_depth = deep, X = X, Y = Y)
 
 models = [sklearn_gbm, self_gbm]
 

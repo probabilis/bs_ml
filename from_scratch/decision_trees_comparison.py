@@ -13,12 +13,24 @@ import matplotlib.pyplot as plt
 
 max_depth = 3
 
-x_min = 0
-x_max = 2 * np.pi
+x_min = 0.1
+x_max = 10
 N = 100
 
 X = np.linspace(x_min ,x_max , N)
-Y = np.sin(X)
+
+###################################
+
+def f(x, noise):
+    return (10 - np.sin(x) + 0.5 * x + np.log(x)) + noise * np.random.randn(*x.shape)
+
+###################################
+
+
+
+
+Y = f(X, noise = 1)
+
 X = X.reshape(-1,1)
 
 model = DecisionTreeRegressor(max_depth = max_depth)
@@ -36,7 +48,7 @@ fig.set_size_inches(12,8)
 
 fig.suptitle("Decision Tree Regressor from Scratch comparison with SKLEARN module")
 ax.set_title("max depth $d_{max}$ = " + str(max_depth))
-ax.plot(X, Y, color = 'gray')
+ax.scatter(X, Y, color = 'gray')
 ax.plot(X, y_pred, color = 'salmon', linestyle = ':', linewidth = 3, label = 'SKLEARN')
 ax.plot(X, y_pred_scratch, color = 'mediumseagreen', linestyle = '--',linewidth = 3, label = 'SCRATCH')
 ax.legend()

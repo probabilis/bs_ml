@@ -22,7 +22,7 @@ X = np.linspace(x_min ,x_max , N)
 ###################################
 
 def f(x, noise):
-    return (10 - np.sin(x) + 0.5 * x + np.log(x)) + noise * np.random.randn(*x.shape)
+    return (10 - np.sin(x) + 0.5 * x + np.log(x) + 1/x) + noise * np.random.randn(*x.shape)
 
 ###################################
 

@@ -91,7 +91,17 @@ def sdr_switch( SDR ):
     gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
     return gbm_bo
 
-gbm_bo = sdr_switch( SDR = True )
+#gbm_bo = sdr_switch( SDR = True )
+
+gbm_bo = BayesianOptimization(
+            f = gbm_reg_bo,
+            pbounds = pbounds,
+            verbose = 0,
+            random_state = 111,
+            bounds_transformer = bounds_transformer)
+
+gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
+
 
 
 print('It takes %s minutes' %((time.time()-st)/60))

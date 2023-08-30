@@ -2,35 +2,19 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-import sklearn
+#official open-source repositories
 from sklearn.tree import DecisionTreeRegressor, export_graphviz
-from decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+#own modules
+from decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
+from testfunction import testfunction, X
 
 ###################################
 
-max_depth = 3
+max_depth = 1
 
-x_min = 0.1
-x_max = 10
-N = 100
-
-X = np.linspace(x_min ,x_max , N)
-
-###################################
-
-def f(x, noise):
-    return (10 - np.sin(x) + 0.5 * x + np.log(x) + 1/x) + noise * np.random.randn(*x.shape)
-
-###################################
-
-
-
-
-Y = f(X, noise = 1)
-
+Y = testfunction(X, noise = 0.5)
 X = X.reshape(-1,1)
 
 model = DecisionTreeRegressor(max_depth = max_depth)

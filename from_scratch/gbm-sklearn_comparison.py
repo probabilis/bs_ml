@@ -53,7 +53,7 @@ def gbm_scratch_sklearn_comparison(plot_save) -> None:
     plt.ylabel('Deviance / MSE ')
     plt.tight_layout()
     if plot_save == True:
-        plt.savefig("gbm_scratch_sklearn_loss_comparison.png")
+        plt.savefig("gbm_scratch_sklearn_loss_comparison.png", dpi=300)
     plt.show()
 
 gbm_scratch_sklearn_comparison(plot_save = False)

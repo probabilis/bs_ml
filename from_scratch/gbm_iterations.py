@@ -4,18 +4,15 @@ MN: 12030366
 """
 ########################################
 #official open-source repositories
-import os
+import sys
 import numpy as np
-from sklearn.tree import DecisionTreeRegressor, export_graphviz
+from scipy import stats
 import matplotlib.pyplot as plt
-
 #own modules
 from gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X
-
-########################################
-
-repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
+sys.path.append('../')
+from bs_ml.utils import repo_path
 
 ########################################
 #testfunction
@@ -29,6 +26,73 @@ n_trees = 1
 max_depth = 1
 
 X_0 = X.reshape(-1,1)
+
+########################################
+
+def linear_regression(save_plot) -> None:
+    y = testfunction(X, noise = 0.5)
+
+    p = np.polyfit(X, y, 1)
+    n = y.size
+    m = p.size
+    dof = n - m
+    # Significance level
+    alpha = 0.05
+    # We're using a two-sided test
+    tails = 2
+    t_critical = stats.t.ppf(1 - (alpha / tails), dof)
+    # Model the data using the parameters of the fitted straight line
+    y_model = np.polyval(p, X)
+    # Create the linear (1 degree polynomial) model
+    model = np.poly1d(p)
+    y_model = model(X)
+    y_bar = np.mean(y)
+
+    # Coefficient of determination, R²
+    R2 = np.sum((y_model - y_bar)**2) / np.sum((y - y_bar)**2)
+    print(f'R² = {R2:.2f}')
+
+    resid = y - y_model
+
+    chi2 = sum((resid / y_model)**2)
+
+    chi2_red = chi2 / dof
+
+    std_err = np.sqrt(sum(resid**2) / dof)
+
+    plt.scatter(X, y, c='gray', marker='o', edgecolors='k', s=18)
+
+    xlim = plt.xlim() ; ylim = plt.ylim()
+
+    plt.scatter(X, y, c='gray', marker='o', edgecolors='k', s=18, label = 'sample points')
+    plt.plot(np.array(xlim), p[1] + p[0] * np.array(xlim), label=f'Line of Best Fit, R² = {R2:.2f}')
+
+    x_fitted = np.linspace(xlim[0], xlim[1], 100)
+    y_fitted = np.polyval(p, x_fitted)
+    # Confidence interval
+    ci = t_critical * std_err * np.sqrt(1 / n + (x_fitted - np.mean(X))**2 / np.sum((X - np.mean(X))**2))
+    plt.fill_between(
+        x_fitted, y_fitted + ci, y_fitted - ci, facecolor='#b9cfe7', zorder=0,
+        label= '95 % Confidence Interval')
+    # Prediction Interval
+    pi = t_critical * std_err * np.sqrt(1 + 1 / n + (x_fitted - np.mean(X))**2 / np.sum((X - np.mean(X))**2))
+    plt.plot(x_fitted, y_fitted - pi, '--', color='0.5', label='95 % Prediction Limits')
+    plt.plot(x_fitted, y_fitted + pi, '--', color='0.5')
+
+    plt.xlabel('x') ; plt.ylabel('F(x)')
+    plt.title('Linear Regression on test function F(x) = [sin(x) + ln(x)] + $\Theta$ $\cdot \mathcal{N}(\cdot)$ at domain x $\in (0, 10]$')
+
+    plt.legend(fontsize=8)
+    #plt.xlim(xlim)
+    #plt.ylim(ylim)
+    fig = plt.gcf()
+    fig.set_size_inches(12,8)
+
+    if save_plot == True:
+        plt.savefig(repo_path + "/figures/" + 'linear_regression.png', dpi=300)
+    plt.show()
+
+linear_regression(save_plot = True)
 
 ########################################
 
@@ -83,7 +147,7 @@ def gbm_iterations(save_plot) -> None:
     fig.tight_layout()
 
     if save_plot == True:
-        plt.savefig(repo_path + "/figures/" + "gbm_iterations.png")
+        plt.savefig(repo_path + "/figures/" + "gbm_iterations.png", dpi=300)
     plt.show()
 
 gbm_iterations(save_plot = True)

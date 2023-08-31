@@ -80,7 +80,7 @@ def linear_regression(save_plot) -> None:
     plt.plot(x_fitted, y_fitted + pi, '--', color='0.5')
 
     plt.xlabel('x') ; plt.ylabel('F(x)')
-    plt.title('Linear Regression on test function F(x) = [sin(x) + ln(x)] + $\Theta$ $\cdot \mathcal{N}(\cdot)$ at domain x $\in (0, 10]$')
+    plt.title('Linear Regression on test function F(x) = [sin(x) + ln(x)] + $\Theta$ $\cdot \mathcal{N}(\cdot)$ at domain x $\in (0, 10]$', fontsize = 12)
 
     plt.legend(fontsize=8)
     #plt.xlim(xlim)
@@ -128,7 +128,7 @@ def gbm_iterations(save_plot) -> None:
             axs[i][0].plot(X, h_m[-1],label = "$h_{%s}$(x)" %(n_trees), color = 'darkcyan', linewidth = 3)
             axs[i][0].set_ylim(-5,5)
         
-        axs[i][1].plot(X, y_hat, color = colors[i], label = "$F_{%s}(x) = \hat{y}$" %(n_trees), linewidth = 5)
+        axs[i][1].plot(X, y_hat, color = colors[i], label = "$\\tilde{F}_{%s}(x) = \hat{y}$" %(n_trees), linewidth = 5)
         axs[i][1].scatter(X, Y, color = 'gray', marker='o', edgecolors='k', s=18, label = "sample points")
 
         axs[i][0].set_title('$n_{trees}$ = ' + str(n_trees), loc = 'left', pad=10)
@@ -143,7 +143,7 @@ def gbm_iterations(save_plot) -> None:
     axs[-1][0].set_xlabel("x")
     axs[-1][1].set_xlabel("x")
 
-    fig.suptitle("Gradient Boosting with Decision Tree Regressor from Scratch with max. depth of trees $d_{max}$ = " + str(max_depth) + ", learning rate $\\alpha$ = " + str(learning_rate) + " and nr. of trees $n_{trees}$")
+    fig.suptitle("Gradient Boosting with Decision Tree Regressor from Scratch with max. depth of trees $d_{max}$ = " + str(max_depth) + ", learning rate $\\alpha$ = " + str(learning_rate) + " and nr. of trees $n_{trees}$", fontsize = 12)
     fig.tight_layout()
 
     if save_plot == True:

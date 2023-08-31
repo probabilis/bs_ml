@@ -37,7 +37,7 @@ ax.plot(X, y_pred, color = 'salmon', linestyle = ':', linewidth = 3, label = 'SK
 ax.plot(X, y_pred_scratch, color = 'mediumseagreen', linestyle = '--',linewidth = 3, label = 'SCRATCH')
 ax.legend()
 fig.tight_layout()
-#plt.savefig("decision_tree_regressor_comparison.png")
+#plt.savefig("decision_tree_regressor_comparison.png", dpi=300)
 plt.show()
 
 from sklearn import tree

@@ -11,10 +11,8 @@ import matplotlib.pyplot as plt
 #own modules
 from gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X
-
-########################################
-
-repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
+sys.path.append('../')
+from bs_ml.utils import repo_path
 
 ########################################
 #testfunction
@@ -51,7 +49,7 @@ def gbm_dt_comparison(plot_save) -> None:
 	fig.set_size_inches(18,14)
 	fig.tight_layout()
 	if plot_save == True:
-		plt.savefig(repo_path + "/figures/" + "gbm_decision_tree_comparison.png")
+		plt.savefig(repo_path + "/figures/" + "gbm_decision_tree_comparison.png", dpi=300)
 	plt.show()
 
 #gbm_dt_comparison(plot_save = False)
@@ -82,7 +80,7 @@ def hyperparameters_matrix(save_plot) -> None:
 
 	fig.tight_layout()
 	if save_plot == True:
-		plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_various_parameters.png")
+		plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_various_parameters.png", dpi=300)
 	plt.show()
 
 #hyperparameters_matrix(save_plot = False)

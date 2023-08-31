@@ -10,7 +10,7 @@ import scipy
 #initialization
 
 path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
-repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "bs_ml")
+repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "bs_ml")
 
 ##########################
 #functions

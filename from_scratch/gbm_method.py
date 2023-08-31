@@ -4,7 +4,7 @@ MN: 12030366
 """
 ########################################
 #official open-source repositories
-import os
+import sys
 from sklearn.tree import DecisionTreeRegressor, export_graphviz
 import matplotlib.pyplot as plt
 
@@ -21,8 +21,8 @@ Y_ = testfunction(X, noise = 0)
 
 ########################################
 #hyperparameters
-learning_rate = 0.1
-n_trees = 1
+learning_rate = 0.01
+n_trees = 1000
 max_depth = 1
 
 X_0 = X.reshape(-1,1)
@@ -33,13 +33,13 @@ def gbm_dt_comparison(plot_save) -> None:
 
 	gbm_model = GradientBoosting(learning_rate, max_depth, n_trees, X_0, Y)
 	gbm_model.fit(X_0, Y)
-	y_hat_gbm = gbm_model.predict(X_0)
+	y_hat_gbm, _ = gbm_model.predict(X_0)
 
 	model = DecisionTreeRegressor(max_depth = max_depth)
 	model.fit(X_0, Y)
 	y_hat_dt = model.predict(X_0)
 
-	plt.title('Gradient Boosting / Decision Tree Regressor comparison from Scratch with max depth $d_{max}$ and number of trees $n$', fontsize = 16)
+	plt.title('Gradient Boosting with Decision Tree Regressor and DTR alone from Scratch with max depth $d_{max}$ and number of trees $n$', fontsize = 12)
 	plt.scatter(X,Y, color = 'gray', marker='o', edgecolors='k', s=18, label = 'sample points of F(x) with Gaussian noise')
 	plt.plot(X, y_hat_dt, color = 'salmon', label = '$\hat{y}$ | DT with d = ' + str(max_depth), linewidth = 5)
 	plt.plot(X, y_hat_gbm, color = 'cornflowerblue', label = '$\hat{y}$ | GBM with $d_{max}$ = ' + str(max_depth) + ' and $n$ = ' + str(n_trees), linewidth = 5)
@@ -52,7 +52,7 @@ def gbm_dt_comparison(plot_save) -> None:
 		plt.savefig(repo_path + "/figures/" + "gbm_decision_tree_comparison.png", dpi=300)
 	plt.show()
 
-#gbm_dt_comparison(plot_save = False)
+gbm_dt_comparison(plot_save = False)
 
 ########################################
 

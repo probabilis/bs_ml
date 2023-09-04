@@ -12,6 +12,9 @@ import scipy
 path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
 repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "bs_ml")
 
+fontsize_title = 16
+fontsize = 12
+
 ##########################
 #functions
 

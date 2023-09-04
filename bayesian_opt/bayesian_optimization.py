@@ -30,7 +30,7 @@ del df ; gc.collect()
 
 ##################################
 
-n = 50
+n = 100
 
 df_pca, features_pca = dim_reduction(df_,features,target,n=n)
 
@@ -67,7 +67,7 @@ params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,
 
 #n_iter:  How many steps of bayesian optimization you want to perform. The more steps the more likely to find a good maximum you are.
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.
-init_points = 20 ; n_iter = 100
+init_points = 10 ; n_iter = 100
 
 pbounds = params_gbm
 bounds_transformer = SequentialDomainReductionTransformer() #minimum_window=0.5

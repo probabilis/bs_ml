@@ -42,7 +42,7 @@ df_val = df_val[df_val['data_type'].str.contains("validation")]
 
 
 
-score = numerai_score(df_val[target],pred)
+score = numerai_score(df_val[target],pred, eras_)
 print("numer.ai score :", score)
 r2 = lgb.score(df_val[target],pred)
 print("R2 score :", r2)

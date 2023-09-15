@@ -28,7 +28,7 @@ params_gbm = {"learning_rate":0.01,"max_depth":7,"n_estimators":1100, "colsample
 
 print("data loading completed")
 
-lgb = LGBMRegressor(params_gbm)
+lgb = LGBMRegressor(**params_gbm)
 lgb.fit(df_[features], df_[target])
 print("lgbm created")
 

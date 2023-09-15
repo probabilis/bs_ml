@@ -24,13 +24,21 @@ Y = np.ravel(Y)
 
 ##################################
 
-def gbm_scratch_sklearn_comparison(plot_save) -> None:
-    n = 100
-    alpha = 0.2
-    deep = 1
+def gbm_scratch_sklearn_mse_comparison(plot_save) -> None:
 
-    sklearn_gbm = GradientBoostingRegressor(n_estimators = n, learning_rate = alpha, max_depth = deep)
-    self_gbm = GradientBoosting(n_trees = n, learning_rate = alpha, max_depth = deep, X = X, Y = Y)
+    #iter = 0; iter_max = 10 
+
+    #plt.figure(figsize=(12, 8))
+
+    fig, ax = plt.subplots(1)
+    fig.set_size_inches(12,8)
+    
+    learning_rate = 0.2 ; max_depth = 1 ; n_estimators = 100
+
+    val_score = np.zeros(n_estimators, dtype = np.float64)
+
+    sklearn_gbm = GradientBoostingRegressor(n_estimators = n_estimators, learning_rate = learning_rate, max_depth = max_depth)
+    self_gbm = GradientBoosting(n_trees = n_estimators, learning_rate = learning_rate, max_depth = max_depth, X = X, Y = Y)
 
     models = [sklearn_gbm, self_gbm]
 
@@ -38,30 +46,34 @@ def gbm_scratch_sklearn_comparison(plot_save) -> None:
         model.fit(X,Y)
         if model == self_gbm:
             y_hat, _ = model.predict(X)
+            mse_scratch = mean_squared_error(Y, y_hat)
         else:
             y_hat = model.predict(X)
-        mse = mean_squared_error(Y, y_hat)
-        print('MSE of model ' + str(model) + str(' : '), round(mse,3))
+        
+    #print('MSE of model ' + str(model) + str(' : '), round(mse_scratch,3))
 
     ################################
 
-    val_score = np.zeros(n, dtype=np.float64)
 
     for i, Y_pred in enumerate(sklearn_gbm.staged_predict(X)):
         val_score[i] = sklearn_gbm.loss_(Y, Y.reshape(-1, 1))
 
-    plt.figure(figsize=(12, 8))
-    plt.title('Deviance / MSE over boosting iterations $m$ from SKLEARN / Scratch module', fontsize = fontsize_title)
-    plt.plot(np.arange(n) + 1, sklearn_gbm.train_score_, color = 'salmon', linestyle = '--',label='SKLEARN MSE Deviance')
-    plt.hlines(mse, 0, n, color = 'mediumseagreen', linestyle = '--', label = 'Scratch MSE Deviance at n = ' + str(n))
-    plt.text(86, 1.1, 'MSE = ' + str(round(mse,3)), fontsize = 12, bbox = dict(facecolor = 'white', alpha = 0.5))
-    plt.legend(loc='upper right', fontsize = fontsize)
-    plt.xlabel('Boosting iterations $m$ / number of trees $n_{trees}$', fontsize = fontsize)
-    plt.ylabel('Deviance / MSE ', fontsize = fontsize)
-    plt.tight_layout()
+    ax.plot(np.arange(n_estimators) + 1, sklearn_gbm.train_score_, color = 'salmon', linestyle = '--',label='SKLEARN MSE Deviance')
+    ax.hlines(mse_scratch, 0, n_estimators, color = 'mediumseagreen', linestyle = '--', label = 'Scratch MSE Deviance at n = ' + str(n_estimators))
+
+    print("deviances from skrach : ", mse_scratch)
+    print("deviances of sklearn : ", sklearn_gbm.train_score_[-1])
+
+    ax.text(n_estimators - 10, mse_scratch + 0.1, 'MSE = ' + str(round(mse_scratch,3)), fontsize = 12, bbox = dict(facecolor = 'white', alpha = 0.5))
+    ax.set_title('Deviance $\\Delta$ / MSE over boosting iterations $m$ from SKLEARN / Scratch module', fontsize = fontsize_title)
+    ax.legend(loc='upper right', fontsize = fontsize)
+    ax.set_xlabel('Boosting iterations $m$ / number of trees $n_{trees}$', fontsize = fontsize)
+    ax.set_ylabel('Deviance $\Delta$ / MSE ', fontsize = fontsize)
+    fig.tight_layout()
+
     if plot_save == True:
         plt.savefig(repo_path + "/figures/" + "gbm_scratch_sklearn_loss_comparison.png", dpi=300)
-
+    
     plt.show()
 
-gbm_scratch_sklearn_comparison(plot_save = True)
+gbm_scratch_sklearn_mse_comparison(plot_save = True)

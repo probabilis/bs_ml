@@ -38,6 +38,7 @@ del df_; gc.collect()
 print("deleted df_ from memory successfully")
 
 df_val = pd.read_parquet(path_val)
+print("validation data loading completed")
 df_val = df_val[df_val['data_type'].str.contains("validation")]
 
 

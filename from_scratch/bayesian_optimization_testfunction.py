@@ -89,8 +89,8 @@ gc.collect()
 
 gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
 
-iterations = gbm_bo.res()
-print(iterations)
+for i, res in enumerate(gbm_bo.res):
+    print("Iteration {}: \n\t{}".format(i, res))
 
 print('It takes %s minutes' %((time.time()-st)/60))
 

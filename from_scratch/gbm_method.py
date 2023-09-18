@@ -46,7 +46,7 @@ def gbm_dt_comparison(plot_save) -> None:
 	plt.plot(X, Y_, color = 'limegreen', linestyle = "--", linewidth = 5, label = "F(x)")
 	plt.legend(fontsize = fontsize)
 	fig = plt.gcf()
-	fig.set_size_inches(12,10)
+	fig.set_size_inches(16,12)
 	fig.tight_layout()
 	if plot_save == True:
 		plt.savefig(repo_path + "/figures/" + "gbm_decision_tree_comparison.png", dpi=300)
@@ -61,7 +61,7 @@ def hyperparameters_matrix(save_plot) -> None:
 	k = 5
 	fig, axs = plt.subplots(k,k)
 	fig.set_size_inches(24,18)
-	fig.suptitle('Gradient Boosting with Decision Tree Regressor from Scratch with max. depth of trees $d_{max}$, nr. of trees $n_{trees}$ and learning rate $\\alpha$ = ' + str(learning_rate), fontsize = fontsize_title)
+	fig.suptitle('Gradient Boosting with Decision Tree Regressor from Scratch with max. depth of trees $d_{max}$, nr. of trees $n_{trees}$ and learning rate $\\nu$ = ' + str(learning_rate), fontsize = fontsize_title)
 
 	colors = ['mediumseagreen','lightskyblue',"mediumpurple",'salmon',"palevioletred"]
 

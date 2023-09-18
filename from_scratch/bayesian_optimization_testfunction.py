@@ -89,8 +89,14 @@ gc.collect()
 
 gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
 
+iterations = []
+
 for i, res in enumerate(gbm_bo.res):
-    print("Iteration {}: \n\t{}".format(i, res))
+    #print("Iteration {}: \n\t{}".format(i, res))
+    iterations.append(res)
+
+bo_iterations = pd.DataFrame.from_dict(iterations)
+print(bo_iterations)
 
 print('It takes %s minutes' %((time.time()-st)/60))
 

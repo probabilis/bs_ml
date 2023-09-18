@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score
 #own modules
 from testfunction import testfunction, X
 sys.path.append('../')
-from bs_ml.utils import repo_path
+from utils import repo_path
 
 #############################################
 

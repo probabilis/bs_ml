@@ -64,4 +64,43 @@ def plot_bo(save_plot) -> None:
         plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_best_parameters.png", dpi=300)
     plt.show()
 
-plot_bo(save_plot = True)
+#plot_bo(save_plot = True)
+
+bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + "bo_iterations.csv")
+target = bo_iterations["target"]
+#dict = bo_iterations["params"]
+
+
+cbt = []
+lr = []
+md = []
+nt = []
+
+
+for i in range(0,len(target)):
+    dict_ = eval(bo_iterations["params"][i])
+    cbt.append( dict_["colsample_bytree"] )
+    lr.append( dict_["learning_rate"])
+    md.append(dict_["max_depth"])
+    nt.append(dict_["n_estimators"])
+
+data = {"target":bo_iterations["target"], "colsample_bytree": cbt, "learning_rate": lr,"n_estimators": nt, "max_depth": md}
+df = pd.DataFrame(data = data)
+print(df)
+
+import matplotlib.pyplot as plt
+from matplotlib import cm
+
+fig, axs = plt.subplots(4, 1)
+fig.set_size_inches(16,12)
+
+A = df["max_depth"]
+X = df["learning_rate"]
+Y = df["n_estimators"]
+Z = df["colsample_bytree"]
+
+Q = [A, X, Y, Z]
+
+for i in range(len(Q)):
+    axs[i].plot(Q[i], df["target"])
+plt.show()

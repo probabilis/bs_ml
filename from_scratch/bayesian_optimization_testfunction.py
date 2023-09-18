@@ -97,6 +97,7 @@ for i, res in enumerate(gbm_bo.res):
 
 bo_iterations = pd.DataFrame.from_dict(iterations)
 print(bo_iterations)
+bo_iterations.to_csv("bo_iterations.csv")
 
 print('It takes %s minutes' %((time.time()-st)/60))
 

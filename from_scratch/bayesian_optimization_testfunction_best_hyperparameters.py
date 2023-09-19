@@ -66,40 +66,48 @@ def plot_bo(save_plot) -> None:
 
 #plot_bo(save_plot = True)
 
-bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + "bo_iterations_ip=10_ni=100_2023-09-18.csv")
-target = bo_iterations["target"]
-#dict = bo_iterations["params"]
+filenames = [
+    "bo_iterations_ip=10_ni=100_2023-09-18.csv",
+    "bo_iterations_ip=10_ni=100_2023-09-19.csv"
+]
+
+def plot_hyperparameter_scatter_plot(save_plot) -> None:
+    bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + filenames[0])
+    target = bo_iterations["target"]
+
+    cbt = [] ; lr = [] ; md = [] ; nt = []
+
+    for i in range(0,len(target)):
+        dict_ = eval(bo_iterations["params"][i])
+        cbt.append( dict_["colsample_bytree"] )
+        lr.append( dict_["learning_rate"])
+        md.append(dict_["max_depth"])
+        nt.append(dict_["n_estimators"])
+
+    data = {"target":bo_iterations["target"], "colsample_bytree": cbt, "learning_rate": lr,"n_estimators": nt, "max_depth": md}
+    df = pd.DataFrame(data = data)
+    #print(df)
+
+    fig, axs = plt.subplots(1, 2)
+    fig.set_size_inches(12,6)
+
+    fig.suptitle("scatter plot of objective function over the hyperparameter space", fontsize = fontsize_title)
+
+    cm = plt.cm.get_cmap('Spectral')
+    im_1 = axs[0].scatter(df["max_depth"], df["n_estimators"], c = df["target"], cmap = cm, s = 100)
+    axs[0].set_xlabel("max. depth / $d_{max}$", fontsize = fontsize)
+    axs[0].set_ylabel("nr. of trees / $n_{trees}$ = m", fontsize = fontsize)
+    fig.colorbar(im_1, ax = axs[0])
+
+    im_2 = axs[1].scatter(df["learning_rate"], df["colsample_bytree"], c= df["target"], cmap = cm, s = 100)
+    axs[1].set_xlabel("learning rate / $\\nu$", fontsize = fontsize)
+    axs[1].set_ylabel("colsample by tree / $\\epsilon$", fontsize = fontsize)
+    fig.colorbar(im_2, ax = axs[1])
+
+    fig.tight_layout()
+    if save_plot == True:
+        plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_hyperparameters_scatter_plot_2.png", dpi=300)
+    plt.show()
 
 
-cbt = []
-lr = []
-md = []
-nt = []
-
-
-for i in range(0,len(target)):
-    dict_ = eval(bo_iterations["params"][i])
-    cbt.append( dict_["colsample_bytree"] )
-    lr.append( dict_["learning_rate"])
-    md.append(dict_["max_depth"])
-    nt.append(dict_["n_estimators"])
-
-data = {"target":bo_iterations["target"], "colsample_bytree": cbt, "learning_rate": lr,"n_estimators": nt, "max_depth": md}
-df = pd.DataFrame(data = data)
-print(df)
-
-import matplotlib.pyplot as plt
-
-fig, axs = plt.subplots(4, 1)
-fig.set_size_inches(16,12)
-
-A = df["max_depth"]
-X = df["learning_rate"]
-Y = df["n_estimators"]
-Z = df["colsample_bytree"]
-
-Q = [A, X, Y, Z]
-
-for i in range(len(Q)):
-    axs[i].scatter(Q[i], df["target"], color = "gray")
-plt.show()
+plot_hyperparameter_scatter_plot(save_plot = True)

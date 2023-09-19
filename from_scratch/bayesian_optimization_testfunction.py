@@ -49,41 +49,10 @@ params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(100,
 
 #n_iter:  How many steps of bayesian optimization you want to perform. The more steps the more likely to find a good maximum you are.
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.
-init_points = 20 ; n_iter = 100
-
-pbounds = params_gbm
-bounds_transformer = SequentialDomainReductionTransformer() #minimum_window=0.5
+init_points = 10 ; n_iter = 100
 
 
-def sdr_switch( SDR ):
-
-    if SDR == False:
-        #standardized optimizer
-        gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
-
-    elif SDR == True:
-        #mutating optimizer
-        gbm_bo = BayesianOptimization(
-                    f = gbm_reg_bo,
-                    pbounds = pbounds,
-                    verbose = 0,
-                    random_state = 111,
-                    bounds_transformer = bounds_transformer)
-        
-    gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
-    return gbm_bo
-
-#gbm_bo = sdr_switch( SDR = True )
-"""
-gbm_bo = BayesianOptimization(
-            f = gbm_reg_bo,
-            pbounds = pbounds,
-            verbose = 0,
-            random_state = 111,
-            bounds_transformer = bounds_transformer)
-"""
-
-gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
+gbm_bo = BayesianOptimization(gbm_reg_bo, params_gbm) 
 
 gc.collect()
 
@@ -92,11 +61,10 @@ gbm_bo.maximize(init_points = init_points, n_iter = n_iter)
 iterations = []
 
 for i, res in enumerate(gbm_bo.res):
-    #print("Iteration {}: \n\t{}".format(i, res))
     iterations.append(res)
 
 bo_iterations = pd.DataFrame.from_dict(iterations)
-bo_iterations.to_csv("bo_iterations.csv")
+bo_iterations.to_csv(f"bo_iterations_ip={init_points}_ni={n_iter}_{date.today()}.csv")
 
 print('It takes %s minutes' %((time.time()-st)/60))
 

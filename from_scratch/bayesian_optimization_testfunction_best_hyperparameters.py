@@ -66,7 +66,7 @@ def plot_bo(save_plot) -> None:
 
 #plot_bo(save_plot = True)
 
-bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + "bo_iterations.csv")
+bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + "bo_iterations_ip=10_ni=100_2023-09-18.csv")
 target = bo_iterations["target"]
 #dict = bo_iterations["params"]
 
@@ -89,7 +89,6 @@ df = pd.DataFrame(data = data)
 print(df)
 
 import matplotlib.pyplot as plt
-from matplotlib import cm
 
 fig, axs = plt.subplots(4, 1)
 fig.set_size_inches(16,12)
@@ -102,5 +101,5 @@ Z = df["colsample_bytree"]
 Q = [A, X, Y, Z]
 
 for i in range(len(Q)):
-    axs[i].plot(Q[i], df["target"])
+    axs[i].scatter(Q[i], df["target"], color = "gray")
 plt.show()

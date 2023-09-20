@@ -17,7 +17,6 @@ data = {'A': [45, 37, 42],
 
 df = pd.read_csv(repo_path + "/analysis/target_correlations.csv")
 
-
 def calculate_score(subset, correlation_matrix):
     # Calculate the score for a subset of variables
     return np.sum(np.abs(correlation_matrix[np.ix_(subset, subset)]))
@@ -43,22 +42,22 @@ def find_least_correlated_subset(correlation_matrix):
     
     return current_subset
 
+columns = list(df.columns)[1::]
+print(columns)
+df_ = df.values[:, 1:]
 
-df_ = df.get_value()
-
-print(df_)
-
+print("----------------------------------------")
 least_correlated_subset = find_least_correlated_subset(df_)
-print("Least correlated subset of variables:", least_correlated_subset)
+#print("Least correlated subset of variables:", least_correlated_subset)
 
+sorted_list = [columns[i] for i in least_correlated_subset]
+print(sorted_list)
 """
 pca = PCA()
-pca.fit(df_)
+pca.fit(df)
 print(pca.explained_variance_ratio_)
-
-print(pca.score_samples(df_))
+print(pca.score_samples(df))
 """
-
 
 
 

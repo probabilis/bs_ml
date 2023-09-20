@@ -47,7 +47,7 @@ del df ; gc.collect()
 
 #loading the specific hyperparameter configuration from bayesian optimization
 
-filename = "params_bayes_testfunction_ip=10_ni=200_2023-09-19.csv"
+filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
 path = repo_path + "/models/" + filename
 
 params_gbm = pd.read_csv(path).to_dict(orient = "list")

@@ -11,13 +11,14 @@ from bayes_opt import BayesianOptimization
 import time
 from datetime import date
 import os
+import json
 import gc
 import sys
 import csv
 from sklearn.model_selection import cross_val_score
 from pathlib import Path
 import matplotlib.pyplot as plt
-
+from numerapi import NumerAPI
 sys.path.append('../')
 
 from preprocessing.cross_validators import era_splitting
@@ -29,8 +30,17 @@ from utils import loading_dataset, numerai_corr, repo_path, path_val
 #############################################
 
 #loading dataset
-df, features, target, eras = loading_dataset()
+#for old v4.0 data framework
+#df, features, target, eras = loading_dataset()
 
+napi = NumerAPI()
+napi.download_dataset("v4.2/train_int8.parquet", repo_path + "/train.parquet");
+napi.download_dataset("v4.2/features.json", repo_path + "/features.json");
+
+feature_metadata = json.load(open("v4.2/features.json")) 
+print(feature_metadata)
+
+"""
 #############################################
 
 #splitting the eras
@@ -139,3 +149,4 @@ def summary_metrics(correlations) -> pd.DataFrame:
     return summary
 
 #summary = summary_metrics(correlations)
+"""

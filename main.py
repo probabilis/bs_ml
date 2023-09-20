@@ -54,9 +54,9 @@ t20s = [t for t in target_names if t.endswith("_20")]
 t60s = [t for t in target_names if t.endswith("_60")]
 
 target_correlations = targets_df[target_names].corr()
-sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
-target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
-plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
+#sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
+#target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
+#plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 
 #############################################
 
@@ -64,7 +64,7 @@ plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 #train, eras_ = era_splitting(df, eras)
 
 #del df ; gc.collect()
-"""
+
 #############################################
 
 #n = 100
@@ -101,25 +101,29 @@ for target in target_candidates:
         max_depth = max_depth,
         colsample_bytree=colsample_bytree
     )
-    model.fit(train[features], train[target]
+    model.fit(train[feature_cols], train[target]
     );
     models[target] = model
 
 #############################################
 
-validation = pd.read_parquet(path_val)
 
-validation = validation[validation['data_type'].str.contains("validation")]
+napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" );
+validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns=["era", "data_type"] + feature_cols + target_cols) 
+
+#validation = validation[validation['data_type'].str.contains("validation")]
+validation = validation[validation["data_type"] == "validation"]
+
 del validation["data_type"]
 
-validation = era_splitting(validation, eras)
+validation = validation[validation["era"].isin(validation["era"].unique()[::4])]
 
 last_train_era = int(train["era"].unique()[-1])
 eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in range(4)]]
 validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 for target in target_candidates:
-    validation[f"prediction_{target}"] = models[target].predict(validation[features])
+    validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
     
 pred_cols = [f"prediction_{target}" for target in target_candidates]
 
@@ -136,7 +140,7 @@ def cumulative_correlations() -> dict:
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
-    plt.savefig("cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+    plt.savefig(repo_path + "/figures/" + "cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations
 
 correlations = cumulative_correlations()
@@ -165,5 +169,5 @@ def summary_metrics(correlations) -> pd.DataFrame:
     summary = pd.DataFrame(summary_metrics).T
     return summary
 
-#summary = summary_metrics(correlations)
-"""
+summary = summary_metrics(correlations)
+print(summary)

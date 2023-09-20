@@ -25,17 +25,14 @@ X_0 = X.reshape(-1,1)
 
 filename = "params_bayes_testfunction_ip=10_ni=200_2023-09-19.csv"
 path = repo_path + "/models/" + filename
-params_gbm = pd.read_csv(path)
 
-params = ['max_depth','learning_rate','colsample_bytree','n_estimators']
-
-params_gbm = params_gbm.to_dict(orient = "list")
+params_gbm = pd.read_csv(path).to_dict(orient = "list")
 params_gbm.pop("Unnamed: 0")
 
-max_depth = params_gbm[params[0]][0]
-learning_rate = params_gbm[params[1]][0]
-colsample_bytree = params_gbm[params[2]][0]
-n_trees = int(round(params_gbm[params[3]][0],1))
+max_depth = params_gbm['max_depth'][0]
+learning_rate = params_gbm['learning_rate'][0]
+colsample_bytree = params_gbm['colsample_bytree'][0]
+n_trees = int(round(params_gbm['n_estimators'][0],1))
 
 ########################################
 

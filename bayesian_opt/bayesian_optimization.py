@@ -77,7 +77,7 @@ def sdr_switch( SDR ):
 
     if SDR == False:
         #standardized optimizer
-        gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
+        gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm) 
 
     elif SDR == True:
         #mutating optimizer

@@ -11,8 +11,10 @@ from utils import loading_dataset, repo_path, numerai_score, path_val
 
 #############################################
 
-napi.download_dataset("v4.2/train_int8.parquet");
-napi.download_dataset("v4.2/features.json");
+napi = NumerAPI()
+#napi.download_dataset("v4.2/train_int8.parquet");
+repo_path
+napi.download_dataset("v4.2/features.json", repo_path + "features.json");
 
 
 """

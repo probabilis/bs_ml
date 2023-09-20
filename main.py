@@ -38,11 +38,11 @@ napi = NumerAPI()
 napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet");
 napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json");
 
-feature_metadata = json.load(open(repo_path + "/features.json")) 
+feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
 target_cols = feature_metadata["targets"]
-train = pd.read_parquet(repo_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
+train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 
 train = train[train["era"].isin(train["era"].unique()[::4])]
 
@@ -63,7 +63,7 @@ plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 #splitting the eras
 #train, eras_ = era_splitting(df, eras)
 
-del df ; gc.collect()
+#del df ; gc.collect()
 """
 #############################################
 

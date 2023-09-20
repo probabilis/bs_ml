@@ -100,12 +100,42 @@ print(validation[pred_cols])
 
 #############################################
 
-correlations = {}
-cumulative_correlations = {}
-for target in target_candidates:
-    correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
-    cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum() 
+def cumulative_correlations() -> dict:
+    correlations = {}
+    cumulative_correlations = {}
+    for target in target_candidates:
+        correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
+        cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum() 
 
-cumulative_correlations = pd.DataFrame(cumulative_correlations)
-cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
-plt.savefig("cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+    cumulative_correlations = pd.DataFrame(cumulative_correlations)
+    cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
+    plt.savefig("cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+    return correlations
+
+correlations = cumulative_correlations()
+
+#############################################
+
+def summary_metrics(correlations) -> pd.DataFrame:
+    summary_metrics = {}
+    for target in target_candidates:
+        # per era correlation between this target and cyrus 
+        mean_corr_with_cryus = validation.groupby("era").apply(lambda d: d[target].corr(d["target_cyrus_v4_20"])).mean()
+        # per era correlation between predictions of the model trained on this target and cyrus
+        mean = correlations[f"prediction_{target}"].mean()
+        std = correlations[f"prediction_{target}"].std()
+        sharpe = mean / std
+        rolling_max = cumulative_correlations[f"prediction_{target}"].expanding(min_periods=1).max()
+        max_drawdown = (rolling_max - cumulative_correlations[f"prediction_{target}"]).max()
+        summary_metrics[f"prediction_{target}"] = {
+            "mean": mean,
+            "std": std,
+            "sharpe": sharpe,
+            "max_drawdown": max_drawdown,
+            "mean_corr_with_cryus": mean_corr_with_cryus,
+        }
+    pd.set_option('display.float_format', lambda x: '%f' % x)
+    summary = pd.DataFrame(summary_metrics).T
+    return summary
+
+#summary = summary_metrics(correlations)

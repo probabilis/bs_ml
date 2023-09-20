@@ -42,9 +42,12 @@ print(feature_metadata)
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
 target_cols = feature_metadata["targets"]
-train = pd.read_parquet("v4.2/train_int8.parquet", columns=["era"] + feature_cols + target_cols)
+train = pd.read_parquet("train.parquet", columns=["era"] + feature_cols + target_cols)
 
-
+train = train[train["era"].isin(train["era"].unique()[::4])]
+print( 
+    train[["era"] + target_cols] 
+)
 
 #############################################
 

@@ -18,12 +18,13 @@ import csv
 from sklearn.model_selection import cross_val_score
 from pathlib import Path
 import matplotlib.pyplot as plt
+import seaborn as sns
 from numerapi import NumerAPI
 sys.path.append('../')
 
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset, numerai_corr, gh_repos_path, path_val
+from utils import loading_dataset, numerai_corr, gh_repos_path, path_val, repo_path
 
 #############################################
 #############################################
@@ -38,16 +39,22 @@ napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet
 napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json");
 
 feature_metadata = json.load(open("features.json")) 
-print(feature_metadata)
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
 target_cols = feature_metadata["targets"]
 train = pd.read_parquet("train.parquet", columns=["era"] + feature_cols + target_cols)
 
 train = train[train["era"].isin(train["era"].unique()[::4])]
-print( 
-    train[["era"] + target_cols] 
-)
+
+assert train["target"].equals(train["target_cyrus_v4_20"])
+target_names = target_cols[1:]
+targets_df = train[["era"] + target_names]
+
+t20s = [t for t in target_names if t.endswith("_20")]
+t60s = [t for t in target_names if t.endswith("_60")]
+
+sns.heatmap(targets_df[target_names].corr(), cmap="coolwarm", xticklabels=False, yticklabels=False);
+plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 
 #############################################
 

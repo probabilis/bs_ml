@@ -11,6 +11,7 @@ import scipy
 #initialization
 
 path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "train.parquet")
+gh_repos_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "bs_ml")
 repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "bs_ml")
 path_val = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "validation.parquet")
 fontsize_title = 16

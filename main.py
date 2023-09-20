@@ -53,7 +53,9 @@ targets_df = train[["era"] + target_names]
 t20s = [t for t in target_names if t.endswith("_20")]
 t60s = [t for t in target_names if t.endswith("_60")]
 
-sns.heatmap(targets_df[target_names].corr(), cmap="coolwarm", xticklabels=False, yticklabels=False);
+target_correlations = targets_df[target_names].corr()
+sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
+target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
 plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 
 #############################################

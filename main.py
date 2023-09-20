@@ -23,7 +23,7 @@ sys.path.append('../')
 
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset, numerai_corr, repo_path, path_val
+from utils import loading_dataset, numerai_corr, gh_repos_path, path_val
 
 #############################################
 #############################################
@@ -34,8 +34,8 @@ from utils import loading_dataset, numerai_corr, repo_path, path_val
 #df, features, target, eras = loading_dataset()
 
 napi = NumerAPI()
-napi.download_dataset("v4.2/train_int8.parquet", repo_path + "/train.parquet");
-napi.download_dataset("v4.2/features.json", repo_path + "/features.json");
+napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet");
+napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json");
 
 feature_metadata = json.load(open("v4.2/features.json")) 
 print(feature_metadata)

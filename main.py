@@ -19,9 +19,9 @@ from pathlib import Path
 
 sys.path.append('../')
 
-from bs_ml.preprocessing.cross_validators import era_splitting
-from bs_ml.preprocessing.pca_dimensional_reduction import dim_reduction
-from bs_ml.utils import loading_dataset, repo_path, path_val
+from preprocessing.cross_validators import era_splitting
+from preprocessing.pca_dimensional_reduction import dim_reduction
+from utils import loading_dataset, repo_path, path_val
 
 #############################################
 #############################################

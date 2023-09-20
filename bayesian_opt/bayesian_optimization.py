@@ -63,7 +63,7 @@ def gbm_reg_bo(learning_rate,max_depth,n_estimators,colsample_bytree):
 
 st = time.time()
 
-params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,20000), "colsample_bytree":(0.1,1)}
+params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,30000), "colsample_bytree":(0.1,1)}
 
 #n_iter:  How many steps of bayesian optimization you want to perform. The more steps the more likely to find a good maximum you are.
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.

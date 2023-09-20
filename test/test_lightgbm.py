@@ -6,11 +6,7 @@ import sklearn
 from lightgbm import LGBMRegressor
 sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
-from utils import loading_dataset, repo_path, numerai_score
-
-#############################################
-
-path_val = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "validation.parquet")
+from utils import loading_dataset, repo_path, numerai_score, path_val
 
 #############################################
 

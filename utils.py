@@ -5,7 +5,9 @@ import numpy as np
 from tqdm import tqdm
 import scipy
 
-##########################
+#############################################
+#############################################
+#############################################
 #initialization
 
 path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "train.parquet")
@@ -14,8 +16,8 @@ path_val = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "v
 fontsize_title = 16
 fontsize = 12
 
-##########################
-#functions
+#############################################
+#functions and methods
 
 def loading_dataset():
     """
@@ -38,6 +40,7 @@ def loading_dataset():
     eras = df.erano
     return df, features, target, eras
 
+##########################
 
 def numerai_score(y, y_pred, eras):
     """
@@ -51,6 +54,7 @@ def numerai_score(y, y_pred, eras):
     rank_pred = y_pred.groupby(eras).apply(lambda x: x.rank(pct = True, method = "first") )
     return np.corrcoef(y, rank_pred)[0,1]
 
+##########################
 
 def numerai_corr(preds, target):
     """
@@ -69,6 +73,7 @@ def numerai_corr(preds, target):
     target_p15 = np.sign(centered_target) * np.abs(centered_target) ** 1.5
     return np.corrcoef(preds_p15, target_p15)[0, 1]
 
+##########################
 
 def correlation_score(y, y_pred):
     """
@@ -80,6 +85,7 @@ def correlation_score(y, y_pred):
     """
     return np.corrcoef(y, y_pred)[0,1]
 
+##########################
 
 def get_biggest_change_features(corrs, n):
     """
@@ -99,6 +105,8 @@ def get_biggest_change_features(corrs, n):
     corr_diffs = h2_corr_means - h1_corr_means
     worst_n = corr_diffs.abs().sort_values(ascending=False).head(n).index.tolist()
     return worst_n
+
+##########################
 
 def neutralize(df, columns, neutralizers = None, proportion = 1.0, normalize = True, era_col = "era", verbose = False):
     """
@@ -141,6 +149,8 @@ def neutralize(df, columns, neutralizers = None, proportion = 1.0, normalize = T
 
     return pd.DataFrame(np.concatenate(computed), columns=columns, index = df.index)
 
+##########################
+
 def feature_corr(df, era_col, target_col):
     """
     params: df, era_col, target_col 
@@ -154,6 +164,18 @@ def feature_corr(df, era_col, target_col):
     lambda era: era[features].corrwith(era[target_col]))
     return all_feature_corrs
 
+##########################
+
+def feature_importance(model):
+
+    feature_importance = model.get_feature_importance()
+
+    data = pd.DataFrame({'feature_importance': feature_importance, 
+        'feature_names': features_new}).sort_values(by = ['feature_importance'],ascending = False)
+    data.to_csv('feature_importance6.csv')
+    data[:20].sort_values(by=['feature_importance'], ascending = True).plot.barh(x='feature_names',y='feature_importance')
+    plt.show()
+    return
 
 ##########################
 #saving and loading models

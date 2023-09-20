@@ -1,4 +1,5 @@
 import pandas as pd
+from numerapi import NumerAPI
 import gc, os, sys
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,6 +11,11 @@ from utils import loading_dataset, repo_path, numerai_score, path_val
 
 #############################################
 
+napi.download_dataset("v4.2/train_int8.parquet");
+napi.download_dataset("v4.2/features.json");
+
+
+"""
 df, features, target, eras = loading_dataset()
 
 df_, eras_ = era_splitting(df, eras)
@@ -47,4 +53,4 @@ score = numerai_score(df_val[target],pred, eras_)
 print("numer.ai score :", score)
 r2 = lgb.score(df_val[target],pred)
 print("R2 score :", r2)
-
+"""

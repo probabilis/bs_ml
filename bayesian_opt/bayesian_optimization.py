@@ -101,7 +101,7 @@ gbm_bo = BayesianOptimization(
             bounds_transformer = bounds_transformer)
 """
 
-gbm_bo = BayesianOptimization(gbm_reg_bo,params_gbm,random_state = 111) 
+gbm_bo = BayesianOptimization(gbm_reg_bo, params_gbm) 
 
 gc.collect()
 

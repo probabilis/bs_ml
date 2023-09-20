@@ -11,7 +11,7 @@ import pandas as pd
 from gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X
 sys.path.append('../')
-from bs_ml.utils import repo_path, fontsize, fontsize_title
+from utils import repo_path, fontsize, fontsize_title
 
 ########################################
 #testfunction

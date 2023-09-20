@@ -5,7 +5,6 @@ import numpy as np
 from tqdm import tqdm
 import scipy
 
-
 ##########################
 #initialization
 
@@ -51,6 +50,24 @@ def numerai_score(y, y_pred, eras):
     """
     rank_pred = y_pred.groupby(eras).apply(lambda x: x.rank(pct = True, method = "first") )
     return np.corrcoef(y, rank_pred)[0,1]
+
+
+def numerai_corr(preds, target):
+    """
+    #function from numer.ai
+    #######################
+    params: preds, target 
+    preds ...pd.Series with predictions
+    target ...pd.Series with targets
+    ---------------
+    return: array -> numer.ai corr array
+    """
+    ranked_preds = (preds.rank(method="average").values - 0.5) / preds.count()
+    gauss_ranked_preds = scipy.stats.norm.ppf(ranked_preds)
+    centered_target = target - target.mean()
+    preds_p15 = np.sign(gauss_ranked_preds) * np.abs(gauss_ranked_preds) ** 1.5
+    target_p15 = np.sign(centered_target) * np.abs(centered_target) ** 1.5
+    return np.corrcoef(preds_p15, target_p15)[0, 1]
 
 
 def correlation_score(y, y_pred):

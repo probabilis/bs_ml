@@ -16,12 +16,13 @@ import sys
 import csv
 from sklearn.model_selection import cross_val_score
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 sys.path.append('../')
 
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset, repo_path, path_val
+from utils import loading_dataset, numerai_corr, repo_path, path_val
 
 #############################################
 #############################################
@@ -96,3 +97,15 @@ for target in target_candidates:
 pred_cols = [f"prediction_{target}" for target in target_candidates]
 
 print(validation[pred_cols])
+
+#############################################
+
+correlations = {}
+cumulative_correlations = {}
+for target in target_candidates:
+    correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
+    cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum() 
+
+cumulative_correlations = pd.DataFrame(cumulative_correlations)
+cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
+plt.savefig("cumulative_correlation_of_validation_predicitions.png", dpi = 300)

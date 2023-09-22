@@ -10,18 +10,15 @@ Ref:
 https://github.com/numerai/example-scripts/blob/master/analysis_and_tips.ipynb
 """
 
-def era_splitting(df, eras):
+def era_splitting(df, window = 4):
     """
-    params: df, eras 
-
-    eras ...         timeline in data
+    params: df 
     window ...       overlapping window length
     ---------------
-    return: dupel -> reduced df with splitted eras
+    return: reduced df with splitted eras
     """
-    df = df[eras.isin(np.arange(1,575,4))]
-    eras = eras[eras.isin(np.arange(1,575,4))]
-    return df, eras
+    df_ = df[df["era"].isin(df["era"].unique()[::window])]
+    return df_
 
 """
 Reference at Scikit:

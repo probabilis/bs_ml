@@ -1,50 +1,62 @@
 """
-Project: Bachelor Machine Learning 
+Project: Bachelor Project / Supervised Machine Learning / Gradient Boosting Machine based on Decision Trees
 Script: Main Program
 Author: Maximilian Gschaider
+Date: 22.09.2023
 MN: 12030366
+------------------
+Ref.: www.numer.ai
 """
+#official open-source repositories
 import pandas as pd
 import numpy as np
 from lightgbm import LGBMRegressor
-from bayes_opt import BayesianOptimization
 import time
 from datetime import date
-import os
 import json
 import gc
 import sys
-import csv
-from sklearn.model_selection import cross_val_score
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
 from numerapi import NumerAPI
+#own modules
 sys.path.append('../')
-
 from preprocessing.cross_validators import era_splitting
-from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset, numerai_corr, gh_repos_path, path_val, repo_path
+from analysis.least_correlated import find_least_correlated_variables_pca
+from utils import numerai_corr, gh_repos_path, repo_path
 
 #############################################
 #############################################
 #############################################
 
-#loading dataset
-#for old v4.0 data framework
-#df, features, target, eras = loading_dataset()
-
+#numer.AI official API for retrieving and pushing data
 napi = NumerAPI()
-napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet");
-napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json");
+#train set
+napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
+#validation set
+napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
+#live dataset 
+napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
+#features metadata
+napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
 
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
 target_cols = feature_metadata["targets"]
+
+#loading training dataset v4.2
 train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 
-train = train[train["era"].isin(train["era"].unique()[::4])]
+#############################################
+#perform subsampling / era splitting due to performance
+
+train = era_splitting(train)
+
+gc.collect()
+
+#############################################
 
 assert train["target"].equals(train["target_cyrus_v4_20"])
 target_names = target_cols[1:]
@@ -54,32 +66,24 @@ t20s = [t for t in target_names if t.endswith("_20")]
 t60s = [t for t in target_names if t.endswith("_60")]
 
 target_correlations = targets_df[target_names].corr()
-#sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
-#target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
-#plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
+def plot_target_correlations(plot_save) -> None:
+    sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
+    target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
+    if plot_save == True:
+        plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
 
 #############################################
-
-#splitting the eras
-#train, eras_ = era_splitting(df, eras)
-
-#del df ; gc.collect()
-
-#############################################
-
-#n = 100
-#df_pca, features_pca = dim_reduction(train,features,target,n)
-#del df_
-
-#############################################
-
 #loading the specific hyperparameter configuration from bayesian optimization
 
 filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
-path = repo_path + "/models/" + filename
 
-params_gbm = pd.read_csv(path).to_dict(orient = "list")
-params_gbm.pop("Unnamed: 0")
+def hyperparameter_loading(filename):
+    path = repo_path + "/models/" + filename
+    params_gbm = pd.read_csv(path).to_dict(orient = "list")
+    params_gbm.pop("Unnamed: 0")
+    return params_gbm
+
+params_gbm = hyperparameter_loading(filename)
 
 max_depth = params_gbm['max_depth'][0]
 learning_rate = params_gbm['learning_rate'][0]
@@ -91,7 +95,19 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 
 target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
 
+target_correlations_20 = targets_df[t20s]
+
+#least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
+least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = 3)
+
+columns = list(target_correlations_20)[1::]
+
+sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
+sorted_least_target_corr_20.append("target_cyrus_v4_20")
+
 #############################################
+
+st = time.time()
 
 models = {}
 for target in target_candidates:
@@ -101,17 +117,17 @@ for target in target_candidates:
         max_depth = max_depth,
         colsample_bytree=colsample_bytree
     )
-    model.fit(train[feature_cols], train[target]
-    );
+    model.fit(train[feature_cols], train[target])
     models[target] = model
 
+print('It takes %s minutes for training the models :' %((time.time()-st)/60))
+
 #############################################
+#getting validation data
 
-
-napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" );
+#loading validation data v4.2
 validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns=["era", "data_type"] + feature_cols + target_cols) 
 
-#validation = validation[validation['data_type'].str.contains("validation")]
 validation = validation[validation["data_type"] == "validation"]
 
 del validation["data_type"]
@@ -127,11 +143,12 @@ for target in target_candidates:
     
 pred_cols = [f"prediction_{target}" for target in target_candidates]
 
-print(validation[pred_cols])
+#print(validation[pred_cols])
 
 #############################################
+#function for cumulative correlation score
 
-def cumulative_correlations() -> dict:
+def cumulative_correlations_targets(plot_save) -> dict:
     correlations = {}
     cumulative_correlations = {}
     for target in target_candidates:
@@ -140,14 +157,16 @@ def cumulative_correlations() -> dict:
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
-    plt.savefig(repo_path + "/figures/" + "cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+    if plot_save == True:
+        plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations
 
-correlations = cumulative_correlations()
+correlations = cumulative_correlations_targets(plot_save = False)
 
 #############################################
+#defining function for summary metrics
 
-def summary_metrics(correlations) -> pd.DataFrame:
+def summary_metrics_targets() -> pd.DataFrame:
     summary_metrics = {}
     for target in target_candidates:
         # per era correlation between this target and cyrus 
@@ -169,5 +188,83 @@ def summary_metrics(correlations) -> pd.DataFrame:
     summary = pd.DataFrame(summary_metrics).T
     return summary
 
-summary = summary_metrics(correlations)
-print(summary)
+summary_metrics_targets_df = summary_metrics_targets()
+summary_metrics_targets_df.to_csv(repo_path + "/models/" + f"{date.today()}_summary_metrics_targets.csv")
+print(summary_metrics_targets_df)
+
+#############################################
+#############################################
+#############################################
+#ENSEMBLE modeling
+
+# Ensemble predictions together with a simple average
+favorite_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
+
+ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
+#ensure that the ensemble score are ranked by percentile (pct = True)
+validation["ensemble"] = validation.groupby("era")[ensemble_cols].rank(pct=True).mean(axis=1)
+
+# Print the ensemble predictions
+pred_cols = ensemble_cols + ["ensemble"]
+validation[pred_cols]
+
+#############################################
+#ENSEMBLE model performance
+
+def cumulative_correlations_ensemble(plot_save):
+    correlations= {}
+    cumulative_correlations = {}
+    for col in pred_cols:
+        correlations[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
+        cumulative_correlations[col] = correlations[col].cumsum() 
+
+    cumulative_correlations = pd.DataFrame(cumulative_correlations)
+    cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[])
+    if plot_save == True:
+        plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
+    return correlations, cumulative_correlations
+
+correlations, cumulative_correlations = cumulative_correlations_ensemble(plot_save = False)
+
+def summary_metrics_ensemble() -> pd.DataFrame:
+    summary_metrics = {}
+    for col in pred_cols:
+        mean = correlations[col].mean()
+        std = correlations[col].std()
+        sharpe = mean / std
+        rolling_max = cumulative_correlations[col].expanding(min_periods=1).max()
+        max_drawdown = (rolling_max - cumulative_correlations[col]).max()
+        summary_metrics[col] = {
+            "mean": mean,
+            "std": std,
+            "sharpe": sharpe,
+            "max_drawdown": max_drawdown,
+        }
+    pd.set_option('display.float_format', lambda x: '%f' % x)
+    summary = pd.DataFrame(summary_metrics).T
+    return summary
+
+summary_metrics_ensemble_df = summary_metrics_ensemble()
+summary_metrics_ensemble_df.to_csv(repo_path + "/models/" + f"{date.today()}_summary_metrics_ensemble.csv")
+print(summary_metrics_ensemble_df)
+
+#############################################
+#ENSEMBLE predicting 
+
+def predict_ensemble(live_features: pd.DataFrame) -> pd.DataFrame:
+    # generate predictions from each model
+    predictions = pd.DataFrame(index=live_features.index)
+    for target in favorite_targets:
+        predictions[target] = models[target].predict(live_features[feature_cols])
+    # ensemble predictions
+    ensemble = predictions.rank(pct=True).mean(axis=1)
+    # format submission
+    submission = ensemble.rank(pct=True, method="first")
+    return submission.to_frame("prediction")
+
+live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature_cols)
+predictions = predict_ensemble(live_features)
+print("----predictions-----")
+print(predictions)
+
+

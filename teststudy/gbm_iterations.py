@@ -9,10 +9,10 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 #own modules
-from gradient_boosting_from_scratch import GradientBoosting
-from testfunction import testfunction, X
 sys.path.append('../')
-from bs_ml.utils import repo_path
+from from_scratch.gradient_boosting_from_scratch import GradientBoosting
+from testfunction import testfunction, X
+from repo_utils import repo_path
 
 ########################################
 #testfunction

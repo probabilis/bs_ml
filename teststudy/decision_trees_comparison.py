@@ -3,16 +3,16 @@ Author: Maximilian Gschaider
 MN: 12030366
 """
 #official open-source repositories
-from sklearn.tree import DecisionTreeRegressor, export_graphviz
+from sklearn.tree import DecisionTreeRegressor
 from sklearn import tree
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt
 #own modules
-from decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
-from testfunction import testfunction, X
 sys.path.append('../')
-from bs_ml.utils import repo_path, fontsize_title, fontsize
+from from_scratch.decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
+from testfunction import testfunction, X
+from repo_utils import repo_path, fontsize_title, fontsize
 
 ###################################
 

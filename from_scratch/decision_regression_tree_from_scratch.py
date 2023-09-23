@@ -2,10 +2,12 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
+########################################
+#official open-source repositories
 import pandas as pd
 import numpy as np
 
-####################################
+########################################
 
 class DecisionTreeRegressorScratch():
 	"""
@@ -118,7 +120,7 @@ class DecisionTreeRegressorScratch():
 
 		...
 
-		Params
+		Params: self
 		------
 
 		---------------
@@ -169,7 +171,7 @@ class DecisionTreeRegressorScratch():
 
 		...
 
-		Params
+		Params: self
 		------
 
 		---------------

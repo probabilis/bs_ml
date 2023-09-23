@@ -4,10 +4,11 @@ MN: 12030366
 """
 ########################################
 #official open-source repositories
-from sklearn.tree import DecisionTreeRegressor
+from decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
 import numpy as np
 import pandas as pd
 
+########################################
 
 class GradientBoosting():
 	"""
@@ -70,7 +71,7 @@ class GradientBoosting():
 		#stagewise iteration for n < n_trees
 		for _ in range(self.n_trees):
 			y_tilde = Y - F_m
-			tree = DecisionTreeRegressor(max_depth = self.max_depth)
+			tree = DecisionTreeRegressorScratch(max_depth = self.max_depth)
 			tree.fit(X, y_tilde)
 			F_m += self.learning_rate * tree.predict(X)
 			self.trees.append(tree)

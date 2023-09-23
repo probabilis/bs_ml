@@ -11,14 +11,11 @@ from datetime import date
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
-
+#own modules
 sys.path.append('../')
-
-#bs_ml.
-
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from utils import loading_dataset, repo_path
+from repo_utils import loading_dataset, repo_path
 
 #############################################
 

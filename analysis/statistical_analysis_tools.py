@@ -1,9 +1,15 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
+#official open-source repositories
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+#own modules
 sys.path.append('../')
-from utils import repo_path
+from repo_utils import repo_path
 
 def statistics(df, features):
 	"""

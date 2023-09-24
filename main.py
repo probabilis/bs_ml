@@ -99,13 +99,19 @@ target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/models/" + f"{date.today()}_target_correlations_20.csv")
 
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
+print(target_correlations_20.values[:, 1:])
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = 3)
-
 
 columns = list(target_correlations_20)[1::]
 
 sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
 sorted_least_target_corr_20.append("target_cyrus_v4_20")
+
+del target_candidates
+
+#############################################
+#least correlated targets plus cyrus
+target_candidates = sorted_least_target_corr_20
 
 #############################################
 

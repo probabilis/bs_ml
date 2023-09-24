@@ -1,3 +1,8 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
+#official open-source repositories
 import pandas as pd
 import numpy as np
 from lightgbm import LGBMRegressor
@@ -5,12 +10,11 @@ from catboost import CatBoostRegressor
 from sklearn.model_selection import GridSearchCV
 from xgboost import XGBRegressor
 import time
-import os
 import sys
+#own modules
 from preprocessing.pca_dimensional_reduction import dim_reduction
-
 sys.path.append('../')
-from utils import loading_dataset
+from repo_utils import loading_dataset
 
 ####################################
 

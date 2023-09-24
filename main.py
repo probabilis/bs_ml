@@ -24,7 +24,7 @@ from numerapi import NumerAPI
 sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
 from analysis.least_correlated import find_least_correlated_variables_pca
-from utils import numerai_corr, gh_repos_path, repo_path
+from repo_utils import numerai_corr, gh_repos_path, repo_path
 
 #############################################
 #############################################
@@ -75,7 +75,7 @@ def plot_target_correlations(plot_save) -> None:
 #############################################
 #loading the specific hyperparameter configuration from bayesian optimization
 
-filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
+filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
 
 def hyperparameter_loading(filename):
     path = repo_path + "/models/" + filename
@@ -161,7 +161,7 @@ def cumulative_correlations_targets(plot_save) -> dict:
         plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations
 
-correlations = cumulative_correlations_targets(plot_save = False)
+correlations = cumulative_correlations_targets(plot_save = True)
 
 #############################################
 #defining function for summary metrics
@@ -224,7 +224,7 @@ def cumulative_correlations_ensemble(plot_save):
         plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
 
-correlations, cumulative_correlations = cumulative_correlations_ensemble(plot_save = False)
+correlations, cumulative_correlations = cumulative_correlations_ensemble(plot_save = True)
 
 def summary_metrics_ensemble() -> pd.DataFrame:
     summary_metrics = {}
@@ -266,5 +266,5 @@ live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature
 predictions = predict_ensemble(live_features)
 print("----predictions-----")
 print(predictions)
-
+summary_metrics_ensemble_df.to_csv(repo_path + "/models/" + f"{date.today()}_predictions.csv")
 

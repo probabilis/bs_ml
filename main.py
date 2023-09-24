@@ -96,9 +96,11 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
 
 target_correlations_20 = targets_df[t20s]
+target_correlations_20.to_csv(repo_path + "/models/" + f"{date.today()}_target_correlations_20.csv")
 
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = 3)
+
 
 columns = list(target_correlations_20)[1::]
 
@@ -266,5 +268,5 @@ live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature
 predictions = predict_ensemble(live_features)
 print("----predictions-----")
 print(predictions)
-summary_metrics_ensemble_df.to_csv(repo_path + "/models/" + f"{date.today()}_predictions.csv")
+predictions.to_csv(repo_path + "/models/" + f"{date.today()}_predictions.csv")
 

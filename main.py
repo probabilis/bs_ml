@@ -161,9 +161,9 @@ def cumulative_correlations_targets(plot_save) -> dict:
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
     if plot_save == True:
         plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
-    return correlations
+    return correlations, cumulative_correlations
 
-correlations = cumulative_correlations_targets(plot_save = True)
+correlations, cumulative_correlations = cumulative_correlations_targets(plot_save = True)
 
 #############################################
 #defining function for summary metrics

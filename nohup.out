@@ -207,3 +207,39 @@ Traceback (most recent call last):
   File "/root/Documents/github_repos/bs_ml/main.py", line 180, in summary_metrics_targets
     rolling_max = cumulative_correlations[f"prediction_{target}"].expanding(min_periods=1).max()
 NameError: name 'cumulative_correlations' is not defined
+2023-09-24 17:28:05,011 INFO numerapi.utils: target file already exists
+2023-09-24 17:28:05,011 INFO numerapi.utils: download complete
+2023-09-24 17:28:06,575 INFO numerapi.utils: target file already exists
+2023-09-24 17:28:06,575 INFO numerapi.utils: download complete
+2023-09-24 17:28:07,570 INFO numerapi.utils: target file already exists
+2023-09-24 17:28:07,570 INFO numerapi.utils: download complete
+2023-09-24 17:28:08,585 INFO numerapi.utils: target file already exists
+2023-09-24 17:28:08,586 INFO numerapi.utils: download complete
+It takes 37.911119655768076 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_waldo_v4_20  0.017618  ...              0.816104
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+prediction_target_xerxes_v4_20 0.018174  ...              0.940960
+
+[4 rows x 5 columns]
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.019691 0.019881 0.990394      0.048012
+----predictions-----
+                  prediction
+id                          
+n00032ac45ae16e7    0.069207
+n00042dc27d38a8c    0.901133
+n000cac02befcd0c    0.946447
+n00208bcaf857da1    0.461586
+n0025d003b492d02    0.298867
+...                      ...
+nffb04f43a0e1f4d    0.526880
+nffb5aa04e15b0b2    0.466117
+nffd260de4d57698    0.285067
+nffdbf81416e3c5b    0.238105
+nffe9bb5e433dd02    0.777961
+
+[4855 rows x 1 columns]

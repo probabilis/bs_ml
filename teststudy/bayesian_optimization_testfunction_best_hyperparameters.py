@@ -8,10 +8,10 @@ import sys
 import matplotlib.pyplot as plt
 import pandas as pd
 #own modules
-from gradient_boosting_from_scratch import GradientBoosting
-from testfunction import testfunction, X
 sys.path.append('../')
-from utils import repo_path, fontsize, fontsize_title
+from from_scratch.gradient_boosting_from_scratch import GradientBoosting
+from testfunction import testfunction, X
+from repo_utils import repo_path, fontsize, fontsize_title
 
 ########################################
 #testfunction

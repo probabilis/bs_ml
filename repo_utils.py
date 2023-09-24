@@ -1,10 +1,14 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
+#official open-source repositories
 import os
 from pathlib import Path
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import scipy
-
 #############################################
 #############################################
 #############################################
@@ -109,8 +113,9 @@ def get_biggest_change_features(corrs, n):
 
 ##########################
 
-def neutralize(df, columns, neutralizers = None, proportion = 1.0, normalize = True, era_col = "era", verbose = False):
+def neutralize_old(df, columns, neutralizers = None, proportion = 1.0, normalize = True, era_col = "era", verbose = False):
     """
+    older version until v4.0 datasets / until sept. 2023
     params: df, columns, neutralizers, proportion, normalize, era_col, verbose
     df ...          input df / vector over the features room
     columns ...     array / columns of df
@@ -149,6 +154,23 @@ def neutralize(df, columns, neutralizers = None, proportion = 1.0, normalize = T
         computed.append(scores)
 
     return pd.DataFrame(np.concatenate(computed), columns=columns, index = df.index)
+
+##########################
+
+def neutralize(predictions: pd.DataFrame, features: pd.DataFrame, proportion: float = 1.0) -> pd.DataFrame:
+    """
+    newer version from v4.2 datasets / from sept. 2023 / Neutralize predictions to features
+    params: df, features, proportion
+    df ...          input df / vector over the features room
+    features ...     array / columns of df
+    proportion ...  scalar 
+    ---------------
+    return: new neutralized df
+    """
+    # add a constant term the features so we can fit the bias/offset term
+    features = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
+    # remove the component of the predictions that are linearly correlated with features
+    return predictions - proportion * features @ (np.linalg.pinv(features, rcond=1e-6) @ predictions)
 
 ##########################
 

@@ -1,11 +1,17 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
+#official open-source repositories
 import numpy as np
 import pandas as pd
 from pyarrow.parquet import ParquetFile
 import pyarrow as pa
 import matplotlib.pyplot as plt
 import sys
+#own modules
 sys.path.append('../')
-from utils import loading_dataset
+from repo_utils import loading_dataset
 from statistical_analysis_tools import statistics, plot_statistics, histogram, overall_statistics
 
 #############################################

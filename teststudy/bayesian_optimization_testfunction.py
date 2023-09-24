@@ -4,19 +4,18 @@ MN: 12030366
 """
 import pandas as pd
 from lightgbm import LGBMRegressor
-from bayes_opt import BayesianOptimization, SequentialDomainReductionTransformer
+from bayes_opt import BayesianOptimization
 import time
 from datetime import date
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
 #own modules
-from testfunction import testfunction, X
 sys.path.append('../')
-from utils import repo_path
+from testfunction import testfunction, X
+from repo_utils import repo_path
 
 #############################################
-
 
 Y = testfunction(X, noise = 0.5)
 X = X.reshape(-1,1)
@@ -50,7 +49,6 @@ params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(100,
 #n_iter:  How many steps of bayesian optimization you want to perform. The more steps the more likely to find a good maximum you are.
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.
 init_points = 10 ; n_iter = 200
-
 
 gbm_bo = BayesianOptimization(gbm_reg_bo, params_gbm) 
 

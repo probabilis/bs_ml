@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 #own modules 
-from gradient_boosting_from_scratch import GradientBoosting
+from from_scratch.gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X
 sys.path.append('../')
-from bs_ml.utils import repo_path, fontsize_title, fontsize
+from repo_utils import repo_path, fontsize_title, fontsize
 
 ##################################
 

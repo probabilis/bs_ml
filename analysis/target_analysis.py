@@ -2,21 +2,24 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
+#official open-source repositories
 import pandas as pd
 import numpy as np
-from bayes_opt import BayesianOptimization
-import time
-import os
-from sklearn.model_selection import cross_val_score
+import json
 import matplotlib.pyplot as plt
+import seaborn as sns
+#own modules
 from statistical_analysis_tools import statistics
-
+from repo_utils import gh_repos_path
 ####################################
 
-path = os.path.join(os.path.expanduser('~'), 'Documents', 'bachelor', "train.parquet")
-#print(path)
+#loading training dataset v4.2
+feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
-df = pd.read_parquet(path)
+feature_cols = feature_metadata["feature_sets"]["medium"]
+target_cols = feature_metadata["targets"]
+
+df = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 
 ####################################
 
@@ -49,8 +52,6 @@ print(targets_20_sorted)
 
 target_correlations = df[targets_20].corr()
 print(round(target_correlations,1))
-
-import seaborn as sns
 
 sns.heatmap(target_correlations.corr())
 fig = plt.gcf()

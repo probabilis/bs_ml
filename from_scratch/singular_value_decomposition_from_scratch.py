@@ -1,11 +1,11 @@
 #used the program-sketch from the computional physics CP lecture from physics bachelor 5S
 #name: "01 - Singular value decomposition of a drawing"
-
+"""
 # Created by:
 # *Maximilian Gschaider
 # *Sebastian Grosinger
 # *Florian Wallner
-
+"""
 #################################
 #--> using the SVD as reduction schematic for PCA
 

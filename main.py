@@ -70,7 +70,7 @@ def plot_target_correlations(plot_save) -> None:
     sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
     target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
     if plot_save == True:
-        plt.savefig(repo_path + "/figures/" + "target_correlations", dpi=300)
+        plt.savefig(repo_path + "/rounds/" + "target_correlations", dpi=300)
 
 #############################################
 #loading the specific hyperparameter configuration from bayesian optimization
@@ -96,7 +96,7 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
 
 target_correlations_20 = targets_df[t20s].corr()
-target_correlations_20.to_csv(repo_path + "/models/" + f"{date.today()}_target_correlations_20.csv")
+target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_correlations_20.csv")
 
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
 print(target_correlations_20.values[:, 1:])
@@ -166,7 +166,7 @@ def cumulative_correlations_targets(plot_save) -> dict:
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
     if plot_save == True:
-        plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+        plt.savefig(repo_path + "/rounds/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations, cumulative_correlations
 
 correlations, cumulative_correlations = cumulative_correlations_targets(plot_save = True)
@@ -197,7 +197,7 @@ def summary_metrics_targets() -> pd.DataFrame:
     return summary
 
 summary_metrics_targets_df = summary_metrics_targets()
-summary_metrics_targets_df.to_csv(repo_path + "/models/" + f"{date.today()}_summary_metrics_targets.csv")
+summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}_summary_metrics_targets.csv")
 print(summary_metrics_targets_df)
 
 #############################################
@@ -229,7 +229,7 @@ def cumulative_correlations_ensemble(plot_save):
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[])
     if plot_save == True:
-        plt.savefig(repo_path + "/figures/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
+        plt.savefig(repo_path + "/rounds/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
 
 correlations, cumulative_correlations = cumulative_correlations_ensemble(plot_save = True)
@@ -253,7 +253,7 @@ def summary_metrics_ensemble() -> pd.DataFrame:
     return summary
 
 summary_metrics_ensemble_df = summary_metrics_ensemble()
-summary_metrics_ensemble_df.to_csv(repo_path + "/models/" + f"{date.today()}_summary_metrics_ensemble.csv")
+summary_metrics_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}_summary_metrics_ensemble.csv")
 print(summary_metrics_ensemble_df)
 
 #############################################
@@ -274,5 +274,5 @@ live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature
 predictions = predict_ensemble(live_features)
 print("----predictions-----")
 print(predictions)
-predictions.to_csv(repo_path + "/models/" + f"{date.today()}_predictions.csv")
+predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}_predictions.csv")
 

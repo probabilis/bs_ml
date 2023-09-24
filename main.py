@@ -95,7 +95,7 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 
 target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
 
-target_correlations_20 = targets_df[t20s]
+target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/models/" + f"{date.today()}_target_correlations_20.csv")
 
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])

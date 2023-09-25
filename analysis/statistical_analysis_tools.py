@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+from datetime import date
 #own modules
 sys.path.append('../')
 from repo_utils import repo_path
@@ -30,9 +31,7 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-import os
-
-def plot_statistics(df, statistic, name, path_ = None):
+def plot_statistics(df, statistic, name, repo_path = None):
 	"""
     params: df, statistic
     df ...          input statistics df / vector over the features room
@@ -44,10 +43,10 @@ def plot_statistics(df, statistic, name, path_ = None):
 	plt.xlabel('$\\mu$ / 1')
 	plt.yticks(ticks=[])
 	plt.ylabel('features')
-	plt.title(statistic)
+	plt.title('numer.ai dataframe v4.2 / features ' + statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(repo_path + f"{path_}/{name}.png")
+	fig.savefig(repo_path +f"features_mean_horizontal_barplot_{date.today()}.png")
 	fig.tight_layout()
 	plt.show()
 	return

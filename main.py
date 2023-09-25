@@ -209,7 +209,18 @@ print(summary_metrics_targets_df)
 numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
 
 #only selecting the last two least correlated variables on which the final model gets trained
-favorite_targets = [element for element in target_candidates[0:2]]
+def target_selection(numerai_list, pca_list):
+
+    pca_list_reduced = [element for element in pca_list[0:2]]
+
+    merged_set = set(numerai_list).union(set(pca_list))
+
+    if len(merged_set) < ( len(numerai_list) + len(pca_list_reduced) ) :
+        merged_set.append(pca_list[2:3])
+    return merged_set
+
+favorite_targets = target_selection(numerai_selected_targets, least_correlated_targets)
+print(favorite_targets)
 
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
 #ensure that the ensemble score are ranked by percentile (pct = True)

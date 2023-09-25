@@ -210,14 +210,11 @@ numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
 
 #only selecting the last two least correlated variables on which the final model gets trained
 def target_selection(numerai_list, pca_list):
-
-    pca_list_reduced = [element for element in pca_list[0:2]]
-
-    merged_set = set(numerai_list).union(set(pca_list))
-
-    if len(merged_set) < ( len(numerai_list) + len(pca_list_reduced) ) :
-        merged_set.append(pca_list[2:3])
-    return merged_set
+    
+    favorite_targets = [element for element in pca_list[0:2]]
+    favorite_targets.extend(target for target in numerai_list if target not in favorite_targets)
+    
+    return favorite_targets
 
 favorite_targets = target_selection(numerai_selected_targets, least_correlated_targets)
 print(favorite_targets)

@@ -206,7 +206,9 @@ print(summary_metrics_targets_df)
 #ENSEMBLE modeling
 
 # Ensemble predictions together with a simple average
-favorite_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
+numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
+
+favorite_targets = numerai_selected_targets.append(target_candidates[0:2])
 
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
 #ensure that the ensemble score are ranked by percentile (pct = True)

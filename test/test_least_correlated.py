@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
 import json
-import itertools
 from sklearn.decomposition import PCA
-from utils import loading_dataset, numerai_corr, gh_repos_path, path_val, repo_path
+import sys
+sys.path.append('../')
+from repo_utils import loading_dataset, numerai_corr, gh_repos_path, path_val, repo_path
 # Example correlation matrix (replace with your data)
 correlation_matrix = np.array([
                             [1.0, 0.2, 0.4, 0.1],

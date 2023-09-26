@@ -129,3 +129,20 @@ def get_skewed_columns(df,skew_limit = 0.2):
                  .rename(columns={0: 'Skew'})
                  .query('abs(Skew) > {}'.format(skew_limit)))
     return skew_cols
+
+def correlation_features(df,features,target):
+
+    eras = df.erano
+
+    correlations = np.zeros((len(eras),len(features)) , dtype = object)
+
+    for e,era in enumerate(eras):
+        df_ = df[eras == era]
+        for f, feature in enumerate(features):
+            if feature in df_:
+                corr_ = np.corrcoef(df_[feature],df_[target])
+                print('corr. calculated for feature:',feature)
+            
+                correlations[e][f] = corr_
+
+    return correlations

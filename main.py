@@ -151,8 +151,6 @@ for target in target_candidates:
     
 pred_cols = [f"prediction_{target}" for target in target_candidates]
 
-#print(validation[pred_cols])
-
 #############################################
 #function for cumulative correlation score
 
@@ -209,14 +207,13 @@ print(summary_metrics_targets_df)
 numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
 
 #only selecting the last two least correlated variables on which the final model gets trained
-def target_selection(numerai_list, pca_list):
-    
-    favorite_targets = [element for element in pca_list[0:2]]
-    favorite_targets.extend(target for target in numerai_list if target not in favorite_targets)
-    
-    return favorite_targets
+#def target_selection(numerai_list, pca_list):
 
-favorite_targets = target_selection(numerai_selected_targets, least_correlated_targets)
+favorite_targets = [element for element in least_correlated_targets[0:2]]
+favorite_targets.extend(target for target in numerai_selected_targets if target not in favorite_targets)
+
+#return favorite_targets
+#favorite_targets = target_selection(numerai_selected_targets, least_correlated_targets)
 print(favorite_targets)
 
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]

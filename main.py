@@ -100,7 +100,7 @@ target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_c
 
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
 print(target_correlations_20.values[:, 1:])
-x = len(target_correlations_20.keys())
+x = len(target_correlations_20.keys()) - 1
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = x)
 
 columns = list(target_correlations_20)[1::]

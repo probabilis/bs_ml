@@ -38,7 +38,24 @@ t20s = [t for t in target_names if t.endswith("_20")]
 target_correlations_20 = targets_df[t20s].corr()
 #print(target_correlations_20.values[:, 1:])
 
+x = 10
+
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = x)
 print(least_correlated_targets)
 least_correlated_targets_v2 = find_least_correlated_variables_pca_v2(target_correlations_20.values[:, 1:], n_components = x)
 print(least_correlated_targets_v2)
+
+correlation_matrix = target_correlations_20
+
+num_variables = len(correlation_matrix.columns)
+min_correlation = 1.0  # Initialize with a high value
+
+for i in range(num_variables):
+    for j in range(i + 1, num_variables):
+        correlation = abs(correlation_matrix.iloc[i, j])
+        if correlation < min_correlation:
+            min_correlation = correlation
+            least_correlated_pair = (correlation_matrix.columns[i], correlation_matrix.columns[j])
+
+least_correlated_variables = least_correlated_pair
+print(least_correlated_variables)

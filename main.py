@@ -106,6 +106,7 @@ columns = list(target_correlations_20)[1::]
 
 sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
 sorted_least_target_corr_20.append("target_cyrus_v4_20")
+print(sorted_least_target_corr_20)
 
 del target_candidates
 

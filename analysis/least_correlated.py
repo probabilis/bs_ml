@@ -45,3 +45,15 @@ def find_least_correlated_variables_pca(data, n_components):
     top_components_indices = np.argsort(np.abs(pca.components_).sum(axis=0))[:n_components]
 
     return set(top_components_indices)
+
+def find_least_correlated_variables_pca_v2(data, n_components):
+    # Create a PCA model with the desired number of components
+    pca = PCA(n_components=n_components)
+
+    # Fit the PCA model to the data
+    pca.fit(data)
+
+    # Get the indices of the top n_components principal components
+    top_components_indices = pca.components_
+
+    return top_components_indices

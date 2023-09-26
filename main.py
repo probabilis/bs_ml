@@ -104,6 +104,7 @@ x = len(target_correlations_20.keys()) - 1
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = x)
 
 columns = list(target_correlations_20)[1::]
+print(columns)
 
 sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
 sorted_least_target_corr_20.append("target_cyrus_v4_20")

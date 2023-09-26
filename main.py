@@ -93,11 +93,13 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 #############################################
 #defining the target candidates for ensemble modeling
 
-target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
+#target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
 
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_correlations_20.csv")
 
+
+"""
 #least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
 print(target_correlations_20.values[:, 1:])
 x = len(target_correlations_20.keys()) - 1
@@ -107,14 +109,28 @@ columns = list(target_correlations_20)[1::]
 print(columns)
 
 sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
-sorted_least_target_corr_20.append("target_cyrus_v4_20")
-print(sorted_least_target_corr_20)
+"""
 
-del target_candidates
+def least_correlated(df_correlation):
+    min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
+    least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
+
+    variable_names = df_correlation.columns
+    least_correlated_variable1 = variable_names[least_correlated_pairs[0][0]]
+    least_correlated_variable2 = variable_names[least_correlated_pairs[1][0]]
+
+    return [least_correlated_variable1, least_correlated_variable2]
+
+least_correlated_targets = least_correlated(target_correlations_20)
+
+target_candidates = least_correlated_targets
 
 #############################################
-#least correlated targets plus cyrus
-target_candidates = sorted_least_target_corr_20
+#least correlated targets plus cyrus and nomi
+target_candidates.append("target_cyrus_v4_20")
+target_candidates.append("target_nomi_v4_20")
+
+print(target_candidates)
 
 #############################################
 
@@ -209,15 +225,10 @@ print(summary_metrics_targets_df)
 # Ensemble predictions together with a simple average
 numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
 
-#only selecting the last two least correlated variables on which the final model gets trained
-#def target_selection(numerai_list, pca_list):
-
 #favorite_targets = [element for element in least_correlated_targets[0:2]]
-favorite_targets = least_correlated_targets[0:2]
+favorite_targets = target_candidates
 favorite_targets.extend(target for target in numerai_selected_targets if target not in favorite_targets)
 
-#return favorite_targets
-#favorite_targets = target_selection(numerai_selected_targets, least_correlated_targets)
 print(favorite_targets)
 
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]

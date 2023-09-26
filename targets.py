@@ -40,10 +40,30 @@ target_correlations_20 = targets_df[t20s].corr()
 
 x = 10
 
+#############################################
+#############################################
+#############################################
+
 least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = x)
 print(least_correlated_targets)
-least_correlated_targets_v2 = find_least_correlated_variables_pca_v2(target_correlations_20.values[:, 1:], n_components = x)
-print(least_correlated_targets_v2)
+
+columns = list(target_correlations_20)[1::]
+print(columns)
+
+sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
+print(sorted_least_target_corr_20)
+
+#############################################
+#############################################
+#############################################
+
+#least_correlated_targets_v2 = find_least_correlated_variables_pca_v2(target_correlations_20.values[:, 1:], n_components = x)
+#print(least_correlated_targets_v2)
+
+#############################################
+#############################################
+#############################################
+
 
 correlation_matrix = target_correlations_20
 
@@ -59,3 +79,18 @@ for i in range(num_variables):
 
 least_correlated_variables = least_correlated_pair
 print(least_correlated_variables)
+
+#############################################
+#############################################
+#############################################
+
+df_correlation = correlation_matrix
+
+min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
+least_correlated_pairs = np.where(np.abs(correlation_matrix) == min_correlation)
+
+variable_names = df_correlation.columns
+least_correlated_variable1 = variable_names[least_correlated_pairs[0][0]]
+least_correlated_variable2 = variable_names[least_correlated_pairs[1][0]]
+
+print(f"The least correlated variables are: {least_correlated_variable1} and {least_correlated_variable2}")

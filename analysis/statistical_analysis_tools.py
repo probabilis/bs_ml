@@ -47,7 +47,7 @@ def plot_statistics(df, statistic, name, repo_path = None):
 	plt.title('numer.ai dataframe v4.2 / features ' + statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(repo_path +f"features_mean_horizontal_barplot_{date.today()}.png")
+	fig.savefig(repo_path +f"{name}_{statistic}_horizontal_barplot_{date.today()}.png")
 	fig.tight_layout()
 	plt.show()
 	return
@@ -56,28 +56,28 @@ def round_int(x):
     if x in [float("-inf"),float("inf")]: return int(10e+6)
     return int(round(x))
 
-def histogram(x, name, path_ = None):
-	"""
+def histogram(x, name, repo_path = None):
+    """
     params: x, name
     x ...       input statistics array / e.g.: vector over one feature room
     name ...	str / name of statistical input variable
     ---------------
     return: plot of histogram diagram
     """
-	q25, q75 = np.percentile(x, [25, 75])
-	bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
-	print(bin_width)
-	if float(bin_width) < 10e-2:
-		bin_width = 0.1
-	bins = abs(round_int((x.max() - x.min()) / bin_width))
-	print(bins)
-	plt.hist(x, density=True, bins = bins)
-	plt.title(name)
-	fig = plt.gcf()
-	fig.set_size_inches(12,10)
-	fig.tight_layout()
-	fig.savefig(repo_path + f"{path_}/{name}.png")
-	plt.show()
+    q25, q75 = np.percentile(x, [25, 75])
+    bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
+    print(bin_width)
+    if float(bin_width) < 10e-2:
+        bin_width = 0.1
+    bins = abs(round_int((x.max() - x.min()) / bin_width))
+    print(bins)
+    plt.hist(x, density=True, bins = bins)
+    plt.title(name)
+    fig = plt.gcf()
+    fig.set_size_inches(12,10)
+    fig.tight_layout()
+    fig.savefig(repo_path +f"{name}_histogram_plot_{date.today()}.png")
+    plt.show()
 
 def overall_statistics(df, features):
 	"""

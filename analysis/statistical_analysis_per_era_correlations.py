@@ -65,7 +65,7 @@ def per_era_correlations(save_plot):
             j = 1
             i = i - 4
         
-        per_era_corrs.cumsum().plot(ax = axs[i,j], figsize=(15, 5), title= f"Cumulative sum of correlations of features group {group} to the target", legend=False, xlabel="eras")
+        per_era_corrs.cumsum().plot(ax = axs[i,j], title= f"Cumulative sum of correlations of features group {group} to the target", legend=False, xlabel="eras")
     
         del per_era_corrs
 

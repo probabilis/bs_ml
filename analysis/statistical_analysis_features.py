@@ -12,8 +12,8 @@ import json
 #own modules
 sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
-from preprocessing.cross_validators import era_splitting
 from data_loading import loading_datasets
+from preprocessing.cross_validators import era_splitting
 
 #############################################
 

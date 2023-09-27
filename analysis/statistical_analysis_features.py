@@ -48,7 +48,7 @@ train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feat
 def per_era_correlations(save_plot):
     
     fig, axs = plt.subplots( int(len(groups[:-1])/2), 2 ) #, sharex=True
-    fig.set_size_inches(16,8)
+    fig.set_size_inches(8,16)
 
     for i, group in enumerate(groups[:-1]):
 

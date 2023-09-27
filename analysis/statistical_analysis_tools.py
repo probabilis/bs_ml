@@ -71,14 +71,14 @@ def histogram(x, name):
         bin_width = 0.1
     bins = abs(round_int((x.max() - x.min()) / bin_width))
     if bins == 0:
-        bins = 1
+        bins = 100000
     print(bins)
     plt.hist(x, density=True, bins = bins)
     plt.title(name)
     fig = plt.gcf()
     fig.set_size_inches(12,10)
     fig.tight_layout()
-    fig.savefig(repo_path + f"{name}_histogram_plot_{date.today()}.png")
+    fig.savefig(repo_path + f"/figures/{name}_histogram_plot_{date.today()}.png")
     plt.show()
 
 def overall_statistics(df, features):

@@ -1,6 +1,12 @@
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
+#official open-source repositories
 import json
 import pandas as pd
 from numerapi import NumerAPI
+#own modules
 from repo_utils import gh_repos_path
 
 def loading_datasets():

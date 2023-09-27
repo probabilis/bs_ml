@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 sys.path.append('../')
-from utils import loading_dataset, feature_corr, get_biggest_change_features
+from repo_utils import loading_dataset, feature_corr, get_biggest_change_features
 
 #############################################
 

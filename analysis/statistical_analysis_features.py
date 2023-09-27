@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-from scipy import stats
 #from numerapi import NumerAPI
 #own modules
 sys.path.append('../')
@@ -80,7 +79,5 @@ def per_era_correlations(save_plot):
     if save_plot == True:
         plt.savefig(repo_path + "/figures/" + "per_era_correlations.png", dpi=300)
     plt.show()
-
-
 
 df = per_era_correlations(save_plot = True)

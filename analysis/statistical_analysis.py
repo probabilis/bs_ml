@@ -34,8 +34,11 @@ t20s = [t for t in target_names if t.endswith("_20")]
 #############################################
 #############################################
 #############################################
-#overall statistics
+#FEATURE statistical analysis tests
+#mean, var
+#correlation
 
+print("feature statistics")
 df_st = statistics(df, feature_cols)
 print(df_st)
 
@@ -50,15 +53,6 @@ plot_statistics(df_st,'variance', "train_df_features_variance")
 histogram(df_st['feature_mean'], "train_df_hist_mean")
 histogram(df_st['feature_variance'], "train_df_hist_var")
 
-
-#############################################
-#############################################
-#############################################
-#TARGET correlations
-
-target_correlations = targets_df[t20s].corr()
-plot_correlations(target_correlations, plot_save = True, name = "target")
-print("target correlation plot successfully created")
 #############################################
 #FEATURE correlations
 
@@ -66,3 +60,31 @@ feature_correlations = train[feature_cols].corr()
 plot_correlations(feature_correlations, plot_save = True, name = "feature")
 print("feature correlation plot successfully created")
 #############################################
+
+del df_st, mean, var
+
+#############################################
+#############################################
+#############################################
+#TARGET statistical analysis tests
+#mean, var
+#correlation
+
+print("target statistics")
+df_st = statistics(targets_df, t20s)
+print(df_st)
+
+mean, var = overall_statistics(targets_df, t20s)
+print(mean, var)
+
+#############################################
+
+plot_statistics(df_st,'mean', "targets_df_targets_mean")
+plot_statistics(df_st,'variance', "targets_df_targets_variance")
+
+histogram(df_st['feature_mean'], "targets_df_hist_mean")
+histogram(df_st['feature_variance'], "targets_df_hist_var")
+
+target_correlations = targets_df[t20s].corr()
+plot_correlations(target_correlations, plot_save = True, name = "target")
+print("target correlation plot successfully created")

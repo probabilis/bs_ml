@@ -79,7 +79,7 @@ def histogram(x, name):
     fig.set_size_inches(12,10)
     fig.tight_layout()
     fig.savefig(repo_path + f"/figures/{name}_histogram_plot_{date.today()}.png")
-    plt.show()
+    #plt.show()
 
 def overall_statistics(df, features):
 	"""

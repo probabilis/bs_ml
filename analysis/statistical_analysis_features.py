@@ -13,11 +13,11 @@ import json
 sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
 from preprocessing.cross_validators import era_splitting
-from data_loading import data_loading
+from data_loading import loading_datasets
 
 #############################################
 
-train, feature_cols, target_cols = data_loading()
+train, feature_cols, target_cols = loading_datasets()
 
 df = era_splitting(train)
 

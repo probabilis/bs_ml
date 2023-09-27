@@ -12,20 +12,14 @@ import json
 #own modules
 sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
+from preprocessing.cross_validators import era_splitting
+from data_loading import data_loading
 
 #############################################
-"""
-#numer.AI official API for retrieving and pushing data
-napi = NumerAPI()
-#train set
-napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
-#validation set
-napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
-#live dataset 
-napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
-#features metadata
-napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
-"""
+
+train, feature_cols, target_cols = data_loading()
+
+df = era_splitting(train)
 
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 

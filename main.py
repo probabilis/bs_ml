@@ -10,7 +10,7 @@ Ref.: www.numer.ai
 #official open-source repositories
 import pandas as pd
 import numpy as np
-from lightgbm import LGBMRegressor
+from lightgbm import LGBMRegressor, plot_importance
 import time
 from datetime import date
 import json
@@ -93,23 +93,8 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 #############################################
 #defining the target candidates for ensemble modeling
 
-#target_candidates = ["target_cyrus_v4_20", "target_waldo_v4_20", "target_victor_v4_20", "target_xerxes_v4_20"]
-
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_correlations_20.csv")
-
-
-"""
-#least_correlated_subset = find_least_correlated_subset(target_correlations_20.values[:, 1:])
-print(target_correlations_20.values[:, 1:])
-x = len(target_correlations_20.keys()) - 1
-least_correlated_targets = find_least_correlated_variables_pca(target_correlations_20.values[:, 1:], n_components = x)
-
-columns = list(target_correlations_20)[1::]
-print(columns)
-
-sorted_least_target_corr_20 = [columns[i] for i in least_correlated_targets]
-"""
 
 def least_correlated(df_correlation):
     min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
@@ -121,15 +106,14 @@ def least_correlated(df_correlation):
 
     return [least_correlated_variable1, least_correlated_variable2]
 
-least_correlated_targets = least_correlated(target_correlations_20)
-
-target_candidates = least_correlated_targets
+target_candidates = least_correlated(target_correlations_20)
 
 #############################################
 #least correlated targets plus cyrus and nomi
-target_candidates.append("target_cyrus_v4_20")
-target_candidates.append("target_nomi_v4_20")
-target_candidates.append("target_victor_v4_20")
+
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+
+target_candidates.extend(top_targets)
 
 print(target_candidates)
 
@@ -146,6 +130,9 @@ for target in target_candidates:
         colsample_bytree=colsample_bytree
     )
     model.fit(train[feature_cols], train[target])
+    
+    plot_importance(model, title = f'Feature importance of model with target : {target}', figsize = (12,8), dpi = 300)
+    plt.savefig(repo_path + "/rounds/" + f"{date.today()}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
 print('It takes %s minutes for training the models :' %((time.time()-st)/60))
@@ -245,7 +232,7 @@ validation[pred_cols]
 #############################################
 #ENSEMBLE model performance
 
-def cumulative_correlations_ensemble(plot_save):
+def cumulative_correlations_ensemble(save_plot):
     correlations= {}
     cumulative_correlations = {}
     for col in pred_cols:
@@ -254,11 +241,11 @@ def cumulative_correlations_ensemble(plot_save):
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[])
-    if plot_save == True:
+    if save_plot == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
 
-correlations, cumulative_correlations = cumulative_correlations_ensemble(plot_save = True)
+correlations, cumulative_correlations = cumulative_correlations_ensemble(save_plot=True)
 
 def summary_metrics_ensemble() -> pd.DataFrame:
     summary_metrics = {}

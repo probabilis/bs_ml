@@ -165,7 +165,7 @@ def plot_correlations(df_correlations, plot_save, name = None) -> None:
     #cmap = sns.diverging_palette(230, 20, as_cmap=True)
     #sns.heatmap(df_correlations, mask=mask, cmap=cmap, vmax=.3, center=0, square=True, linewidths=.5, cbar_kws={"shrink": .5}, xticklabels=False, yticklabels=False)
     fig.suptitle(f'{df_correlations} matrix', fontsize=fontsize_title)
-    sns.heatmap(df_correlations, cmap="coolwarm", mask = mask, xticklabels=False, yticklabels=False)
+    sns.heatmap(df_correlations, annot = False, cmap="coolwarm", mask = mask, xticklabels=False, yticklabels=False)
     df_correlations.to_csv(repo_path + f"/analysis/{name}_correlations_matrix_{date.today()}.csv")
 
     if plot_save == True:

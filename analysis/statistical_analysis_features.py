@@ -51,6 +51,9 @@ def per_era_correlations(save_plot):
     fig.set_size_inches(12,16)
 
     for i, group in enumerate(groups[:-1]):
+
+        del per_era_corrs
+
         j = 0
         feature_subset = list(subgroups["medium"][group])
         per_era_corrs = pd.DataFrame(index = train.era.unique())

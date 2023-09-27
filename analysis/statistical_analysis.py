@@ -50,6 +50,7 @@ print(mean, var)
 plot_statistics(df_st,'mean', "train_df_features_mean")
 plot_statistics(df_st,'variance', "train_df_features_variance")
 
+#problem bins = 0
 histogram(df_st['feature_mean'], "train_df_hist_mean")
 histogram(df_st['feature_variance'], "train_df_hist_var")
 

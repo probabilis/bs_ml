@@ -30,18 +30,11 @@ target = "target"
 
 targets_20 = [t for t in df if t.endswith("20")]
 
-df_st = statistics(df,targets_20)
 
-def histogram(x, name):
-	q25, q75 = np.percentile(x, [25, 75])
-	bin_width = 2 * (q75 - q25) * len(x) ** (-1/3)
-	bins = round((x.max() - x.min()) / bin_width)
-	plt.hist(x, bins = bins)
-	plt.title(name)
-	#fig = plt.gcf()
-	#fig.set_size_inches(12,10)
-	#fig.tight_layout()
-	plt.show()
+
+
+
+df_st = statistics(df,targets_20)
 
 df_st = df_st.set_index('feature_names')
 #print(df_st)

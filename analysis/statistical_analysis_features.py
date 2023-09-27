@@ -52,8 +52,6 @@ def per_era_correlations(save_plot):
 
     for i, group in enumerate(groups[:-1]):
 
-        del per_era_corrs
-
         j = 0
         feature_subset = list(subgroups["medium"][group])
         per_era_corrs = pd.DataFrame(index = train.era.unique())
@@ -69,6 +67,8 @@ def per_era_correlations(save_plot):
         
         per_era_corrs.cumsum().plot(ax = axs[i,j], figsize=(15, 5), title= f"Cumulative sum of correlations of features group {group} to the target (w/ negative flipped)", legend=False, xlabel="eras")
     
+        del per_era_corrs
+
     
     #axs.set_title("per era correlation", loc = 'left', pad=10, fontsize = fontsize)
     #axs.set_xlabel("eras")

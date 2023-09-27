@@ -32,7 +32,7 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-def plot_statistics(df, statistic, name, repo_path = None):
+def plot_statistics(df, statistic, name, repo_path = repo_path):
 	"""
     params: df, statistic
     df ...          input statistics df / vector over the features room
@@ -56,7 +56,7 @@ def round_int(x):
     if x in [float("-inf"),float("inf")]: return int(10e+6)
     return int(round(x))
 
-def histogram(x, name, repo_path = None):
+def histogram(x, name, repo_path = repo_path):
     """
     params: x, name
     x ...       input statistics array / e.g.: vector over one feature room
@@ -76,7 +76,7 @@ def histogram(x, name, repo_path = None):
     fig = plt.gcf()
     fig.set_size_inches(12,10)
     fig.tight_layout()
-    fig.savefig(repo_path +f"{name}_histogram_plot_{date.today()}.png")
+    fig.savefig(repo_path + f"{name}_histogram_plot_{date.today()}.png")
     plt.show()
 
 def overall_statistics(df, features):

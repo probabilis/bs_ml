@@ -70,6 +70,8 @@ def histogram(x, name):
     if float(bin_width) < 10e-2:
         bin_width = 0.1
     bins = abs(round_int((x.max() - x.min()) / bin_width))
+    if bins == 0:
+        bins = 1
     print(bins)
     plt.hist(x, density=True, bins = bins)
     plt.title(name)

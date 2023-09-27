@@ -370,3 +370,54 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.9/dist-packages/pandas/core/base.py", line 239, in __getitem__
     raise KeyError(f"Columns not found: {str(bad_keys)[1:-1]}")
 KeyError: "Columns not found: 'prediction_target_victor_v4_20'"
+python3: can't open file '/root/Documents/github_repos/bs_ml/main,py': [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 26, in <module>
+    from analysis.least_correlated import find_least_correlated_variables_pca
+ModuleNotFoundError: No module named 'analysis.least_correlated'
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 26, in <module>
+    from analysis.least_correlated import find_least_correlated_variables_pca
+ModuleNotFoundError: No module named 'analysis.least_correlated'
+2023-09-27 14:38:29,711 INFO numerapi.utils: target file already exists
+2023-09-27 14:38:29,711 INFO numerapi.utils: download complete
+2023-09-27 14:38:30,829 INFO numerapi.utils: target file already exists
+2023-09-27 14:38:30,830 INFO numerapi.utils: download complete
+2023-09-27 14:38:31,941 INFO numerapi.utils: target file already exists
+2023-09-27 14:38:31,941 INFO numerapi.utils: download complete
+2023-09-27 14:38:32,986 INFO numerapi.utils: target file already exists
+2023-09-27 14:38:32,986 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_george_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 41.648089317480725 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_george_v4_20 0.006197  ...              0.664612
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[5 rows x 5 columns]
+['target_alan_v4_20', 'target_george_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_george_v4_20 0.006197 0.011775 0.526281      0.064123
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.017502 0.019246 0.909384      0.052707
+----predictions-----
+                  prediction
+id                          
+n000c6cbc80e2382    0.593105
+n001fbdc5ed92bfb    0.396573
+n004af9008fee7b6    0.364575
+n00576a21306a727    0.489678
+n008c6a7cb0be5e0    0.045211
+...                      ...
+nff9da6ce84f7ce4    0.742981
+nffc063e38b5e532    0.839182
+nffe18fe6579ec51    0.717795
+nffe80222de3ca88    0.946532
+nffecb78e327055d    0.088357
+
+[4844 rows x 1 columns]

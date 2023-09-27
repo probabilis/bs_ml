@@ -129,6 +129,7 @@ target_candidates = least_correlated_targets
 #least correlated targets plus cyrus and nomi
 target_candidates.append("target_cyrus_v4_20")
 target_candidates.append("target_nomi_v4_20")
+target_candidates.append("target_victor_v4_20")
 
 print(target_candidates)
 
@@ -234,6 +235,8 @@ print(favorite_targets)
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
 #ensure that the ensemble score are ranked by percentile (pct = True)
 validation["ensemble"] = validation.groupby("era")[ensemble_cols].rank(pct=True).mean(axis=1)
+#PROBLEMO
+
 
 # Print the ensemble predictions
 pred_cols = ensemble_cols + ["ensemble"]

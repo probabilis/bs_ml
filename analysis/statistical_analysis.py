@@ -5,18 +5,21 @@ MN: 12030366
 #official open-source repositories
 import numpy as np
 import pandas as pd
-from pyarrow.parquet import ParquetFile
-import pyarrow as pa
 import matplotlib.pyplot as plt
 import sys
 #own modules
 sys.path.append('../')
-from repo_utils import loading_dataset
+from data_loading import data_loading
 from statistical_analysis_tools import statistics, plot_statistics, histogram, overall_statistics
+from preprocessing.cross_validators import era_splitting
 
 #############################################
 
-df, features, target, eras = loading_dataset()
+train, feature_cols, target_cols = data_loading()
+
+df = era_splitting(train)
+
+features = feature_cols
 
 #############################################
 

@@ -423,3 +423,69 @@ nffecb78e327055d    0.088357
 [4844 rows x 1 columns]
 python3: can't open file '/root/Documents/github_repos/bs_ml/statistical_analysis_per_era_correlations.py': [Errno 2] No such file or directory
 python3: can't open file '/root/Documents/github_repos/bs_ml/statistical_analysis_per_era_correlations.py': [Errno 2] No such file or directory
+2023-09-28 14:13:38,481 INFO numerapi.utils: target file already exists
+2023-09-28 14:13:38,482 INFO numerapi.utils: download complete
+2023-09-28 14:13:39,714 INFO numerapi.utils: target file already exists
+2023-09-28 14:13:39,714 INFO numerapi.utils: download complete
+2023-09-28 14:13:40,694 INFO numerapi.utils: target file already exists
+2023-09-28 14:13:40,695 INFO numerapi.utils: download complete
+2023-09-28 14:13:42,117 INFO numerapi.utils: target file already exists
+2023-09-28 14:13:42,118 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 115, in <module>
+    target_candidates = least_correlated(target_correlations_20, amount = 1)
+  File "/root/Documents/github_repos/bs_ml/main.py", line 107, in least_correlated
+    if i > 0:
+UnboundLocalError: local variable 'i' referenced before assignment
+2023-09-28 14:27:58,105 INFO numerapi.utils: target file already exists
+2023-09-28 14:27:58,105 INFO numerapi.utils: download complete
+2023-09-28 14:27:59,248 INFO numerapi.utils: target file already exists
+2023-09-28 14:27:59,249 INFO numerapi.utils: download complete
+2023-09-28 14:28:00,259 INFO numerapi.utils: target file already exists
+2023-09-28 14:28:00,259 INFO numerapi.utils: download complete
+2023-09-28 14:28:01,194 INFO numerapi.utils: target file already exists
+2023-09-28 14:28:01,194 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 115, in <module>
+    target_candidates = least_correlated(target_correlations_20, amount = 1)
+  File "/root/Documents/github_repos/bs_ml/main.py", line 107, in least_correlated
+    if i > 0:
+UnboundLocalError: local variable 'i' referenced before assignment
+2023-09-28 14:29:33,580 INFO numerapi.utils: target file already exists
+2023-09-28 14:29:33,581 INFO numerapi.utils: download complete
+2023-09-28 14:29:34,661 INFO numerapi.utils: target file already exists
+2023-09-28 14:29:34,661 INFO numerapi.utils: download complete
+2023-09-28 14:29:35,685 INFO numerapi.utils: target file already exists
+2023-09-28 14:29:35,685 INFO numerapi.utils: download complete
+2023-09-28 14:29:36,701 INFO numerapi.utils: target file already exists
+2023-09-28 14:29:36,701 INFO numerapi.utils: download complete
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 24.573467330137888 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[3 rows x 5 columns]
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.019785 0.020226 0.978234      0.045963
+----predictions-----
+                  prediction
+id                          
+n000710e35972c49    0.033416
+n0009247ca6024f4    0.311056
+n00094bf010e4396    0.848185
+n000b5d9eecefb68    0.189563
+n000e677f04100e2    0.082715
+...                      ...
+nffad8eb46a94d37    0.014026
+nffc055bfc0f6029    0.281559
+nffc8b1517827dd1    0.536097
+nffd3e5463c83e51    0.017120
+nffef374b2a3973c    0.134488
+
+[4848 rows x 1 columns]

@@ -23,7 +23,6 @@ from numerapi import NumerAPI
 #own modules
 sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
-#from analysis.least_correlated import find_least_correlated_variables_pca
 from repo_utils import numerai_corr, gh_repos_path, repo_path
 
 #############################################
@@ -139,7 +138,7 @@ for target in target_candidates:
     )
     model.fit(train[feature_cols], train[target])
     
-    plot_importance(model, title = f'Feature importance of model with target : {target}',max_num_features = 50, figsize = (12,8), dpi = 300)
+    plot_importance(model, title = f'Feature importance of model with target : {target}',max_num_features = 30, figsize = (12,10), dpi = 300)
     plt.savefig(repo_path + "/rounds/" + f"{date.today()}_feature_importance_{target}{prefix}.png", dpi = 300)
     models[target] = model
 

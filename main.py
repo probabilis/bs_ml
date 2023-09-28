@@ -104,7 +104,7 @@ def least_correlated(df_correlation, amount):
 
     least_correlated_variables = []
 
-    if i > 0:
+    if amount > 0:
         for i in range(amount-1):
 
             least_correlated_variable = variable_names[least_correlated_pairs[i][0]]

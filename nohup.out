@@ -610,3 +610,43 @@ nfff274768babba2    0.978926
 nfff53b38d457c46    0.838430
 
 [4840 rows x 1 columns]
+2023-09-28 20:57:44,073 INFO numerapi.utils: target file already exists
+2023-09-28 20:57:44,074 INFO numerapi.utils: download complete
+2023-09-28 20:57:45,191 INFO numerapi.utils: target file already exists
+2023-09-28 20:57:45,191 INFO numerapi.utils: download complete
+2023-09-28 20:57:46,230 INFO numerapi.utils: target file already exists
+2023-09-28 20:57:46,230 INFO numerapi.utils: download complete
+2023-09-28 20:57:47,228 INFO numerapi.utils: target file already exists
+2023-09-28 20:57:47,228 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 34.45313032865524 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+----predictions-----
+                  prediction
+id                          
+n000b559d07fb1f6    0.232438
+n0024d0d43fcebdb    0.340289
+n002de418f30864c    0.726240
+n003164a0466d21e    0.271694
+n003ac56e7b3a231    0.355372
+...                      ...
+nffcecaf0be332a2    0.704959
+nffdf9db1516fef4    0.496901
+nffeda372d8337be    0.875620
+nfff274768babba2    0.978926
+nfff53b38d457c46    0.838430
+
+[4840 rows x 1 columns]

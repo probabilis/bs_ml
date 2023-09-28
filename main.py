@@ -29,7 +29,7 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path
 #############################################
 #############################################
 #prefix for saving
-prefix = "_round3"
+prefix = "_round4"
 
 #numer.AI official API for retrieving and pushing data
 napi = NumerAPI()
@@ -113,7 +113,7 @@ def least_correlated(df_correlation, amount):
 
     return least_correlated_variables
 
-target_candidates = least_correlated(target_correlations_20, amount = 1)
+target_candidates = least_correlated(target_correlations_20, amount = 5)
 
 #############################################
 #least correlated targets plus cyrus and nomi

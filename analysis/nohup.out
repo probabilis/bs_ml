@@ -390,3 +390,199 @@
   per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
 /root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+2023-09-28 12:48:11,062 INFO numerapi.utils: target file already exists
+2023-09-28 12:48:11,062 INFO numerapi.utils: download complete
+2023-09-28 12:48:12,146 INFO numerapi.utils: target file already exists
+2023-09-28 12:48:12,146 INFO numerapi.utils: download complete
+2023-09-28 12:48:13,167 INFO numerapi.utils: target file already exists
+2023-09-28 12:48:13,168 INFO numerapi.utils: download complete
+2023-09-28 12:48:14,197 INFO numerapi.utils: target file already exists
+2023-09-28 12:48:14,197 INFO numerapi.utils: download complete
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.9/dist-packages/numpy/lib/function_base.py:2855: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))
+/root/Documents/github_repos/bs_ml/analysis/statistical_analysis_per_era_correlations.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  per_era_corrs[feature_name] = train.groupby("era").apply(lambda df: numerai_corr(df[feature_name], df["target"]))

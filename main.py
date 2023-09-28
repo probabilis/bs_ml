@@ -29,7 +29,7 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path
 #############################################
 #############################################
 #prefix for saving
-prefix = "_round2"
+prefix = "_round3"
 
 #numer.AI official API for retrieving and pushing data
 napi = NumerAPI()
@@ -95,7 +95,7 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 #defining the target candidates for ensemble modeling
 
 target_correlations_20 = targets_df[t20s].corr()
-target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_correlations_20{prefix}.csv")
+target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
 
 def least_correlated(df_correlation, amount):
     min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
@@ -139,7 +139,7 @@ for target in target_candidates:
     model.fit(train[feature_cols], train[target])
     
     plot_importance(model, title = f'Feature importance of model with target : {target}',max_num_features = 30, figsize = (12,8), dpi = 300)
-    plt.savefig(repo_path + "/rounds/" + f"{date.today()}_feature_importance_{target}{prefix}.png", dpi = 300)
+    plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
 print('It takes %s minutes for training the models :' %((time.time()-st)/60))
@@ -178,7 +178,7 @@ def cumulative_correlations_targets(plot_save) -> dict:
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
     if plot_save == True:
-        plt.savefig(repo_path + "/rounds/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions{prefix}.png", dpi = 300)
+        plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations, cumulative_correlations
 
 correlations, cumulative_correlations = cumulative_correlations_targets(plot_save = True)
@@ -209,7 +209,7 @@ def summary_metrics_targets() -> pd.DataFrame:
     return summary
 
 summary_metrics_targets_df = summary_metrics_targets()
-summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}_summary_metrics_targets{prefix}.csv")
+summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_targets.csv")
 print(summary_metrics_targets_df)
 
 #############################################
@@ -249,7 +249,7 @@ def cumulative_correlations_ensemble(save_plot):
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[])
     if save_plot == True:
-        plt.savefig(repo_path + "/rounds/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_ensemble{prefix}.png", dpi = 300)
+        plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
 
 correlations, cumulative_correlations = cumulative_correlations_ensemble(save_plot=True)
@@ -273,7 +273,7 @@ def summary_metrics_ensemble() -> pd.DataFrame:
     return summary
 
 summary_metrics_ensemble_df = summary_metrics_ensemble()
-summary_metrics_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}_summary_metrics_ensemble{prefix}.csv")
+summary_metrics_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_ensemble.csv")
 print(summary_metrics_ensemble_df)
 
 #############################################
@@ -294,5 +294,5 @@ live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature
 predictions = predict_ensemble(live_features)
 print("----predictions-----")
 print(predictions)
-predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}_predictions{prefix}.csv")
+predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_predictions.csv")
 

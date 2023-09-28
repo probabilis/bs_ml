@@ -96,17 +96,23 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}_target_correlations_20.csv")
 
-def least_correlated(df_correlation):
+def least_correlated(df_correlation, amount):
     min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
     least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
 
     variable_names = df_correlation.columns
-    least_correlated_variable1 = variable_names[least_correlated_pairs[0][0]]
-    least_correlated_variable2 = variable_names[least_correlated_pairs[1][0]]
 
-    return [least_correlated_variable1, least_correlated_variable2]
+    least_correlated_variables = []
 
-target_candidates = least_correlated(target_correlations_20)
+    if i > 0:
+        for i in range(amount-1):
+
+            least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
+            least_correlated_variables.append(least_correlated_variable)
+
+    return least_correlated_variables
+
+target_candidates = least_correlated(target_correlations_20, amount = 1)
 
 #############################################
 #least correlated targets plus cyrus and nomi

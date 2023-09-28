@@ -47,7 +47,7 @@ def plot_statistics(df, statistic, name):
 	plt.title('numer.ai dataframe v4.2 / features ' + statistic)
 	fig = plt.gcf()
 	fig.set_size_inches(12,10)
-	fig.savefig(repo_path +f"{name}_{statistic}_horizontal_barplot_{date.today()}.png")
+	fig.savefig(repo_path +f"/figures/{name}_horizontal_barplot_{date.today()}.png")
 	fig.tight_layout()
 	plt.show()
 	return

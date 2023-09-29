@@ -19,8 +19,6 @@ from preprocessing.cross_validators import era_splitting
 
 train, feature_cols, target_cols = loading_datasets()
 
-print(len(feature_cols))
-
 df = era_splitting(train)
 
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 

@@ -113,7 +113,7 @@ def least_correlated(df_correlation, amount):
 
     return least_correlated_variables
 
-target_candidates = least_correlated(target_correlations_20, amount = 3)
+target_candidates = least_correlated(target_correlations_20, amount = 1)
 
 #############################################
 #least correlated targets plus cyrus and nomi

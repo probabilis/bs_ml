@@ -650,3 +650,31 @@ nfff274768babba2    0.978926
 nfff53b38d457c46    0.838430
 
 [4840 rows x 1 columns]
+2023-09-28 22:49:29,683 INFO numerapi.utils: target file already exists
+2023-09-28 22:49:29,684 INFO numerapi.utils: download complete
+2023-09-28 22:49:30,822 INFO numerapi.utils: target file already exists
+2023-09-28 22:49:30,823 INFO numerapi.utils: download complete
+2023-09-28 22:49:31,979 INFO numerapi.utils: target file already exists
+2023-09-28 22:49:31,980 INFO numerapi.utils: download complete
+2023-09-28 22:49:32,982 INFO numerapi.utils: target file already exists
+2023-09-28 22:49:32,982 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 116, in <module>
+    target_candidates = least_correlated(target_correlations_20, amount = 5)
+  File "/root/Documents/github_repos/bs_ml/main.py", line 111, in least_correlated
+    least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
+IndexError: tuple index out of range
+2023-09-29 15:02:46,503 INFO numerapi.utils: target file already exists
+2023-09-29 15:02:46,504 INFO numerapi.utils: download complete
+2023-09-29 15:02:47,606 INFO numerapi.utils: target file already exists
+2023-09-29 15:02:47,606 INFO numerapi.utils: download complete
+2023-09-29 15:02:48,614 INFO numerapi.utils: target file already exists
+2023-09-29 15:02:48,615 INFO numerapi.utils: download complete
+2023-09-29 15:02:49,599 INFO numerapi.utils: target file already exists
+2023-09-29 15:02:49,599 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 116, in <module>
+    target_candidates = least_correlated(target_correlations_20, amount = 3)
+  File "/root/Documents/github_repos/bs_ml/main.py", line 111, in least_correlated
+    least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
+IndexError: tuple index out of range

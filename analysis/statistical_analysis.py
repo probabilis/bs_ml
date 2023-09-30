@@ -50,9 +50,8 @@ print(mean, var)
 plot_statistics(df_st,'mean', "train_df_features_mean")
 plot_statistics(df_st,'variance', "train_df_features_variance")
 
-#problem bins = 0
-histogram(df_st['feature_mean'], "train_df_hist_mean")
-histogram(df_st['feature_variance'], "train_df_hist_var")
+#histogram(df_st['feature_mean'], "train_df_hist_mean")
+#histogram(df_st['feature_variance'], "train_df_hist_var")
 
 #############################################
 #FEATURE correlations
@@ -83,9 +82,13 @@ print(mean, var)
 plot_statistics(df_st,'mean', "targets_df_targets_mean")
 plot_statistics(df_st,'variance', "targets_df_targets_variance")
 
-histogram(df_st['feature_mean'], "targets_df_hist_mean")
-histogram(df_st['feature_variance'], "targets_df_hist_var")
+#histogram(df_st['feature_mean'], "targets_df_hist_mean")
+#histogram(df_st['feature_variance'], "targets_df_hist_var")
 
 target_correlations = targets_df[t20s].corr()
 plot_correlations(target_correlations, plot_save = True, name = "target")
 print("target correlation plot successfully created")
+
+histogram(train['feature_wetter_unbaffled_loma'], 'feature_wetter_unbaffled_loma')
+
+

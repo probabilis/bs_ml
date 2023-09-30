@@ -41,7 +41,7 @@ def plot_statistics(df, statistic, name):
     return: plot of statistical test
     """
 	df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y='feature_' + str(statistic))
-	plt.xlabel('$\\mu$ / 1')
+	plt.xlabel(f'{statistic}')
 	plt.yticks(ticks=[])
 	plt.ylabel('features')
 	plt.title('numer.ai dataframe v4.2 / features ' + statistic)

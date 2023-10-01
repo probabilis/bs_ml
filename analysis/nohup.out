@@ -648,3 +648,59 @@ target statistics
 0.00034100848742574794
 100000
 target correlation plot successfully created
+2023-09-30 16:44:43,449 INFO numerapi.utils: target file already exists
+2023-09-30 16:44:43,450 INFO numerapi.utils: download complete
+2023-09-30 16:44:44,532 INFO numerapi.utils: target file already exists
+2023-09-30 16:44:44,532 INFO numerapi.utils: download complete
+2023-09-30 16:44:45,584 INFO numerapi.utils: target file already exists
+2023-09-30 16:44:45,584 INFO numerapi.utils: download complete
+2023-09-30 16:44:46,620 INFO numerapi.utils: target file already exists
+2023-09-30 16:44:46,620 INFO numerapi.utils: download complete
+feature statistics
+    feature_variance feature_mean                             feature_names
+0           2.000515     1.999921      feature_abating_unadaptable_weakfish
+1           2.000515     1.999921         feature_ablest_mauritanian_elding
+2           2.000515     1.999921  feature_acclimatisable_unfeigned_maghreb
+3           2.000515     1.999921        feature_accommodable_crinite_cleft
+4           1.717541     1.999944       feature_accretive_sorrier_skedaddle
+..               ...          ...                                       ...
+578         2.000515     1.999921          feature_wrathful_prolix_colotomy
+579         1.717541     1.999944     feature_wrinkliest_unmaintainable_usk
+580         2.000515     1.999921       feature_wrought_muckier_temporality
+581         2.000515     1.999921            feature_yelled_hysteretic_eath
+582         1.717541     1.999944           feature_yoruban_unapplied_tawse
+
+[583 rows x 3 columns]
+1.9999258405350737 0.020440332815330326
+feature correlation plot successfully created
+target statistics
+   feature_variance feature_mean          feature_names
+0          0.050004     0.500001      target_nomi_v4_20
+1          0.050044     0.499941     target_tyler_v4_20
+2          0.050005     0.500002    target_victor_v4_20
+3          0.049876     0.500019     target_ralph_v4_20
+4          0.049761      0.50002     target_waldo_v4_20
+5          0.049976     0.499992    target_jerome_v4_20
+6          0.049661     0.500015     target_janet_v4_20
+7          0.049415     0.500011       target_ben_v4_20
+8          0.046977     0.500007      target_alan_v4_20
+9          0.049772     0.499554      target_paul_v4_20
+10         0.049371     0.498755    target_george_v4_20
+11         0.039752     0.504772   target_william_v4_20
+12         0.029315     0.500367    target_arthur_v4_20
+13          0.03261     0.499815    target_thomas_v4_20
+14          0.04975     0.500015     target_cyrus_v4_20
+15         0.049754     0.500013  target_caroline_v4_20
+16         0.049719     0.500034       target_sam_v4_20
+17         0.049724     0.500019    target_xerxes_v4_20
+18         0.049506     0.500046     target_alpha_v4_20
+19         0.049994     0.500004     target_bravo_v4_20
+20         0.049511     0.500046   target_charlie_v4_20
+21         0.049975     0.500007     target_delta_v4_20
+22         0.049922     0.500017      target_echo_v4_20
+23         0.049979     0.500012    target_jeremy_v4_20
+0.50014514 2.9886138633613217e-05
+target correlation plot successfully created
+0.02979136298239393
+40
+python3: can't open file '/root/Documents/github_repos/bs_ml/analysis/main_neutralization.py': [Errno 2] No such file or directory

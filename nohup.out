@@ -678,3 +678,373 @@ Traceback (most recent call last):
   File "/root/Documents/github_repos/bs_ml/main.py", line 111, in least_correlated
     least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
 IndexError: tuple index out of range
+2023-09-30 17:23:31,430 INFO numerapi.utils: target file already exists
+2023-09-30 17:23:31,431 INFO numerapi.utils: download complete
+2023-09-30 17:23:32,488 INFO numerapi.utils: target file already exists
+2023-09-30 17:23:32,488 INFO numerapi.utils: starting download
+/root/Documents/github_repos/validation.parquet:   0%|          | 0.00/2.17G [00:00<?, ?B/s]/root/Documents/github_repos/validation.parquet: 100%|█████████▉| 2.17G/2.17G [00:00<00:00, 13.0GB/s]/root/Documents/github_repos/validation.parquet: 2.51GB [00:19, 13.0GB/s]                            /root/Documents/github_repos/validation.parquet: 2.51GB [00:19, 93.2MB/s]/root/Documents/github_repos/validation.parquet: 2.51GB [00:20, 92.6MB/s]/root/Documents/github_repos/validation.parquet: 2.87GB [00:40, 92.6MB/s]/root/Documents/github_repos/validation.parquet: 2.87GB [00:40, 42.7MB/s]/root/Documents/github_repos/validation.parquet: 2.87GB [00:40, 42.5MB/s]/root/Documents/github_repos/validation.parquet: 3.16GB [00:56, 29.4MB/s]/root/Documents/github_repos/validation.parquet: 3.17GB [00:56, 29.4MB/s]/root/Documents/github_repos/validation.parquet: 3.34GB [01:06, 24.9MB/s]/root/Documents/github_repos/validation.parquet: 3.46GB [01:13, 23.0MB/s]/root/Documents/github_repos/validation.parquet: 3.53GB [01:17, 22.0MB/s]/root/Documents/github_repos/validation.parquet: 3.59GB [01:20, 21.3MB/s]/root/Documents/github_repos/validation.parquet: 3.62GB [01:22, 20.9MB/s]/root/Documents/github_repos/validation.parquet: 3.65GB [01:23, 20.5MB/s]/root/Documents/github_repos/validation.parquet: 3.66GB [01:24, 20.2MB/s]/root/Documents/github_repos/validation.parquet: 3.68GB [01:25, 20.0MB/s]/root/Documents/github_repos/validation.parquet: 3.69GB [01:25, 19.8MB/s]/root/Documents/github_repos/validation.parquet: 3.69GB [01:26, 19.8MB/s]/root/Documents/github_repos/validation.parquet: 3.70GB [01:26, 19.5MB/s]/root/Documents/github_repos/validation.parquet: 3.70GB [01:26, 19.2MB/s]/root/Documents/github_repos/validation.parquet: 3.71GB [01:27, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 3.71GB [01:27, 19.0MB/s]/root/Documents/github_repos/validation.parquet: 3.71GB [01:27, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 3.72GB [01:27, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.72GB [01:27, 19.0MB/s]/root/Documents/github_repos/validation.parquet: 3.72GB [01:27, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.72GB [01:27, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 3.72GB [01:27, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.73GB [01:28, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.73GB [01:28, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.73GB [01:28, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.73GB [01:28, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.73GB [01:28, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.74GB [01:28, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.74GB [01:28, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.74GB [01:28, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.74GB [01:28, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.74GB [01:29, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.75GB [01:29, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.75GB [01:29, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.75GB [01:29, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 3.75GB [01:29, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.75GB [01:29, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 3.76GB [01:29, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 3.76GB [01:29, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 3.76GB [01:29, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 3.76GB [01:30, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.76GB [01:30, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.77GB [01:30, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 3.77GB [01:30, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.77GB [01:30, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 3.77GB [01:30, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 3.77GB [01:30, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.78GB [01:30, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.78GB [01:30, 16.8MB/s]/root/Documents/github_repos/validation.parquet: 3.78GB [01:31, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 3.78GB [01:31, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.78GB [01:31, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 3.79GB [01:31, 16.8MB/s]/root/Documents/github_repos/validation.parquet: 3.79GB [01:31, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 3.79GB [01:31, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 3.79GB [01:31, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 3.80GB [01:31, 16.6MB/s]/root/Documents/github_repos/validation.parquet: 3.80GB [01:32, 19.9MB/s]/root/Documents/github_repos/validation.parquet: 3.80GB [01:32, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.80GB [01:32, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.80GB [01:32, 16.4MB/s]/root/Documents/github_repos/validation.parquet: 3.81GB [01:32, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.81GB [01:32, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.81GB [01:32, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 3.81GB [01:32, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 3.82GB [01:33, 19.5MB/s]/root/Documents/github_repos/validation.parquet: 3.82GB [01:33, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 3.82GB [01:33, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.82GB [01:33, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.82GB [01:33, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.83GB [01:33, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 3.83GB [01:33, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 3.83GB [01:33, 19.7MB/s]/root/Documents/github_repos/validation.parquet: 3.83GB [01:34, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.84GB [01:34, 16.5MB/s]/root/Documents/github_repos/validation.parquet: 3.84GB [01:34, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.84GB [01:34, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.84GB [01:34, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.84GB [01:34, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.85GB [01:34, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.85GB [01:34, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 3.85GB [01:34, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.85GB [01:35, 19.6MB/s]/root/Documents/github_repos/validation.parquet: 3.85GB [01:35, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 3.86GB [01:35, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.86GB [01:35, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.86GB [01:35, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 3.86GB [01:35, 16.0MB/s]/root/Documents/github_repos/validation.parquet: 3.87GB [01:35, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 3.87GB [01:36, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 3.87GB [01:36, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.87GB [01:36, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.88GB [01:36, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 3.88GB [01:36, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.88GB [01:36, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.89GB [01:37, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.89GB [01:37, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.89GB [01:37, 20.0MB/s]/root/Documents/github_repos/validation.parquet: 3.89GB [01:37, 19.0MB/s]/root/Documents/github_repos/validation.parquet: 3.90GB [01:37, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.90GB [01:37, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.90GB [01:37, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 3.90GB [01:37, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.91GB [01:38, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.91GB [01:38, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.91GB [01:38, 16.8MB/s]/root/Documents/github_repos/validation.parquet: 3.91GB [01:38, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.91GB [01:38, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 3.92GB [01:38, 16.8MB/s]/root/Documents/github_repos/validation.parquet: 3.92GB [01:38, 16.0MB/s]/root/Documents/github_repos/validation.parquet: 3.92GB [01:39, 16.6MB/s]/root/Documents/github_repos/validation.parquet: 3.92GB [01:39, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 3.93GB [01:39, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.93GB [01:39, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.93GB [01:39, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 3.94GB [01:39, 21.0MB/s]/root/Documents/github_repos/validation.parquet: 3.94GB [01:39, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 3.94GB [01:40, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 3.94GB [01:40, 16.5MB/s]/root/Documents/github_repos/validation.parquet: 3.95GB [01:40, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 3.95GB [01:40, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.95GB [01:40, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 3.95GB [01:40, 20.2MB/s]/root/Documents/github_repos/validation.parquet: 3.96GB [01:40, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 3.96GB [01:41, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 3.96GB [01:41, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.96GB [01:41, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.97GB [01:41, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 3.97GB [01:41, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 3.97GB [01:41, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.97GB [01:41, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 3.97GB [01:41, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 3.98GB [01:42, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.98GB [01:42, 16.5MB/s]/root/Documents/github_repos/validation.parquet: 3.98GB [01:42, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 3.98GB [01:42, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 3.98GB [01:42, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 3.99GB [01:42, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 3.99GB [01:42, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 3.99GB [01:42, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 3.99GB [01:42, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 3.99GB [01:43, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.00GB [01:43, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 4.00GB [01:43, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 4.00GB [01:43, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.00GB [01:43, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:43, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:43, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:43, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:43, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:44, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.01GB [01:44, 16.6MB/s]/root/Documents/github_repos/validation.parquet: 4.02GB [01:44, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.02GB [01:44, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.02GB [01:44, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.02GB [01:44, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.03GB [01:44, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 4.03GB [01:44, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 4.03GB [01:44, 19.4MB/s]/root/Documents/github_repos/validation.parquet: 4.03GB [01:45, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 4.03GB [01:45, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.04GB [01:45, 19.0MB/s]/root/Documents/github_repos/validation.parquet: 4.04GB [01:45, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 4.04GB [01:45, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.04GB [01:45, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.04GB [01:45, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.05GB [01:45, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.05GB [01:45, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.05GB [01:46, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.05GB [01:46, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 4.05GB [01:46, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 4.06GB [01:46, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.06GB [01:46, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.06GB [01:46, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.06GB [01:46, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 4.06GB [01:46, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.07GB [01:47, 19.2MB/s]/root/Documents/github_repos/validation.parquet: 4.07GB [01:47, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 4.07GB [01:47, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 4.07GB [01:47, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 4.08GB [01:47, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 4.08GB [01:47, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 4.08GB [01:47, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.08GB [01:47, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.08GB [01:47, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.09GB [01:48, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 4.09GB [01:48, 16.4MB/s]/root/Documents/github_repos/validation.parquet: 4.09GB [01:48, 16.1MB/s]/root/Documents/github_repos/validation.parquet: 4.09GB [01:48, 16.6MB/s]/root/Documents/github_repos/validation.parquet: 4.10GB [01:48, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.10GB [01:48, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.10GB [01:49, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.10GB [01:49, 19.8MB/s]/root/Documents/github_repos/validation.parquet: 4.11GB [01:49, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.11GB [01:49, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.11GB [01:49, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.11GB [01:49, 19.2MB/s]/root/Documents/github_repos/validation.parquet: 4.12GB [01:49, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 4.12GB [01:49, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 4.12GB [01:50, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.12GB [01:50, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 4.12GB [01:50, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.13GB [01:50, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.13GB [01:50, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.13GB [01:50, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 4.13GB [01:50, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.13GB [01:50, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.14GB [01:50, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.14GB [01:51, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 4.14GB [01:51, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.14GB [01:51, 18.3MB/s]/root/Documents/github_repos/validation.parquet: 4.15GB [01:51, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.15GB [01:51, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.15GB [01:51, 16.5MB/s]/root/Documents/github_repos/validation.parquet: 4.15GB [01:51, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.15GB [01:51, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.16GB [01:52, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.16GB [01:52, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.16GB [01:52, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.16GB [01:52, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.16GB [01:52, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 4.17GB [01:52, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 4.17GB [01:52, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.17GB [01:52, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.17GB [01:52, 17.7MB/s]/root/Documents/github_repos/validation.parquet: 4.17GB [01:53, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.18GB [01:53, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.18GB [01:53, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.18GB [01:53, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 4.18GB [01:53, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.18GB [01:53, 15.7MB/s]/root/Documents/github_repos/validation.parquet: 4.19GB [01:53, 16.6MB/s]/root/Documents/github_repos/validation.parquet: 4.19GB [01:53, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.19GB [01:54, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 4.19GB [01:54, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.20GB [01:54, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.20GB [01:54, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.20GB [01:54, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.20GB [01:54, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.20GB [01:54, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.21GB [01:54, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.21GB [01:55, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.21GB [01:55, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.21GB [01:55, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.21GB [01:55, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.22GB [01:55, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 4.22GB [01:55, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.22GB [01:55, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.22GB [01:55, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.22GB [01:55, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.23GB [01:56, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.23GB [01:56, 19.1MB/s]/root/Documents/github_repos/validation.parquet: 4.23GB [01:56, 17.3MB/s]/root/Documents/github_repos/validation.parquet: 4.23GB [01:56, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.23GB [01:56, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.24GB [01:56, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.24GB [01:56, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 4.24GB [01:56, 17.4MB/s]/root/Documents/github_repos/validation.parquet: 4.24GB [01:56, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.24GB [01:57, 17.8MB/s]/root/Documents/github_repos/validation.parquet: 4.25GB [01:57, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.25GB [01:57, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.25GB [01:57, 19.0MB/s]/root/Documents/github_repos/validation.parquet: 4.25GB [01:57, 17.5MB/s]/root/Documents/github_repos/validation.parquet: 4.25GB [01:57, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.26GB [01:57, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 4.26GB [01:57, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.26GB [01:57, 17.9MB/s]/root/Documents/github_repos/validation.parquet: 4.26GB [01:58, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 4.26GB [01:58, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.27GB [01:58, 18.1MB/s]/root/Documents/github_repos/validation.parquet: 4.27GB [01:58, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.27GB [01:58, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.27GB [01:58, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.28GB [01:58, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.28GB [01:58, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.28GB [01:59, 16.0MB/s]/root/Documents/github_repos/validation.parquet: 4.28GB [01:59, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.29GB [01:59, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.29GB [01:59, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.29GB [01:59, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.29GB [01:59, 20.6MB/s]/root/Documents/github_repos/validation.parquet: 4.30GB [01:59, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.30GB [02:00, 16.7MB/s]/root/Documents/github_repos/validation.parquet: 4.30GB [02:00, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 4.30GB [02:00, 18.8MB/s]/root/Documents/github_repos/validation.parquet: 4.31GB [02:00, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.31GB [02:00, 15.9MB/s]/root/Documents/github_repos/validation.parquet: 4.31GB [02:00, 18.9MB/s]/root/Documents/github_repos/validation.parquet: 4.31GB [02:00, 18.6MB/s]/root/Documents/github_repos/validation.parquet: 4.31GB [02:00, 17.1MB/s]/root/Documents/github_repos/validation.parquet: 4.32GB [02:01, 18.7MB/s]/root/Documents/github_repos/validation.parquet: 4.32GB [02:01, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.32GB [02:01, 17.2MB/s]/root/Documents/github_repos/validation.parquet: 4.32GB [02:01, 18.4MB/s]/root/Documents/github_repos/validation.parquet: 4.32GB [02:01, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.33GB [02:01, 16.9MB/s]/root/Documents/github_repos/validation.parquet: 4.33GB [02:01, 18.5MB/s]/root/Documents/github_repos/validation.parquet: 4.33GB [02:01, 17.6MB/s]/root/Documents/github_repos/validation.parquet: 4.33GB [02:02, 16.5MB/s]/root/Documents/github_repos/validation.parquet: 4.34GB [02:02, 18.2MB/s]/root/Documents/github_repos/validation.parquet: 4.34GB [02:02, 18.0MB/s]/root/Documents/github_repos/validation.parquet: 4.34GB [02:02, 17.0MB/s]/root/Documents/github_repos/validation.parquet: 4.34GB [02:02, 35.4MB/s]
+2023-09-30 17:25:36,130 INFO numerapi.utils: target file already exists
+2023-09-30 17:25:36,131 INFO numerapi.utils: starting download
+/root/Documents/github_repos/live.parquet:   0%|          | 0.00/5.90M [00:00<?, ?B/s]/root/Documents/github_repos/live.parquet: 5.91MB [00:00, 35.7MB/s]                   /root/Documents/github_repos/live.parquet: 9.48MB [00:01, 6.73MB/s]/root/Documents/github_repos/live.parquet: 11.2MB [00:01, 7.39MB/s]/root/Documents/github_repos/live.parquet: 11.8MB [00:01, 8.63MB/s]
+2023-09-30 17:25:38,518 INFO numerapi.utils: target file already exists
+2023-09-30 17:25:38,518 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 116, in <module>
+    target_candidates = least_correlated(target_correlations_20, amount = 3)
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 111, in least_correlated
+    least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
+IndexError: tuple index out of range
+2023-09-30 17:56:53,570 INFO numerapi.utils: target file already exists
+2023-09-30 17:56:53,570 INFO numerapi.utils: download complete
+2023-09-30 17:56:54,618 INFO numerapi.utils: target file already exists
+2023-09-30 17:56:54,618 INFO numerapi.utils: download complete
+2023-09-30 17:56:55,674 INFO numerapi.utils: target file already exists
+2023-09-30 17:56:55,674 INFO numerapi.utils: download complete
+2023-09-30 17:56:56,809 INFO numerapi.utils: target file already exists
+2023-09-30 17:56:56,809 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 33.37573801676432 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3652, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'prediction'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 297, in <module>
+    neutralized = validation.groupby("era").apply(lambda d: neutralize(d["prediction"], d[feature_subset]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1353, in apply
+    result = self._python_apply_general(f, self._selected_obj)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1402, in _python_apply_general
+    values, mutated = self.grouper.apply(f, data, self.axis)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/ops.py", line 767, in apply
+    res = f(group)
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 297, in <lambda>
+    neutralized = validation.groupby("era").apply(lambda d: neutralize(d["prediction"], d[feature_subset]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3654, in get_loc
+    raise KeyError(key) from err
+KeyError: 'prediction'
+2023-10-01 11:37:22,025 INFO numerapi.utils: target file already exists
+2023-10-01 11:37:22,025 INFO numerapi.utils: download complete
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 39, in <module>
+    napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
+  File "/usr/local/lib/python3.9/dist-packages/numerapi/numerapi.py", line 113, in download_dataset
+    dataset_url = self.raw_query(query, args)['data']['dataset']
+  File "/usr/local/lib/python3.9/dist-packages/numerapi/base_api.py", line 126, in raw_query
+    result = utils.post_with_err_handling(
+  File "/usr/local/lib/python3.9/dist-packages/numerapi/utils.py", line 98, in post_with_err_handling
+    resp = requests.post(url, json=body, headers=headers, timeout=timeout)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.9/http/client.py", line 1347, in getresponse
+    response.begin()
+  File "/usr/lib/python3.9/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.9/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 37, in <module>
+    napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
+  File "/usr/local/lib/python3.9/dist-packages/numerapi/numerapi.py", line 114, in download_dataset
+    utils.download_file(dataset_url, dest_path, self.show_progress_bars)
+  File "/usr/local/lib/python3.9/dist-packages/numerapi/utils.py", line 45, in download_file
+    req = requests.get(url, stream=True, timeout=600)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 1012, in _validate_conn
+    conn.connect()
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 411, in connect
+    self.sock = ssl_wrap_socket(
+  File "/usr/lib/python3/dist-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/usr/lib/python3/dist-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/usr/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/usr/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/usr/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+KeyboardInterrupt
+2023-10-01 11:38:14,953 INFO numerapi.utils: target file already exists
+2023-10-01 11:38:14,953 INFO numerapi.utils: download complete
+2023-10-01 11:38:16,456 INFO numerapi.utils: target file already exists
+2023-10-01 11:38:16,456 INFO numerapi.utils: download complete
+2023-10-01 11:38:17,561 INFO numerapi.utils: target file already exists
+2023-10-01 11:38:17,561 INFO numerapi.utils: download complete
+2023-10-01 11:38:18,623 INFO numerapi.utils: target file already exists
+2023-10-01 11:38:18,624 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 29.102438243230186 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3652, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'prediction'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 301, in <module>
+    validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["prediction"] 
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3654, in get_loc
+    raise KeyError(key) from err
+KeyError: 'prediction'
+2023-10-01 13:30:54,153 INFO numerapi.utils: target file already exists
+2023-10-01 13:30:54,153 INFO numerapi.utils: download complete
+2023-10-01 13:30:55,229 INFO numerapi.utils: target file already exists
+2023-10-01 13:30:55,229 INFO numerapi.utils: download complete
+2023-10-01 13:30:56,325 INFO numerapi.utils: target file already exists
+2023-10-01 13:30:56,325 INFO numerapi.utils: download complete
+2023-10-01 13:30:57,405 INFO numerapi.utils: target file already exists
+2023-10-01 13:30:57,406 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 29.450955045223235 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3652, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'prediction'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 307, in <module>
+    correlations2[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1353, in apply
+    result = self._python_apply_general(f, self._selected_obj)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1402, in _python_apply_general
+    values, mutated = self.grouper.apply(f, data, self.axis)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/ops.py", line 767, in apply
+    res = f(group)
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 307, in <lambda>
+    correlations2[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3654, in get_loc
+    raise KeyError(key) from err
+KeyError: 'prediction'
+2023-10-01 16:15:59,316 INFO numerapi.utils: target file already exists
+2023-10-01 16:15:59,318 INFO numerapi.utils: download complete
+2023-10-01 16:16:00,443 INFO numerapi.utils: target file already exists
+2023-10-01 16:16:00,443 INFO numerapi.utils: download complete
+2023-10-01 16:16:01,443 INFO numerapi.utils: target file already exists
+2023-10-01 16:16:01,443 INFO numerapi.utils: download complete
+2023-10-01 16:16:02,427 INFO numerapi.utils: target file already exists
+2023-10-01 16:16:02,427 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 29.36696443160375 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+['prediction', 'neutralized_intelligence', 'neutralized_wisdom', 'neutralized_charisma', 'neutralized_dexterity', 'neutralized_strength', 'neutralized_constitution', 'neutralized_agility', 'neutralized_serenity', 'neutralized_all']
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3652, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'prediction'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 305, in <module>
+    correlations2[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1353, in apply
+    result = self._python_apply_general(f, self._selected_obj)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/groupby.py", line 1402, in _python_apply_general
+    values, mutated = self.grouper.apply(f, data, self.axis)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/groupby/ops.py", line 767, in apply
+    res = f(group)
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 305, in <lambda>
+    correlations2[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/indexes/base.py", line 3654, in get_loc
+    raise KeyError(key) from err
+KeyError: 'prediction'
+2023-10-01 17:48:52,278 INFO numerapi.utils: target file already exists
+2023-10-01 17:48:52,278 INFO numerapi.utils: download complete
+2023-10-01 17:48:53,488 INFO numerapi.utils: target file already exists
+2023-10-01 17:48:53,489 INFO numerapi.utils: download complete
+2023-10-01 17:48:54,531 INFO numerapi.utils: target file already exists
+2023-10-01 17:48:54,532 INFO numerapi.utils: download complete
+2023-10-01 17:48:55,544 INFO numerapi.utils: target file already exists
+2023-10-01 17:48:55,544 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 37.708756522337595 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+['ensemble', 'neutralized_intelligence', 'neutralized_wisdom', 'neutralized_charisma', 'neutralized_dexterity', 'neutralized_strength', 'neutralized_constitution', 'neutralized_agility', 'neutralized_serenity', 'neutralized_all']
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 330, in <module>
+    predictions = predict_neutral(live_features)
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 322, in predict_neutral
+    ensemble = predictions.rank(pct=True).mean(axis=1)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/generic.py", line 9195, in rank
+    return ranker(data)
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/generic.py", line 9172, in ranker
+    ranks = algos.rank(
+  File "/usr/local/lib/python3.9/dist-packages/pandas/core/algorithms.py", line 1043, in rank
+    ranks = algos.rank_1d(
+  File "pandas/_libs/algos.pyx", line 1023, in pandas._libs.algos.rank_1d
+  File "<__array_function__ internals>", line 200, in lexsort
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2023-10-01 18:59:54,769 INFO numerapi.utils: target file already exists
+2023-10-01 18:59:54,770 INFO numerapi.utils: download complete
+2023-10-01 18:59:55,862 INFO numerapi.utils: target file already exists
+2023-10-01 18:59:55,863 INFO numerapi.utils: download complete
+2023-10-01 18:59:56,916 INFO numerapi.utils: target file already exists
+2023-10-01 18:59:56,917 INFO numerapi.utils: download complete
+2023-10-01 18:59:58,021 INFO numerapi.utils: target file already exists
+2023-10-01 18:59:58,021 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 33.16651374896367 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010674  ...              0.664882
+prediction_target_cyrus_v4_20  0.019078  ...              1.000000
+prediction_target_nomi_v4_20   0.019094  ...              0.824809
+prediction_target_victor_v4_20 0.018402  ...              0.828950
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010674 0.021367 0.499541      0.100016
+prediction_target_cyrus_v4_20  0.019078 0.020705 0.921438      0.050978
+prediction_target_nomi_v4_20   0.019094 0.020716 0.921697      0.039244
+prediction_target_victor_v4_20 0.018402 0.018679 0.985197      0.045998
+ensemble                       0.018910 0.020167 0.937651      0.050403
+['ensemble', 'neutralized_intelligence', 'neutralized_wisdom', 'neutralized_charisma', 'neutralized_dexterity', 'neutralized_strength', 'neutralized_constitution', 'neutralized_agility', 'neutralized_serenity', 'neutralized_all']
+----predictions-----
+                  prediction
+id                          
+n00135c5e35a316a    0.409928
+n002140b90b0f9b6    0.656670
+n00233efe5a1f2aa    0.257704
+n0025920f1202e4e    0.083764
+n002b731acc88e7b    0.141675
+...                      ...
+nffd4bd03a42b055    0.385109
+nffe3c57b9f32460    0.286039
+nffe7198224756a5    0.780972
+nfff6f31cde3a21c    0.241779
+nfff92b3c781671b    0.628956
+
+[4835 rows x 1 columns]

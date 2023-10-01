@@ -293,12 +293,12 @@ for size in sizes:
 pd.DataFrame(subgroups).applymap(len).sort_values(by="all", ascending=False)
 
 
-predicion_column_df = "ensemble"
+prediction_column_df = "ensemble"
 
 for group in groups:
     feature_subset = list(subgroups["medium"][group])
-    neutralized = validation.groupby("era").apply(lambda d: neutralize(d[predicion_column_df], d[feature_subset]))
-    validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["prediction"] 
+    neutralized = validation.groupby("era").apply(lambda d: neutralize(d[prediction_column_df], d[feature_subset]))
+    validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")[prediction_column_df] 
 
 prediction_cols2 = ["prediction"] + [f"neutralized_{group}" for group in groups]
 correlations2 = {}

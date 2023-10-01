@@ -298,6 +298,7 @@ for group in groups:
     validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["ensemble"] 
 
 prediction_cols2 = ["prediction"] + [f"neutralized_{group}" for group in groups]
+print(prediction_cols2)
 correlations2 = {}
 cumulative_correlations2 = {}
 for col in prediction_cols2:

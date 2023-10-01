@@ -315,7 +315,7 @@ feature_subset = list(subgroups["medium"]["serenity"])
 
 def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
     # make predictions using all features
-    predictions = pd.Series(model.predict(live_features[feature_cols]), index=live_features.index) 
+    predictions = pd.DataFrame(index=live_features.index)
     for target in favorite_targets:
         predictions[target] = models[target].predict(live_features[feature_cols])
     # ensemble predictions

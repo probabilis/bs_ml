@@ -297,7 +297,7 @@ for group in groups:
     neutralized = validation.groupby("era").apply(lambda d: neutralize(d["ensemble"], d[feature_subset]))
     validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["ensemble"] 
 
-prediction_cols2 = ["prediction"] + [f"neutralized_{group}" for group in groups]
+prediction_cols2 = ["ensemble"] + [f"neutralized_{group}" for group in groups]
 print(prediction_cols2)
 correlations2 = {}
 cumulative_correlations2 = {}

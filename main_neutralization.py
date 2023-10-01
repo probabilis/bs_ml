@@ -292,9 +292,12 @@ for size in sizes:
 # as data frame
 pd.DataFrame(subgroups).applymap(len).sort_values(by="all", ascending=False)
 
+
+predicion_column_df = "ensemble"
+
 for group in groups:
     feature_subset = list(subgroups["medium"][group])
-    neutralized = validation.groupby("era").apply(lambda d: neutralize(d["prediction"], d[feature_subset]))
+    neutralized = validation.groupby("era").apply(lambda d: neutralize(d[predicion_column_df], d[feature_subset]))
     validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["prediction"] 
 
 prediction_cols2 = ["prediction"] + [f"neutralized_{group}" for group in groups]
@@ -310,20 +313,27 @@ plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correla
 #############################################
 #ENSEMBLE predicting 
 
-def predict_ensemble(live_features: pd.DataFrame) -> pd.DataFrame:
-    # generate predictions from each model
-    predictions = pd.DataFrame(index=live_features.index)
+feature_subset = list(subgroups["medium"]["serenity"])
+
+def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
+    # make predictions using all features
+    predictions = pd.Series(model.predict(live_features[feature_cols]), index=live_features.index) 
     for target in favorite_targets:
         predictions[target] = models[target].predict(live_features[feature_cols])
     # ensemble predictions
     ensemble = predictions.rank(pct=True).mean(axis=1)
-    # format submission
-    submission = ensemble.rank(pct=True, method="first")
+    # neutralize predictions to a subset of features
+
+    neutralized = neutralize(ensemble, live_features[feature_subset], 1.0)
+    submission = pd.Series(neutralized).rank(pct=True, method="first")
     return submission.to_frame("prediction")
 
 live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature_cols)
-predictions = predict_ensemble(live_features)
+predictions = predict_neutral(live_features)
+
 print("----predictions-----")
 print(predictions)
-predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_predictions.csv")
+predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_neutralized_predictions.csv")
+
+
 

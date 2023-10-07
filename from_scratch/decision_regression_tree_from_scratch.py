@@ -137,6 +137,7 @@ class DecisionTreeRegressorScratch():
 		best_feature = None ; best_value = None
 
 		for feature in self.features:
+			print("feature : ", feature)
 			#dropping missing values and sorting by features
 			df_X = df.dropna().sort_values(feature) 
 

@@ -20,6 +20,8 @@ Y_ = testfunction(X, noise = 0)
 
 X_0 = X.reshape(-1,1)
 
+X_0 = pd.DataFrame(X_0)
+
 ########################################
 #hyperparameters
 
@@ -34,6 +36,9 @@ learning_rate = params_gbm['learning_rate'][0]
 colsample_bytree = params_gbm['colsample_bytree'][0]
 n_trees = int(round(params_gbm['n_estimators'][0],1))
 
+#max_depth = 1
+#n_trees = 10
+
 ########################################
 
 def plot_bo(save_plot) -> None:
@@ -41,12 +46,12 @@ def plot_bo(save_plot) -> None:
 
     fig, ax = plt.subplots(1)
     fig.set_size_inches(12,8)
-    fig.suptitle('Gradient Boosting with Decision Tree Regressor from Scratch with best hyperparameter combination', fontsize = fontsize_title)
+    fig.suptitle('Gradient Boosting with Decision Tree Regressor from Scratch with best hyperparameter configuration', fontsize = fontsize_title)
 
     colors = ['mediumseagreen','lightskyblue',"mediumpurple",'salmon',"palevioletred"]
 
     gbm = GradientBoosting(learning_rate, max_depth, n_trees, X_0, Y)
-    gbm.fit(X_0,Y)
+    gbm.fit(X_0, Y)
     y_hat, _ = gbm.predict(X_0)
     ax.plot(X, y_hat, color = colors[1], label = "$\hat{y}(x)$", linewidth = 5)
     ax.set_title('$d_{max}$ = ' + str(max_depth) + '/ $n_{trees}$ = ' + str(n_trees) + '/ $\\nu$ = ' + str(learning_rate) + '/ $\\epsilon$ = ' + str(colsample_bytree), loc = 'left', pad=10, fontsize = fontsize)

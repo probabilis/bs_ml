@@ -28,13 +28,15 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
     fig, axs = plt.subplots(1)
     fig.set_size_inches(12,8)
 
+    #SKLEARN modul
     model = DecisionTreeRegressor(max_depth = max_depth)
     model.fit(X,Y)
     y_pred = model.predict(X)
 
+    #FROM_SCRATCH
     model_scratch = DecisionTreeRegressorScratch(pd.DataFrame(X), Y.tolist(), max_depth = max_depth)
-    model_scratch.grow_tree()
-    y_pred_scratch = model_scratch.fit(pd.DataFrame(X))
+    model_scratch.fit()
+    y_pred_scratch = model_scratch.predict(pd.DataFrame(X))
 
     ###################################
 

@@ -137,7 +137,6 @@ class DecisionTreeRegressorScratch():
 		best_feature = None ; best_value = None
 
 		for feature in self.features:
-			print("feature : ", feature)
 			#dropping missing values and sorting by features
 			df_X = df.dropna().sort_values(feature) 
 
@@ -166,9 +165,9 @@ class DecisionTreeRegressorScratch():
 
 		return (best_feature, best_value)
 
-	def grow_tree(self):
+	def fit(self):
 		"""
-		Recursive function for creating the decision tree
+		Recursive function for fitting / growing the decision tree under the given dataset 
 
 		...
 
@@ -207,7 +206,7 @@ class DecisionTreeRegressorScratch():
 					rule = f"{best_feature} > {round(best_value, 3)}" )
 
 				self.left = left
-				self.left.grow_tree()
+				self.left.fit()
 
 				right = DecisionTreeRegressorScratch(
 					right_df[self.features],
@@ -219,11 +218,11 @@ class DecisionTreeRegressorScratch():
 					rule = f"{best_feature}  {round(best_value, 3)}" )
 
 				self.right = right
-				self.right.grow_tree()
+				self.right.fit()
 
-	def fit(self, X : pd.DataFrame):
+	def predict(self, X : pd.DataFrame):
 		"""
-		fitting the regression tree through given data
+		predicting the regression tree through the given data
 
 		...
 
@@ -244,10 +243,10 @@ class DecisionTreeRegressorScratch():
 			for feature in self.features:
 				values.update({feature: x[feature]})
 
-			predictions.append(self.predict(values))
-		return predictions
+			predictions.append(self.predict_obs(values))
+		return np.asarray(predictions)
 
-	def predict(self, values : dict):
+	def predict_obs(self, values : dict):
 		"""
 		Method for predicting the functional for the given input feature space
 		

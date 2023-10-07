@@ -72,13 +72,9 @@ class GradientBoosting():
 		for _ in range(self.n_trees):
 			y_tilde = Y - F_m
 			tree = DecisionTreeRegressorScratch(X, y_tilde, max_depth = self.max_depth)
-			#tree = DecisionTreeRegressor(max_depth=self.max_depth) #ori
-			tree.grow_tree()
-			#tree.fit(self.X, y_tilde)
-			y_pred = tree.fit(X)	#ori
-			y_pred = np.asarray(y_pred)
+			tree.fit()
 
-			F_m += self.learning_rate * y_pred #* tree.predict(X)	#ori
+			F_m += self.learning_rate * tree.predict(X)
 			self.trees.append(tree)
 
 	def predict(self, X : pd.DataFrame):
@@ -95,6 +91,6 @@ class GradientBoosting():
 		return : array
 			y_hat / predicted output df
 		"""
-		y_hat = self.F_0 + self.learning_rate * np.sum([tree.fit(X) for tree in self.trees], axis = 0)
-		h_m = [tree.fit(X) for tree in self.trees]
+		y_hat = self.F_0 + self.learning_rate * np.sum([tree.predict(X) for tree in self.trees], axis = 0)
+		h_m = [tree.predict(X) for tree in self.trees]
 		return y_hat, h_m

@@ -29,7 +29,7 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 #############################################
 #############################################
 #prefix for saving
-prefix = "_round4"
+prefix = "_round0"
 
 #numer.AI official API for retrieving and pushing data
 napi = NumerAPI()

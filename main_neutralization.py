@@ -307,6 +307,31 @@ for col in prediction_cols2:
 pd.DataFrame(cumulative_correlations2).plot(title="Cumulative Correlation of Neutralized Predictions", figsize=(10, 6), xticks=[]);
 plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_neutralization_ensemble.png", dpi = 300)
 
+#############################################
+
+pred_cols_neutral = ["ensemble"] + ["neutralized_serenity"]
+
+def summary_metrics_neutralized_ensemble() -> pd.DataFrame:
+    summary_metrics = {}
+    for col in pred_cols_neutral:
+        mean = correlations2[col].mean()
+        std = correlations2[col].std()
+        sharpe = mean / std
+        rolling_max = cumulative_correlations2[col].expanding(min_periods=1).max()
+        max_drawdown = (rolling_max - cumulative_correlations2[col]).max()
+        summary_metrics[col] = {
+            "mean": mean,
+            "std": std,
+            "sharpe": sharpe,
+            "max_drawdown": max_drawdown,
+        }
+    pd.set_option('display.float_format', lambda x: '%f' % x)
+    summary = pd.DataFrame(summary_metrics).T
+    return summary
+
+summary_metrics_neutralized_ensemble_df = summary_metrics_neutralized_ensemble()
+summary_metrics_neutralized_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_neutralized_ensemble.csv")
+print(summary_metrics_ensemble_df)
 
 #############################################
 #ENSEMBLE predicting 
@@ -328,6 +353,7 @@ def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
 
 live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature_cols)
 predictions = predict_neutral(live_features)
+
 
 print("----predictions-----")
 print(predictions)

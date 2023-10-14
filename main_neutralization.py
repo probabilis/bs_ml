@@ -254,7 +254,7 @@ def cumulative_correlations_ensemble(save_plot):
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
 
-correlations, cumulative_correlations = cumulative_correlation(pred_cols, save_plot=True)
+correlations, cumulative_correlations = cumulative_correlation(pred_cols, plot_save=True)
 
 #not needed
 def summary_metrics_ensemble() -> pd.DataFrame:

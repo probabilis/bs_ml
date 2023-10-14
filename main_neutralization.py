@@ -256,7 +256,7 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
 correlations, cumulative_correlations = cumulative_correlations_ensemble(pred_cols, plot_save=True)
 
 #not needed
-def summary_metrics_ensemble() -> pd.DataFrame:
+def summary_metrics_ensemble(pred_cols, correlations, cumulative_correlations) -> pd.DataFrame:
     summary_metrics = {}
     for col in pred_cols:
         mean = correlations[col].mean()
@@ -274,7 +274,7 @@ def summary_metrics_ensemble() -> pd.DataFrame:
     summary = pd.DataFrame(summary_metrics).T
     return summary
 
-summary_metrics_ensemble_df = summary_metrics(pred_cols, correlations, cumulative_correlations)
+summary_metrics_ensemble_df = summary_metrics_ensemble(pred_cols, correlations, cumulative_correlations)
 summary_metrics_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_ensemble.csv")
 print(summary_metrics_ensemble_df)
 

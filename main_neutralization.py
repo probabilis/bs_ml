@@ -314,7 +314,7 @@ plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correla
 pred_cols_neutral = ["ensemble"] + ["neutralized_serenity"]
 
 #not needed
-def summary_metrics_neutralized_ensemble() -> pd.DataFrame:
+def summary_metrics_neutralized_ensemble(pred_cols_neutral, correlations_neutral, cumulative_correlations_neutral) -> pd.DataFrame:
     summary_metrics = {}
     for col in pred_cols_neutral:
         mean = correlations_neutral[col].mean()
@@ -332,7 +332,7 @@ def summary_metrics_neutralized_ensemble() -> pd.DataFrame:
     summary = pd.DataFrame(summary_metrics).T
     return summary
 
-summary_metrics_neutralized_ensemble_df = summary_metrics(pred_cols_neutral, correlations_neutral, cumulative_correlations_neutral)
+summary_metrics_neutralized_ensemble_df = summary_metrics_neutralized_ensemble(pred_cols_neutral, correlations_neutral, cumulative_correlations_neutral)
 summary_metrics_neutralized_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_neutralized_ensemble.csv")
 print(summary_metrics_ensemble_df)
 

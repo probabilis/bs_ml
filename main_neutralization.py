@@ -230,8 +230,6 @@ print(favorite_targets)
 ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
 #ensure that the ensemble score are ranked by percentile (pct = True)
 validation["ensemble"] = validation.groupby("era")[ensemble_cols].rank(pct=True).mean(axis=1)
-#PROBLEMO
-
 
 # Print the ensemble predictions
 pred_cols = ensemble_cols + ["ensemble"]
@@ -255,7 +253,6 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
 
 correlations, cumulative_correlations = cumulative_correlations_ensemble(pred_cols, plot_save=True)
 
-#not needed
 def summary_metrics_ensemble(pred_cols, correlations, cumulative_correlations) -> pd.DataFrame:
     summary_metrics = {}
     for col in pred_cols:
@@ -313,7 +310,6 @@ plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correla
 
 pred_cols_neutral = ["ensemble"] + ["neutralized_serenity"]
 
-#not needed
 def summary_metrics_neutralized_ensemble(pred_cols_neutral, correlations_neutral, cumulative_correlations_neutral) -> pd.DataFrame:
     summary_metrics = {}
     for col in pred_cols_neutral:

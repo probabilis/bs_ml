@@ -66,7 +66,7 @@ def plot_bo(save_plot) -> None:
         plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_best_parameters.png", dpi=300)
     plt.show()
 
-plot_bo(save_plot = True)
+#plot_bo(save_plot = False)
 
 filenames = [
     "bo_iterations_ip=10_ni=100_2023-09-18.csv",
@@ -75,7 +75,7 @@ filenames = [
 ]
 
 def plot_hyperparameter_scatter_plot(save_plot) -> None:
-    bo_iterations = pd.read_csv(repo_path + "/from_scratch/" + filenames[2])
+    bo_iterations = pd.read_csv(repo_path + "/teststudy/" + filenames[2])
     target = bo_iterations["target"]
 
     cbt = [] ; lr = [] ; md = [] ; nt = []
@@ -113,4 +113,4 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     plt.show()
 
 
-#plot_hyperparameter_scatter_plot(save_plot = True)
+plot_hyperparameter_scatter_plot(save_plot = False)

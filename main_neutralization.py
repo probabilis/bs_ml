@@ -138,7 +138,7 @@ for target in target_candidates:
     )
     model.fit(train[feature_cols], train[target])
     
-    plot_importance(model, title = f'Feature importance of model with target : {target}',max_num_features = 30, figsize = (12,8), dpi = 300)
+    plot_importance(model, title = f'Feature importance of GBDT model over target : {target}',max_num_features = 30, figsize = (16,8), dpi = 300)
     plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
@@ -173,10 +173,11 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
     cumulative_correlations = {}
     for target in target_candidates:
         correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
-        cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum() 
+        cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[]);
+    cumulative_correlations.plot(title="Cumulative Correlation of Validation Predictions", figsize=(10, 6), xticks=[])
+    cumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations, cumulative_correlations

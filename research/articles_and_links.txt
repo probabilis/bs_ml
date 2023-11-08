@@ -1,0 +1,85 @@
+#CC to the original authors and contributors.
+
+#Numer.ai specific:
+
+https://forum.numer.ai/t/performing-exploratory-data-analysis-on-numerai-tournament-data-with-r/1199 
+https://forum.numer.ai/t/an-introduction-to-feature-neutralization-exposure/4955 
+https://forum.numer.ai/t/modern-portfolio-theory-for-my-models/5816 
+
+##########################
+#Invariant risk minimiization (numer.ai meta model func.)
+https://arxiv.org/pdf/1907.02893.pdf 
+
+##########################
+#Gradient Boosting framework comparison:
+https://neptune.ai/blog/when-to-choose-catboost-over-xgboost-or-lightgbm 
+
+##########################
+#CrossValidation
+https://de.wikipedia.org/wiki/Kreuzvalidierungsverfahren 
+https://scikit-learn.org/stable/modules/cross_validation.html#k-fold 
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold 
+#GroupKFold
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html#sklearn.model_selection.GroupKFold 
+#TimeSeriesSplit
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html 
+
+##########################
+#BayesianOptimization
+https://distill.pub/2020/bayesian-optimization/ 
+https://krasserm.github.io/2018/03/21/bayesian-optimization/ 
+https://towardsdatascience.com/bayesian-optimization-concept-explained-in-layman-terms-1d2bcdeaf12f 
+https://tune.tidymodels.org/articles/acquisition_functions.html 
+https://tune.tidymodels.org/articles/acquisition_functions.html 
+https://www.vantage-ai.com/en/blog/bayesian-optimization-for-quicker-hyperparameter-tuning 
+https://www.kaggle.com/code/nroman/bayesian-optimization-for-lgbm-hyperparameters 
+https://ekamperi.github.io/machine%20learning/2021/05/08/bayesian-optimization.html 
+
+#Uninformative vs informative CV methods
+https://towardsdatascience.com/grid-search-vs-random-search-vs-bayesian-optimization-2e68f57c3c46 
+
+#Python Libraries:
+https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html#skopt.BayesSearchCV 
+https://github.com/bayesian-optimization/BayesianOptimization 
+
+##########################
+#GBM
+https://developers.google.com/machine-learning/decision-forests/intro-to-gbdt?hl=de 
+https://towardsdatascience.com/intuitive-ensemble-learning-guide-with-gradient-boosting-as-a-study-case-9a3bc1ba1e09 
+https://machinelearningmastery.com/gradient-boosting-machine-ensemble-in-python/ 
+https://sefiks.com/2019/02/24/machine-learning-wars-deep-learning-vs-gbm/ 
+
+##########################
+#Decision Trees
+https://en.wikipedia.org/wiki/Decision_tree_learning 
+https://scikit-learn.org/stable/modules/tree.html#tree 
+https://towardsdatascience.com/how-decision-trees-split-nodes-from-loss-function-perspective-60a2f2124b4e 
+https://towardsdatascience.com/decision-tree-regressor-a-visual-guide-with-scikit-learn-2aa9e01f5d7f 
+https://stackoverflow.com/questions/63794821/get-all-values-of-a-terminal-leaf-node-in-a-decisiontreeregressor 
+#CART
+https://vincentqin.gitee.io/blogresource-2/cv-books/10-CART.pdf 
+https://www.wikiwand.com/de/CART_(Algorithmus) 
+#Breiman
+https://rafalab.dfci.harvard.edu/pages/649/ 
+https://rafalab.dfci.harvard.edu/pages/649/section-11.pdf 
+https://www.dcc.fc.up.pt/~ltorgo/PhD/th3.pdf 
+
+##########################
+#DL vs GBM comparison
+https://medium.com/@arch.mo2men/why-xgboost-model-is-better-than-neural-network-once-it-comes-to-linear-regression-problem-5db90912c559 
+https://towardsdatascience.com/when-and-why-tree-based-models-often-outperform-neural-networks-ceba9ecd0fd8 
+https://arxiv.org/pdf/2207.08815.pdf 
+
+##########################
+#Overall 
+https://www.wikiwand.com/de/Gradientenverfahren 
+https://www.wikiwand.com/en/Mathematical_optimization 
+https://www.wikiwand.com/en/Loss_function 
+https://www.wikiwand.com/en/Expected_value 
+https://www.wikiwand.com/en/Empirical_risk_minimization 
+https://www.wikiwand.com/en/Joint_probability_distribution 
+https://www.wikiwand.com/en/Regularization_(mathematics) 
+https://www.wikiwand.com/en/Bias%E2%80%93variance_tradeoff 
+
+ 
+

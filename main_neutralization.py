@@ -176,7 +176,7 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
         cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of Validation Predictions", figsize=(10, 6), xticks=[])
+    cumulative_correlations.plot(title="Cumulative Correlation of Validation Predictions", figsize=(10, 6), xticks=[], xlabel='eras', ylabel='corr(predictions_i, target)')
     cumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)

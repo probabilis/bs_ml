@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numerapi import NumerAPI
 #own modules
-sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
 from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 

@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numerapi import NumerAPI
 #own modules
-sys.path.append('../')
+#sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
 from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 
@@ -32,15 +32,15 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 prefix = "_round0"
 
 #numer.AI official API for retrieving and pushing data
-napi = NumerAPI()
+#napi = NumerAPI()
 #train set
-napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
+#napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
 #validation set
-napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
+#napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
 #live dataset 
-napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
+#napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
 #features metadata
-napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
+#napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
 
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 

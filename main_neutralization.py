@@ -2,7 +2,7 @@
 Project: Bachelor Project / Supervised Machine Learning / Gradient Boosting Machine based on Decision Trees
 Script: Main Program
 Author: Maximilian Gschaider
-Date: 22.09.2023
+Date: 09.11.2023
 MN: 12030366
 ------------------
 Ref.: www.numer.ai
@@ -15,8 +15,6 @@ import time
 from datetime import date
 import json
 import gc
-import sys
-from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
 from numerapi import NumerAPI
@@ -339,9 +337,11 @@ feature_subset = list(subgroups["medium"]["serenity"])
 
 def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
     # make predictions using all features
-    predictions = pd.DataFrame(index=live_features.index)
+    predictions = pd.DataFrame(index = live_features.index)
+
     for target in favorite_targets:
         predictions[target] = models[target].predict(live_features[feature_cols])
+        
     # ensemble predictions
     ensemble = predictions.rank(pct=True).mean(axis=1)
     # neutralize predictions to a subset of features

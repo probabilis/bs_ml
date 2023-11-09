@@ -19,10 +19,31 @@ def neutralize(predictions: pd.DataFrame, features: pd.DataFrame, proportion: fl
     return: new neutralized df
     """
     # add a constant term the features so we can fit the bias/offset term
-    features = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
+    out_ = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
     print(features)
     # remove the component of the predictions that are linearly correlated with features
     return predictions - proportion * features @ (np.linalg.pinv(features, rcond=1e-6) @ predictions)
+
+#############################################
+#############################################
+#############################################
+
+def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
+    # make predictions using all features
+    predictions = pd.DataFrame(index = live_features.index)
+
+    for target in favorite_targets:
+        predictions[target] = models[target].predict(live_features[feature_cols])
+        
+    # ensemble predictions
+    ensemble = predictions.rank(pct=True).mean(axis=1)
+    # neutralize predictions to a subset of features
+
+    neutralized = neutralize(ensemble, live_features[feature_subset], 1.0)
+    submission = pd.Series(neutralized).rank(pct=True, method="first")
+    return submission.to_frame("prediction")
+
+#############################################
 
 """
 df = pd.read_csv(repo_path + "/rounds/" + "val_pred.csv")

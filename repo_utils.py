@@ -169,7 +169,6 @@ def neutralize(predictions: pd.DataFrame, features: pd.DataFrame, proportion: fl
     """
     # add a constant term the features so we can fit the bias/offset term
     features = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
-    print(features)
     # remove the component of the predictions that are linearly correlated with features
     return predictions - proportion * features @ (np.linalg.pinv(features, rcond=1e-6) @ predictions)
 

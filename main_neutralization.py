@@ -67,7 +67,7 @@ t60s = [t for t in target_names if t.endswith("_60")]
 
 target_correlations = targets_df[target_names].corr()
 def plot_target_correlations(plot_save) -> None:
-    sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False);
+    sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False)
     target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + "target_correlations", dpi=300)

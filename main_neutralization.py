@@ -2,10 +2,11 @@
 Project: Bachelor Project / Supervised Machine Learning / Gradient Boosting Machine based on Decision Trees
 Script: Main Program
 Author: Maximilian Gschaider
-Date: 09.11.2023
+Date: 15.11.2023
 MN: 12030366
 ------------------
 Ref.: www.numer.ai
+#(some of the code from the scripts provided was used)
 """
 #official open-source repositories
 import pandas as pd
@@ -39,6 +40,8 @@ napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
 #features metadata
 napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
 
+start = time.time()
+
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
@@ -48,10 +51,9 @@ target_cols = feature_metadata["targets"]
 train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 
 #############################################
-#perform subsampling / era splitting due to performance
-
-train = era_splitting(train)
-
+#performing subsampling of the initial training dataset due to performance (era splitting)
+#train = era_splitting(train)
+#start garbage collection interface / full collection
 gc.collect()
 
 #############################################
@@ -71,8 +73,7 @@ def plot_target_correlations(plot_save) -> None:
         plt.savefig(repo_path + "/rounds/" + "target_correlations", dpi=300)
 
 #############################################
-#loading the specific hyperparameter configuration from bayesian optimization
-
+#current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
 
 def hyperparameter_loading(filename):
@@ -89,7 +90,7 @@ colsample_bytree = params_gbm['colsample_bytree'][0]
 n_trees = int(round(params_gbm['n_estimators'][0],1))
 
 #############################################
-#defining the target candidates for ensemble modeling
+#defining the target candidates for the ensemble model
 
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
@@ -99,7 +100,6 @@ def least_correlated(df_correlation, amount):
     least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
 
     variable_names = df_correlation.columns
-
     least_correlated_variables = []
 
     if amount > 0:
@@ -107,7 +107,8 @@ def least_correlated(df_correlation, amount):
 
             least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
             least_correlated_variables.append(least_correlated_variable)
-
+    else:
+        print("Amount of least correlated must be greater than zero.")
     return least_correlated_variables
 
 target_candidates = least_correlated(target_correlations_20, amount = 1)
@@ -116,9 +117,7 @@ target_candidates = least_correlated(target_correlations_20, amount = 1)
 #least correlated targets plus cyrus and nomi
 
 top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-
 target_candidates.extend(top_targets)
-
 print(target_candidates)
 
 #############################################
@@ -140,11 +139,9 @@ for target in target_candidates:
     plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
-print('It takes %s minutes for training the models :' %((time.time()-st)/60))
+print(f'It takes %s minutes for training all {len(target_candidates)} models :' %((time.time()-st)/60))
 
 #############################################
-#getting validation data
-
 #loading validation data v4.2
 validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns=["era", "data_type"] + feature_cols + target_cols) 
 
@@ -183,7 +180,7 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
 correlations, cumulative_correlations = cumulative_correlation(target_candidates, plot_save = True)
 
 #############################################
-#defining function for summary metrics
+#function for summary metrics statistics for all different targets
 
 def summary_metrics(target_candidates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
     summary_metrics = {}
@@ -250,6 +247,9 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
     return correlations, cumulative_correlations
 
 correlations, cumulative_correlations = cumulative_correlations_ensemble(pred_cols, plot_save=True)
+
+#############################################
+#function for summary metrics statistics for all different targets
 
 def summary_metrics_ensemble(pred_cols, correlations, cumulative_correlations) -> pd.DataFrame:
     summary_metrics = {}
@@ -358,5 +358,4 @@ print("----predictions-----")
 print(predictions)
 predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_neutralized_predictions.csv")
 
-
-
+print(f'It takes %s minutes in total to run main.py.' %((time.time()-start)/60))

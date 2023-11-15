@@ -1501,3 +1501,98 @@ nffea0ec00760123    0.365762
 nfffcb4b7cd0cda2    0.456785
 
 [4790 rows x 1 columns]
+2023-11-08 20:14:27,044 INFO numerapi.utils: target file already exists
+2023-11-08 20:14:27,045 INFO numerapi.utils: download complete
+2023-11-08 20:14:28,211 INFO numerapi.utils: target file already exists
+2023-11-08 20:14:28,212 INFO numerapi.utils: download complete
+2023-11-08 20:14:29,242 INFO numerapi.utils: target file already exists
+2023-11-08 20:14:29,242 INFO numerapi.utils: download complete
+2023-11-08 20:14:30,327 INFO numerapi.utils: target file already exists
+2023-11-08 20:14:30,327 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 19.144060866038004 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010284  ...              0.664847
+prediction_target_cyrus_v4_20  0.018922  ...              1.000000
+prediction_target_nomi_v4_20   0.018935  ...              0.824861
+prediction_target_victor_v4_20 0.018176  ...              0.829001
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010284 0.021727 0.473315      0.100016
+prediction_target_cyrus_v4_20  0.018922 0.020696 0.914264      0.051593
+prediction_target_nomi_v4_20   0.018935 0.020710 0.914270      0.039839
+prediction_target_victor_v4_20 0.018176 0.018776 0.968062      0.055535
+ensemble                       0.018644 0.020306 0.918174      0.058214
+['ensemble', 'neutralized_intelligence', 'neutralized_wisdom', 'neutralized_charisma', 'neutralized_dexterity', 'neutralized_strength', 'neutralized_constitution', 'neutralized_agility', 'neutralized_serenity', 'neutralized_all']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010284 0.021727 0.473315      0.100016
+prediction_target_cyrus_v4_20  0.018922 0.020696 0.914264      0.051593
+prediction_target_nomi_v4_20   0.018935 0.020710 0.914270      0.039839
+prediction_target_victor_v4_20 0.018176 0.018776 0.968062      0.055535
+ensemble                       0.018644 0.020306 0.918174      0.058214
+----predictions-----
+                  prediction
+id                          
+n0008da98d935542    0.496660
+n003e41e19f4a590    0.526514
+n004a634bb753824    0.315866
+n004df2fadde2883    0.858246
+n005597b40668ae6    0.277662
+...                      ...
+nffc6e2fba680854    0.587265
+nffd426436a88702    0.259916
+nffdb4771e8ef190    0.269729
+nffea0ec00760123    0.365762
+nfffcb4b7cd0cda2    0.456785
+
+[4790 rows x 1 columns]
+2023-11-09 17:42:34,847 INFO numerapi.utils: target file already exists
+2023-11-09 17:42:34,849 INFO numerapi.utils: download complete
+2023-11-09 17:42:35,906 INFO numerapi.utils: target file already exists
+2023-11-09 17:42:35,907 INFO numerapi.utils: download complete
+2023-11-09 17:42:36,892 INFO numerapi.utils: target file already exists
+2023-11-09 17:42:36,892 INFO numerapi.utils: starting download
+/root/Documents/github_repos/live.parquet:   0%|          | 0.00/5.86M [00:00<?, ?B/s]/root/Documents/github_repos/live.parquet: 5.87MB [00:00, 36.4MB/s]                   /root/Documents/github_repos/live.parquet: 9.51MB [00:01, 6.87MB/s]/root/Documents/github_repos/live.parquet: 11.2MB [00:01, 7.57MB/s]/root/Documents/github_repos/live.parquet: 11.7MB [00:01, 8.73MB/s]
+2023-11-09 17:42:39,413 INFO numerapi.utils: target file already exists
+2023-11-09 17:42:39,414 INFO numerapi.utils: download complete
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+It takes 14.659468539555867 minutes for training the models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.010284  ...              0.664847
+prediction_target_cyrus_v4_20  0.018922  ...              1.000000
+prediction_target_nomi_v4_20   0.018935  ...              0.824861
+prediction_target_victor_v4_20 0.018176  ...              0.829001
+
+[4 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010284 0.021727 0.473315      0.100016
+prediction_target_cyrus_v4_20  0.018922 0.020696 0.914264      0.051593
+prediction_target_nomi_v4_20   0.018935 0.020710 0.914270      0.039839
+prediction_target_victor_v4_20 0.018176 0.018776 0.968062      0.055535
+ensemble                       0.018644 0.020306 0.918174      0.058214
+['ensemble', 'neutralized_intelligence', 'neutralized_wisdom', 'neutralized_charisma', 'neutralized_dexterity', 'neutralized_strength', 'neutralized_constitution', 'neutralized_agility', 'neutralized_serenity', 'neutralized_all']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.010284 0.021727 0.473315      0.100016
+prediction_target_cyrus_v4_20  0.018922 0.020696 0.914264      0.051593
+prediction_target_nomi_v4_20   0.018935 0.020710 0.914270      0.039839
+prediction_target_victor_v4_20 0.018176 0.018776 0.968062      0.055535
+ensemble                       0.018644 0.020306 0.918174      0.058214
+----predictions-----
+                  prediction
+id                          
+n000ea02f3fec136    0.200585
+n002437a7314ac8f    0.570832
+n002a4fa327d6f80    0.960092
+n0030f9af7754786    0.404931
+n00432db10d04d3d    0.021521
+...                      ...
+nff9c863d7475b6e    0.954868
+nffaced848ceb96a    0.450063
+nffc49f6208d442c    0.655871
+nffcffba73eb128e    0.060593
+nffea316dae33cb0    0.758880
+
+[4786 rows x 1 columns]

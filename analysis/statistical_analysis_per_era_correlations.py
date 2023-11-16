@@ -8,16 +8,22 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-#from numerapi import NumerAPI
 #own modules
 sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
-from data_loading import loading_datasets
 from preprocessing.cross_validators import era_splitting
 
 #############################################
 
-train, feature_cols, target_cols = loading_datasets()
+feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
+
+feature_cols = feature_metadata["feature_sets"]["medium"]
+target_cols = feature_metadata["targets"]
+
+#loading training dataset v4.2
+train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
+
+#############################################
 
 df = era_splitting(train)
 

@@ -62,16 +62,17 @@ def per_era_correlations(save_plot):
         per_era_corrs *= np.sign(per_era_corrs.mean())
 
         if i >= 4:
-            j = 1
-            i = i - 4
+            #coordinates for plotting
+            j = 1 ; i = i - 4
         
-        per_era_corrs.cumsum().plot(ax = axs[i,j], title= f"Cumulative sum of features group corr. to the target / {group}", legend=False, xlabel="eras")
+        per_era_corrs.cumsum().plot(ax = axs[i,j], title= f"Cumulative corr. of features group {group} with main target", legend=False, xlabel="eras")
     
         del per_era_corrs
 
     
     #axs.set_title("per era correlation", loc = 'left', pad=10, fontsize = fontsize)
     #axs.set_xlabel("eras")
+    axs.set_ylabel("cum. corr($x_i$,$y$)")
     fig.tight_layout()
     if save_plot == True:
         plt.savefig(repo_path + "/figures/" + "per_era_correlations.png", dpi=300)

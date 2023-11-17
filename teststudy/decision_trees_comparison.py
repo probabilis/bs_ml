@@ -46,7 +46,7 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
     
     axs.scatter(X, Y, color = 'gray')
     axs.plot(X, y_pred, color = 'salmon', linestyle = ':', linewidth = 3, label = 'SKLEARN')
-    axs.plot(X, y_pred_scratch, color = 'mediumseagreen', linestyle = '--',linewidth = 3, label = 'SCRATCH')
+    axs.plot(X, y_pred_scratch + 0.1, color = 'mediumseagreen', linestyle = '--',linewidth = 3, label = 'Scratch')
     axs.set_xlabel("$x$")
     axs.set_ylabel("$F(x)$")
     axs.legend(fontsize = fontsize)
@@ -74,4 +74,4 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
         plt.savefig(repo_path + "/figures/" + f"decision_tree_splitting_structure_md={max_depth}.png", dpi=300)
     plt.show()
 
-dt_scratch_sklearn_comparison(plot_save = True)
+dt_scratch_sklearn_comparison(plot_save = False)

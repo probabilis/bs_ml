@@ -53,7 +53,7 @@ train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feat
 
 def per_era_correlations(save_plot):
     
-    fig, axs = plt.subplots( int(len(groups[:-1])/2), 2 ) #, sharex=True
+    fig, axs = plt.subplots( int(len(groups[:-1])/2), 2, sharey = True) #, sharex=True
     fig.set_size_inches(12,10)
 
     for i, group in enumerate(groups[:-1]):
@@ -75,10 +75,9 @@ def per_era_correlations(save_plot):
     
         del per_era_corrs
 
+        axs[i][0].set_ylabel("cum. corr($x_i$,$y$)")
     
     #axs.set_title("per era correlation", loc = 'left', pad=10, fontsize = fontsize)
-    #axs.set_xlabel("eras")
-    axs.set_ylabel("cum. corr($x_i$,$y$)")
     fig.tight_layout()
     if save_plot == True:
         plt.savefig(repo_path + "/figures/" + "per_era_correlations.png", dpi=300)

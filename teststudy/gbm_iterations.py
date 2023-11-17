@@ -92,7 +92,7 @@ def linear_regression(save_plot) -> None:
         plt.savefig(repo_path + "/figures/" + 'linear_regression.png', dpi=300)
     plt.show()
 
-linear_regression(save_plot = True)
+linear_regression(save_plot = False)
 
 ########################################
 
@@ -150,4 +150,4 @@ def gbm_iterations(save_plot) -> None:
         plt.savefig(repo_path + "/figures/" + "gbm_iterations.png", dpi=300)
     plt.show()
 
-gbm_iterations(save_plot = True)
+#gbm_iterations(save_plot = False)

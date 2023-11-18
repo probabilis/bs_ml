@@ -27,7 +27,7 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 #############################################
 #############################################
 #prefix for saving
-prefix = "_round0"
+prefix = "_all_targets"
 
 #numer.AI official API for retrieving and pushing data
 napi = NumerAPI()
@@ -65,13 +65,6 @@ targets_df = train[["era"] + target_names]
 t20s = [t for t in target_names if t.endswith("_20")]
 t60s = [t for t in target_names if t.endswith("_60")]
 
-target_correlations = targets_df[target_names].corr()
-def plot_target_correlations(plot_save) -> None:
-    sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False)
-    target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
-    if plot_save == True:
-        plt.savefig(repo_path + "/rounds/" + "target_correlations", dpi=300)
-
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
@@ -90,34 +83,9 @@ colsample_bytree = params_gbm['colsample_bytree'][0]
 n_trees = int(round(params_gbm['n_estimators'][0],1))
 
 #############################################
-#defining the target candidates for the ensemble model
+#using all target candidates 
 
-target_correlations_20 = targets_df[t20s].corr()
-target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
-
-def least_correlated(df_correlation, amount):
-    min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
-    least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
-
-    variable_names = df_correlation.columns
-    least_correlated_variables = []
-
-    if amount > 0:
-        for i in range(amount):
-
-            least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
-            least_correlated_variables.append(least_correlated_variable)
-    else:
-        print("Amount of least correlated must be greater than zero.")
-    return least_correlated_variables
-
-target_candidates = least_correlated(target_correlations_20, amount = 1)
-
-#############################################
-#least correlated targets plus cyrus and nomi
-
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-target_candidates.extend(top_targets)
+target_candidates = t20s
 print(target_candidates)
 
 #############################################
@@ -172,7 +140,6 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
-    #Scumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
     return correlations, cumulative_correlations
@@ -208,6 +175,7 @@ summary_metrics_targets_df = summary_metrics(target_candidates, correlations, cu
 summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_targets.csv")
 print(summary_metrics_targets_df)
 
+"""
 #############################################
 #############################################
 #############################################
@@ -301,7 +269,7 @@ cumulative_correlations_neutral = {}
 for col in prediction_cols_groups:
     correlations_neutral[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
     cumulative_correlations_neutral[col] = correlations_neutral[col].cumsum() 
-pd.DataFrame(cumulative_correlations_neutral).plot(title="Cumulative Correlation of Neutralized Predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+pd.DataFrame(cumulative_correlations_neutral).plot(title="Cumulative Correlation of Neutralized Predictions", figsize=(10, 6), xticks=[])
 plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_neutralization_ensemble.png", dpi = 300)
 
 #############################################
@@ -359,3 +327,4 @@ print(predictions)
 predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_neutralized_predictions.csv")
 
 print(f'It takes %s minutes in total to run main.py.' %((time.time()-start)/60))
+"""

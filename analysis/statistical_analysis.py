@@ -48,7 +48,7 @@ t20s = [t for t in target_names if t.endswith("_20")]
 #correlation
 
 print("feature statistics")
-df_st = statistics(train, feature_cols)
+df_st = statistics(train,"feature", feature_cols)
 print(df_st)
 
 mean, var = overall_statistics(train, feature_cols)
@@ -57,7 +57,6 @@ print(mean, var)
 #############################################
 
 plot_statistics(df_st,'mean',"feature","train_df_features_mean")
-
 plot_statistics(df_st,'variance',"feature", "train_df_features_variance")
 
 #histogram(df_st['feature_mean'], "train_df_hist_mean")
@@ -81,7 +80,7 @@ del df_st, mean, var
 #correlation
 
 print("target statistics")
-df_st = statistics(targets_df, t20s)
+df_st = statistics(targets_df,"target", t20s)
 print(df_st)
 
 mean, var = overall_statistics(targets_df, t20s)

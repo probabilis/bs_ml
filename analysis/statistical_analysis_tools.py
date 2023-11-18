@@ -13,7 +13,7 @@ import seaborn as sns
 sys.path.append('../')
 from repo_utils import repo_path, fontsize, fontsize_title
 
-def statistics(df, features):
+def statistics(df, type_, features):
 	"""
     params: df, features
     df ...          input df / vector over the features room
@@ -29,7 +29,7 @@ def statistics(df, features):
 		mean = np.mean(df[feature])
 		variances[f] = variance
 		means[f] = mean
-	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
+	df_statistics = pd.DataFrame({f'{type_}_variance': variances, f'{type_}_mean':means, 'feature_names': features})
 	return df_statistics
 
 def plot_statistics(df, statistic, type_, name):

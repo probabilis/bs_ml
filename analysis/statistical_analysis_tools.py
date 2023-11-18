@@ -44,7 +44,7 @@ def plot_statistics(df, statistic, type_, name):
     """
     df.sort_values(by = [f'{type_}_' + str(statistic)], ascending = True).plot.barh(y= f'{type_}_{statistic}')
     if statistic == "mean" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
-    elif statistic == "variance" : plt.xlabel(f'{statistic} / $\nu(\cdot)$', fontsize = fontsize)
+    elif statistic == "variance" : plt.xlabel(f'{statistic} / $\\nu(\cdot)$', fontsize = fontsize)
         
     plt.yticks(ticks=[])
     plt.ylabel(f'{type_} index', fontsize = fontsize)

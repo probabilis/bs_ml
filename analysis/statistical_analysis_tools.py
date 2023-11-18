@@ -44,7 +44,7 @@ def plot_statistics(df, statistic, type_, name):
     """
     df.sort_values(by = [f'{type_}_' + str(statistic)], ascending = True).plot.barh(y= f'{type_}_{statistic}')
     if statistic == "mean" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
-    elif statistic == "variance" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
+    elif statistic == "variance" : plt.xlabel(f'{statistic} / $\nu(\cdot)$', fontsize = fontsize)
         
     plt.yticks(ticks=[])
     plt.ylabel(f'{type_} index', fontsize = fontsize)
@@ -173,8 +173,8 @@ def plot_correlations(df_correlations, plot_save, name = None) -> None:
         sns.heatmap(df_correlations, annot = False, cmap="coolwarm", mask = mask, xticklabels=False, yticklabels=False, cbar_kws={'label': 'corr($x_i, x_j$)'})
     elif name == "target":
         sns.heatmap(df_correlations, annot = False, cmap="coolwarm", mask = mask, xticklabels=False, yticklabels=False, cbar_kws={'label': 'corr($y_i, y_j$)'})
-    plt.xlabel(f'{name} indices', fontsize = fontsize)
-    plt.ylabel(f'{name} indices', fontsize = fontsize)
+    plt.xlabel(f'{name}s', fontsize = fontsize)
+    plt.ylabel(f'{name}s', fontsize = fontsize)
     df_correlations.to_csv(repo_path + f"/analysis/{name}_correlations_matrix_{date.today()}.csv")
 
     if plot_save == True:

@@ -28,7 +28,7 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
     fig, axs = plt.subplots(1)
     fig.set_size_inches(12,8)
 
-    #SKLEARN modul
+    #SKLEARN module
     model = DecisionTreeRegressor(max_depth = max_depth)
     model.fit(X,Y)
     y_pred = model.predict(X)
@@ -38,9 +38,7 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
     model_scratch.fit()
     y_pred_scratch = model_scratch.predict(pd.DataFrame(X))
 
-    ###################################
-
-
+    ##################################
 
     fig.suptitle("Decision Tree Regressor from Scratch comparison with SKLEARN module / max. depth $d_{max}$ = " + str(max_depth), fontsize = fontsize_title)
     
@@ -57,13 +55,7 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
 
     plt.show()
 
-    #import graphviz
-    #dot_data = export_graphviz(model, out_file = None)
-    #graph = graphviz.Source(dot_data, filename = 'test.gv', format = 'png')
-    #graph.view()
-
     fig, axs = plt.subplots(1)
-
 
     tree.plot_tree(model, fontsize = fontsize)
     fig = plt.gcf()

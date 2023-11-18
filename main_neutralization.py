@@ -52,7 +52,7 @@ train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feat
 
 #############################################
 #performing subsampling of the initial training dataset due to performance (era splitting)
-#train = era_splitting(train)
+train = era_splitting(train)
 #start garbage collection interface / full collection
 gc.collect()
 
@@ -171,7 +171,7 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
         cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of Validation Predictions", figsize=(10, 6), xticks=[], xlabel='eras', ylabel='corr(predictions_i, target)')
+    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\tilde{y}_i$, $y_i$)')
     cumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
@@ -241,7 +241,7 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
         cumulative_correlations[col] = correlations[col].cumsum() 
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of validation Predictions", figsize=(10, 6), xticks=[])
+    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions incl. ensemble model", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\tilde{y}_i$, $y_i$)')
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations

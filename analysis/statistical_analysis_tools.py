@@ -42,7 +42,7 @@ def plot_statistics(df, statistic, type_, name):
     ---------------
     return: plot of statistical test
     """
-    df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y= f'{type_}_{statistic}')
+    df.sort_values(by = [f'{type_}' + str(statistic)], ascending = True).plot.barh(y= f'{type_}_{statistic}')
     if statistic == "mean" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
     elif statistic == "variance" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
         

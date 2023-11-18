@@ -89,8 +89,8 @@ print(mean, var)
 
 #############################################
 
-plot_statistics(df_st,'mean', "targets_df_targets_mean")
-plot_statistics(df_st,'variance', "targets_df_targets_variance")
+plot_statistics(df_st,'mean',"target", "train_df_targets_mean")
+plot_statistics(df_st,'variance',"target", "train_df_targets_variance")
 
 #histogram(df_st['feature_mean'], "targets_df_hist_mean")
 #histogram(df_st['feature_variance'], "targets_df_hist_var")

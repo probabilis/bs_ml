@@ -27,7 +27,7 @@ from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 #############################################
 #############################################
 #prefix for saving
-prefix = "_all_targets"
+prefix = "_round0_all_targets"
 
 #numer.AI official API for retrieving and pushing data
 napi = NumerAPI()
@@ -103,8 +103,8 @@ for target in target_candidates:
     )
     model.fit(train[feature_cols], train[target])
     
-    plot_importance(model, title = f'Feature importance of GBDT model over target : {target}',max_num_features = 30, figsize = (16,8), dpi = 300)
-    plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
+    #plot_importance(model, title = f'Feature importance of GBDT model over target : {target}',max_num_features = 30, figsize = (16,8), dpi = 300)
+    #plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
 print(f'It takes %s minutes for training all {len(target_candidates)} models :' %((time.time()-st)/60))

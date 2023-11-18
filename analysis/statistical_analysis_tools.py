@@ -42,7 +42,7 @@ def plot_statistics(df, statistic, type_, name):
     ---------------
     return: plot of statistical test
     """
-    df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y='feature_' + str(statistic))
+    df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y= f'{type_}_{statistic}')
     if statistic == "mean" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
     elif statistic == "variance" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
         
@@ -168,8 +168,10 @@ def plot_correlations(df_correlations, plot_save, name = None) -> None:
     fig, ax = plt.subplots(figsize=(11, 9))
     #cmap = sns.diverging_palette(230, 20, as_cmap=True)
     #sns.heatmap(df_correlations, mask=mask, cmap=cmap, vmax=.3, center=0, square=True, linewidths=.5, cbar_kws={"shrink": .5}, xticklabels=False, yticklabels=False)
-    fig.suptitle(f'{name} correlation matrix', fontsize=fontsize_title)
+    fig.suptitle(f'{name} correlation matrix over all training eras', fontsize=fontsize_title)
     sns.heatmap(df_correlations, annot = False, cmap="coolwarm", mask = mask, xticklabels=False, yticklabels=False)
+    plt.xlabel(f'{name} indices')
+    plt.ylabel(f'{name} indices')
     df_correlations.to_csv(repo_path + f"/analysis/{name}_correlations_matrix_{date.today()}.csv")
 
     if plot_save == True:

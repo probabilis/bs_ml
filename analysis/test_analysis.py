@@ -10,6 +10,7 @@ from repo_utils import loading_dataset, feature_corr, get_biggest_change_feature
 
 #############################################
 
+"""
 
 df = pd.read_csv(repo_path + "/rounds/" + "val_pred.csv")
 print(len(df))
@@ -22,6 +23,15 @@ y = lambda x : x
 #y_ = y(x)
 
 plt.plot(x,y(x))
+plt.show()
+
+"""
+
+x = np.linspace(0,100,100)
+y = np.sin(x)
+
+plt.plot(x,y)
+plt.title("$\\Sigma_i$")
 plt.show()
 
 

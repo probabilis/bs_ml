@@ -32,25 +32,29 @@ def statistics(df, features):
 	df_statistics = pd.DataFrame({'feature_variance': variances, 'feature_mean':means, 'feature_names': features})
 	return df_statistics
 
-def plot_statistics(df, statistic, name):
-	"""
+def plot_statistics(df, statistic, type_, name):
+    """
     params: df, statistic
     df ...          input statistics df / vector over the features room
     statistic ...	str / type of statistical test
+    type_ ... str / features or targets
+    name ... filename
     ---------------
     return: plot of statistical test
     """
-	df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y='feature_' + str(statistic))
-	plt.xlabel(f'{statistic}')
-	plt.yticks(ticks=[])
-	plt.ylabel('features')
-	plt.title('numer.ai dataframe v4.2 / features ' + statistic)
-	fig = plt.gcf()
-	fig.set_size_inches(12,10)
-	fig.savefig(repo_path +f"/figures/{name}_horizontal_barplot_{date.today()}.png")
-	fig.tight_layout()
-	plt.show()
-	return
+    df.sort_values(by = ['feature_' + str(statistic)], ascending = True).plot.barh(y='feature_' + str(statistic))
+    if statistic == "mean" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
+    elif statistic == "variance" : plt.xlabel(f'{statistic} / $\mu(\cdot)$', fontsize = fontsize)
+        
+    plt.yticks(ticks=[])
+    plt.ylabel(f'{type_} index', fontsize = fontsize)
+    plt.title(f'numer.ai dataframe v4.2 / {type_} ' + statistic, fontsize = fontsize_title)
+    fig = plt.gcf()
+    fig.set_size_inches(12,10)
+    fig.savefig(repo_path +f"/figures/{name}_horizontal_barplot_{date.today()}.png")
+    fig.tight_layout()
+    plt.show()
+    return
 
 def round_int(x):
     if x in [float("-inf"),float("inf")]: return int(10e+6)

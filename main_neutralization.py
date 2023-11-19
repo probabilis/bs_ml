@@ -80,9 +80,8 @@ def hyperparameter_loading(filename):
     params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
     
     print(params_gbm)
-
     
-    params_gbm = params_gbm.pop("Unnamed: 0")
+    params_gbm.pop("Unnamed: 0")
     
     print(params_gbm)
 

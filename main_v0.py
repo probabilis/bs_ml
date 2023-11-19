@@ -21,7 +21,7 @@ import seaborn as sns
 #from numerapi import NumerAPI
 #own modules
 from preprocessing.cross_validators import era_splitting
-from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize, loading
+from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize
 
 
 """
@@ -70,22 +70,14 @@ t60s = [t for t in target_names if t.endswith("_60")]
 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
+print("check")
+
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
+max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
-def hyperparameter_loading(filename):
-    path = repo_path + "/models/" + filename
-    params_gbm = pd.read_csv(path).to_dict(orient = "list")
-    params_gbm.pop("Unnamed: 0")
-    return params_gbm
-
-params_gbm = hyperparameter_loading(filename)
-
-max_depth = params_gbm['max_depth'][0]
-learning_rate = params_gbm['learning_rate'][0]
-colsample_bytree = params_gbm['colsample_bytree'][0]
-n_trees = int(round(params_gbm['n_estimators'][0],1))
+print("hypercheck")
 
 #############################################
 #using all target candidates 

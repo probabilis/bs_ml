@@ -31,17 +31,17 @@ fontsize = 12
 #functions and methods
 
 def loading():
-
     """
-    params: path, filename 
-    path ...        str / relative path folders for file 
-    filename ...    str / filename of df
+    #loading method for Numer.ai data tournament
+    depedency on loaded modules and variables
     ---------------
-    return: df, features, target, eras
-    df ...          Dataframe
-    features ...    features vector
-    target ....     target vector
-    eras   ...      eras vector
+    return: train, feature_cols, target_cols, targets_df, t20s, t60s
+    train ...          pd.DataFrame / training df
+    feature_cols ...    list / features list
+    target_cols ....     list / targets list
+    targets_df   ...      pd.DataFrame / targets df of all targets
+    t20s    ... list / rolling twenties targets as strings
+    t60s    ... list / rolling sixties targets as strings
     """
 
     #numer.AI official API for retrieving and pushing data
@@ -86,12 +86,10 @@ def loading():
 
 def hyperparameter_loading(filename):
     """
-    params: y, y_pred, eras 
-    y ...           target vector as trainings data
-    y_pred ...      predicted target vector from evaluating function over feature space
-    eras ...        timeline in data
+    params: filename
+    filename ...        STR / path + filename
     ---------------
-    return: array -> pearson correlation array
+    return: dupel of integers -> max_depth, learning_rate, colsample_bytree, n_trees
     """
     params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
     
@@ -144,6 +142,24 @@ def numerai_corr(preds, target):
     preds_p15 = np.sign(gauss_ranked_preds) * np.abs(gauss_ranked_preds) ** 1.5
     target_p15 = np.sign(centered_target) * np.abs(centered_target) ** 1.5
     return np.corrcoef(preds_p15, target_p15)[0, 1]
+
+#################################################################################################
+
+def least_correlated(df_correlation, amount):
+    min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
+    least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
+
+    variable_names = df_correlation.columns
+    least_correlated_variables = []
+
+    if amount > 0:
+        for i in range(amount):
+
+            least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
+            least_correlated_variables.append(least_correlated_variable)
+    else:
+        print("Amount of least correlated must be greater than zero.")
+    return least_correlated_variables
 
 #################################################################################################
 #################################################################################################

@@ -18,96 +18,41 @@ import json
 import gc
 import matplotlib.pyplot as plt
 import seaborn as sns
-from numerapi import NumerAPI
 #############################################
 from preprocessing.cross_validators import era_splitting
-from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
+from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
 #############################################
-#############################################
-#############################################
-#prefix for saving
-prefix = "_round0"
-
-#numer.AI official API for retrieving and pushing data
-napi = NumerAPI()
-#train set
-napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
-#validation set
-napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
-#live dataset 
-napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
-#features metadata
-napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
-
-start = time.time()
-
-feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
-
-feature_cols = feature_metadata["feature_sets"]["medium"]
-target_cols = feature_metadata["targets"]
-
-#loading training dataset v4.2
-train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
+#overall prefix for saving (directory management)
+prefix = "_round0_all_targets"
 
 #############################################
-#performing subsampling of the initial training dataset due to performance (era splitting)
-train = era_splitting(train)
-#start garbage collection interface / full collection
-gc.collect()
-
-#############################################
-
-assert train["target"].equals(train["target_cyrus_v4_20"])
-target_names = target_cols[1:]
-targets_df = train[["era"] + target_names]
-
-t20s = [t for t in target_names if t.endswith("_20")]
-t60s = [t for t in target_names if t.endswith("_60")]
-
-target_correlations = targets_df[target_names].corr()
-def plot_target_correlations(plot_save) -> None:
-    sns.heatmap(target_correlations, cmap="coolwarm", xticklabels=False, yticklabels=False)
-    target_correlations.to_csv(repo_path + "/analysis/target_correlations.csv")
-    if plot_save == True:
-        plt.savefig(repo_path + "/rounds/" + "target_correlations", dpi=300)
+#loading all necassary data from the reposiroty utils file 
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
+
+#hyperparameter csv file
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
+
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
-print("check")
-
+print("loading check")
 #############################################
 #defining the target candidates for the ensemble model
 
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
 
-def least_correlated(df_correlation, amount):
-    min_correlation = df_correlation.mask(np.tril(np.ones(df_correlation.shape)).astype(bool)).min().min()
-    least_correlated_pairs = np.where(np.abs(df_correlation) == min_correlation)
-
-    variable_names = df_correlation.columns
-    least_correlated_variables = []
-
-    if amount > 0:
-        for i in range(amount):
-
-            least_correlated_variable = variable_names[least_correlated_pairs[i][0]]
-            least_correlated_variables.append(least_correlated_variable)
-    else:
-        print("Amount of least correlated must be greater than zero.")
-    return least_correlated_variables
-
-target_candidates = least_correlated(target_correlations_20, amount = 1)
+least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
 
 #############################################
 #least correlated targets plus cyrus and nomi
 
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-target_candidates.extend(top_targets)
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+target_candidates = least_correlated_targets.extend(top_targets)
 print(target_candidates)
 
 #############################################

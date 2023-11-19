@@ -3,14 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import json
-#sys.path.append('../')
+sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path
 
 #############################################
 
 #############################################
 
-sys.path.insert(0, '/home/Documents/github_repos/bs_ml')
+#sys.path.insert(0, '/home/Documents/github_repos/bs_ml')
 
 """
 

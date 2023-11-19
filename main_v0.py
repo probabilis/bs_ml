@@ -108,10 +108,18 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
         cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    
-    
-    #cumulative_correlations.ptarget_candidates = t20s
-print(target_candidates)didates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
+    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    #Scumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
+    if plot_save == True:
+        plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
+    return correlations, cumulative_correlations
+
+correlations, cumulative_correlations = cumulative_correlation(target_candidates, plot_save = True)
+
+#############################################
+#function for summary metrics statistics for all different targets
+
+def summary_metrics(target_candidates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
     summary_metrics = {}
     for target in target_candidates:
         # per era correlation between this target and cyrus 
@@ -232,19 +240,9 @@ for col in prediction_cols_groups:
     correlations_neutral[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
     cumulative_correlations_neutral[col] = correlations_neutral[col].cumsum() 
 pd.DataFrame(cumulative_correlations_neutral).plot(title="Cumulative Correlation of Neutralized Predictions", figsize=(10, 6), xticks=[])
-plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_neutralization_ensemble.png", dpi = 300)
-
-#############################################
-
-pred_cols_neutral = ["ensemble"] + ["neutralized_serenity"]
-
-def summary_metrics_neutralized_ensemble(pred_cols_neutral, correlations_neutral, cumulative_correlations_neutral) -> pd.DataFrame:
-    summary_metrics = {}
-    for col in pred_cols_neutral:
-        mean = correlations_neutral[col].mean()
-        std = correlations_neutral[col].std()
-        sharpe = mean / std
-        rolling_max = cumulative_correlations_neutral[col].expanding(min_periods=1).max()
+plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumul#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+ng(min_periods=1).max()
         max_drawdown = (rolling_max - cumulative_correlations_neutral[col]).max()
         summary_metrics[col] = {
             "mean": mean,

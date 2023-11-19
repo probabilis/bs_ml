@@ -3,12 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import json
-sys.path.append('../')
-from repo_utils import loading_dataset, feature_corr, get_biggest_change_features, repo_path, gh_repos_path
+#sys.path.append('../')
+from repo_utils import repo_path, gh_repos_path
 
 #############################################
 
 #############################################
+
+sys.path.insert(0, '/home/Documents/github_repos/bs_ml')
 
 """
 
@@ -27,12 +29,20 @@ plt.show()
 
 """
 
-x = np.linspace(0,100,100)
-y = np.sin(x)
+x = pd.read_csv(repo_path + "/rounds/2023-11-19_round0_all_targets_summary_metrics_targets.csv")#.to_dict(orient = "list")
 
-plt.plot(x,y)
-plt.title("$\\Sigma_i$")
-plt.show()
+
+x = x.sort_values(by = ["sharpe"], ascending = False)
+print(x)
+
+
+
+#plt.plot(x,y)
+#plt.title("$\\Sigma_i$")
+#plt.show()
+
+
+
 
 
 #############################################

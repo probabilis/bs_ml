@@ -19,7 +19,7 @@ import gc
 import matplotlib.pyplot as plt
 import seaborn as sns
 from numerapi import NumerAPI
-#own modules
+#############################################
 from preprocessing.cross_validators import era_splitting
 from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
 
@@ -77,10 +77,12 @@ def plot_target_correlations(plot_save) -> None:
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
 
 def hyperparameter_loading(filename):
-    path = repo_path + "/models/" + filename
-    params_gbm = pd.read_csv(path).to_dict(orient = "list")
-    params_gbm.pop("Unnamed: 0")
+    params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
+    params_gbm = params_gbm.pop("Unnamed: 0")
     return params_gbm
+
+
+#max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
 params_gbm = hyperparameter_loading(filename)
 

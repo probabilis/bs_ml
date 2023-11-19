@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import sys
 import json
 import gc
-#own modules
+#############################################
 sys.path.append('../')
 from repo_utils import gh_repos_path
 from statistical_analysis_tools import statistics, plot_statistics, histogram, overall_statistics, plot_correlations

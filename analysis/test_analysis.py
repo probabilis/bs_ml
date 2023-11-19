@@ -31,19 +31,8 @@ plt.show()
 
 x = pd.read_csv(repo_path + "/rounds/2023-11-19_round0_all_targets_summary_metrics_targets.csv")#.to_dict(orient = "list")
 
-
 x = x.sort_values(by = ["sharpe"], ascending = False)
 print(x)
-
-
-
-#plt.plot(x,y)
-#plt.title("$\\Sigma_i$")
-#plt.show()
-
-
-
-
 
 #############################################
 """

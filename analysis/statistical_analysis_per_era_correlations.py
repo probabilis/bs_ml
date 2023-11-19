@@ -75,7 +75,7 @@ def per_era_correlations(save_plot):
     
         del per_era_corrs
 
-        axs[i][0].set_ylabel("$\\Sigma_i$ corr($\\x_i$, $y_i$)")
+        axs[i][0].set_ylabel("$\\Sigma_i$ corr($x_i$, $y_i$)")
     
     #axs.set_title("per era correlation", loc = 'left', pad=10, fontsize = fontsize)
     fig.tight_layout()

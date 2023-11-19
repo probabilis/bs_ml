@@ -1646,3 +1646,40 @@ nfff59ca42ccec09    0.821869
 
 [4783 rows x 1 columns]
 It takes 62.053877246379855 minutes in total to run main.py.
+2023-11-18 22:54:33,885 INFO numerapi.utils: target file already exists
+2023-11-18 22:54:33,887 INFO numerapi.utils: download complete
+2023-11-18 22:54:34,938 INFO numerapi.utils: target file already exists
+2023-11-18 22:54:34,939 INFO numerapi.utils: download complete
+2023-11-18 22:54:35,931 INFO numerapi.utils: target file already exists
+2023-11-18 22:54:35,931 INFO numerapi.utils: download complete
+2023-11-18 22:54:37,036 INFO numerapi.utils: target file already exists
+2023-11-18 22:54:37,036 INFO numerapi.utils: download complete
+['target_nomi_v4_20', 'target_tyler_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_waldo_v4_20', 'target_jerome_v4_20', 'target_janet_v4_20', 'target_ben_v4_20', 'target_alan_v4_20', 'target_paul_v4_20', 'target_george_v4_20', 'target_william_v4_20', 'target_arthur_v4_20', 'target_thomas_v4_20', 'target_cyrus_v4_20', 'target_caroline_v4_20', 'target_sam_v4_20', 'target_xerxes_v4_20', 'target_alpha_v4_20', 'target_bravo_v4_20', 'target_charlie_v4_20', 'target_delta_v4_20', 'target_echo_v4_20', 'target_jeremy_v4_20']
+It takes 67.74059801499048 minutes for training all 24 models :
+                                     mean  ...  mean_corr_with_cryus
+prediction_target_nomi_v4_20     0.018536  ...              0.824783
+prediction_target_tyler_v4_20    0.017375  ...              0.695162
+prediction_target_victor_v4_20   0.017782  ...              0.828936
+prediction_target_ralph_v4_20    0.017895  ...              0.880594
+prediction_target_waldo_v4_20    0.017065  ...              0.816194
+prediction_target_jerome_v4_20   0.012646  ...              0.775421
+prediction_target_janet_v4_20    0.008578  ...              0.693212
+prediction_target_ben_v4_20      0.011491  ...              0.745770
+prediction_target_alan_v4_20     0.009954  ...              0.664780
+prediction_target_paul_v4_20     0.004786  ...              0.755377
+prediction_target_george_v4_20   0.005915  ...              0.665101
+prediction_target_william_v4_20  0.013732  ...              0.833175
+prediction_target_arthur_v4_20   0.007533  ...              0.723930
+prediction_target_thomas_v4_20   0.011816  ...              0.790305
+prediction_target_cyrus_v4_20    0.018551  ...              1.000000
+prediction_target_caroline_v4_20 0.018260  ...              0.927723
+prediction_target_sam_v4_20      0.018298  ...              0.909598
+prediction_target_xerxes_v4_20   0.017641  ...              0.940907
+prediction_target_alpha_v4_20    0.014796  ...              0.761951
+prediction_target_bravo_v4_20    0.018128  ...              0.803490
+prediction_target_charlie_v4_20  0.014488  ...              0.762680
+prediction_target_delta_v4_20    0.016239  ...              0.809277
+prediction_target_echo_v4_20     0.017121  ...              0.842960
+prediction_target_jeremy_v4_20   0.012639  ...              0.779451
+
+[24 rows x 5 columns]

@@ -144,9 +144,9 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
     
     #cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
     
-    fig, [ax1,ax2] = plt.subplots(1,2, figsize=(14,6) )
+    fig, [ax1,ax2] = plt.subplots(1,2)
 
-    cumulative_correlations.plot(ax = ax1,title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    cumulative_correlations.plot(ax = ax1,title="Cumulative Correlation of validation predictions",legend=False, figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
 
     cumulative_correlations.plot(ax = ax2, figsize=(4, 6))
     h,l = ax2.get_legend_handles_labels()

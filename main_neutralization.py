@@ -78,7 +78,13 @@ filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
 
 def hyperparameter_loading(filename):
     params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
+    
+    print(params_gbm)
+
+    
     params_gbm = params_gbm.pop("Unnamed: 0")
+    
+    print(params_gbm)
 
     max_depth = params_gbm['max_depth']
     learning_rate = params_gbm['learning_rate']

@@ -18,72 +18,44 @@ import json
 import gc
 import matplotlib.pyplot as plt
 import seaborn as sns
-#from numerapi import NumerAPI
-#own modules
+#############################################
 from preprocessing.cross_validators import era_splitting
-from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize
+from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
-
-"""
 #############################################
-#############################################
-#############################################
-#prefix for saving
+#overall prefix for saving (directory management)
 prefix = "_round0_all_targets"
 
-#numer.AI official API for retrieving and pushing data
-napi = NumerAPI()
-#train set
-napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
-#validation set
-napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
-#live dataset 
-napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
-#features metadata
-napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
-
-start = time.time()
-
-feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
-
-feature_cols = feature_metadata["feature_sets"]["medium"]
-target_cols = feature_metadata["targets"]
-
-#loading training dataset v4.2
-train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
-
 #############################################
-#performing subsampling of the initial training dataset due to performance (era splitting)
-train = era_splitting(train)
-#start garbage collection interface / full collection
-gc.collect()
-
-#############################################
-
-assert train["target"].equals(train["target_cyrus_v4_20"])
-target_names = target_cols[1:]
-targets_df = train[["era"] + target_names]
-
-t20s = [t for t in target_names if t.endswith("_20")]
-t60s = [t for t in target_names if t.endswith("_60")]
-"""
-
+#loading all necassary data from the reposiroty utils file 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
-
-print("check")
 
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
+
+#hyperparameter csv file
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
+
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
-print("hypercheck")
+print("loading check")
+#############################################
+#defining the target candidates for the ensemble model
+
+target_correlations_20 = targets_df[t20s].corr()
+target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
+
+least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
 
 #############################################
-#using all target candidates 
+#least correlated targets plus cyrus and nomi
 
-target_candidates = t20s
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+
+target_candidates = least_correlated_targets.extend(top_targets)
 print(target_candidates)
+
 
 #############################################
 #MODEL training for the given targets
@@ -138,28 +110,8 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     
     
-    #cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
-    
-    fig, [ax1,ax2] = plt.subplots(1,2, figsize = (14,6), width_ratios=[3, 1])
-
-    cumulative_correlations.plot(ax = ax1,title="Cumulative Correlation of validation predictions",legend=False, xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
-
-    cumulative_correlations.plot(ax = ax2)
-    h,l = ax2.get_legend_handles_labels()
-    ax2.clear()
-    ax2.legend(h,l,loc="upper right")
-    ax2.axis("off")
-    
-    if plot_save == True:
-        plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
-    return correlations, cumulative_correlations
-
-correlations, cumulative_correlations = cumulative_correlation(target_candidates, plot_save = True)
-
-#############################################
-#function for summary metrics statistics for all different targets
-
-def summary_metrics(target_candidates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
+    #cumulative_correlations.ptarget_candidates = t20s
+print(target_candidates)didates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
     summary_metrics = {}
     for target in target_candidates:
         # per era correlation between this target and cyrus 

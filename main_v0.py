@@ -86,7 +86,6 @@ n_trees = int(round(params_gbm['n_estimators'][0],1))
 #using all target candidates 
 
 target_candidates = t20s
-target_candidates = target_candidates[:2]
 print(target_candidates)
 
 #############################################

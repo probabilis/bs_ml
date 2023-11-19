@@ -75,23 +75,6 @@ def plot_target_correlations(plot_save) -> None:
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
-
-def hyperparameter_loading(filename):
-    params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
-    
-    print(params_gbm)
-    
-    params_gbm.pop("Unnamed: 0")
-    
-    print(params_gbm)
-
-    max_depth = params_gbm['max_depth'][0]
-    learning_rate = params_gbm['learning_rate'][0]
-    colsample_bytree = params_gbm['colsample_bytree'][0]
-    n_trees = int(round(params_gbm['n_estimators'][0],1))
-
-    return max_depth, learning_rate, colsample_bytree, n_trees
-
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
 print("check")

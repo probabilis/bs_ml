@@ -26,7 +26,8 @@ path_val = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "v
 fontsize_title = 16
 fontsize = 12
 
-#############################################
+#################################################################################################
+#################################################################################################
 #functions and methods
 
 def loading():
@@ -81,9 +82,9 @@ def loading():
 
     return train, feature_cols, target_cols, targets_df, t20s, t60s
 
-##########################
+#################################################################################################
 
-def numerai_score(y, y_pred, eras):
+def hyperparameter_loading(filename):
     """
     params: y, y_pred, eras 
     y ...           target vector as trainings data
@@ -92,10 +93,40 @@ def numerai_score(y, y_pred, eras):
     ---------------
     return: array -> pearson correlation array
     """
-    rank_pred = y_pred.groupby(eras).apply(lambda x: x.rank(pct = True, method = "first") )
-    return np.corrcoef(y, rank_pred)[0,1]
+    params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
+    
+    print(params_gbm)
+    
+    params_gbm.pop("Unnamed: 0")
+    
+    print(params_gbm)
 
-##########################
+    max_depth = params_gbm['max_depth'][0]
+    learning_rate = params_gbm['learning_rate'][0]
+    colsample_bytree = params_gbm['colsample_bytree'][0]
+    n_trees = int(round(params_gbm['n_estimators'][0],1))
+
+    return max_depth, learning_rate, colsample_bytree, n_trees
+
+#################################################################################################
+
+def neutralize(predictions: pd.DataFrame, features: pd.DataFrame, proportion: float = 1.0) -> pd.DataFrame:
+    """
+    newer version from v4.2 datasets / from sept. 2023 / Neutralize predictions to features
+    params: df, features, proportion
+    df ...          input df / vector over the features room
+    features ...     array / columns of df
+    proportion ...  scalar 
+    ---------------
+    return: new neutralized df
+    """
+    # add a constant term the features so we can fit the bias/offset term
+    features = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
+    # remove the component of the predictions that are linearly correlated with features
+    return predictions - proportion * features @ (np.linalg.pinv(features, rcond=1e-6) @ predictions)
+
+
+#################################################################################################
 
 def numerai_corr(preds, target):
     """
@@ -114,7 +145,25 @@ def numerai_corr(preds, target):
     target_p15 = np.sign(centered_target) * np.abs(centered_target) ** 1.5
     return np.corrcoef(preds_p15, target_p15)[0, 1]
 
-##########################
+#################################################################################################
+#################################################################################################
+#################################################################################################
+
+#not using anymore
+
+def numerai_score(y, y_pred, eras):
+    """
+    params: y, y_pred, eras 
+    y ...           target vector as trainings data
+    y_pred ...      predicted target vector from evaluating function over feature space
+    eras ...        timeline in data
+    ---------------
+    return: array -> pearson correlation array
+    """
+    rank_pred = y_pred.groupby(eras).apply(lambda x: x.rank(pct = True, method = "first") )
+    return np.corrcoef(y, rank_pred)[0,1]
+
+#################################################################################################
 
 def correlation_score(y, y_pred):
     """
@@ -126,7 +175,7 @@ def correlation_score(y, y_pred):
     """
     return np.corrcoef(y, y_pred)[0,1]
 
-##########################
+#################################################################################################
 
 def get_biggest_change_features(corrs, n):
     """
@@ -147,7 +196,7 @@ def get_biggest_change_features(corrs, n):
     worst_n = corr_diffs.abs().sort_values(ascending=False).head(n).index.tolist()
     return worst_n
 
-##########################
+#################################################################################################
 
 def neutralize_old(df, columns, neutralizers = None, proportion = 1.0, normalize = True, era_col = "era", verbose = False):
     """
@@ -191,24 +240,8 @@ def neutralize_old(df, columns, neutralizers = None, proportion = 1.0, normalize
 
     return pd.DataFrame(np.concatenate(computed), columns=columns, index = df.index)
 
-##########################
 
-def neutralize(predictions: pd.DataFrame, features: pd.DataFrame, proportion: float = 1.0) -> pd.DataFrame:
-    """
-    newer version from v4.2 datasets / from sept. 2023 / Neutralize predictions to features
-    params: df, features, proportion
-    df ...          input df / vector over the features room
-    features ...     array / columns of df
-    proportion ...  scalar 
-    ---------------
-    return: new neutralized df
-    """
-    # add a constant term the features so we can fit the bias/offset term
-    features = np.hstack((features, np.array([np.mean(predictions)] * len(features)).reshape(-1, 1)))
-    # remove the component of the predictions that are linearly correlated with features
-    return predictions - proportion * features @ (np.linalg.pinv(features, rcond=1e-6) @ predictions)
-
-##########################
+#################################################################################################
 
 def feature_corr(df, era_col, target_col):
     """
@@ -223,7 +256,7 @@ def feature_corr(df, era_col, target_col):
     lambda era: era[features].corrwith(era[target_col]))
     return all_feature_corrs
 
-##########################
+#################################################################################################
 
 def feature_importance(model):
 
@@ -236,7 +269,7 @@ def feature_importance(model):
     plt.show()
     return
 
-##########################
+#################################################################################################
 #saving and loading models
 
 MODEL_FOLDER = "models"

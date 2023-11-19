@@ -18,11 +18,13 @@ import json
 import gc
 import matplotlib.pyplot as plt
 import seaborn as sns
-from numerapi import NumerAPI
+#from numerapi import NumerAPI
 #own modules
 from preprocessing.cross_validators import era_splitting
-from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize
+from repo_utils import numerai_corr, gh_repos_path, repo_path, neutralize, loading
 
+
+"""
 #############################################
 #############################################
 #############################################
@@ -64,6 +66,9 @@ targets_df = train[["era"] + target_names]
 
 t20s = [t for t in target_names if t.endswith("_20")]
 t60s = [t for t in target_names if t.endswith("_60")]
+"""
+
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization

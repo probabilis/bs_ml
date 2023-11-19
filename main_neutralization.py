@@ -50,8 +50,8 @@ least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
 #############################################
 #least correlated targets plus cyrus and nomi
 
-#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
 target_candidates = least_correlated_targets.extend(top_targets)
 print(target_candidates)
 

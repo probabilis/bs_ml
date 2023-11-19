@@ -1720,3 +1720,65 @@ prediction_target_echo_v4_20     0.017121  ...              0.842960
 prediction_target_jeremy_v4_20   0.012639  ...              0.779451
 
 [24 rows x 5 columns]
+2023-11-19 22:03:46,194 INFO numerapi.utils: target file already exists
+2023-11-19 22:03:46,195 INFO numerapi.utils: download complete
+2023-11-19 22:03:47,279 INFO numerapi.utils: target file already exists
+2023-11-19 22:03:47,279 INFO numerapi.utils: download complete
+2023-11-19 22:03:48,384 INFO numerapi.utils: target file already exists
+2023-11-19 22:03:48,384 INFO numerapi.utils: download complete
+2023-11-19 22:03:49,393 INFO numerapi.utils: target file already exists
+2023-11-19 22:03:49,394 INFO numerapi.utils: download complete
+2023-11-19 22:20:09,964 INFO numerapi.utils: target file already exists
+2023-11-19 22:20:09,965 INFO numerapi.utils: download complete
+2023-11-19 22:20:11,179 INFO numerapi.utils: target file already exists
+2023-11-19 22:20:11,179 INFO numerapi.utils: download complete
+2023-11-19 22:20:12,376 INFO numerapi.utils: target file already exists
+2023-11-19 22:20:12,376 INFO numerapi.utils: download complete
+2023-11-19 22:20:13,393 INFO numerapi.utils: target file already exists
+2023-11-19 22:20:13,393 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.2], 'learning_rate': [0.02], 'max_depth': [2], 'n_estimators': [2465.2]}
+{'colsample_bytree': [0.2], 'learning_rate': [0.02], 'max_depth': [2], 'n_estimators': [2465.2]}
+loading check
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 15.94097053607305 minutes for training all 6 models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.009954  ...              0.664780
+prediction_target_cyrus_v4_20  0.018551  ...              1.000000
+prediction_target_nomi_v4_20   0.018536  ...              0.824783
+prediction_target_victor_v4_20 0.017782  ...              0.828936
+prediction_target_ralph_v4_20  0.017895  ...              0.880594
+prediction_target_bravo_v4_20  0.018128  ...              0.803490
+
+[6 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.009954 0.021958 0.453296      0.113072
+prediction_target_cyrus_v4_20  0.018551 0.021032 0.882044      0.079712
+prediction_target_nomi_v4_20   0.018536 0.021112 0.878000      0.071543
+prediction_target_victor_v4_20 0.017782 0.019221 0.925121      0.087411
+prediction_target_ralph_v4_20  0.017895 0.019980 0.895668      0.049117
+prediction_target_bravo_v4_20  0.018128 0.020283 0.893768      0.070845
+ensemble                       0.018916 0.021113 0.895923      0.092673
+{'Unnamed: 0': [0], 'colsample_bytree': [0.2], 'learning_rate': [0.02], 'max_depth': [2], 'n_estimators': [2465.2]}
+{'colsample_bytree': [0.2], 'learning_rate': [0.02], 'max_depth': [2], 'n_estimators': [2465.2]}
+loading check
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 17.101085488001505 minutes for training all 6 models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.009954  ...              0.664780
+prediction_target_cyrus_v4_20  0.018551  ...              1.000000
+prediction_target_nomi_v4_20   0.018536  ...              0.824783
+prediction_target_victor_v4_20 0.017782  ...              0.828936
+prediction_target_ralph_v4_20  0.017895  ...              0.880594
+prediction_target_bravo_v4_20  0.018128  ...              0.803490
+
+[6 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.009954 0.021958 0.453296      0.113072
+prediction_target_cyrus_v4_20  0.018551 0.021032 0.882044      0.079712
+prediction_target_nomi_v4_20   0.018536 0.021112 0.878000      0.071543
+prediction_target_victor_v4_20 0.017782 0.019221 0.925121      0.087411
+prediction_target_ralph_v4_20  0.017895 0.019980 0.895668      0.049117
+prediction_target_bravo_v4_20  0.018128 0.020283 0.893768      0.070845
+ensemble                       0.018916 0.021113 0.895923      0.092673

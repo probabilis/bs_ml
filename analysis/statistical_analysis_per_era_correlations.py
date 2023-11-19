@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-#own modules
+#############################################
 sys.path.append('../')
 from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
 from preprocessing.cross_validators import era_splitting

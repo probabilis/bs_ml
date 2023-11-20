@@ -176,6 +176,8 @@ validation[pred_cols]
 #############################################
 #ENSEMBLE model performance
 
+hyperparameters_str = ",".join(str(element) for element in hyperparameters)
+
 def cumulative_correlations_ensemble(pred_cols, plot_save):
     correlations= {}
     cumulative_correlations = {}
@@ -185,6 +187,7 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions incl. ensemble model", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    plt.suptitle(f"{hyperparameters_str}")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations

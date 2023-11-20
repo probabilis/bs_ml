@@ -174,7 +174,6 @@ validation[pred_cols]
 #############################################
 #ENSEMBLE model performance
 #max_depth, learning_rate, colsample_bytree, n_trees
-hyperparameters_str = ",".join(str(element) for element in hyperparameters)
 
 def cumulative_correlations_ensemble(pred_cols, plot_save):
     correlations= {}

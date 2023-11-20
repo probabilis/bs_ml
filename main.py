@@ -301,7 +301,7 @@ print(f'It takes %s minutes in total to run main.py.' %((time.time()-start)/60))
 """
 #first og main.py data
 
-"""
+
 Project: Bachelor Project / Supervised Machine Learning / Gradient Boosting Machine based on Decision Trees
 Script: Main Program
 Author: Maximilian Gschaider
@@ -309,7 +309,7 @@ Date: 22.09.2023
 MN: 12030366
 ------------------
 Ref.: www.numer.ai
-"""
+
 #official open-source repositories
 import pandas as pd
 import numpy as np
@@ -598,7 +598,4 @@ predictions = predict_ensemble(live_features)
 print("----predictions-----")
 print(predictions)
 predictions.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_predictions.csv")
-
-
-
 """

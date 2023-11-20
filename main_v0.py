@@ -24,7 +24,7 @@ from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading
 
 #############################################
 #overall prefix for saving (directory management)
-prefix = "_round0_new_targets_checkout"
+prefix = "_round0_test"
 
 #############################################
 #loading all necassary data from the reposiroty utils file 

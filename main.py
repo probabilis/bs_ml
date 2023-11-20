@@ -39,8 +39,6 @@ filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
 
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
-hyperparameters = [max_depth, learning_rate, colsample_bytree, n_trees]
-
 print("loading check")
 #############################################
 #defining the target candidates for the ensemble model
@@ -175,7 +173,7 @@ validation[pred_cols]
 
 #############################################
 #ENSEMBLE model performance
-
+#max_depth, learning_rate, colsample_bytree, n_trees
 hyperparameters_str = ",".join(str(element) for element in hyperparameters)
 
 def cumulative_correlations_ensemble(pred_cols, plot_save):
@@ -186,8 +184,9 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
         cumulative_correlations[col] = correlations[col].cumsum() 
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions incl. ensemble model", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
-    plt.suptitle(f"{hyperparameters_str}")
+    cumulative_correlations.plot(figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    plt.suptitle("Cumulative Correlation of validation predictions incl. ensemble model")
+    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_max$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations

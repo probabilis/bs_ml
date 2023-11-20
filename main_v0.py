@@ -24,7 +24,7 @@ from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading
 
 #############################################
 #overall prefix for saving (directory management)
-prefix = "_round0_test"
+prefix = "_round0_test_all_targets"
 
 #############################################
 #loading all necassary data from the reposiroty utils file 
@@ -39,6 +39,8 @@ filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
 
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 
+hyperparameters = [max_depth, learning_rate, colsample_bytree, n_trees]
+
 print("loading check")
 #############################################
 #defining the target candidates for the ensemble model
@@ -51,8 +53,8 @@ least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
 #############################################
 #least correlated targets plus cyrus and nomi
 
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
 
 least_correlated_targets.extend(top_targets)
 target_candidates = least_correlated_targets
@@ -143,6 +145,7 @@ def summary_metrics(target_candidates : list, correlations : pd.DataFrame, cumul
     summary = pd.DataFrame(summary_metrics).T
     return summary
 
+
 summary_metrics_targets_df = summary_metrics(target_candidates, correlations, cumulative_correlations)
 summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_targets.csv")
 print(summary_metrics_targets_df)
@@ -153,7 +156,7 @@ print(summary_metrics_targets_df)
 #############################################
 #ENSEMBLE modeling
 
-# Ensemble predictions together with a simple average
+#Ensemble predictions together with a simple average
 numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
 
 #favorite_targets = [element for element in least_correlated_targets[0:2]]

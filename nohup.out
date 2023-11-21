@@ -33,3 +33,61 @@ prediction_target_victor_v4_20 0.020370 0.020824 0.978205      0.113223
 prediction_target_ralph_v4_20  0.020524 0.021711 0.945346      0.076151
 prediction_target_bravo_v4_20  0.020144 0.021291 0.946142      0.085856
 ensemble                       0.021533 0.021924 0.982155      0.093575
+2023-11-20 22:22:37,569 INFO numerapi.utils: target file already exists
+2023-11-20 22:22:37,570 INFO numerapi.utils: download complete
+2023-11-20 22:22:38,702 INFO numerapi.utils: target file already exists
+2023-11-20 22:22:38,702 INFO numerapi.utils: download complete
+2023-11-20 22:22:39,746 INFO numerapi.utils: target file already exists
+2023-11-20 22:22:39,746 INFO numerapi.utils: download complete
+2023-11-20 22:22:40,799 INFO numerapi.utils: target file already exists
+2023-11-20 22:22:40,799 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.2], 'learning_rate': [0.01], 'max_depth': [7], 'n_estimators': [1093.9]}
+{'colsample_bytree': [0.2], 'learning_rate': [0.01], 'max_depth': [7], 'n_estimators': [1093.9]}
+loading check
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 13.096720691521963 minutes for training all 6 models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.014080  ...              0.664780
+prediction_target_cyrus_v4_20  0.021521  ...              1.000000
+prediction_target_nomi_v4_20   0.020510  ...              0.824783
+prediction_target_victor_v4_20 0.020370  ...              0.828936
+prediction_target_ralph_v4_20  0.020524  ...              0.880594
+prediction_target_bravo_v4_20  0.020144  ...              0.803490
+
+[6 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 177, in <module>
+    hyperparameters_str = ",".join(str(element) for element in hyperparameters)
+NameError: name 'hyperparameters' is not defined
+2023-11-20 22:44:57,063 INFO numerapi.utils: target file already exists
+2023-11-20 22:44:57,063 INFO numerapi.utils: download complete
+2023-11-20 22:44:58,126 INFO numerapi.utils: target file already exists
+2023-11-20 22:44:58,126 INFO numerapi.utils: download complete
+2023-11-20 22:44:59,196 INFO numerapi.utils: target file already exists
+2023-11-20 22:44:59,196 INFO numerapi.utils: download complete
+2023-11-20 22:45:00,700 INFO numerapi.utils: target file already exists
+2023-11-20 22:45:00,700 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.2], 'learning_rate': [0.01], 'max_depth': [7], 'n_estimators': [1093.9]}
+{'colsample_bytree': [0.2], 'learning_rate': [0.01], 'max_depth': [7], 'n_estimators': [1093.9]}
+loading check
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 11.08383496205012 minutes for training all 6 models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_alan_v4_20   0.014080  ...              0.664780
+prediction_target_cyrus_v4_20  0.021521  ...              1.000000
+prediction_target_nomi_v4_20   0.020510  ...              0.824783
+prediction_target_victor_v4_20 0.020370  ...              0.828936
+prediction_target_ralph_v4_20  0.020524  ...              0.880594
+prediction_target_bravo_v4_20  0.020144  ...              0.803490
+
+[6 rows x 5 columns]
+['target_alan_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_alan_v4_20   0.014080 0.022450 0.627177      0.091102
+prediction_target_cyrus_v4_20  0.021521 0.022820 0.943074      0.096203
+prediction_target_nomi_v4_20   0.020510 0.021896 0.936722      0.068289
+prediction_target_victor_v4_20 0.020370 0.020824 0.978205      0.113223
+prediction_target_ralph_v4_20  0.020524 0.021711 0.945346      0.076151
+prediction_target_bravo_v4_20  0.020144 0.021291 0.946142      0.085856
+ensemble                       0.021533 0.021924 0.982155      0.093575

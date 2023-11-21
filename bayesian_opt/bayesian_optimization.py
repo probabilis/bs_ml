@@ -15,29 +15,18 @@ from sklearn.model_selection import cross_val_score
 sys.path.append('../')
 from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
-from repo_utils import loading_dataset, repo_path
+from repo_utils import repo_path, loading
+
+#############################################
+#############################################
+#loading all necassary data from the reposiroty utils file 
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 #############################################
 
-df, features, target, eras = loading_dataset()
+train = era_splitting(train)
 
-#############################################
-
-df_, eras_ = era_splitting(df, eras)
-del df ; gc.collect()
-
-##################################
-
-n = 300
-
-df_pca, features_pca = dim_reduction(df_,features,target,n=n)
-
-del df_ ; gc.collect()
-
-##################################
-
-X = df_pca[features_pca]
-Y = df_pca[target]
+del targets_df ; gc.collect()
 
 def gbm_reg_bo(learning_rate,max_depth,n_estimators,colsample_bytree):
     """
@@ -55,13 +44,13 @@ def gbm_reg_bo(learning_rate,max_depth,n_estimators,colsample_bytree):
     params_gbm['learning_rate'] = learning_rate
     params_gbm['n_estimators'] = round(n_estimators)
     params_gbm['colsample_bytree'] = colsample_bytree
-    scores = cross_val_score(LGBMRegressor(**params_gbm),X,Y)
+    scores = cross_val_score(LGBMRegressor(**params_gbm),train[feature_cols], train["target"])
     score = scores.mean()
     return score
 
 st = time.time()
 
-params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,30000), "colsample_bytree":(0.1,1)}
+params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,50000), "colsample_bytree":(0.1,1)}
 
 #n_iter:  How many steps of bayesian optimization you want to perform. The more steps the more likely to find a good maximum you are.
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.

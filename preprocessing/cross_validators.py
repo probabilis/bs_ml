@@ -17,8 +17,7 @@ def era_splitting(df, window = 4):
     ---------------
     return: reduced df with splitted eras
     """
-    df_ = df[df["era"].isin(df["era"].unique()[::window])]
-    return df_
+    return df[df["era"].isin(df["era"].unique()[::window])]
 
 """
 Reference at Scikit:

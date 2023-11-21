@@ -104,7 +104,7 @@ params_gbm['learning_rate'] = round(params_gbm['learning_rate'], 2)
 params_gbm['colsample_bytree'] = round(params_gbm['colsample_bytree'], 1)
 params_gbm['n_estimators'] = round(params_gbm['n_estimators'], 1)
 print(params_gbm)
-name = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n={n}"
+name = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n=full"
 
 data = pd.DataFrame([params_gbm])
 data.to_csv(repo_path + "/models/" + name + ".csv")

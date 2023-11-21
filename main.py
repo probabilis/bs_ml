@@ -34,8 +34,8 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 
 #hyperparameter csv file
-#filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
-filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
+filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
+#filename = "params_bayes_ip=20_ni=300_2023-09-15_n=300.csv"
 
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 

@@ -24,7 +24,7 @@ from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading
 
 #############################################
 #overall prefix for saving (directory management)
-prefix = "_round0"
+prefix = "_round0_all_targets"
 
 #############################################
 #loading all necassary data from the reposiroty utils file 
@@ -51,8 +51,8 @@ least_correlated_targets = least_correlated(target_correlations_20, amount = 2)
 #############################################
 #least correlated targets plus cyrus and nomi
 
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
 target_candidates = least_correlated_targets.extend(top_targets)
 
 top_targets.extend(least_correlated_targets)

@@ -56,9 +56,8 @@ top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
 target_candidates = least_correlated_targets.extend(top_targets)
 
 top_targets.extend(least_correlated_targets)
-print(top_targets)
 target_candidates = top_targets
-
+print(target_candidates)
 #############################################
 #MODEL training for the given targets
 

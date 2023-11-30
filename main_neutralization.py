@@ -35,6 +35,7 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 #hyperparameter csv file
 filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
+filename = "params_bayes_ip=10_ni=100_2023-11-25_n=full.csv"
 
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
 

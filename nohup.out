@@ -208,3 +208,40 @@ Traceback (most recent call last):
   File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 216, in <module>
     feature_sets = feature_metadata["feature_sets"]
 NameError: name 'feature_metadata' is not defined
+2023-11-30 21:26:19,111 INFO numerapi.utils: target file already exists
+2023-11-30 21:26:19,112 INFO numerapi.utils: download complete
+2023-11-30 21:26:20,203 INFO numerapi.utils: target file already exists
+2023-11-30 21:26:20,203 INFO numerapi.utils: download complete
+2023-11-30 21:26:21,325 INFO numerapi.utils: target file already exists
+2023-11-30 21:26:21,326 INFO numerapi.utils: download complete
+2023-11-30 21:26:22,319 INFO numerapi.utils: target file already exists
+2023-11-30 21:26:22,320 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.1], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [3998.9]}
+{'colsample_bytree': [0.1], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [3998.9]}
+loading check
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20', 'target_alan_v4_20', 'target_george_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 32.4333266099294 minutes for training all 12 models :
+                                   mean  ...  mean_corr_with_cryus
+prediction_target_cyrus_v4_20  0.012700  ...              1.000000
+prediction_target_nomi_v4_20   0.012151  ...              0.824783
+prediction_target_victor_v4_20 0.011024  ...              0.828936
+prediction_target_ralph_v4_20  0.011809  ...              0.880594
+prediction_target_bravo_v4_20  0.012884  ...              0.803490
+prediction_target_alan_v4_20   0.004683  ...              0.664780
+prediction_target_george_v4_20 0.003689  ...              0.665101
+
+[7 rows x 5 columns]
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20', 'target_alan_v4_20', 'target_george_v4_20', 'target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.012700 0.020946 0.606341      0.070955
+prediction_target_nomi_v4_20   0.012151 0.021590 0.562810      0.084825
+prediction_target_victor_v4_20 0.011024 0.018690 0.589827      0.083455
+prediction_target_ralph_v4_20  0.011809 0.020510 0.575766      0.074835
+prediction_target_bravo_v4_20  0.012884 0.019736 0.652825      0.055745
+prediction_target_alan_v4_20   0.004683 0.020429 0.229258      0.130654
+prediction_target_george_v4_20 0.003689 0.010777 0.342283      0.068108
+ensemble                       0.012426 0.020429 0.608266      0.083962
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main_neutralization.py", line 216, in <module>
+    feature_sets = feature_metadata["feature_sets"]
+NameError: name 'feature_metadata' is not defined

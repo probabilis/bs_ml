@@ -54,7 +54,7 @@ params_gbm = {"learning_rate":(0.01,0.2),"max_depth":(1,10),"n_estimators":(500,
 
 #n_iter:  Number of estimators of Bayesian Optimization (the more steps the more likely to find a good maximum you are)
 #init_points: How many steps of random exploration you want to perform. Random exploration can help by diversifying the exploration space.
-init_points = 10 ; n_iter = 100
+init_points = 2 ; n_iter = 5
 
 pbounds = params_gbm
 bounds_transformer = SequentialDomainReductionTransformer() #minimum_window=0.5
@@ -77,4 +77,13 @@ print(params_gbm)
 name = f"params_bayes_ip={init_points}_ni={n_iter}_{date.today()}_n=full"
 
 data = pd.DataFrame([params_gbm])
-data.to_csv(repo_path + "/models/" + name + ".csv")
+data.to_csv(repo_path + "/models/" + name + ".csv" )
+
+filename = name + ".txt"
+
+with open(filename, "w") as file:
+    for i, res in enumerate(gbm_bo.res):
+        iter_ = "Iteration {}: \n\t{}".format(i, res)
+        print(iter_)
+        file.write(iter_)
+

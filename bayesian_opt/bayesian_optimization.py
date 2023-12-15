@@ -83,7 +83,7 @@ filename = name + ".txt"
 
 with open(filename, "w") as file:
     for i, res in enumerate(gbm_bo.res):
-        iter_ = "Iteration {}: \n\t{}".format(i, res)
+        iter_ = "Iteration {}: \n\t{}\n".format(i, res)
         print(iter_)
         file.write(iter_)
 

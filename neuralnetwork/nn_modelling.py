@@ -63,7 +63,7 @@ for epoch in range(n_epochs):
     with tqdm.tqdm(batch_start, unit = "batch", mininterval = 0, disable = True) as bar:
         for start in bar:
             X_batch = X_train[start : start+batch_size]
-            y_batch = y_batch[start : start + batch_size]
+            y_batch = y_test[start : start + batch_size]
 
             y_pred = model(X_batch)
             loss = loss_fn(y_pred, y_batch)

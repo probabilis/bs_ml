@@ -19,6 +19,7 @@ gc.collect()
 input_features_amount = len(feature_cols)
 ifa = input_features_amount
 
+print("ifa", ifa)
 
 model = nn.Sequential(
     nn.Linear(ifa, ifa * 2),

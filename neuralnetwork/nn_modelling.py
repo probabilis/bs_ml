@@ -40,10 +40,10 @@ optimizer = optim.Adam(model.parameters(), lr = 0.0001)
 target = "target_cyrus_v4_20"
 
 X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
-X_train = torch.tensor(X_train, dtype=torch.float32)
-y_train = torch.tensor(y_train, dtype=torch.float32).reshape(-1, 1)
-X_test = torch.tensor(X_test, dtype=torch.float32)
-y_test = torch.tensor(y_test, dtype=torch.float32).reshape(-1, 1)
+X_train = torch.tensor(X_train.values, dtype=torch.float32)
+y_train = torch.tensor(y_train.values, dtype=torch.float32).reshape(-1, 1)
+X_test = torch.tensor(X_test.values, dtype=torch.float32)
+y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
 
 del train 
 gc.collect()

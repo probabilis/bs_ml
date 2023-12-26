@@ -18,12 +18,9 @@ del targets_df
 gc.collect()
 
 input_features_amount = len(feature_cols)
-ifa = input_features_amount
-
-print("ifa", ifa)
 
 model = nn.Sequential(
-    nn.Linear(ifa, 1000),
+    nn.Linear(input_features_amount, 1000),
     nn.ReLU(),
     nn.Linear(1000, 500),
     nn.ReLU(),
@@ -82,9 +79,9 @@ for epoch in range(n_epochs):
     history.append(mse)
     if mse < best_mse:
         best_mse = mse
-        best_weights = copy.deepcopy(model.state_dict)
+        best_weights = copy.deepcopy(model.state_dict())
 model.load_state_dict(best_weights)
 print(best_mse)
 plt.plot(history)
-plt.savefig("mse_nn_test.py")
+plt.savefig("mse_nn_test.png")
 plt.show()

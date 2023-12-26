@@ -23,10 +23,10 @@ model = nn.Sequential(
     nn.Linear(ifa, ifa / 2),
     nn.ReLU(),
     nn.Linear(ifa / 2, 1)
+)
 
 loss_fn = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr = 0.0001)
-
 
 target = "target_cyrus_v4_20"
 
@@ -42,7 +42,7 @@ batch_start = torch.arange(0, len(X_train, batch_size)
 
 best_mse = np.inf
 best_weights = None
-history = [] 
+history = []
 
 for epoch in range(n_epochs):
     model.train()
@@ -50,7 +50,7 @@ for epoch in range(n_epochs):
         for start in bar:
             X_batch = X_train[start : start+batch_size]
             y_batch = y_batch[start : start + batch_size]
-            
+
             y_pred = model(X_batch)
             loss = loss_fn(y_pred, y_batch)
             

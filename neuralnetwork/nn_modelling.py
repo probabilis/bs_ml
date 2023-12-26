@@ -2,14 +2,19 @@ import numpy as np
 import pandas as pd
 import torch
 import tqdm
+import sys
+import gc
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
+sys.append("../")
 from repo_utils import loading
 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 del targets_df
+
+gc.collect()
 
 input_features_amount = len(feature_cols)
 ifa = input_features_amount
@@ -25,6 +30,8 @@ model = nn.Sequential(
     nn.Linear(ifa / 2, 1)
 )
 
+print("created model sucessfully")
+
 loss_fn = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr = 0.0001)
 
@@ -35,6 +42,8 @@ X_train = torch.tensor(X_train, dtype=torch.float32)
 y_train = torch.tensor(y_train, dtype=torch.float32).reshape(-1, 1)
 X_test = torch.tensor(X_test, dtype=torch.float32)
 y_test = torch.tensor(y_test, dtype=torch.float32).reshape(-1, 1)
+
+print("prepared data sucessfully")
 
 n_epochs = 100
 batch_size = 10

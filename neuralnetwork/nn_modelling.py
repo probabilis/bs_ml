@@ -61,9 +61,10 @@ history = []
 for epoch in range(n_epochs):
     model.train()
     with tqdm.tqdm(batch_start, unit = "batch", mininterval = 0, disable = False) as bar:
+        bar.set_description(f"Epoch {epoch}")
         for start in bar:
-            X_batch = X_train[start : start+batch_size]
-            y_batch = y_test[start : start + batch_size]
+            X_batch = X_train[start : start + batch_size]
+            y_batch = y_train[start : start + batch_size]
 
             y_pred = model(X_batch)
             loss = loss_fn(y_pred, y_batch)

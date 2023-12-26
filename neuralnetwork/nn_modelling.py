@@ -22,13 +22,13 @@ ifa = input_features_amount
 print("ifa", ifa)
 
 model = nn.Sequential(
-    nn.Linear(ifa, ifa * 2),
+    nn.Linear(ifa, 1000),
     nn.ReLU(),
-    nn.Linear(ifa * 2, ifa),
+    nn.Linear(1000, 500),
     nn.ReLU(),
-    nn.Linear(ifa, ifa / 2),
+    nn.Linear(500, 250),
     nn.ReLU(),
-    nn.Linear(ifa / 2, 1)
+    nn.Linear(250, 1)
 )
 
 print("created model sucessfully")

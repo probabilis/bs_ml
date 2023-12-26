@@ -67,8 +67,7 @@ for epoch in range(n_epochs):
     history.append(mse)
     if mse < best_mse:
         best_mse = mse
-        best_weights = copy.deepcopy(model.state_dict))
-
+        best_weights = copy.deepcopy(model.state_dict)
 model.load_state_dict(best_weights)
 print(best_mse)
 plt.plot(history)

@@ -7,7 +7,7 @@ import gc
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-sys.append("../")
+sys.path.append("../")
 from repo_utils import loading
 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()

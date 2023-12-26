@@ -38,7 +38,7 @@ y_test = torch.tensor(y_test, dtype=torch.float32).reshape(-1, 1)
 
 n_epochs = 100
 batch_size = 10
-batch_start = torch.arange(0, len(X_train, batch_size)
+batch_start = torch.arange(0, len(X_train, batch_size))
 
 best_mse = np.inf
 best_weights = None

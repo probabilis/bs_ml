@@ -60,7 +60,7 @@ history = []
 
 for epoch in range(n_epochs):
     model.train()
-    with tqdm.tqdm(batch_start, unit = "batch", mininterval = 0, disable = True) as bar:
+    with tqdm.tqdm(batch_start, unit = "batch", mininterval = 0, disable = False) as bar:
         for start in bar:
             X_batch = X_train[start : start+batch_size]
             y_batch = y_test[start : start + batch_size]

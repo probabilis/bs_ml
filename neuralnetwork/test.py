@@ -10,6 +10,7 @@ Ref.: www.numer.ai
 """
 #official open-source repositories
 import pandas as pd
+import sys
 import numpy as np
 from lightgbm import LGBMRegressor, plot_importance
 import time
@@ -22,6 +23,7 @@ import torch
 import torch.optim as optim
 import torch.nn as nn 
 #############################################
+sys.path.append("../")
 from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
 #############################################

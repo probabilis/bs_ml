@@ -1,12 +1,6 @@
 """
-Project: Bachelor Project / Supervised Machine Learning / Gradient Boosting Machine based on Decision Trees
-Script: Main Program
 Author: Maximilian Gschaider
-Date: 15.11.2023
 MN: 12030366
-------------------
-Ref.: www.numer.ai
-#(some of the code from the scripts provided was used)
 """
 #official open-source repositories
 import pandas as pd
@@ -32,9 +26,9 @@ prefix = "00"
 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
-target_cyrus = "target_cyrus_v4_20"
+target = "target_cyrus_v4_20"
 
-PATH = "nn_model_0"
+nn_model_name = "nn_model_0"
 
 ifa = len(feature_cols)
 
@@ -48,29 +42,21 @@ model_nn = nn.Sequential(
     nn.Linear(250, 1)
 )
 
-model_nn.load_state_dict(torch.load(PATH))
+model_nn.load_state_dict(torch.load(nn_model_name))
 model_nn.eval()
 
-target_candidates = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-print(target_candidates)
 #############################################
 #GBM MODEL training for the given targets
 
 st = time.time()
 
-models = {}
-for target in target_candidates:
-    print(f"train GBM model on {target}")
-    model = LGBMRegressor(
+model_gbm = LGBMRegressor(
         n_estimators = 6352,
         learning_rate = 0.02,
         max_depth = 1,
         colsample_bytree = 0.9
     )
-    model.fit(train[feature_cols], train[target])
-    models[target] = model
-
-print(f'It takes %s minutes for training all {len(target_candidates)} models :' %((time.time()-st)/60))
+model_gbm.fit(train[feature_cols], train[target])
 
 #############################################
 validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns=["era", "data_type"] + feature_cols + target_cols) 
@@ -90,40 +76,29 @@ validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 X_val = torch.tensor(validation[feature_cols].values, dtype = torch.float32, requires_grad = True)
 
-#LGBM models
-for target in target_candidates:
-    validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
-
-#X_val = X_val.detach().numpy()
+#LGBM model
+validation[f"prediction_{target}_gbm"] = model_gbm.predict(validation[feature_cols])
 
 #NN model
-    
-y_pred = model_nn(X_val)
-y_pred = y_pred.detach().numpy()
-
-validation[f"prediction_{target_cyrus}_nn"] = y_pred
-
+#y_pred = model_nn(X_val).detach().numpy()
+#y_pred = y_pred.detach().numpy()
+validation[f"prediction_{target}_nn"] = model_nn(X_val).detach().numpy()
 
 #############################################
 #function for cumulative correlation score
-
-def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
+def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> dict:    
     correlations = {}
     cumulative_correlations = {}
-    #GBM
-    for target in target_candidates:
-        correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
-        cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
-    
-    #NN
-    correlations[f"prediction_{target_cyrus}_nn"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target_cyrus}_nn"], d["target"]))
-    cumulative_correlations[f"prediction_{target_cyrus}_nn"] = correlations[f"prediction_{target_cyrus}_nn"].cumsum()
-
+    for model in models:
+        correlations[f"prediction_{target}_{model}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}_{model}"], d["target"]))
+        cumulative_correlations[f"prediction_{target}_{model}"] = correlations[f"prediction_{target}_{model}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
     if plot_save == True:
-        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_nn.png", dpi = 300)
+        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_gbm_nn.png", dpi = 300)
     return correlations, cumulative_correlations
 
-correlations, cumulative_correlations = cumulative_correlation(target_candidates, plot_save = True)
+
+models = ["gbm", "nn"]
+correlations, cumulative_correlations = cumulative_correlation_model_comparison(models, plot_save = True)

@@ -61,7 +61,7 @@ st = time.time()
 models = {}
 for target in target_candidates:
     model = LGBMRegressor(
-        n_estimators = 500,
+        n_estimators = 10,
         learning_rate = 0.1,
         max_depth = 1,
         colsample_bytree = 0.8
@@ -96,6 +96,8 @@ X_val = torch.tensor(validation[feature_cols].values, dtype = torch.float32)
 for target in target_candidates:
     print(target)
     validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
+
+X_val = X_val.detach().numpy()
 
 #NN model
 validation[f"prediction_{target_cyrus}_nn"] = model_nn(X_val)

@@ -22,6 +22,8 @@ import seaborn as sns
 from preprocessing.cross_validators import era_splitting
 from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
+start = time.time()
+
 #############################################
 #overall prefix for saving (directory management)
 prefix = "_round0_"
@@ -95,7 +97,10 @@ eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in ran
 validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 for target in target_candidates:
+    #LGBM models
     validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
+    #NN models
+    validation[f"prediction_{target}_nn"] = model(validation[feature_cols])
     
 pred_cols = [f"prediction_{target}" for target in target_candidates]
 
@@ -214,6 +219,7 @@ print(summary_metrics_ensemble_df)
 
 #############################################
 #feature neutralization
+feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 feature_sets = feature_metadata["feature_sets"]
 
 sizes = ["small", "medium", "all"]

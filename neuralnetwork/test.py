@@ -36,14 +36,16 @@ target_cyrus = "target_cyrus_v4_20"
 
 PATH = "nn_model_0"
 
+ifa = len(feature_cols)
+
 model_nn = nn.Sequential(
-    nn.Linear(8, 24),
+    nn.Linear(ifa, 1000),
     nn.ReLU(),
-    nn.Linear(24, 12),
+    nn.Linear(1000, 500),
     nn.ReLU(),
-    nn.Linear(12, 6),
+    nn.Linear(500, 250),
     nn.ReLU(),
-    nn.Linear(6, 1)
+    nn.Linear(250, 1)
 )
 
 model_nn.load_state_dict(torch.load(PATH))

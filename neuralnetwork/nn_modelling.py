@@ -5,6 +5,7 @@ import tqdm
 import sys
 import gc
 import copy
+import matplotlib.pyplot as plt
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader

@@ -4,6 +4,7 @@ import torch
 import tqdm
 import sys
 import gc
+import copy
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader

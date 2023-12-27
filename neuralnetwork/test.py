@@ -100,7 +100,11 @@ for target in target_candidates:
 #X_val = X_val.detach().numpy()
 
 #NN model
-validation[f"prediction_{target_cyrus}_nn"] = model_nn(X_val)
+    
+y_pred = model_nn(X_val)
+y_pred = y_pred.detach().numpy()
+
+validation[f"prediction_{target_cyrus}_nn"] = y_pred
 
 
 #############################################

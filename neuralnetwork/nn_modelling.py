@@ -34,7 +34,7 @@ model = nn.Sequential(
 print("created model sucessfully")
 
 loss_fn = nn.MSELoss()
-optimizer = optim.Adam(model.parameters(), lr = 0.1)
+optimizer = optim.Adam(model.parameters(), lr = 0.01)
 
 target = "target_cyrus_v4_20"
 
@@ -50,7 +50,7 @@ gc.collect()
 print("prepared data sucessfully")
 
 n_epochs = 10
-batch_size = 5_000
+batch_size = 500
 batch_start = torch.arange(0, len(X_train), batch_size)
 
 best_mse = np.inf

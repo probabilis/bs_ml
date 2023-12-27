@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 #############################################
 sys.path.append("../")
-from repo_utils import loading
+from repo_utils import fontsize,fontsize_title, loading
 
 #############################################
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
@@ -96,7 +96,16 @@ for epoch in range(n_epochs):
 #############################################
 torch.save(model.state_dict(), "nn_model_0")
 model.load_state_dict(best_weights)
+
 print(best_mse)
-plt.plot(history)
-plt.savefig("mse_nn_test.png")
+fig, ax = plt.subplots(1)
+fig.set_size_inches(10,6)
+
+ax.set_title('Deviance $\\Delta$ / MSE over epoch iterations $i$ from Neural Network (PyTorch)', fontsize = fontsize_title)
+ax.legend(loc='upper right', fontsize = fontsize)
+ax.set_xlabel('Epoch iterations $i$', fontsize = fontsize)
+ax.set_ylabel('Deviance $\Delta$ / MSE ', fontsize = fontsize)
+ax.plot(history)
+fig.tight_layout()
+plt.savefig("loss_deviance_mse_nn.png")
 plt.show()

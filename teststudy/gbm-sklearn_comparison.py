@@ -46,8 +46,7 @@ def gbm_scratch_sklearn_mse_comparison(plot_save) -> None:
             mse_scratch = mean_squared_error(Y, y_hat)
         else:
             y_hat = model.predict(X)
-        
-    #print('MSE of model ' + str(model) + str(' : '), round(mse_scratch,3))
+
     ################################
 
     for i, Y_pred in enumerate(sklearn_gbm.staged_predict(X)):

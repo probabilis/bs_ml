@@ -60,16 +60,14 @@ st = time.time()
 
 models = {}
 for target in target_candidates:
+    print(f"train GBM model on {target}")
     model = LGBMRegressor(
-        n_estimators = 100,
-        learning_rate = 0.1,
+        n_estimators = 6352,
+        learning_rate = 0.02,
         max_depth = 1,
-        colsample_bytree = 0.8
+        colsample_bytree = 0.9
     )
     model.fit(train[feature_cols], train[target])
-    
-    #plot_importance(model, title = f'Feature importance of GBDT model over target : {target}',max_num_features = 30, figsize = (16,8), dpi = 300)
-    #plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
 print(f'It takes %s minutes for training all {len(target_candidates)} models :' %((time.time()-st)/60))
@@ -94,7 +92,6 @@ X_val = torch.tensor(validation[feature_cols].values, dtype = torch.float32, req
 
 #LGBM models
 for target in target_candidates:
-    print(target)
     validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
 
 #X_val = X_val.detach().numpy()

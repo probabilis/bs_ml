@@ -49,7 +49,7 @@ gc.collect()
 print("prepared data sucessfully")
 
 n_epochs = 2
-batch_size = 5
+batch_size = 5_000
 batch_start = torch.arange(0, len(X_train), batch_size)
 
 best_mse = np.inf

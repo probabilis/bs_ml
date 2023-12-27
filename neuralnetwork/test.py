@@ -61,7 +61,7 @@ st = time.time()
 models = {}
 for target in target_candidates:
     model = LGBMRegressor(
-        n_estimators = 5000,
+        n_estimators = 500,
         learning_rate = 0.1,
         max_depth = 1,
         colsample_bytree = 0.8
@@ -95,7 +95,7 @@ for target in target_candidates:
     validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
 
 #NN model
-validation[f"prediction_{target_cyrus}_nn"] = model_nn(validation[feature_cols])
+validation[f"prediction_{target_cyrus}_nn"] = model_nn(validation[feature_cols].values)
 
 
 #############################################

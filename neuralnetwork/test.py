@@ -22,7 +22,6 @@ import torch
 import torch.optim as optim
 import torch.nn as nn 
 #############################################
-from preprocessing.cross_validators import era_splitting
 from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
 #############################################

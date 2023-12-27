@@ -90,9 +90,11 @@ validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 #############################################
 
+X_val = torch.tensor(validation[feature_cols], dtype = torch.float32)
+
 #LGBM models
 for target in target_candidates:
-    validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
+    validation[f"prediction_{target}"] = models[target].predict(X_val)
 
 #NN model
 validation[f"prediction_{target_cyrus}_nn"] = model_nn(validation[feature_cols].values)

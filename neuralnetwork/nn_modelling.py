@@ -33,7 +33,7 @@ model = nn.Sequential(
 print("created model sucessfully")
 
 loss_fn = nn.MSELoss()
-optimizer = optim.Adam(model.parameters(), lr = 0.0001)
+optimizer = optim.Adam(model.parameters(), lr = 0.1)
 
 target = "target_cyrus_v4_20"
 
@@ -48,8 +48,8 @@ gc.collect()
 
 print("prepared data sucessfully")
 
-n_epochs = 10
-batch_size = 100
+n_epochs = 2
+batch_size = 5
 batch_start = torch.arange(0, len(X_train), batch_size)
 
 best_mse = np.inf
@@ -81,6 +81,9 @@ for epoch in range(n_epochs):
     if mse < best_mse:
         best_mse = mse
         best_weights = copy.deepcopy(model.state_dict())
+        print(best_weights)
+torch.save(model.state_dict(), "nn_model_0")
+
 model.load_state_dict(best_weights)
 print(best_mse)
 plt.plot(history)

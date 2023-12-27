@@ -28,6 +28,16 @@ prefix = "00"
 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
-last_train_era = int(train["era"].unique()[-1])
-print(last_train_era)
+#last_train_era = int(train["era"].unique()[-1])
+#print(last_train_era)
 
+
+validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns=["era", "data_type"] + feature_cols + target_cols) 
+validation = validation[validation["data_type"] == "validation"]
+
+del validation["data_type"]
+
+validation = validation[validation["era"].isin(validation["era"].unique()[::4])]
+
+
+validation[f"prediction_{target}_nn"] = model(validation[feature_cols])

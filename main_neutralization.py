@@ -35,14 +35,12 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
 
-#hyperparameter csv file
-#filename = "params_bayes_ip=10_ni=100_2023-09-23_n=300.csv"
-#filename = "params_bayes_ip=10_ni=100_2023-11-25_n=full.csv"
+#hyperparameters CSV file
 filename = "params_bayes_ip=10_ni=100_2023-12-18_n=full.csv"
 
 max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
+print("hyperparameter loading check")
 
-print("loading check")
 #############################################
 #defining the target candidates for the ensemble model
 
@@ -54,8 +52,12 @@ least_correlated_targets = least_correlated(target_correlations_20, amount = 2)
 #############################################
 #least correlated targets plus cyrus and nomi
 
-top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
-#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20","target_ralph_v4_20","target_bravo_v4_20"]
+#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
+top_targets = ["target_cyrus_v4_20",
+               "target_nomi_v4_20",
+               "target_victor_v4_20",
+               "target_ralph_v4_20",
+               "target_bravo_v4_20"]
 target_candidates = least_correlated_targets.extend(top_targets)
 
 top_targets.extend(least_correlated_targets)
@@ -116,6 +118,9 @@ def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    plt.suptitle("Cumulative Correlation of validation predictions")
+    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_{'max'}$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
+
     #Scumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
@@ -185,7 +190,9 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
         cumulative_correlations[col] = correlations[col].cumsum() 
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions incl. ensemble model", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    cumulative_correlations.plot(figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+    plt.suptitle("Cumulative Correlation of validation predictions incl. ensemble model")
+    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_{'max'}$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
@@ -219,6 +226,7 @@ print(summary_metrics_ensemble_df)
 
 #############################################
 #feature neutralization
+
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 feature_sets = feature_metadata["feature_sets"]
 

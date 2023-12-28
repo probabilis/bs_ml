@@ -2,16 +2,16 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#official open-source repositories
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 from datetime import date
 import seaborn as sns
-#own modules
 sys.path.append('../')
 from repo_utils import repo_path, fontsize, fontsize_title
+
+#############################################
 
 def statistics(df, type_, features):
 	"""

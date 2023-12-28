@@ -2,12 +2,9 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-########################################
-#official open-source repositories
 import sys
 import matplotlib.pyplot as plt
 import pandas as pd
-#own modules
 sys.path.append('../')
 from repo_utils import repo_path, fontsize, fontsize_title
 
@@ -15,8 +12,7 @@ from repo_utils import repo_path, fontsize, fontsize_title
 #hyperparameters
 bo_file = "params_bayes_ip=10_ni=100_2023-12-18_n=full.txt"
 
-
-with open(bo_file) as file:
+with open(repo_path + "/outputs/" + bo_file) as file:
     lines = file.readlines()
 
     count = 0
@@ -26,8 +22,6 @@ with open(bo_file) as file:
     for line in lines:
         count += 1
         Line = line.strip()
-        #print(Line)
-
         if not count % 2:
             Dict = eval(Line)
             
@@ -63,7 +57,7 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(12,6)
 
-    fig.suptitle("Scatter plot of objective function $Z_F(x)$ (numer.ai) over the hyperparameter space", fontsize = fontsize_title)
+    fig.suptitle("Scatter plot of objective function $Z_F(x)$ iterations from BO over the hyperparameter space", fontsize = fontsize_title)
 
     cm = plt.cm.get_cmap('Spectral')
     im_1 = axs[0].scatter(df["max_depth"], df["n_estimators"], c = df["target"], cmap = cm, s = 100)
@@ -85,4 +79,4 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     plt.show()
 
 
-plot_hyperparameter_scatter_plot(save_plot = False)
+plot_hyperparameter_scatter_plot(save_plot = True)

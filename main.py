@@ -8,7 +8,6 @@ MN: 12030366
 Ref.: www.numer.ai
 #(some of the code from the scripts provided was used)
 """
-#official open-source repositories
 import pandas as pd
 import numpy as np
 from lightgbm import LGBMRegressor, plot_importance
@@ -17,13 +16,14 @@ from datetime import date
 import json
 import gc
 import matplotlib.pyplot as plt
-import seaborn as sns
 #############################################
-from preprocessing.cross_validators import era_splitting
 from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
 
-start = time.time()
+#############################################
+#############################################
+#############################################
 
+start = time.time()
 #############################################
 #overall prefix for saving (directory management)
 prefix = "_round0_"
@@ -34,7 +34,6 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 #############################################
 #current best hyperparamter configuration for giving training dataframe determined through bayesian optimization
-
 #hyperparameters CSV file
 filename = "params_bayes_ip=10_ni=100_2023-12-18_n=full.csv"
 
@@ -43,33 +42,29 @@ print("hyperparameter loading check")
 
 #############################################
 #defining the target candidates for the ensemble model
-
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
 
 least_correlated_targets = least_correlated(target_correlations_20, amount = 2)
 
 #############################################
-#least correlated targets plus cyrus and nomi
+#target candidates = best performing (= top) targets plus least correlated target
 
-#top_targets = ["target_cyrus_v4_20","target_nomi_v4_20","target_victor_v4_20"]
 top_targets = ["target_cyrus_v4_20",
                "target_nomi_v4_20",
                "target_victor_v4_20",
                "target_ralph_v4_20",
                "target_bravo_v4_20"]
-target_candidates = least_correlated_targets.extend(top_targets)
 
-top_targets.extend(least_correlated_targets)
-target_candidates = top_targets
-print(target_candidates)
+targets = top_targets.extend(least_correlated_targets)
+
 #############################################
-#MODEL training for the given targets
+#GBM model training for the given targets
 
 st = time.time()
 
 models = {}
-for target in target_candidates:
+for target in targets:
     model = LGBMRegressor(
         n_estimators = n_trees,
         learning_rate=learning_rate,
@@ -82,7 +77,8 @@ for target in target_candidates:
     plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_feature_importance_{target}.png", dpi = 300)
     models[target] = model
 
-print(f'It takes %s minutes for training all {len(target_candidates)} models :' %((time.time()-st)/60))
+gc.collect()
+print(f'It takes %s minutes for training all {len(targets)} models :' %((time.time()-st)/60))
 
 #############################################
 #loading validation data v4.2
@@ -98,87 +94,24 @@ last_train_era = int(train["era"].unique()[-1])
 eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in range(4)]]
 validation = validation[~validation["era"].isin(eras_to_embargo)]
 
-for target in target_candidates:
-    #LGBM models
+for target in targets:
     validation[f"prediction_{target}"] = models[target].predict(validation[feature_cols])
-    #NN models
-    validation[f"prediction_{target}_nn"] = model(validation[feature_cols])
     
-pred_cols = [f"prediction_{target}" for target in target_candidates]
+pred_cols = [f"prediction_{target}" for target in targets]
 
-#############################################
-#function for cumulative correlation score
-
-def cumulative_correlation(target_candidates : list, plot_save : bool) -> dict:
-    correlations = {}
-    cumulative_correlations = {}
-    for target in target_candidates:
-        correlations[f"prediction_{target}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}"], d["target"]))
-        cumulative_correlations[f"prediction_{target}"] = correlations[f"prediction_{target}"].cumsum()
-
-    cumulative_correlations = pd.DataFrame(cumulative_correlations)
-    cumulative_correlations.plot(title="Cumulative Correlation of validation predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
-    plt.suptitle("Cumulative Correlation of validation predictions")
-    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_{'max'}$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
-
-    #Scumulative_correlations.to_csv(repo_path + "/rounds/" + "val_pred.csv")
-    if plot_save == True:
-        plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions.png", dpi = 300)
-    return correlations, cumulative_correlations
-
-correlations, cumulative_correlations = cumulative_correlation(target_candidates, plot_save = True)
-
-#############################################
-#function for summary metrics statistics for all different targets
-
-def summary_metrics(target_candidates : list, correlations : pd.DataFrame, cumulative_correlations : pd.DataFrame) -> pd.DataFrame:
-    summary_metrics = {}
-    for target in target_candidates:
-        # per era correlation between this target and cyrus 
-        mean_corr_with_cryus = validation.groupby("era").apply(lambda d: d[target].corr(d["target_cyrus_v4_20"])).mean()
-        # per era correlation between predictions of the model trained on this target and cyrus
-        mean = correlations[f"prediction_{target}"].mean()
-        std = correlations[f"prediction_{target}"].std()
-        sharpe = mean / std
-        rolling_max = cumulative_correlations[f"prediction_{target}"].expanding(min_periods=1).max()
-        max_drawdown = (rolling_max - cumulative_correlations[f"prediction_{target}"]).max()
-        summary_metrics[f"prediction_{target}"] = {
-            "mean": mean,
-            "std": std,
-            "sharpe": sharpe,
-            "max_drawdown": max_drawdown,
-            "mean_corr_with_cryus": mean_corr_with_cryus,
-        }
-    pd.set_option('display.float_format', lambda x: '%f' % x)
-    summary = pd.DataFrame(summary_metrics).T
-    return summary
-
-summary_metrics_targets_df = summary_metrics(target_candidates, correlations, cumulative_correlations)
-summary_metrics_targets_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_summary_metrics_targets.csv")
-print(summary_metrics_targets_df)
-
-#############################################
-#############################################
 #############################################
 #ENSEMBLE modeling
 
-# Ensemble predictions together with a simple average
-numerai_selected_targets = ["target_cyrus_v4_20", "target_victor_v4_20"]
-
-#favorite_targets = [element for element in least_correlated_targets[0:2]]
-favorite_targets = target_candidates
-favorite_targets.extend(target for target in numerai_selected_targets if target not in favorite_targets)
-
-print(favorite_targets)
-
-ensemble_cols = [f"prediction_{target}" for target in favorite_targets]
+ensemble_cols = [f"prediction_{target}" for target in targets]
 #ensure that the ensemble score are ranked by percentile (pct = True)
 validation["ensemble"] = validation.groupby("era")[ensemble_cols].rank(pct=True).mean(axis=1)
 
 # Print the ensemble predictions
 pred_cols = ensemble_cols + ["ensemble"]
-validation[pred_cols]
+#validation[pred_cols]
 
+#############################################
+#############################################
 #############################################
 #ENSEMBLE model performance
 
@@ -225,7 +158,9 @@ summary_metrics_ensemble_df.to_csv(repo_path + "/rounds/" + f"{date.today()}{pre
 print(summary_metrics_ensemble_df)
 
 #############################################
-#feature neutralization
+#############################################
+#############################################
+#FEATURE neutralization
 
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 feature_sets = feature_metadata["feature_sets"]
@@ -239,7 +174,7 @@ for size in sizes:
         # intersection of feature sets
         subgroups[size][group] = set(feature_sets[size]).intersection(set(feature_sets[group]))
 
-# as data frame
+#############################################
 pd.DataFrame(subgroups).applymap(len).sort_values(by="all", ascending=False)
 
 for group in groups:
@@ -248,7 +183,7 @@ for group in groups:
     validation[f"neutralized_{group}"] = neutralized.reset_index().set_index("id")["ensemble"] 
 
 prediction_cols_groups = ["ensemble"] + [f"neutralized_{group}" for group in groups]
-print(prediction_cols_groups)
+
 correlations_neutral = {}
 cumulative_correlations_neutral = {}
 for col in prediction_cols_groups:
@@ -292,7 +227,7 @@ def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
     # make predictions using all features
     predictions = pd.DataFrame(index = live_features.index)
 
-    for target in favorite_targets:
+    for target in targets:
         predictions[target] = models[target].predict(live_features[feature_cols])
         
     # ensemble predictions

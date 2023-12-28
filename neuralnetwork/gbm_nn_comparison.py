@@ -51,7 +51,7 @@ model_nn.eval()
 st = time.time()
 
 model_gbm = LGBMRegressor(
-        n_estimators = 6352,
+        n_estimators = 100,#6352
         learning_rate = 0.02,
         max_depth = 1,
         colsample_bytree = 0.9

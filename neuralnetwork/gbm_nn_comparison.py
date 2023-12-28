@@ -28,7 +28,7 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 target = "target_cyrus_v4_20"
 
-nn_model_name = "nn_model_1"
+nn_model_name = "nn_model_0"
 
 ifa = len(feature_cols)
 
@@ -51,7 +51,7 @@ model_nn.eval()
 st = time.time()
 
 model_gbm = LGBMRegressor(
-        n_estimators = 100,#6352
+        n_estimators = 50,#6352
         learning_rate = 0.02,
         max_depth = 1,
         colsample_bytree = 0.9
@@ -91,13 +91,12 @@ def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> 
     cumulative_correlations = {}
     for model in models:
         correlations[f"prediction_{target}_{model}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}_{model}"], d["target"]))
-        print( correlations[f"prediction_{target}_{model}"] )
         cumulative_correlations[f"prediction_{target}_{model}"] = correlations[f"prediction_{target}_{model}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions / GBM and NN comparison", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
     if plot_save == True:
-        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_gbm_nn.png", dpi = 300)
+        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_gbm_nn_0.png", dpi = 300)
     return correlations, cumulative_correlations
 
 

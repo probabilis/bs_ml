@@ -94,7 +94,7 @@ for epoch in range(n_epochs):
         print("mse :", best_mse)
 
 #############################################
-torch.save(model.state_dict(), f"nn_model_00_n_epochs={n_epochs}_batch_size={batch_size}")
+torch.save(model.state_dict(), f"nn_model_n_epochs={n_epochs}_batch_size={batch_size}")
 model.load_state_dict(best_weights)
 
 print(best_mse)

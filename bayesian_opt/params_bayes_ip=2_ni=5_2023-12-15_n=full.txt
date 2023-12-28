@@ -1,8 +1,0 @@
-Iteration 0: 
-	{'target': -0.008163388112584703, 'params': {'colsample_bytree': 0.3560753685615795, 'learning_rate': 0.10184782896644397, 'max_depth': 1.385332485043934, 'n_estimators': 47302.82333282711}}Iteration 1: 
-	{'target': -0.02717013434718769, 'params': {'colsample_bytree': 0.6367148539528712, 'learning_rate': 0.02684936836660739, 'max_depth': 2.2474013897833878, 'n_estimators': 45523.389697251856}}Iteration 2: 
-	{'target': -0.06192188407505754, 'params': {'colsample_bytree': 0.8985365063052428, 'learning_rate': 0.06930787409179488, 'max_depth': 1.562002136785693, 'n_estimators': 47295.73382816236}}Iteration 3: 
-	{'target': -0.08221578974576374, 'params': {'colsample_bytree': 0.49345242392835775, 'learning_rate': 0.0818935246806518, 'max_depth': 5.910929129701303, 'n_estimators': 20305.02660022089}}Iteration 4: 
-	{'target': -0.11203863295557367, 'params': {'colsample_bytree': 0.9051852202146788, 'learning_rate': 0.049021072758179615, 'max_depth': 5.2514176029681225, 'n_estimators': 42467.49944817686}}Iteration 5: 
-	{'target': -0.08140713674031623, 'params': {'colsample_bytree': 0.5552539754631296, 'learning_rate': 0.11956152906089902, 'max_depth': 9.118670585060089, 'n_estimators': 25101.435169773682}}Iteration 6: 
-	{'target': -0.08110890946844065, 'params': {'colsample_bytree': 0.8668068276047708, 'learning_rate': 0.09908639522289393, 'max_depth': 6.644055824340954, 'n_estimators': 45521.495087996984}}

@@ -2,8 +2,10 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-########################################
-#official open-source repositories
+"""
+Author: Maximilian Gschaider
+MN: 12030366
+"""
 import pandas as pd
 import numpy as np
 

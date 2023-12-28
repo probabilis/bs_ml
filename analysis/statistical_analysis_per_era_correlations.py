@@ -2,32 +2,20 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#official open-source repositories
 import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-#############################################
 sys.path.append('../')
-from repo_utils import repo_path, gh_repos_path, numerai_corr, fontsize, fontsize_title
-from preprocessing.cross_validators import era_splitting
+from repo_utils import repo_path, gh_repos_path, numerai_corr, loading, fontsize, fontsize_title
 
 #############################################
 
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
-
-feature_cols = feature_metadata["feature_sets"]["medium"]
-target_cols = feature_metadata["targets"]
-
-#loading training dataset v4.2
-train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 
 #############################################
-
-df = era_splitting(train)
-
-feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
 feature_sets = feature_metadata["feature_sets"]
 
@@ -45,7 +33,6 @@ subgroups_df = pd.DataFrame(subgroups).applymap(len).sort_values(by="all", ascen
 
 feature_cols = feature_metadata["feature_sets"]["medium"]
 
-#print(feature_cols)
 target_cols = feature_metadata["targets"]
 train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
 

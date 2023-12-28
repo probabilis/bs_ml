@@ -2,45 +2,27 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#official open-source repositories
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 import json
 import gc
-#############################################
 sys.path.append('../')
-from repo_utils import gh_repos_path
+from repo_utils import gh_repos_path, loading
 from statistical_analysis_tools import statistics, plot_statistics, histogram, overall_statistics, plot_correlations
-from preprocessing.cross_validators import era_splitting
 
 #############################################
+
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
-feature_cols = feature_metadata["feature_sets"]["medium"]
-target_cols = feature_metadata["targets"]
-
-#loading training dataset v4.2
-train = pd.read_parquet(gh_repos_path + "/train.parquet", columns=["era"] + feature_cols + target_cols)
-
-#############################################
-#performing subsampling of the initial training dataset due to performance (era splitting)
-train = era_splitting(train)
-#start garbage collection interface / full collection
 gc.collect()
 
 #############################################
 
 feature_sets = feature_metadata["feature_sets"]
 
-assert train["target"].equals(train["target_cyrus_v4_20"])
-target_names = target_cols[1:]
-targets_df = train[["era"] + target_names]
-
-t20s = [t for t in target_names if t.endswith("_20")]
-
-#############################################
 #############################################
 #############################################
 #FEATURE statistical analysis tests
@@ -72,7 +54,6 @@ print("feature correlation plot successfully created")
 
 del df_st, mean, var
 
-#############################################
 #############################################
 #############################################
 #TARGET statistical analysis tests

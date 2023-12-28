@@ -80,9 +80,9 @@ X_val = torch.tensor(validation[feature_cols].values, dtype = torch.float32, req
 validation[f"prediction_{target}_gbm"] = model_gbm.predict(validation[feature_cols])
 
 #NN model
-#y_pred = model_nn(X_val).detach().numpy()
-#y_pred = y_pred.detach().numpy()
-validation[f"prediction_{target}_nn"] = model_nn(X_val).detach().numpy()
+y_pred = model_nn(X_val) #.detach().numpy()
+y_pred = y_pred.detach().numpy()
+validation[f"prediction_{target}_nn"] = y_pred
 
 #############################################
 #function for cumulative correlation score
@@ -91,6 +91,7 @@ def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> 
     cumulative_correlations = {}
     for model in models:
         correlations[f"prediction_{target}_{model}"] = validation.groupby("era").apply(lambda d: numerai_corr(d[f"prediction_{target}_{model}"], d["target"]))
+        print( correlations[f"prediction_{target}_{model}"] )
         cumulative_correlations[f"prediction_{target}_{model}"] = correlations[f"prediction_{target}_{model}"].cumsum()
 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)

@@ -28,7 +28,7 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 target = "target_cyrus_v4_20"
 
-nn_model_name = "nn_model_0"
+nn_model_name = "nn_model_1"
 
 ifa = len(feature_cols)
 

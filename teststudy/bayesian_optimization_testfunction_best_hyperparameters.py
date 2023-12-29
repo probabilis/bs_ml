@@ -84,12 +84,12 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(12,6)
 
-    fig.suptitle("Scatter Plot of objective function $Z_F(x)$ over the hyperparameter space", fontsize = fontsize_title)
+    fig.suptitle("Scatter Plot of objective function $Z_F(x)$ BO iterations over the hyperparameter space", fontsize = fontsize_title)
 
     cm = plt.cm.get_cmap('Spectral')
     im_1 = axs[0].scatter(df["max_depth"], df["n_estimators"], c = df["target"], cmap = cm, s = 100)
     axs[0].set_xlabel("max. depth / $d_{max}$", fontsize = fontsize)
-    axs[0].set_ylabel("nr. of trees / $n_{trees}$ = m", fontsize = fontsize)
+    axs[0].set_ylabel("nr. of trees / $n_{trees}$ = $m$", fontsize = fontsize)
     cbar = plt.colorbar(im_1)
     cbar.set_label('$Z_F(x)$', rotation=90, fontsize = fontsize)
 
@@ -101,7 +101,7 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
 
     fig.tight_layout()
     if save_plot == True:
-        plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_hyperparameters_scatter_plot_2.png", dpi=300)
+        plt.savefig(repo_path + "/figures/" + "gbm_with_decision_tree_hyperparameters_scatter_plot.png", dpi=300)
     plt.show()
 
 

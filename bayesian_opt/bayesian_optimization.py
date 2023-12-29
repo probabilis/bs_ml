@@ -4,7 +4,7 @@ MN: 12030366
 """
 import pandas as pd
 from lightgbm import LGBMRegressor
-from bayes_opt import BayesianOptimization, SequentialDomainReductionTransformer
+from bayes_opt import BayesianOptimization
 import time
 from datetime import date
 import gc
@@ -16,7 +16,6 @@ from preprocessing.cross_validators import era_splitting
 from preprocessing.pca_dimensional_reduction import dim_reduction
 from repo_utils import repo_path, loading
 
-#############################################
 #############################################
 #loading all necassary data from the reposiroty utils file 
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()

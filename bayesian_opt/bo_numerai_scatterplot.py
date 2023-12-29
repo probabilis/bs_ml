@@ -57,7 +57,7 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(12,6)
 
-    fig.suptitle("Scatter plot of objective function $Z_F(x)$ iterations from BO over the hyperparameter space", fontsize = fontsize_title)
+    fig.suptitle("Scatter plot of objective function $Z_F(x)$ BO iterations over the hyperparameter space", fontsize = fontsize_title)
 
     cm = plt.cm.get_cmap('Spectral')
     im_1 = axs[0].scatter(df["max_depth"], df["n_estimators"], c = df["target"], cmap = cm, s = 100)

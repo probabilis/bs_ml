@@ -5,10 +5,7 @@ MN: 12030366
 import numpy as np
 from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
 
-"""
-Ref: 
-https://github.com/numerai/example-scripts/blob/master/analysis_and_tips.ipynb
-"""
+########################################
 
 def era_splitting(df, window = 4):
     """
@@ -25,8 +22,9 @@ https://scikit-learn.org/stable/modules/cross_validation.html
 
 TimeSeriesSplitGroups Class is written by Numerai. All Rights reserved.
 
-Because the TimeSeriesSplit class in sklearn does not use groups and won't respect era boundries, we implement
-a version that will
+Because the TimeSeriesSplit class in sklearn does not use groups and won't respect era boundries, a version has been implemented that will
+#Ref: 
+#https://github.com/numerai/example-scripts/blob/master/analysis_and_tips.ipynb
 """
 
 class TimeSeriesSplitGroups(_BaseKFold):

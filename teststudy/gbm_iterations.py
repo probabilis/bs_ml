@@ -3,12 +3,10 @@ Author: Maximilian Gschaider
 MN: 12030366
 """
 ########################################
-#official open-source repositories
 import sys
 import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
-#own modules
 sys.path.append('../')
 from from_scratch.gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X

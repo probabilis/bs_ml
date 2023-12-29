@@ -10,7 +10,6 @@ from datetime import date
 import gc
 import sys
 from sklearn.model_selection import cross_val_score
-#own modules
 sys.path.append('../')
 from testfunction import testfunction, X
 from repo_utils import repo_path

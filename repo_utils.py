@@ -2,7 +2,6 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#official open-source repositories
 import os
 import json
 from pathlib import Path

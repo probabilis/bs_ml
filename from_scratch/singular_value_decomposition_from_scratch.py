@@ -6,7 +6,6 @@
 # *Sebastian Grosinger
 # *Florian Wallner
 """
-#################################
 #--> using the SVD as reduction schematic for PCA
 
 import numpy as np

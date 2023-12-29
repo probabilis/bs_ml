@@ -3,14 +3,12 @@ Author: Maximilian Gschaider
 MN: 12030366
 """
 ########################################
-#official open-source repositories
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sys
-#own modules 
 sys.path.append('../')
 from from_scratch.gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X

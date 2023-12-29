@@ -2,8 +2,6 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-########################################
-#official open-source repositories
 from from_scratch.decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
 import numpy as np
 import pandas as pd

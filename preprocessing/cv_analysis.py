@@ -6,24 +6,20 @@ from sklearn import model_selection, metrics
 from lightgbm import LGBMRegressor
 from sklearn.model_selection import cross_val_score
 sys.path.append('../')
-from preprocessing.cross_validators import era_splitting, TimeSeriesSplitGroups 
-from utils import loading_dataset, correlation_score
+from preprocessing.cross_validators import TimeSeriesSplitGroups 
+from repo_utils import loading, correlation_score
 
 #############################################
 
-df, features, target, eras = loading_dataset()
+train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
+eras = train.era.astype(int)
 
-#############################################
-
-df_, eras_ = era_splitting(df, eras)
-
-del df ; gc.collect()
+target = "target_cyrus_v4_20"
+gc.collect()
 
 #############################################
 
 params_gbm = {"learning_rate": 0.02,"max_depth": 2,"n_estimators":1550, "colsample_bytree": 0.8}
-
-#############################################
 
 crossvalidators = [
     model_selection.KFold(5),   #classical 5 kFold CV
@@ -32,15 +28,10 @@ crossvalidators = [
     TimeSeriesSplitGroups(5) #classical time series split with eras + boundaries
 ]
 
-#def cross_validation(X,Y,eras, crossvalidators):
-
 for cv in crossvalidators:
     print(cv)
-    score = cross_val_score(LGBMRegressor(**params_gbm),df_[features],df_[target], cv = cv, n_jobs = 1, groups = eras, scoring = metrics.make_scorer(correlation_score, greater_is_better = True))
+    score = cross_val_score(LGBMRegressor(**params_gbm),train[feature_cols],train[target], cv = cv, n_jobs = 1, groups = eras, scoring = metrics.make_scorer(correlation_score, greater_is_better = True))
     print(np.mean(score))
     print('-------')
-
-#out = cross_validation(df_[features],df_[target],eras_, crossvalidators)
-
 
 

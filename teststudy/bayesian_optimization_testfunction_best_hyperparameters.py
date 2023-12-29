@@ -3,11 +3,9 @@ Author: Maximilian Gschaider
 MN: 12030366
 """
 ########################################
-#official open-source repositories
 import sys
 import matplotlib.pyplot as plt
 import pandas as pd
-#own modules
 sys.path.append('../')
 from from_scratch.gradient_boosting_from_scratch import GradientBoosting
 from testfunction import testfunction, X
@@ -82,7 +80,6 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
 
     data = {"target":bo_iterations["target"], "colsample_bytree": cbt, "learning_rate": lr,"n_estimators": nt, "max_depth": md}
     df = pd.DataFrame(data = data)
-    #print(df)
 
     fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(12,6)

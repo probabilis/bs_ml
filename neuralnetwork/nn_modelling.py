@@ -38,6 +38,8 @@ model = nn.Sequential(
 )
 
 loss_fn = nn.MSELoss()
+#Using the adpative Adam optimizer
+#https://www.lightly.ai/post/which-optimizer-should-i-use-for-my-machine-learning-project
 optimizer = optim.Adam(model.parameters(), lr = 0.01)
 
 print("created model sucessfully")
@@ -66,6 +68,7 @@ best_mse = np.inf
 best_weights = None
 history = []
 
+#Optimizer Loop
 for epoch in range(n_epochs):
     model.train()
     with tqdm.tqdm(batch_start, unit = "batch", mininterval = 0, disable = False) as bar:
@@ -101,6 +104,7 @@ print(best_mse)
 fig, ax = plt.subplots(1)
 fig.set_size_inches(10,6)
 
+#plotting the MSE over epoch iterations
 ax.set_title('Deviance $\\Delta$ / MSE over epoch iterations $i$ from Neural Network (PyTorch)', fontsize = fontsize_title)
 ax.legend(loc='upper right', fontsize = fontsize)
 ax.set_xlabel('Epoch iterations $i$', fontsize = fontsize)

@@ -2,13 +2,11 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#official open-source repositories
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import tree
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt
-#own modules
 sys.path.append('../')
 from from_scratch.decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
 from testfunction import testfunction, X

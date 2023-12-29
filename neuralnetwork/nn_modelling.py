@@ -40,7 +40,7 @@ model = nn.Sequential(
 loss_fn = nn.MSELoss()
 #Using the adpative Adam optimizer
 #https://www.lightly.ai/post/which-optimizer-should-i-use-for-my-machine-learning-project
-optimizer = optim.Adam(model.parameters(), lr = 0.01)
+optimizer = optim.Adam(model.parameters(), lr = 0.001)
 
 print("created model sucessfully")
 
@@ -60,7 +60,7 @@ gc.collect()
 print("prepared data sucessfully")
 
 #############################################
-n_epochs = 20
+n_epochs = 100
 batch_size = 50
 batch_start = torch.arange(0, len(X_train), batch_size)
 

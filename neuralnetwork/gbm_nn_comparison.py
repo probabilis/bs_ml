@@ -95,7 +95,7 @@ def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> 
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(title="Cumulative Correlation of validation predictions / GBM and NN comparison", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
     if plot_save == True:
-        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_gbm_nn_0.png", dpi = 300)
+        plt.savefig(repo_path + "/neuralnetwork/" + f"{date.today()}_cumulative_correlation_of_validation_predicitions_gbm_nn_0.png", dpi = 300)
     return correlations, cumulative_correlations
 
 

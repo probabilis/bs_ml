@@ -48,8 +48,8 @@ print("created model sucessfully")
 #split up training data for back-propagation
 
 #X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
-X_train = torch.tensor(X_train.values, dtype=torch.float32)
-y_train = torch.tensor(y_train.values, dtype=torch.float32).reshape(-1, 1)
+X_train = torch.tensor(train[feature_cols].values, dtype=torch.float32)
+y_train = torch.tensor(train[feature_cols].values, dtype=torch.float32).reshape(-1, 1)
 
 del train
 gc.collect()
@@ -66,8 +66,8 @@ eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in ran
 validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 
-X_test = torch.tensor(validation[feature_cols])
-Y_test = torch.tensor(validation["target"])
+X_test = torch.tensor(validation[feature_cols].values)
+Y_test = torch.tensor(validation["target"].values)
 
 #X_test = torch.tensor(X_test.values, dtype=torch.float32)
 #y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)

@@ -61,7 +61,7 @@ validation = validation[validation["data_type"] == "validation"]
 del validation["data_type"]
 
 validation = validation[validation["era"].isin(validation["era"].unique()[::4])]
-last_train_era = int(train["era"].unique()[-1])
+last_train_era = int(X_train["era"].unique()[-1])
 eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in range(4)]]
 validation = validation[~validation["era"].isin(eras_to_embargo)]
 

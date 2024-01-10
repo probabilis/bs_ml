@@ -40,7 +40,7 @@ model = nn.Sequential(
 loss_fn = nn.MSELoss()
 #Using the adpative Adam optimizer
 #https://www.lightly.ai/post/which-optimizer-should-i-use-for-my-machine-learning-project
-optimizer = optim.Adam(model.parameters(), lr = 0.001)
+optimizer = optim.Adam(model.parameters(), lr = 0.01)
 
 print("created model sucessfully")
 

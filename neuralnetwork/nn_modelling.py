@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 #############################################
 sys.path.append("../")
-from repo_utils import fontsize,fontsize_title, loading
+from repo_utils import fontsize,fontsize_title, loading, gh_repos_path
 
 #############################################
 train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
@@ -47,20 +47,38 @@ print("created model sucessfully")
 #############################################
 #split up training data for back-propagation
 
-X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
+#X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
 X_train = torch.tensor(X_train.values, dtype=torch.float32)
 y_train = torch.tensor(y_train.values, dtype=torch.float32).reshape(-1, 1)
 
-X_test = torch.tensor(X_test.values, dtype=torch.float32)
-y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
+del train
+gc.collect()
 
-del train 
+validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns = ["era", "data_type"] + feature_cols + target_cols)
+
+validation = validation[validation["data_type"] == "validation"]
+
+del validation["data_type"]
+
+validation = validation[validation["era"].isin(validation["era"].uniqe()[::4])]
+last_train_era = int(train["era"].unique()[-1])
+eras_to_embargo = [str(era).zfill(4) for era in [last_train_era + i for i in range(4)]]
+validation = validation[~validation["era"].isin(eras_to_embargo)]
+
+
+X_test = torch.tensor(validation[feature_cols])
+Y_test = torch.tensor(validation["target"])
+
+#X_test = torch.tensor(X_test.values, dtype=torch.float32)
+#y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
+
+del validation
 gc.collect()
 
 print("prepared data sucessfully")
 
 #############################################
-n_epochs = 100
+n_epochs = 10
 batch_size = 50
 batch_start = torch.arange(0, len(X_train), batch_size)
 

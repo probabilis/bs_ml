@@ -84,20 +84,20 @@ def plot_hyperparameter_scatter_plot(save_plot) -> None:
     fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(12,6)
 
-    fig.suptitle("Scatter Plot of objective function $Z_F(x)$ BO iterations over the hyperparameter space", fontsize = fontsize_title)
+    fig.suptitle("Scatter Plot of objective function $Z_F(\\theta_i)$ BO iterations over the hyperparameter space $\\theta$", fontsize = fontsize_title)
 
     cm = plt.cm.get_cmap('Spectral')
     im_1 = axs[0].scatter(df["max_depth"], df["n_estimators"], c = df["target"], cmap = cm, s = 100)
     axs[0].set_xlabel("max. depth / $d_{max}$", fontsize = fontsize)
     axs[0].set_ylabel("nr. of trees / $n_{trees}$ = $m$", fontsize = fontsize)
     cbar = plt.colorbar(im_1)
-    cbar.set_label('$Z_F(x)$', rotation=90, fontsize = fontsize)
+    cbar.set_label('$Z_F(\\theta_i)$', rotation=90, fontsize = fontsize)
 
     im_2 = axs[1].scatter(df["learning_rate"], df["colsample_bytree"], c= df["target"], cmap = cm, s = 100)
     axs[1].set_xlabel("learning rate / $\\nu$", fontsize = fontsize)
     axs[1].set_ylabel("colsample by tree / $\\epsilon$", fontsize = fontsize)
     cbar = plt.colorbar(im_2)
-    cbar.set_label('$Z_F(x)$', rotation=90, fontsize = fontsize)
+    cbar.set_label('$Z_F(\\theta_i)$', rotation=90, fontsize = fontsize)
 
     fig.tight_layout()
     if save_plot == True:

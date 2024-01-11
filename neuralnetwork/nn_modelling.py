@@ -69,7 +69,7 @@ validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 
 X_test = torch.tensor(validation[feature_cols].values)
-y_test = torch.tensor(validation["target"].values)
+y_test = torch.tensor(validation["target"].values).reshape(-1, 1)
 
 #X_test = torch.tensor(X_test.values, dtype=torch.float32)
 #y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)

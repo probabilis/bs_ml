@@ -29,10 +29,14 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 target = "target_cyrus_v4_20"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 nn_model_name = "nn_model_n_epochs=10_batch_size=50"
 =======
-nn_model_name = "nn_model_n_epochs=100_batch_size=50"
+nn_model_name = "nn_model_n_epochs=10_batch_size=50"
 >>>>>>> e7f0502515b6b66f7b772feeb58127d6c331202f
+=======
+nn_model_name = "nn_model_n_epochs=100_batch_size=50"
+>>>>>>> a6cca36995660ea2845f1e6a6fa2f170f979ec9d
 ifa = len(feature_cols)
 
 model_nn = nn.Sequential(

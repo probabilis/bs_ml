@@ -26,7 +26,7 @@ from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading
 start = time.time()
 #############################################
 #overall prefix for saving (directory management)
-prefix = "_round0_"
+prefix = "_round0"
 
 #############################################
 #loading all necassary data from the reposiroty utils file 
@@ -57,7 +57,7 @@ top_targets = ["target_cyrus_v4_20",
                "target_bravo_v4_20"]
 
 targets = top_targets.extend(least_correlated_targets)
-
+print(targets)
 #############################################
 #GBM model training for the given targets
 

@@ -50,13 +50,13 @@ least_correlated_targets = least_correlated(target_correlations_20, amount = 2)
 #############################################
 #target candidates = best performing (= top) targets plus least correlated target
 
-top_targets = ["target_cyrus_v4_20",
+targets = ["target_cyrus_v4_20",
                "target_nomi_v4_20",
                "target_victor_v4_20",
                "target_ralph_v4_20",
                "target_bravo_v4_20"]
 
-targets = top_targets.extend(least_correlated_targets)
+targets.extend(least_correlated_targets)
 print(targets)
 #############################################
 #GBM model training for the given targets

@@ -1,0 +1,15 @@
+2024-01-14 20:01:28,390 INFO numerapi.utils: target file already exists
+2024-01-14 20:01:28,390 INFO numerapi.utils: download complete
+2024-01-14 20:01:29,922 INFO numerapi.utils: target file already exists
+2024-01-14 20:01:29,922 INFO numerapi.utils: download complete
+2024-01-14 20:01:30,917 INFO numerapi.utils: target file already exists
+2024-01-14 20:01:30,918 INFO numerapi.utils: download complete
+2024-01-14 20:01:31,894 INFO numerapi.utils: target file already exists
+2024-01-14 20:01:31,894 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+{'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+hyperparameter loading check
+Traceback (most recent call last):
+  File "/root/Documents/github_repos/bs_ml/main.py", line 67, in <module>
+    for target in targets:
+TypeError: 'NoneType' object is not iterable

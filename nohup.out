@@ -29,3 +29,51 @@ Traceback (most recent call last):
   File "/root/Documents/github_repos/bs_ml/main.py", line 67, in <module>
     for target in targets:
 TypeError: 'NoneType' object is not iterable
+2024-01-14 20:11:21,855 INFO numerapi.utils: target file already exists
+2024-01-14 20:11:21,855 INFO numerapi.utils: download complete
+2024-01-14 20:11:22,914 INFO numerapi.utils: target file already exists
+2024-01-14 20:11:22,914 INFO numerapi.utils: download complete
+2024-01-14 20:11:24,035 INFO numerapi.utils: target file already exists
+2024-01-14 20:11:24,036 INFO numerapi.utils: download complete
+2024-01-14 20:11:25,019 INFO numerapi.utils: target file already exists
+2024-01-14 20:11:25,020 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+{'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+hyperparameter loading check
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20', 'target_alan_v4_20', 'target_george_v4_20']
+It takes 618.0505771875381 minutes for training all 7 models :
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.013704 0.020590 0.665553      0.069975
+prediction_target_nomi_v4_20   0.012957 0.021410 0.605183      0.088180
+prediction_target_victor_v4_20 0.011912 0.018731 0.635965      0.078441
+prediction_target_ralph_v4_20  0.012785 0.020195 0.633056      0.063145
+prediction_target_bravo_v4_20  0.013571 0.019657 0.690386      0.057030
+prediction_target_alan_v4_20   0.005496 0.020268 0.271158      0.114004
+prediction_target_george_v4_20 0.004258 0.011208 0.379913      0.069655
+ensemble                       0.012573 0.019657 0.639622      0.083875
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.013704 0.020590 0.665553      0.069975
+prediction_target_nomi_v4_20   0.012957 0.021410 0.605183      0.088180
+prediction_target_victor_v4_20 0.011912 0.018731 0.635965      0.078441
+prediction_target_ralph_v4_20  0.012785 0.020195 0.633056      0.063145
+prediction_target_bravo_v4_20  0.013571 0.019657 0.690386      0.057030
+prediction_target_alan_v4_20   0.005496 0.020268 0.271158      0.114004
+prediction_target_george_v4_20 0.004258 0.011208 0.379913      0.069655
+ensemble                       0.012573 0.019657 0.639622      0.083875
+----predictions-----
+                  prediction
+id                          
+n0007ad006f8f1c7    0.457866
+n001a05e568cb759    0.074883
+n00259d38476c9dd    0.429300
+n00278b75749dc9d    0.229953
+n004fce213ec7aae    0.985309
+...                      ...
+nfff3779b3144492    0.687003
+nfffcf93aff747d8    0.035095
+nfffee692ea937be    0.747194
+nffffafcd5dc3bef    0.978780
+nffffd2cf83bf0e7    0.778821
+
+[4901 rows x 1 columns]
+It takes 641.6984917442004 minutes in total to run main.py.

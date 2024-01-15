@@ -51,7 +51,7 @@ print("created model sucessfully")
 X_train = torch.tensor(train[feature_cols].values, dtype=torch.float32)
 y_train = torch.tensor(train[target].values, dtype=torch.float32).reshape(-1, 1)
 
-last_train_era = int(train["era"].unique()[-2])
+last_train_era = int(train["era"].unique()[-1])
 
 del train
 gc.collect()
@@ -71,6 +71,7 @@ validation = validation[~validation["era"].isin(eras_to_embargo)]
 X_test = torch.tensor(validation[feature_cols].values, dtype = torch.float32)
 y_test = torch.tensor(validation[target].values, dtype = torch.float32).reshape(-1, 1)
 
+#needed if validation data should be extracted from training data
 #X_test = torch.tensor(X_test.values, dtype=torch.float32)
 #y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
 

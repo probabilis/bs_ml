@@ -45,7 +45,7 @@ print("hyperparameter loading check")
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
 
-least_correlated_targets = least_correlated(target_correlations_20, amount = 2)
+least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
 
 #############################################
 #target candidates = best performing (= top) targets plus least correlated target
@@ -125,7 +125,7 @@ def cumulative_correlations_ensemble(pred_cols, plot_save):
     cumulative_correlations = pd.DataFrame(cumulative_correlations)
     cumulative_correlations.plot(figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
     plt.suptitle("Cumulative Correlation of validation predictions incl. ensemble model")
-    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_{'max'}$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
+    plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_m$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
     if plot_save == True:
         plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_ensemble.png", dpi = 300)
     return correlations, cumulative_correlations
@@ -189,7 +189,9 @@ cumulative_correlations_neutral = {}
 for col in prediction_cols_groups:
     correlations_neutral[col] = validation.groupby("era").apply(lambda d: numerai_corr(d[col], d["target"]))
     cumulative_correlations_neutral[col] = correlations_neutral[col].cumsum() 
-pd.DataFrame(cumulative_correlations_neutral).plot(title="Cumulative Correlation of Neutralized Predictions", figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+pd.DataFrame(cumulative_correlations_neutral).plot(figsize=(10, 6), xlabel='eras', ylabel='$\\Sigma_i$ corr($\\tilde{y}_i$, $y_i$)')
+plt.suptitle("Cumulative Correlation of neutralized predictions of ensemble model")
+plt.title(f"GBM-DT hyperparameters: $m$ = {n_trees}, $d_m$ = {max_depth}, $\\nu$ = {learning_rate}, $\\epsilon$ = {colsample_bytree}")
 plt.savefig(repo_path + "/rounds/" + f"{date.today()}{prefix}_cumulative_correlation_of_validation_predicitions_neutralization_ensemble.png", dpi = 300)
 
 #############################################

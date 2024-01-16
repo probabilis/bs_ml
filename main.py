@@ -45,7 +45,7 @@ print("hyperparameter loading check")
 target_correlations_20 = targets_df[t20s].corr()
 target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_target_correlations_20.csv")
 
-least_correlated_targets = least_correlated(target_correlations_20, amount = 1)
+least_correlated_targets = least_correlated(target_correlations_20, amount = 0)
 
 #############################################
 #target candidates = best performing (= top) targets plus least correlated target

@@ -123,3 +123,57 @@ nffffd2cf83bf0e7    0.817996
 
 [4901 rows x 1 columns]
 It takes 550.0730792284012 minutes in total to run main.py.
+2024-01-16 19:46:18,869 INFO numerapi.utils: target file already exists
+2024-01-16 19:46:18,869 INFO numerapi.utils: download complete
+2024-01-16 19:46:19,938 INFO numerapi.utils: target file already exists
+2024-01-16 19:46:19,939 INFO numerapi.utils: download complete
+2024-01-16 19:46:20,957 INFO numerapi.utils: target file already exists
+2024-01-16 19:46:20,957 INFO numerapi.utils: starting download
+/root/Documents/github_repos/live.parquet:   0%|          | 0.00/5.95M [00:00<?, ?B/s]/root/Documents/github_repos/live.parquet: 5.96MB [00:00, 37.0MB/s]                   /root/Documents/github_repos/live.parquet: 9.66MB [00:01, 6.79MB/s]/root/Documents/github_repos/live.parquet: 11.4MB [00:01, 7.73MB/s]/root/Documents/github_repos/live.parquet: 11.9MB [00:01, 8.79MB/s]
+2024-01-16 19:46:23,332 INFO numerapi.utils: target file already exists
+2024-01-16 19:46:23,334 INFO numerapi.utils: download complete
+2024-01-16 20:01:55,709 INFO numerapi.utils: target file already exists
+2024-01-16 20:01:55,709 INFO numerapi.utils: download complete
+2024-01-16 20:01:56,792 INFO numerapi.utils: target file already exists
+2024-01-16 20:01:56,793 INFO numerapi.utils: download complete
+2024-01-16 20:01:57,892 INFO numerapi.utils: target file already exists
+2024-01-16 20:01:57,892 INFO numerapi.utils: download complete
+2024-01-16 20:01:58,872 INFO numerapi.utils: target file already exists
+2024-01-16 20:01:58,873 INFO numerapi.utils: download complete
+{'Unnamed: 0': [0], 'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+{'colsample_bytree': [0.9], 'learning_rate': [0.02], 'max_depth': [1], 'n_estimators': [6352.4]}
+hyperparameter loading check
+Amount of least correlated must be greater than zero.
+['target_cyrus_v4_20', 'target_nomi_v4_20', 'target_victor_v4_20', 'target_ralph_v4_20', 'target_bravo_v4_20']
+It takes 446.3083767215411 minutes for training all 5 models :
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.013704 0.020590 0.665553      0.069975
+prediction_target_nomi_v4_20   0.012957 0.021410 0.605183      0.088180
+prediction_target_victor_v4_20 0.011912 0.018731 0.635965      0.078441
+prediction_target_ralph_v4_20  0.012785 0.020195 0.633056      0.063145
+prediction_target_bravo_v4_20  0.013571 0.019657 0.690386      0.057030
+ensemble                       0.013839 0.020766 0.666429      0.074787
+                                   mean      std   sharpe  max_drawdown
+prediction_target_cyrus_v4_20  0.013704 0.020590 0.665553      0.069975
+prediction_target_nomi_v4_20   0.012957 0.021410 0.605183      0.088180
+prediction_target_victor_v4_20 0.011912 0.018731 0.635965      0.078441
+prediction_target_ralph_v4_20  0.012785 0.020195 0.633056      0.063145
+prediction_target_bravo_v4_20  0.013571 0.019657 0.690386      0.057030
+ensemble                       0.013839 0.020766 0.666429      0.074787
+----predictions-----
+                  prediction
+id                          
+n00168f1675ffa00    0.288136
+n002221438b7888c    0.424750
+n002e8a2c407e0f4    0.765979
+n004011e3c28ff47    0.157648
+n0042ce8c770fbfa    0.595875
+...                      ...
+nffb80f9d324fb7a    0.693486
+nffcb9292af03f51    0.196855
+nffd6e41710707fc    0.262201
+nffdd6cb85617af6    0.153359
+nffebd2cf06e3b6e    0.699816
+
+[4897 rows x 1 columns]
+It takes 467.91239769061406 minutes in total to run main.py.

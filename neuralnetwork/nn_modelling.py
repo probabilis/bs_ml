@@ -82,7 +82,7 @@ print("prepared data sucessfully")
 
 #############################################
 n_epochs = 10
-batch_size = 5000
+batch_size = 500
 batch_start = torch.arange(0, len(X_train), batch_size)
 
 best_mse = np.inf
@@ -132,5 +132,5 @@ ax.set_xlabel('Epoch iterations $i$', fontsize = fontsize)
 ax.set_ylabel('Deviance $\Delta$ / MSE ', fontsize = fontsize)
 ax.plot(history)
 fig.tight_layout()
-plt.savefig("loss_deviance_mse_nn.png")
+plt.savefig(f"loss_deviance_mse_nn_n_epochs={n_epochs}_batch_size={batch_size}.png")
 plt.show()

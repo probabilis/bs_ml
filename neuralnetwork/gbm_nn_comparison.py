@@ -28,7 +28,7 @@ train, feature_cols, target_cols, targets_df, t20s, t60s = loading()
 
 target = "target_cyrus_v4_20"
 
-nn_model_name = "nn_model_n_epochs=20_batch_size=50"
+nn_model_name = "nn_model_n_epochs=10_batch_size=400"
 ifa = len(feature_cols)
 
 model_nn = nn.Sequential(
@@ -83,6 +83,8 @@ y_pred = model_nn(X_val) #.detach().numpy()
 y_pred = y_pred.detach().numpy()
 validation[f"prediction_{target}_nn"] = y_pred
 
+print(y_pred)
+
 #############################################
 #function for cumulative correlation score
 def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> dict:
@@ -99,5 +101,7 @@ def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> 
     return correlations, cumulative_correlations
 
 
-models = ["gbm", "nn"]
+#models = ["gbm", "nn"]
+models = ["nn"]
+
 correlations, cumulative_correlations = cumulative_correlation_model_comparison(models, plot_save = True)

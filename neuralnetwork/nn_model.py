@@ -47,7 +47,7 @@ print("created model sucessfully")
 #############################################
 #split up training data for back-propagation
 
-#X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
+X_train, X_test, y_train, y_test = train_test_split(train[feature_cols], train[target], train_size=0.7, shuffle=True)
 X_train = torch.tensor(train[feature_cols].values, dtype=torch.float32)
 y_train = torch.tensor(train[target].values, dtype=torch.float32).reshape(-1, 1)
 
@@ -56,6 +56,7 @@ last_train_era = int(train["era"].unique()[-1])
 del train
 gc.collect()
 
+"""
 validation = pd.read_parquet(gh_repos_path + "/validation.parquet", columns = ["era", "data_type"] + feature_cols + target_cols)
 
 validation = validation[validation["data_type"] == "validation"]
@@ -70,12 +71,13 @@ validation = validation[~validation["era"].isin(eras_to_embargo)]
 
 X_test = torch.tensor(validation[feature_cols].values, dtype = torch.float32)
 y_test = torch.tensor(validation[target].values, dtype = torch.float32).reshape(-1, 1)
+"""
 
 #needed if validation data should be extracted from training data
-#X_test = torch.tensor(X_test.values, dtype=torch.float32)
-#y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
+X_test = torch.tensor(X_test.values, dtype=torch.float32)
+y_test = torch.tensor(y_test.values, dtype=torch.float32).reshape(-1, 1)
 
-del validation
+#del validation
 gc.collect()
 
 print("prepared data sucessfully")

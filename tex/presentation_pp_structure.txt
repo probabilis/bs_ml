@@ -1,0 +1,53 @@
+#presentation structure
+
+#page 0
+introduction + motivation
+
+#page 1
+loss function
+numerical optimization + steepest descent
+
+#page 2
+Loss function -> GBM Design
+
+#page 3
+Decision trees -> Regression trees
+
+#page 4
+Regression boosted trees
+
+#page 5
+#Regularization -> Final algorithm design
+
+#page 6
+Cross validation - uninformed / informed
+
+#page 7
+Bayesian optimization
+
+#page 8
+BO 2
+
+#page 9
+case study 0
+
+#page 10
+case study 1
+
+#page 11
+case study 2
+
+#page 12
+performance GBMDT framework
+
+#page 12
+numer.ai
+
+#page 13
+
+
+
+
+
+
+

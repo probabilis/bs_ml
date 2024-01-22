@@ -10,3 +10,4 @@ __pycache__
 nohup.out
 neuralnetwork/nohup.out
 gitus.sh
+run_main.sh

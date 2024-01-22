@@ -1,4 +1,0 @@
-,best_models,times
-CatBoost,"pca_100_CatBoost_{'learning_rate': 0.05, 'max_depth': 10, 'n_estimators': 2000, 'rsm': 0.8}.json",3026.8206803798676
-LGBM,"pca_100_LGBM_{'colsample_bytree': 0.8, 'learning_rate': 0.05, 'max_depth': 10, 'n_estimators': 2000}.json",654.609815120697
-XGB,"pca_100_XGB_{'colsample_bytree': 0.8, 'learning_rate': 0.05, 'max_depth': 10, 'n_estimators': 2000}.json",3562.229107618332

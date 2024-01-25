@@ -100,7 +100,6 @@ def propose_next_sampling_point(acquisition, X_sample, gpr, bounds, random_point
 
 ####################################################
 
-
 bounds = [-2.0, 3.0] #creating nested X array within bounds
 X = np.arange(bounds[0], bounds[1], 0.01).reshape(-1, 1) #sample points
 X_sample = np.array([[-1.9], [2.2]]) #additive noise ratio
@@ -130,13 +129,12 @@ def plot_objective_function(plot_save = True):
     plt.plot(X_sample, Y_sample, 'kx', mew=3, label='Initial samples')
     plt.xlabel("$x$", fontsize = fontsize)
     plt.ylabel("$Z(x)$", fontsize = fontsize)
-    plt.title("Objective function $Z(x) = -sin(5x) + e^{2(x-1)} - x^2$ + 1,5$x + \mathcal{N}(\cdot)$", fontsize = fontsize_title)
+    plt.title("Objective function $Z(x) = -sin(5x) + e^{2(x-1)} - x^2$ + 1,5$x + 10 + \mathcal{N}(\cdot)$", fontsize = fontsize_title)
     plt.legend()
     fig = plt.gcf()
     fig.set_size_inches(8,4)
     if plot_save == True:
-        #plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_objective.png", dpi=300)
-        plt.savefig("bayesian_optimization_from_scratch_objective.png", dpi=300)
+        plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_objective.png", dpi=300)
     plt.show()
 
 plot_objective_function()
@@ -147,7 +145,7 @@ m52 = ConstantKernel(1.0) * Matern(length_scale = 1.0, nu = 3)
 gpr = GaussianProcessRegressor(kernel = m52, alpha = noise**2)
 
 #Number of iterations which have to be made
-number_iterations = 7
+number_iterations = 8
 
 def plot_bo_iterations(X_sample, Y_sample, plot_save = True):
 
@@ -181,14 +179,12 @@ def plot_bo_iterations(X_sample, Y_sample, plot_save = True):
     #fig.suptitle(f"Bayesian optimization of scalar objetive function $F(x)$ over {n_iter} iterations with Gaussian Prior")
     plt.tight_layout()
     if plot_save == True:
-        #plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_iterations.png", dpi=300)
-        plt.savefig("bayesian_optimization_from_scratch_iterations.png", dpi=300)
+        plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_iterations.png", dpi=300)
     plt.show()
     return X_sample, Y_sample
 
 X_sample, Y_sample = plot_bo_iterations(X_sample, Y_sample)
 
 plot_convergence(X_sample, Y_sample)
-#plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_convergence_plot.png", dpi=300)
-plt.savefig("bayesian_optimization_from_scratch_convergence_plot.png", dpi=300)
+plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_convergence_plot.png", dpi=300)
 plt.show()

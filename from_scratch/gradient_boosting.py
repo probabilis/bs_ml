@@ -2,7 +2,7 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-from from_scratch.decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
+from from_scratch.decision_tree_regressor import TreeRegressor
 import numpy as np
 import pandas as pd
 
@@ -37,9 +37,9 @@ class GradientBoosting():
 	      		X : pd.DataFrame, Y : pd.DataFrame):
 
 		#hyperparameter asssignment
-		self.learning_rate = learning_rate
-		self.max_depth = max_depth 
-		self.n_trees = n_trees
+		self.learning_rate = learning_rate if learning_rate else 0.01
+		self.max_depth = max_depth if max_depth else 3
+		self.n_trees = n_trees if n_trees else 100
 		#input and output dataframe assignment
 		self.X = X
 		self.Y = Y

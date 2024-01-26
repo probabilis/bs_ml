@@ -5,17 +5,6 @@ MN: 12030366
 import numpy as np
 from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
 
-########################################
-
-def era_splitting(df, window = 4):
-    """
-    params: df 
-    window ...       overlapping window length
-    ---------------
-    return: reduced df with splitted eras
-    """
-    return df[df["era"].isin(df["era"].unique()[::window])]
-
 """
 Reference at Scikit:
 https://scikit-learn.org/stable/modules/cross_validation.html
@@ -26,6 +15,10 @@ Because the TimeSeriesSplit class in sklearn does not use groups and won't respe
 #Ref: 
 #https://github.com/numerai/example-scripts/blob/master/analysis_and_tips.ipynb
 """
+
+#BaseKFold with Shuffling and Random States will be from Sklear (Sci-Kit) imported
+
+########################################
 
 class TimeSeriesSplitGroups(_BaseKFold):
 

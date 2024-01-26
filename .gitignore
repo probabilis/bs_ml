@@ -1,3 +1,6 @@
+*.sh
+*.pyc
+ **/__pycache__/
 env
 test
 tables

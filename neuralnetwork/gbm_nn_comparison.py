@@ -6,20 +6,16 @@ MN: 12030366
 import pandas as pd
 import sys
 import numpy as np
-from lightgbm import LGBMRegressor, plot_importance
+from lightgbm import LGBMRegressor
 import time
 from datetime import date
-import json
 import gc
 import matplotlib.pyplot as plt
-import seaborn as sns
 import torch
-import torch.optim as optim
-import torch.nn as nn 
 #############################################
 sys.path.append("../")
-from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr, neutralize, least_correlated
-
+from repo_utils import gh_repos_path, repo_path, loading, hyperparameter_loading, numerai_corr
+from nn_model import model as model_nn
 #############################################
 #overall prefix for saving (directory management)
 prefix = "00"
@@ -31,30 +27,27 @@ target = "target_cyrus_v4_20"
 nn_model_name = "nn_model_n_epochs=10_batch_size=500"
 ifa = len(feature_cols)
 
-model_nn = nn.Sequential(
-    nn.Linear(ifa, 1000),
-    nn.ReLU(),
-    nn.Linear(1000, 500),
-    nn.ReLU(),
-    nn.Linear(500, 250),
-    nn.ReLU(),
-    nn.Linear(250, 1)
-)
-
 model_nn.load_state_dict(torch.load(nn_model_name))
 model_nn.eval()
 
 #############################################
 #GBM MODEL training for the given targets
 
+#hyperparameter loading
+filename = "params_bayes_ip=10_ni=100_2023-12-18_n=full.csv"
+max_depth, learning_rate, colsample_bytree, n_trees = hyperparameter_loading(filename)
+print("hyperparameter loading check")
+
+
 st = time.time()
 
 model_gbm = LGBMRegressor(
-        n_estimators = 50,
-        learning_rate = 0.02,
-        max_depth = 1,
-        colsample_bytree = 0.9
+        n_estimators = n_trees,
+        learning_rate = learning_rate,
+        max_depth = max_depth,
+        colsample_bytree = colsample_bytree
     )
+
 model_gbm.fit(train[feature_cols], train[target])
 
 #############################################
@@ -101,7 +94,6 @@ def cumulative_correlation_model_comparison(models : list, plot_save : bool) -> 
     return correlations, cumulative_correlations
 
 
-#models = ["gbm", "nn"]
-models = ["nn"]
+models = ["gbm", "nn"]
 
 correlations, cumulative_correlations = cumulative_correlation_model_comparison(models, plot_save = True)

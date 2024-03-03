@@ -79,6 +79,8 @@ target_correlations = targets_df[t20s].corr()
 plot_correlations(target_correlations, plot_save = True, name = "target")
 print("target correlation plot successfully created")
 
-histogram(train['feature_wetter_unbaffled_loma'], 'feature_wetter_unbaffled_loma')
+#############################################
+#histogram plot of specific FEATURE
+#histogram(train['feature_wetter_unbaffled_loma'], 'feature_wetter_unbaffled_loma')
 
 

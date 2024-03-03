@@ -36,23 +36,24 @@ def plot_acquisition(X, Y, X_next, show_legend=False):
         plt.legend()
 
 def plot_convergence(X_sample, Y_sample, n_init=2):
-    plt.figure(figsize=(12, 3))
+    plt.figure(figsize=(12, 4))
 
     x = X_sample[n_init:].ravel()
     y = Y_sample[n_init:].ravel()
     r = range(1, len(x)+1)
 
-    x_neighbor_dist = [np.abs(a-b) for a, b in zip(x, x[1:])]
+    x_neighbor_dist = [np.abs(a - b) for a, b in zip(x, x[1:])]
     y_max_watermark = np.maximum.accumulate(y)
 
     plt.subplot(1, 2, 1)
     plt.plot(r[1:], x_neighbor_dist, color = "salmon")
     plt.xlabel('Iteration i')
     plt.ylabel('$\Delta x$')
-    plt.title('Distance $\Delta x$ between consecutive $x_i$ of $Z(x)$')
+    plt.title('Distance $\Delta x$ between consecutive $x_i$ of $Z(x)$', fontsize = 12)
 
     plt.subplot(1, 2, 2)
     plt.plot(r, y_max_watermark, color = 'cornflowerblue')
     plt.xlabel('Iteration i')
     plt.ylabel('Best function value $\\tilde{Z}(x)$')
-    plt.title('Values of best selected sample of $Z(x)$ over iterations')
+    plt.title('Values of best selected sample of $Z(x)$ over iterations', fontsize = 12)
+    plt.tight_layout()

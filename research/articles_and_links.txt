@@ -34,6 +34,8 @@ https://tune.tidymodels.org/articles/acquisition_functions.html
 https://www.vantage-ai.com/en/blog/bayesian-optimization-for-quicker-hyperparameter-tuning 
 https://www.kaggle.com/code/nroman/bayesian-optimization-for-lgbm-hyperparameters 
 https://ekamperi.github.io/machine%20learning/2021/05/08/bayesian-optimization.html 
+https://ekamperi.github.io/machine%20learning/2021/06/11/acquisition-functions.html
+https://krasserm.github.io/2018/03/21/bayesian-optimization/
 
 #Uninformative vs informative CV methods
 https://towardsdatascience.com/grid-search-vs-random-search-vs-bayesian-optimization-2e68f57c3c46 

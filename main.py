@@ -6,7 +6,7 @@ Date: 15.11.2023
 MN: 12030366
 ------------------
 Ref.: www.numer.ai
-#(some of the code from the scripts provided was used)
+# (some of the code snippets of the officially provided project where used)
 """
 import pandas as pd
 import numpy as np
@@ -48,7 +48,10 @@ target_correlations_20.to_csv(repo_path + "/rounds/" + f"{date.today()}{prefix}_
 least_correlated_targets = least_correlated(target_correlations_20, amount = 0)
 
 #############################################
-#target candidates = best performing (= top) targets plus least correlated target
+#target candidates = best performing (= top) targets based on a measurement on all targets on validation dataframe
+#data file: 
+#   bs_ml/rounds/2023-11-19_round0_all_targets_summary_metrics_targets.csv
+#   bs_ml/rounds/2023-11-19_round0_all_targets_cumulative_correlation_of_validation_predicitions.png
 
 targets = ["target_cyrus_v4_20",
                "target_nomi_v4_20",
@@ -225,23 +228,23 @@ print(summary_metrics_ensemble_df)
 
 feature_subset = list(subgroups["medium"]["serenity"])
 
-def predict_neutral(live_features: pd.DataFrame) -> pd.DataFrame:
+def predict_neutral(live: pd.DataFrame) -> pd.DataFrame:
     # make predictions using all features
-    predictions = pd.DataFrame(index = live_features.index)
+    predictions = pd.DataFrame(index = live.index)
 
     for target in targets:
-        predictions[target] = models[target].predict(live_features[feature_cols])
+        predictions[target] = models[target].predict(live[feature_cols])
         
     # ensemble predictions
     ensemble = predictions.rank(pct=True).mean(axis=1)
     # neutralize predictions to a subset of features
 
-    neutralized = neutralize(ensemble, live_features[feature_subset], 1.0)
+    neutralized = neutralize(ensemble, live[feature_subset], 1.0)
     submission = pd.Series(neutralized).rank(pct=True, method="first")
     return submission.to_frame("prediction")
 
-live_features = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature_cols)
-predictions = predict_neutral(live_features)
+live = pd.read_parquet(gh_repos_path + "/live.parquet", columns=feature_cols)
+predictions = predict_neutral(live)
 
 
 print("----predictions-----")

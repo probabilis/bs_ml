@@ -69,7 +69,7 @@ class GradientBoosting():
 		#stagewise iteration for n < n_trees
 		for _ in range(self.n_trees):
 			y_tilde = Y - F_m
-			tree = DecisionTreeRegressorScratch(X, y_tilde, max_depth = self.max_depth)
+			tree = TreeRegressor(X, y_tilde, max_depth = self.max_depth)
 			tree.fit()
 
 			F_m += self.learning_rate * tree.predict(X)

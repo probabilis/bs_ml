@@ -8,7 +8,7 @@ import pandas as pd
 import sys
 import matplotlib.pyplot as plt
 sys.path.append('../')
-from from_scratch.decision_regression_tree_from_scratch import DecisionTreeRegressorScratch
+from from_scratch.decision_tree_regressor import TreeRegressor
 from testfunction import testfunction, X
 from repo_utils import repo_path, fontsize_title, fontsize
 
@@ -32,7 +32,7 @@ def dt_scratch_sklearn_comparison(plot_save) -> None:
     y_pred = model.predict(X)
 
     #FROM_SCRATCH
-    model_scratch = DecisionTreeRegressorScratch(pd.DataFrame(X), Y.tolist(), max_depth = max_depth)
+    model_scratch = TreeRegressor(pd.DataFrame(X), Y.tolist(), max_depth = max_depth)
     model_scratch.fit()
     y_pred_scratch = model_scratch.predict(pd.DataFrame(X))
 

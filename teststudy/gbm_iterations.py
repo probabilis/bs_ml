@@ -8,7 +8,7 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 sys.path.append('../')
-from from_scratch.gradient_boosting_from_scratch import GradientBoosting
+from from_scratch.gradient_boosting import GradientBoosting
 from testfunction import testfunction, X
 from repo_utils import repo_path
 

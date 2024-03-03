@@ -2,10 +2,6 @@
 Author: Maximilian Gschaider
 MN: 12030366
 """
-#CC to
-#https://www.borealisai.com/research-blogs/tutorial-8-bayesian-optimization/
-#https://ekamperi.github.io/machine%20learning/2021/06/11/acquisition-functions.html
-#https://krasserm.github.io/2018/03/21/bayesian-optimization/
 from bo_utilization import plot_approximation, plot_acquisition, plot_convergence
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,6 +13,8 @@ import sys
 sys.path.append('../')
 from repo_utils import repo_path, fontsize, fontsize_title
 ####################################################
+
+prefix = "test_"
 
 def expected_improvement(X, X_sample, gpr, kappa = 0.01, threshold = 1E-100):
     '''
@@ -133,8 +131,9 @@ def plot_objective_function(plot_save = True):
     plt.legend()
     fig = plt.gcf()
     fig.set_size_inches(8,4)
+    plt.tight_layout()
     if plot_save == True:
-        plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_objective.png", dpi=300)
+        plt.savefig(repo_path + "/figures/" + prefix + "bayesian_optimization_from_scratch_objective.png", dpi=300)
     plt.show()
 
 plot_objective_function()
@@ -179,12 +178,12 @@ def plot_bo_iterations(X_sample, Y_sample, plot_save = True):
     #fig.suptitle(f"Bayesian optimization of scalar objetive function $F(x)$ over {n_iter} iterations with Gaussian Prior")
     plt.tight_layout()
     if plot_save == True:
-        plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_iterations.png", dpi=300)
+        plt.savefig(repo_path + "/figures/" + prefix + "bayesian_optimization_from_scratch_iterations.png", dpi=300)
     plt.show()
     return X_sample, Y_sample
 
 X_sample, Y_sample = plot_bo_iterations(X_sample, Y_sample)
 
 plot_convergence(X_sample, Y_sample)
-plt.savefig(repo_path + "/figures/" + "bayesian_optimization_from_scratch_convergence_plot.png", dpi=300)
+plt.savefig(repo_path + "/figures/" + prefix + "bayesian_optimization_from_scratch_convergence_plot.png", dpi=300)
 plt.show()

@@ -10,18 +10,21 @@ import numpy as np
 from tqdm import tqdm
 import scipy
 import gc
-from numerapi import NumerAPI
 import time
-from preprocessing.cross_validators import era_splitting
+from numerapi import NumerAPI
+from preprocessing.transformers import era_splitting
 #############################################
 #############################################
 #############################################
 #initialization
 
-path_ = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "train.parquet")
+# ---------------- data files for numer.ai project ----------------
+# train.parquet / validation.parquet / test.parquet / features.json
+
+#path for local repo folder where bs_ml is located 
+#here ~/Documents/github_repos
 gh_repos_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos')
-repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "bs_ml")
-path_val = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', "validation.parquet")
+repo_path = os.path.join(os.path.expanduser('~'), 'Documents', 'github_repos', 'bs_ml')
 fontsize_title = 16
 fontsize = 12
 
@@ -43,18 +46,19 @@ def loading():
     t60s    ... list / rolling sixties targets as strings
     """
 
-    #numer.AI official API for retrieving and pushing data
-    napi = NumerAPI()
-    #train set
-    napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
-    #validation set
-    napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
-    #live dataset 
-    napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
-    #features metadata
-    napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
+    update_dataframes = True
 
-    start = time.time()
+    if update_dataframes == True:
+        #numer.AI official API for retrieving and pushing data
+        napi = NumerAPI()
+        #train set
+        napi.download_dataset("v4.2/train_int8.parquet", gh_repos_path + "/train.parquet")
+        #validation set
+        napi.download_dataset("v4.2/validation_int8.parquet", gh_repos_path + "/validation.parquet" )
+        #live dataset 
+        napi.download_dataset("v4.2/live_int8.parquet", gh_repos_path + "/live.parquet")
+        #features metadata
+        napi.download_dataset("v4.2/features.json", gh_repos_path + "/features.json")
 
     feature_metadata = json.load(open(gh_repos_path + "/features.json")) 
 
@@ -90,7 +94,7 @@ def hyperparameter_loading(filename):
     ---------------
     return: dupel of integers -> max_depth, learning_rate, colsample_bytree, n_trees
     """
-    params_gbm = pd.read_csv(repo_path + "/models/" + filename).to_dict(orient = "list")
+    params_gbm = pd.read_csv(gh_repos_path + "/bs_ml/models/" + filename).to_dict(orient = "list")
     
     print(params_gbm)
     

@@ -11,7 +11,7 @@ import numpy as np
 
 ########################################
 
-class DecisionTreeRegressorScratch():
+class TreeRegressor():
 	"""
 	A class for growing a regression decision tree from scratch 
     ...
@@ -198,7 +198,7 @@ class DecisionTreeRegressorScratch():
 
 				left_df, right_df = df[df[best_feature] <= best_value].copy(), df[df[best_feature] > best_value].copy()
 
-				left = DecisionTreeRegressorScratch(
+				left = TreeRegressor(
 					left_df[self.features],
 					left_df['Y'].values.tolist(),
 					depth = self.depth + 1,
@@ -210,7 +210,7 @@ class DecisionTreeRegressorScratch():
 				self.left = left
 				self.left.fit()
 
-				right = DecisionTreeRegressorScratch(
+				right = TreeRegressor(
 					right_df[self.features],
 					right_df['Y'].values.tolist(),
 					depth = self.depth + 1,

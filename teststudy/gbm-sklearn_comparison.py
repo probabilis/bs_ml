@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import sys
 sys.path.append('../')
-from from_scratch.gradient_boosting_from_scratch import GradientBoosting
+from from_scratch.gradient_boosting import GradientBoosting
 from testfunction import testfunction, X
 from repo_utils import repo_path, fontsize_title, fontsize
 

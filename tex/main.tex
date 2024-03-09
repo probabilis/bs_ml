@@ -94,7 +94,7 @@ Institute of Theoretical and Computational Physics}
 \newpage
 \section*{Abstract}
 Gradient Boosting is a supervised machine learning technique which is used in regression and classification tasks. Because of its prediction speed, accuracy and interpretability especially with large and complex data structures it attracted a lot of attention in the last decades. It's a special kind of ensemble method where multiple learning models are combined to obtain better predictive performance than could be obtained from any of the constituent learning models alone. Through converting weak learners to strong ones one can benefit of the boosting structure. In comparison to Bootstrap Aggregating (Bagging), Stacking or Voting the Gradient Boosting framework is built in a stage-wise fashion. Usually in regression tasks the weak learners are decision trees, because of its natural intelligibility and simplicity. Initially \textit{Schapire} and \textit{Freund} developed the first statistical meta-algorithm framework called \textit{Adaboost}, an adaptive boosting algorithm that won the \textit{Gödel Prize}. The idea of gradient boosting originated in the observation by \textit{Leo Breiman} that boosting can be interpreted as an optimization algorithm on a suitable cost function. The first explicit regression gradient boosting algorithms were subsequently developed by \textit{Jerome H. Friedman}. \\
-In the following thesis the Gradient Boosting algorithm will be illuminated from depth especially with Regression Trees as weak learners. The Bayesian Optimization method will be introduced for tuning the hyperparameters of the model. For practical purposes the algorithms will be designed from scratch and finally the frameworks will be used to make inference (predictions) in a real-world data problem. Additionally the Gradient Boosting Machine will be compared to a Neural Network in the same prediction problem to highlight strengths and weaknesses.
+In the following thesis the Gradient Boosting algorithm will be illuminated from depth especially with Regression Trees as weak learners. A Bayesian Optimization method will be introduced for tuning the hyperparameters of the model. For practical purposes the algorithms will be designed from scratch and finally the frameworks will be used to make inference (predictions) in a real-world data problem. Additionally the Gradient Boosting Machine will be compared to a Neural Network in the same prediction problem to highlight strengths and weaknesses.
 \clearpage
 \thispagestyle{empty}
 \tableofcontents
@@ -189,18 +189,21 @@ Expanding this notion, by using this training sample $\{y,\vec{x}_n\}$ with the 
     \tilde{F} = \underset{F}{\arg\min} \mathbb{E}_{y,\vec{x}} L(y,F(\vec{x})) = \underset{F}{\arg\min} \underbrace{\mathbb{E}_{\vec{x}} [\overbrace{\mathbb{E}_y (L(y,F(\vec{x})))}^\text{expected $y$ loss}|\vec{x}]}_\text{expectation over the whole dataset}
 \end{equation}
 Typically used loss functions (estimators) for regression problems $L(y,F)$ include squared-error $(y - F)^2$ and absolute-error $|y - F|$ for $y \in \mathbb{R}^1$.
-Often the function to be determined $F(\vec{x})$ is restricted to be a member of a parameterized class of functions $F(\vec{x},\vec{P})$, where $\vec{P} = \{P_1,P_2,..\}$ is a discrete set of parameters whose joint values identify individual class members. Because of ``brave'' modeling behavior one can use only ``additive'' expansions of the form:
+Often the function to be determined $F(\vec{x})$ is restricted to be a member of a parameterized class of functions $F(\vec{x},\vec{P})$, where $\vec{P} = \{P_1,P_2,..\}$ is a discrete set of parameters whose joint values identify individual class members. Because of ``brave'' modeling behavior one can assume ``additive'' expansions of the form:
 \begin{equation}
     F(\vec{x};\{\beta_m, \vec{a}_m\}_1^M) = \sum_{m=1}^{M} \beta_m h(\vec{x};\vec{a}_m)
     \label{eq: param_approx_function}
 \end{equation}
-The function $h(\vec{x};\vec{a}_m)$ is called a generic function (can handle different data types) and is usually a simple parameterized function of the input variables $\vec{x}$ by specific parameters $\vec{a} = \{a_1,a_2,...\}$. Depending on the joint values $\vec{a}_m$ chosen for these parameters the individual terms will differ. Expansions like (\ref{eq: param_approx_function}) are the basis of many function approximation methods such as neural networks or support vector machines. When working with a continuous domain of the variables, the generic functions $h(\vec{x};\vec{a}_m)$ are often used as small regression trees, such as those produced by \textit{CART}$^{TM}$ algorithm \cite{Breiman1984}. For such regression trees the parameters $\vec{a}_m$ are the splitting variables, split locations and the terminal node means of the individual trees, but this will be discussed in section [\ref{sec: decision_trees}].
+The function $h(\vec{x};\vec{a}_m)$ is also called a generic function (can handle different data types) and is usually a simple parameterized function of the input variables $\vec{x}$ by specific parameters $\vec{a} = \{a_1,a_2,...\}$. Expansions like (\ref{eq: param_approx_function}) are the basis of many function approximation methods such as neural networks or support vector machines. When working with a continuous domain of the variables, the generic functions $h(\vec{x};\vec{a}_m)$ are often used as small regression trees, such as those produced by the \textit{CART}$^{TM}$ algorithm \cite{Breiman1984}. \\
+When using such \textit{regression trees} the parameters $\vec{a}_m$ are the splitting variables, split locations and the terminal node means of the individual trees, but this will be discussed in section [\ref{sec: decision_trees}] in depth.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Numerical optimization in function space}
 \label{sec: parameter_opt}
 At numerical optimization methods, a distinction is often made between parametric and non-parametric approaches. While both aim to draw inferences from data, they differ mainly in their underlying principles.
-At parametric methods typically it is assumed that the data follows a known probability distribution where  non-parametric approaches do not make any assumptions about the form of the mapping function. Another perspective is the amount and structure of data which is available for the model. Generally speaking one can say that parametric models are simpler and require less data, but as already stated they assume a certain data structure.\\
+\begin{comment}
+    At parametric methods typically it is assumed that the data follows a known probability distribution where  non-parametric approaches do not make any assumptions about the form of the mapping function. Another perspective is the amount and structure of data which is available for the model. Generally speaking one can say that parametric models are simpler and require less data, but as already stated they assume a certain data structure.\\
+\end{comment}
 In the following derivation it is considered that the initial function $F(\vec{x})$ evaluation at each point $\vec{x}$ acts as a ``parameter'' for the model, as Friedman et al. stated \cite{Friedman2001}. With this assumption one can consequently define the minimization of the loss function between the unknown functional dependence $F(\vec{x})$ and known output values $y$ through the expectation value:
 \begin{center}
     $\Phi(F) = \mathbb{E}_{y,\vec{x}} L(y,F(\vec{x})) = \mathbb{E}_{\vec{x}}[\mathbb{E}_y(L(y,F(\vec{x})))|\vec{x}]$
@@ -213,18 +216,18 @@ Theoretically there are an infinite number of such parameters in function space,
 \begin{center}
     $\tilde{F}(\vec{x}) = \sum_{m=0}^{M} f_m(\vec{x})$
 \end{center}
-Whereby $f_0(\vec{x})$ is an initial guess and $\{f_m(\vec{x})\}_1^M$ are incremental functions (``steps'' or ``boosts'') defined by the optimization method. There are several different numerical optimization methods which are often used in function optimization tasks. Mostly one will choose an iterative method, like ``Gradient descent'' resp. ``Steepest descennt''. \\
-\subsection{Steepest descent}
-Steepest descent (also known as gradient descent) is an unconstrained optimization technique which uses a first-order (linear local error) iterative algorithm schematic. The main idea is to take repeated steps in the opposite direction of the gradient at the current point (direction of steepest descent). Gradient descent is based on the observation that if the function $F(\vec{x})$ is defined and differentiable in a given neighborhood of a point $\vec{p}$, then the function $F(\vec{x})$ decreases ``steepest'' in the direction of the negative gradient $- \nabla F(\vec{p})$. From there one can conclude that following expression
+Whereby $f_0(\vec{x})$ is an initial guess and $\{f_m(\vec{x})\}_1^M$ are incremental functions (``steps'' or ``boosts'') defined by the optimization method. There are several different numerical optimization methods which are often used in function optimization tasks. Mostly one will choose an iterative method, like ``Gradient descent'' resp. ``Steepest descent''. \\
+\subsection{Gradient descent}
+Gradient descent is an unconstrained optimization technique which uses a first-order (linear local error) iterative algorithm schematic. The main idea is to take repeated steps in the opposite direction of the gradient of a real valued function $F$ at the current point (direction of steepest descent). Gradient descent is based on the observation that if the function $F(\vec{x})$ is defined and differentiable in a given neighborhood of a point $\vec{p}$, then the function $F(\vec{x})$ decreases ``steepest'' in the direction of the negative gradient $- \nabla F(\vec{p})$:
 \begin{equation}
-    \vec{p}_{n+1} = p_n - \gamma \nabla F(\vec{a}_n)
+    \vec{p}_{n+1} = p_n - \gamma \nabla F(\vec{p}_n)
 \end{equation}
-can ultimately converge to a local minimum $F(\vec{a_n}) \geq F(\vec{a}_{n+1})$, under the constrain that $\gamma \in \mathbb{R}_{+}$ act as small step size. This monotonic sequence will approach the desired local minimum and if $F(\vec{x})$ is even a convex function it will approach the global minimum. By using this steepest-descent method for the $m$-th incremental function results to
+One can assume that this system ultimately converges to a local minimum $F(\vec{a}_n) \geq F(\vec{a}_{n+1})$, under the constrain that $\gamma \in \mathbb{R}_{+}$ act as small step size. This monotonic sequence will approach the desired local minimum and if $F(\vec{x})$ is even a convex function it will approach the global minimum. By using this steepest-descent method for the $m$-th incremental function results to
 \begin{equation}
     \label{eq: incr_function}
     f_m(\vec{x}) = - \rho_m \cdot g_m(\vec{x})
 \end{equation}
-and with the definition of the gradient:
+with the definition of the gradient:
 \begin{center}
     $g_m(\vec{x}) = [\frac{\partial \Phi(F(\vec{x}))}{\partial F(\vec{x})}]_{F(\vec{x}) = F_{m-1}(\vec{x})} = [\frac{\partial \mathbb{E}_y [L(y,F(\vec{x})|\vec{x}]}{\partial F(\vec{x})}]_{F(\vec{x}) = F_{m-1}(\vec{x})}$
 \end{center}
@@ -370,7 +373,7 @@ The resulting additive model combines the information of individual base learner
 \section{Base learners for the additive modeling structure}
 \subsection{Decision trees}
 A decision tree is a flowchart like structure where on each node a binary decisions will be made. The tree is built by splitting the initial data set into subsets. \\
-Depending on the inherent properties of the input features $\vec{x}_i$ of the dataset one can distinguish of different metrics which are classically used. Generally these metrics measure the ``homogeneity'' of the target variable within the subsets. Depending on the discrete or continuous properties of the data-set one can use different metrics like positive correctness, gini-impurity, information gain, variance reduction or goodness of fit. \\
+Depending on the inherent properties of the input features $\vec{x}_i$ of the dataset one can distinguish different metrics which are typically used. Generally these metrics measure the ``homogeneity'' of the target variable within the subsets. Depending on the discrete or continuous properties of the data-set one can use different metrics like positive correctness, gini-impurity, information gain, variance reduction or goodness of fit. \\
 This splitting process is repeated on each derived subset in a recursive manner called recursive partitioning. Usually the recursion is stopped when the splitting no longer adds value to the prediction or some threshold is met. This specific process of top-down induction of decision trees is an example of a ``greedy'' algorithm. The term \textbf{classification and regression tree (CART)} analysis is an umbrella term used to refer either regression or classification predictions \cite{Steinberg2009}.The Gradient Boosting framework creates multiple decision trees based on the given hyperparameters because of its ensemble properties. This is done by incrementally building an ensemble by training each new instance to emphasize the training instances previously ``mis-modeled''.
 \begin{comment}
 More generally, the concept of regression tree can be extended to any kind of object equipped with pairwise dissimilarities such as categorical sequences.
@@ -498,8 +501,8 @@ Which is simply the arithmetic mean of the current residuals in the $j$-th termi
     $F_0(\vec{x}) = \text{mean}\{y_i\}_1^N$ \\
     \For{$m = 1$ to $M$}
     {
-    $\tilde{y}_i = \sum_{i=1}^N [y_i - F_{m-1}(\vec{x})]^2$ \\
-    $\{R_{jm}\} = J-\text{terminal node tree}(\{\tilde{y}_i,\vec{x}_i\}_1^N)$ \\
+    $\tilde{y}_i = \sum_{i=1}^N [y_i - F_{m-1}(\vec{x})]$ \\
+    $\{R_{jm}\}_1^J = J-\text{terminal node tree}(\{\tilde{y}_i,\vec{x}_i\}_1^N)$ \\
     $\gamma_{jm} = \mathbb{E}_{\vec{x}_i \in R_{jm}}[y_i - F_{m-1}(\vec{x}_i)] \text{ for } j = 1,..,J$ \\
     $F_m(\vec{x}) = F_{m-1}(\vec{x}) + \sum_{j=1}^J \gamma_{jm} \mathds{1}(\vec{x} \in R_{jm})$
     }
@@ -570,7 +573,7 @@ Second, we must choose an \textit{acquisition function}, which is used to constr
 \caption{Bayesian Optimization \cite{Frazier2018}}
     \label{alg: bayesian_opt}
     Place a Gaussian process prior \\
-    Observe $f$ at $n_0$ points according to an initial space-filling experimental design. \\
+    Observe $f$ (Objective Function) at $n_0$ points according to an initial space-filling experimental design. \\
     Set $n = n_0$ \\
     \While{$n \leq N$}
     {
@@ -593,7 +596,7 @@ The Gaussian process (GP) is a convenient and powerful prior distribution over f
 \subsubsection{Acquisition Functions for Bayesian Optimization}
 Let's assume that the function $f(\vec{x})$ is drawn from a Gaussian process prior and that our observations are of the form $\{\vec{x}_n,y_n\}_{n=1}^N$, where $y_n \approx \mathcal{N}(f(\vec{x}_n),\nu)$ and $\nu$ is the variance of noise introduced into the function observations.
 This prior and the data specific noise induce a posterior over functions, which in turn induces the acquisition function, which we denote by a: $\mathcal{X} \rightarrow \mathbb{R}^{+}$, determines what point in $\mathcal{X}$ should be evaluated next via a ``proxy'' optimization $x_{n+1} = \underset{\vec{x}}\arg\max a(\vec{x})$ \cite{Snoek2012}. So the acquisition functions propose the next sample points in the seach space. In general, these acquisition functions depend on the previous observations, as well as the learnable GP hyperparameters. From this we denote this dependence as $a(\vec{x};\{\vec{x}_n,y_n\},\theta)$, whereby the $\{\vec{x}_n,y_n\}$ tuple-set represents the previous sampling points and $\theta$ are the GP hyperparameters.
-There are several popular choices of acquisition functions. Under the Gaussian process prior, these functions depend on the model solely through its predictive mean function $\mu(\vec{x};\{\vec{x_n},y_n\},\theta)$ and predictive variance function $\nu(\cdot) = \sigma^2(\vec{x};\{\vec{x}_n, y_n\}, \theta)$.\\
+There are several popular choices of acquisition functions. Under the Gaussian process prior, these functions depend on the model solely through its predictive mean function $\mu(\vec{x};\{\vec{x}_n,y_n\},\theta)$ and predictive variance function $\nu(\cdot) = \sigma^2(\vec{x};\{\vec{x}_n, y_n\}, \theta)$.\\
 Moreover one has to mention the trade off between exploitation and exploration.\\
 \textit{Exploitation} means sampling where the surrogate model predicts a high objective and \textit{exploration} means sampling at locations where the prediction uncertainty is high. Both effects correspond to high acquisition function values and the overall goal is to maximize the acquisition function to determine the next sampling point. There are several types of acquisition functions which are commonly used: \\
 \\
@@ -667,7 +670,7 @@ Additionally if $\sigma(x) = 0$ then EI$(x) = 0$.
 One can also inject a hyper-parameter $\epsilon$ into the equation (\ref{eq: ei_raw}) to tune how much exploitation versus how much exploration the BO algorithm will perform.
 \begin{equation}
 \label{eq: ei_hp}
-        \text{EI} = [\mu - f(x^{\ast}) - \epsilon] \Phi\left(\frac{\mu - f(x^{\ast} - \epsilon)}{\sigma} \right) + \sigma \phi\left(\frac{\mu - f(x^{\ast}) - \epsilon}{\sigma}\right)
+        \text{EI} = [\mu - f(x^{\ast}) - \epsilon] \Phi\left(\frac{\mu - f(x^{\ast}) - \epsilon}{\sigma} \right) + \sigma \phi\left(\frac{\mu - f(x^{\ast}) - \epsilon}{\sigma}\right)
 \end{equation}
 One has to keep in mind that the first summation term in equation (\ref{eq: ei_hp}) is the exploitation term and second is the exploration term. Increasing $\epsilon$ will decrease the importance of improvements predicted by the GP posterior mean $\mu(x)$ relative to the importance of potential improvements in regions of high prediction uncertainty, represented by large $\sigma(x)$ values.
 \begin{comment}
@@ -860,7 +863,7 @@ We can obtain the optimization process within the bounded region through maximiz
 Interesting is here the balanced trade-off between exploration and exploitation. Initially the optimizer based on the two sample points drives the search direction to the right side based on the acquisition function. But exploration allows the algorithm to escape from this region and find the global optimum in the middle. So this trade-off by varying the exploration and exploitation parameters inherently is essential for finding the global maximum. But it has to be noted that by an increase of dimensions in the search space of hyperparameters this convergence can become computationally very expensive. Additionally the sampling point proposals often fall within regions of high uncertainty (exploration / iteration 4) and are not only driven by the highest surrogate function values (exploitation / like it is visible on iteration 3 or 5). After 8 iterations the global maximum of the objective function is found in this iteration round. It has to be said that the proposed sampling points for maximizing the acquisition function are drawn from a uniform distribution and therefore depending on the collected samples the convergence time depends on the specific iteration. \\
 \begin{figure}[!htpb]
     \centering
-    \includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/bayesian_optimization_from_scratch_convergence_plot.png}
+    \includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/bayesian_optimization_from_scratch_convergence_plot_0.png}
     \caption[Bayesian Optimization convergence plot]{Bayesian Optimization convergence plot of test-objective function $Z(x)$}
     \label{fig: bo_convergence_plot}
 \end{figure}
@@ -920,7 +923,7 @@ Therefore we may not get only one parameter-configuration which may fit our need
 The GBDT-model gets trained with the hyperparameters and results in following model $\tilde{y}(x)$ over the domain $\mathcal{X}$ [Fig. \ref{fig: gbm_dt_best_par}].
 \begin{figure}[!htpb]
     \centering
-    \includegraphics[width=0.9\textwidth,trim={0 0 0 0},clip]{figures/gbm_with_decision_tree_best_parameters.png}
+    \includegraphics[width=0.85\textwidth,trim={0 0 0 0},clip]{figures/gbm_with_decision_tree_best_parameters.png}
     \caption[Best parameter configuration at GBM with Decision Trees on testfunction]{Best parameter configuration at GBM with Decision Trees on testfunction $F(x)$ with sample points and predicted function $\tilde{y}(x)$}
     \label{fig: gbm_dt_best_par}
 \end{figure}
@@ -932,9 +935,10 @@ Other standard usages of such supervised learning algorithms would be the predic
 \begin{figure}[!htpb]
     \centering
     \includegraphics[width=0.6\textwidth,trim={0 0 0 0},clip]{figures/bs_ml_figure_5.png}
-    \caption[Numer.ai data tournament participation process flow and dataset structure]{Numer.ai data tournament participation process flow and dataset structure \cite{Numerai}}
+    \caption[Numer.ai data tournament participation process flow and dataset structure]{Numer.ai data tournament participation process flow and dataset structure \cite{Numerai} / the colored points represent the generated signals from the prediction problem}
     \label{fig: numerai_workflow}
 \end{figure}
+\newpage
 \subsection{Numer.ai dataframe}
 The datasets consists of different encrypted \textit{id's} which corresponds to a stock at a specific time era of over more than 500 \textit{eras} (each era is exactly one week apart) with over 1000 \textit{features} and 20 different \textit{targets}. This results in single feature vectors with more than 5 million entries  [Fig. \ref{fig: numerai_dataset}].
 \begin{figure}[!htpb]
@@ -977,7 +981,7 @@ All of the values in the dataframe are already normalized, so they have a fixed 
 \begin{minipage}[t]{8.8cm}
 \vspace{0pt}
 \centering
-\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_features_mean_horizontal_barplot_2023-11-18.png}
+\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_features_mean_horizontal_barplot_2024-02-29.png}
 \caption[Mean of Features]{Mean $\mu(\cdot)$ of features $\vec{x}_i$}
 \label{fig: features_mean}
 \end{minipage}
@@ -985,7 +989,7 @@ All of the values in the dataframe are already normalized, so they have a fixed 
 \begin{minipage}[t]{8.8cm}
 \vspace{0pt}
 \centering
-\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_features_variance_horizontal_barplot_2023-11-18.png}
+\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_features_variance_horizontal_barplot_2024-02-29.png}
 \caption[Variance of Features]{Variance $\nu(\cdot)$ of features $\vec{x}_i$ }
 \label{fig: features_variance}
 \end{minipage}
@@ -996,7 +1000,7 @@ Switching from the feature to the target statistics one get similar results. The
 \begin{minipage}[t]{8.5cm}
 \vspace{0pt}
 \centering
-\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_targets_mean_horizontal_barplot_2023-11-18.png}
+\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_targets_mean_horizontal_barplot_2024-02-29.png}
 \caption[Mean of Targets]{Mean $\mu(\cdot)$ of targets $y_i$}
 \label{fig: targets_mean}
 \end{minipage}
@@ -1004,7 +1008,7 @@ Switching from the feature to the target statistics one get similar results. The
 \begin{minipage}[t]{8.5cm}
 \vspace{0pt}
 \centering
-\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_targets_variance_horizontal_barplot_2023-11-18.png}
+\includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/train_df_targets_variance_horizontal_barplot_2024-02-29.png}
 \caption[Variance of Features]{Variance $\nu(\cdot)$ of targets $y_i$ }
 \label{fig: targets_variance}
 \end{minipage}
@@ -1019,7 +1023,7 @@ Interesting to note are recurrent patterns in the correlation matrix which indic
 \vspace{0pt}
     \centering
     \includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/feature_correlations_matrix_2023-11-18.png}
-    \caption[Numer.ai dataset features correlation matrix]{Numer.ai dataset features correlation matrix}
+    \caption[Numer.ai dataset features $\vec{x}_i$ correlation matrix]{Numer.ai dataset features $\vec{x}_i$ correlation matrix}
     \label{fig: numerai_features_correlation_matrix}
 \end{minipage}
 \hfill
@@ -1027,7 +1031,7 @@ Interesting to note are recurrent patterns in the correlation matrix which indic
 \vspace{0pt}
     \centering
     \includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/target_correlations_matrix_2023-11-18.png}
-    \caption[Numer.ai dataset targets correlation matrix]{Numer.ai dataset targets correlation matrix}
+    \caption[Numer.ai dataset targets $\vec{y}_i$ correlation matrix]{Numer.ai dataset targets $\vec{y}_i$ correlation matrix}
     \label{fig: numerai_targets_correlation_matrix}
 \end{minipage}
 \end{figure}
@@ -1035,15 +1039,14 @@ The correlation matrix of the targets also provides an insight for building the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Cross Validation methods}
-Because of the importance of Cross validation at supervised machine learning tasks we've to compare different methods for validating our model performance. We'll use therefore a model selection method from the Python library \cite{Scikit2023}. We'll use the classical $k$-fold cross-validation method ($k$ = 5) as explained in section [\ref{sec: cross_validation}]. Because of the structure of the dataframe $\hat{\mathcal{X}}$ in relation to time the parameter $k$ can be set to 5 without causing any illogical problems (one week represents one era). In the framework there's the possibility to use different sub-methods whereby we'll focus on 4 different strategies:
+Because of the importance of Cross validation at supervised machine learning tasks we've to compare different methods for validating our model performance. We'll use therefore different model selection methods from a open-source Python library \cite{Scikit2023}: the classical $k$-fold cross-validation method ($k$ = 5) as explained in section [\ref{sec: cross_validation}]. Because of the structure of the dataframe $\hat{\mathcal{X}}$ in relation to time the parameter $k$ can be set to 5 without causing any illogical consequences (one week represents one era). In the framework there's the possibility to configure the cross validation method via shuffling and random states, which means that one can shuffle the the data before splitting. Additionally one can control the ordering of the folds, by varying the randomness but this will be neglected. In total 4 different strategies gets analyzed:
 \begin{itemize}
     \item $5$-fold with No Shuffling and No Random States
     \item $5$-fold with Shuffling and No Random States
     \item $5$-Grouped-fold with Shuffling and No Random States
-    \item $5$-splitted TimeSeries Groups
+    \item $5$-splitted Time-Series Groups
 \end{itemize}
-Whereby the TimeSeries cross validation method is slightly modified compared to the Scikit's module, because it has to use groups and respect the era boundaries \cite{Numerai}.
-When comparing these four different CV-methods by the standard score metric ($L_2$) one get slightly different values:
+Whereby the Time-Series CV metric is a variation of $k$-fold CV which returns first $k$ folds as train set and the $k+1$-th fold as test set. The Time-Series CV method is slightly modified compared to the Scikit's module, because it has to use groups and respect the era boundaries \cite{Numerai}. When comparing these four different CV-methods by the standard score metric ($L_2$) one get slightly different values:
 \begin{itemize}
     \item $5$-fold with No Shuffling and No Random States: $CV_{score} \approx 0{,}051$
     \item $5$-fold with Shuffling and No Random States: $CV_{score} \approx 0{,}054$
@@ -1059,7 +1062,7 @@ Due to the size of the dataset the optimization process is computationally very 
 For speeding up the optimization process one could dimensionally reduce the dataset with PCA (principal component analysis). The information loss $IL(\vec{x})$ which would occur would then be proportional to the variance of the principal components.
 Under the assumption that the reduction process via PCA does not inherently change the modeling behavior and consequently in shape conservation of the objective function. This has been done for testing the framework (a reduction of the 583 features (medium dataset) to $n = 300$ principal components would result in an information loss of $IL(\vec{x}) \approx 0{,}044 \%$). Ultimately the optimization has been performed on the whole (medium) dataset.
 To make the optimization process as efficient as possible the BO Python library \cite{Nogueira2014} will be used with Upper-Confidence-Bounds acquisition function (standard method in the used module) and $n_{iter} = 100$ iterations and $init_{points} = 10$ points for exploration. \\
-\newpage
+\\
 We'll use the same hyperparameter constellation as in the test-case problem but with slightly larger parameter domains because of the size of the dataset:
 \begin{itemize}
     \item Learning Rate $\nu \in  [0{,}01 ; 0{,}2]$
@@ -1087,21 +1090,21 @@ The best combination of hyperparameters which maximizes our objective function b
 \newpage
 \subsection{Ensemble model and target selection}
 As already stated the idea is to create an ensemble model where mutltiple GBM-DT models get trained over different targets. This is possible due to a similar property of the target values, for example (hypothetically) one model gets trained versus the normalized \textit{market cap} and one model gets trained versus the \textit{sector performance} etc. \\
-For building an ensemble model $F_E(\vec{x})$ one can evaluate following properties of every sub-model $F_i(\vec{x})$.
+For building an ensemble model $F_E(\vec{x})$ one can evaluate following properties of every sub-model $F_m(\vec{x})$.
 \begin{itemize}
-    \item specific target $y_i$
-    \item hyper-parameters $\theta_i$
-    \item feature domain $\vec{x}_i$
-    \item weighting $\omega_i$
+    \item specific target $y_m$
+    \item hyper-parameters $\theta_m$
+    \item feature domain $\vec{x}_m$
+    \item weighting $\omega_m$
 \end{itemize}
-For simplicity the hyper-parameters $\theta_i$ of every sub-model are selected equally. Also the feature domain is left unchanged, which means that all input 583 features are used. So the focus is set on the target selection and the weighting metric is discussed further below. \\
+For simplicity the hyper-parameters $\theta_m$ of every sub-model are selected equally. Also the feature domain is left unchanged, which means that all input 583 features are used. So the focus is set on the target selection and the weighting metric is discussed further below. \\
 Because of computational efficiency the official LightGBM framework \cite{LightGBM} is used for modeling instead of the self written algorithm \cite{Gschaider}, but ultimately the underlying clockwork of the \textit{Gradient Boosting}-Framework with \textit{Decision Tree}-Regressor as base learners is ``nearly" identical (for those 4 hyperparameters). One has to mention that because of the huge development of the framework there's always the possibility to configure the base model or add additional hyperparameters. With the given prediction problem one has the possibility to train each model versus a different target value which are correlated at different scale. \\
 In the following the GBM-DT model which is trained on a \textbf{specific single target} with the hyper-parameters which were determined through BO [Sec. \ref{sec: bayesian_opt_numerai}] is denoted as \textbf{GBM-DT$^{\ast}$}. \\
 The main target which is used to calculate the model performance is currently \textit{target cyrus}. Evaluating the GBM-DT$^{\ast}$ model performance over all different targets results in a very solid performance of \textit{target nomi}, \textit{target ralph}, \textit{target bravo} and \textit{target victor} [Fig. \ref{fig: cum_corr_val_preds_all_targets}]. \\
 \begin{figure}[!htpb]
     \centering
     \includegraphics[width=1\textwidth,trim={70 0 70 0 0},clip]{figures/2023-11-19_round0_all_targets_cumulative_correlation_of_validation_predicitions.png}
-    \caption[Cumulative per era correlation of validation predictions over the GBM-DT$^{\ast}$ models over all different targets]{Cumulative per era correlation $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$ of validation predictions $\tilde{y}_i(\vec{x}(t))$ of the GBM-DT$^{\ast}$ model over all 25 different targets}
+    \caption[Cumulative per era correlation of validation predictions over the GBM-DT$^{\ast}$ models over all different targets]{Cumulative per era correlation $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$ of validation predictions $\tilde{y}(\vec{x}(t))$ of the GBM-DT$^{\ast}$ model over all 25 different targets}
     \label{fig: cum_corr_val_preds_all_targets}
 \end{figure}
 \\
@@ -1115,20 +1118,29 @@ To sum up we'll use the following $N = 5$ targets, which describe 20-day stock m
     \item \textit{target ralph}
     \item \textit{target bravo}
 \end{itemize}
-The weights $\omega_i(\vec{x})$ of the model combination will be set equally for simplification. One can optimize this by searching the right weights also by Bayesian Optimization. \\
-Additionally the predictions have to be ranked by percentile ($PR[\cdot]$) for normalization ($\tilde{y} \in$ [0,1]) to be compatible for submission.
-\begin{center}
-    $\tilde{y} = PR[F_E(\vec{x})] = PR[\sum_{i=1}^{N=5} \omega_i(\vec{x}) F_i] \quad$ with $\omega_i(\vec{x}) = \omega = \frac{1}{N=5}$
-\end{center}
+The individual weights $\omega_m(\vec{x})$ of every sub-model will be set equally for simplification, so the expectation value for $F_E(\vec{x})$ is simple the average. One can optimize this by searching the right weights also by Bayesian Optimization. \\
+\subsubsection{Percentile ranking}
+Additionally the predictions have to be ranked by percentile ($PR[\cdot]$) for normalization ($\tilde{y} \in$ [0,1]) to be compatible for submission, which means they get ranked by their value and normalized. For the ensemble model (combining multiple sub-models) we'll calculate each individual $PR[\cdot]$ of the sub-model and average them (setting the weights the same: $\omega_m = \omega = \frac{1}{N=5}$).
+\begin{equation}
+    \label{eq: ensemble}
+    F^{PR}_m(\vec{x}) = \tilde{y}^{PR}_m = PR[\tilde{y}_m] \rightarrow F^{PR}_E(\vec{x}) = \sum_{m=1}^{N=5}  \omega_i F^{PR}_i(\vec{x})
+\end{equation}
 Whereby the percentile rank is defined as follows:
 \begin{equation}
-    PR = \frac{CF \pm 0.5 \times F}{N} \times 100
+    \label{eq: pr}
+    %PR = \frac{CF \pm 0.5 \times F}{N} \times 100
+    PR[\tilde{y}] = \frac{P(\tilde{y})}{100} \timesl (n + 1)
 \end{equation}
-Where $CF$ denotes the cumulative frequency (count of all scores less / more than or equal to the score of interest), $F$ the frequency for the score of interest and $N$ the number of scores in the distribution. It describes of a given score ($\tilde{y}$) the percentage of scores in its frequency distribution that are less than that score. This ranking metric is used in all predictions $\tilde{y}$ which get submissioned to \textit{Numer.ai}. \\
-\\
-\textbf{Cumulative Correlation:} \\
-This very specific (performance) metric evaluation can be used due to the time-sequential behavior of the predicted problem. The trained model will be used to predict on the validation dataframe. Those predictions $\tilde{y}_i$ which in a sense are time-dependent ($\tilde{y}_i(t)$) are used to calculate the correlation on each time step (era) $t_i$ with the ``true'' prediction $y_i$ from the validation dataset and summing them up: $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$. So consequently the ``ideal regressor'' would predict on each time step the true target value and therefor would result in the length of the validation dataset (total rows $N_{val}$).
-
+with the percentile of a given score:
+\begin{center}
+    $P(\tilde{y})$ = (Number of values below score $\tilde{y}$) / (total number of scores $n$) $\times$ 100
+\end{center}
+It describes of a given score ($\tilde{y}$ which represents the predictions of a trained model on the validation dataset) the percentage of scores in its frequency distribution that are less than that score. This ranking metric is used in all predictions $\tilde{y}$ which get submitted to \textit{Numer.ai}. To illustrate this a little bit more an example is shortly sketched: \\
+Suppose we would use the trained GBM-DT$^{\ast}$ model to predict on a single era (era timestamp $t$) $\tilde{y}(t)$, like it is done with the \textit{live}-dataframe which can be uploaded for live-predicting each week.
+By transforming the $n$ different prediction values $\tilde{y}_m$ ($m$ stands for the different target values which are used for creating the ensemble model) into a single value with metric (\ref{eq: ensemble}) the resulting ``ensemble score'' is normalized and represents the fraction of scores in its distribution ($N \times$ original prediction values $\tilde{y}_m \in [0,1]$ $\rightarrow \tilde{y}_E \in [0,1]$). Consequently when iteratively predicting the targets $\tilde{y}_m(t_i)$ on each timestamp (era-stamp $t_i$ from the validation dataset) like it has been done in figure \ref{fig: cum_corr_val_preds_all_targets} the new single ensemble prediction $\tilde{y}_E(t_i)$ re-ranked from the sub-models predictions with index $m$ now can be plotted by summing up their correlations with the true target values $y_m(t_i)$ from the dataset (Cumulative Correlation). \\
+\subsubsection{Cumulative Correlation}
+This very specific (performance) metric evaluation can be used due to the time-sequential behavior of the predicted problem. The trained model will be used to predict on the validation dataframe. Those predictions $\tilde{y}_i$ ($\Leftrightarrow \tilde{y}(t_i)$ / index $i$ stands here for the predictions in the different eras and not the individual sub-models) which in a sense are time-dependent are used to calculate the correlation on each time step (era) $t_i$ with the ``true'' prediction $y_i$ from the validation dataset and summing them up: $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$. So consequently the ``ideal regressor'' would predict on each time step the true target value and therefor would result in the length of the validation dataset (total rows $N_{val}$). \\
+\textit{Remark: } From now on the notation $\text{corr}(\tilde{y}_i,y_i)$ in the cumulative correlation plots means the cumulative correlation from predictions $\tilde{y}_i \equiv \tilde{y}(t_i)$ to real target values $y_i \equiv y(t_i)$ in a time dependent manner (over all eras).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Neutralization of feature exposure}
@@ -1138,11 +1150,11 @@ We can evaluate from the dataset that they're single features which have a high 
 \begin{figure}[!htpb]%[htp]
     \centering
     \includegraphics[width=1\textwidth,trim={0 0 0 0},clip]{figures/per_era_correlations.png}
-    \caption[Cumulative per era correlation of the different feature groups]{Cumulative per era correlation $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$ of the different feature groups validation predictions $\tilde{y}_i(\vec{x}(t))$ of the GBM-DT$^{\ast}$ model over the main \textit{target cyrus} $y(\vec{x}(t))$}
+    \caption[Cumulative per era correlation of the different feature groups]{Cumulative per era correlation $\Sigma_i \text{corr}(x_i,y_i)$ of the individual features $x$ of the different feature groups of the training set with real target values $y(\vec{x}(t))$ (\textit{target cyrus}) }
     \label{fig: per_era_correlation}
 \end{figure}
 \\
-It has to be said that the Pearson correlation coefficient measures linear correlation between two sets of data and therefor higher order relations are not taken into account at this point. The idea is to use ``Feature Neutralization" to reduce feature exposure in a sense of eliminating stationary relationships best possible, as \textit{Numer.ai} proposed. This ``neutralizaton'' process, at a high level, is nothing more than removing the component of the predictions that are \textit{linearly} correlated with certain features, leaving only the residual non-linear component \cite{Numerai}. When reducing only one single feature $x_1$ for simplicity the following consideration has to take place (vectorial notation is neglected at this point). Without loss of generality, one can assume that the real target value $y$ is determined by the following function:
+It has to be said that the Pearson correlation coefficient measures linear correlation between two sets of data and therefor higher order relations are not taken into account at this point. The idea is to use ``Feature Neutralization" to reduce feature exposure in a sense of eliminating stationary correlation components best possible, as \textit{Numer.ai} proposed. This ``neutralizaton'' process, at a high level, is nothing more than removing the component of the predictions that are \textit{linearly} correlated with certain features, leaving only the residual non-linear component \cite{Numerai}. When reducing only one single feature $x_1$ for simplicity the following consideration has to take place (vectorial notation is neglected at this point). Without loss of generality, one can assume that the real target value $y$ is determined by the following function:
 \begin{equation}
 \label{eq: neutral_x1}
     y = f(x_1) + g(x_1, x_2,...)
@@ -1237,7 +1249,7 @@ One input feature vector $\vec{\chi}_i$ is implemented as one input-neuron in th
 As activation function $\sigma$ the classical ``ReLu'' -function will be implemented, which is a standard choice when dealing with tabular data. For optimizing the loss in the training cycle the \textit{Adam-Optimizer} \cite{Pytorch} will be used, which is a adaptive stochastic gradient descent optimization algorithm. For the loss function the mean-squared error (MSE) is used again. Other hyper-parameters are: \\
 \begin{itemize}
     \item Learning rate $\nu$ = 0,01
-    \item Number of epochs $n_{epochs}$ = 100
+    \item Number of epochs $n_{epochs}$ = 10
     \item Batch size $b_{size}$ = 50
 \end{itemize}
 Whereby the learning rate $\nu$ shrinks down the calculated change on every weight $\Delta \omega_{ji}$ in the network according to equation [\ref{eq: nn_mlp_weights}] when using steepest (gradient) descent:
@@ -1293,7 +1305,7 @@ Now we'll switch to the GBM-DT$^{\ast}$ model and train it not only on the main 
     \caption[Cumulative per era correlation of validation predictions over the GBM-DT$^{\ast}$ ensemble model with comparison]{Cumulative per era correlation $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$ of validation predictions $\tilde{y}(\vec{x}(t))$ of the GBM-DT$^{\ast}$ over best performing targets incl. ensemble model}
     \label{fig: cum_corr_val_preds_ensemble}
 \end{figure}
-Additionally the evaluations of the core metrics are listed in the following summary table [\ref{table: summary_metric_predictions_ensemble}]. This includes the mean of the predicted target values mean[$\tilde{y}_i(\vec{x})$], the standard deviation of the predicted targets $\sigma_i(\vec{x})$, the sharpe ratio $S_i$ (equ. \ref{eq: sharpe_ratio}) whereby the risk free yield is set to 0 \%, the maximum drawdown $MDD$ (equ. \ref{eq: mdd}) and the mean correlation $C_{iCyrus}$ with \textit{target cyrus}, as it as the main target for prediction.
+Additionally the evaluations of the core metrics are listed in the following summary table [\ref{table: summary_metric_predictions_ensemble}]. This includes the mean of the predicted target values mean[$\tilde{y}_m(\vec{x})$], the standard deviation of the predicted targets $\sigma_m(\vec{x})$, the sharpe ratio $S_m$ (equ. \ref{eq: sharpe_ratio}) whereby the risk free yield is set to 0 \%, the maximum drawdown $MDD$ (equ. \ref{eq: mdd}) and the mean correlation $C_{iCyrus}$ with \textit{target cyrus}, as it as the main target for prediction.
 \begin{comment}
 \begin{table}[!htbp]
 \centering
@@ -1319,15 +1331,15 @@ mean correlation $C_{iCyrus}$ with \textit{target cyrus} \\}
 \begin{table}[!htbp]
 \centering
 \caption{Summary metrics of prediction values from the ensemble model and different targets \\
-predicted target values $\tilde{y}_i(\vec{x})$ \\
-standard deviation of the predicted targets $\sigma_i(\vec{x})$ \\
-sharpe ratio $S_i$ (\ref{eq: sharpe_ratio}) with risk free yield 0 \% \\
+predicted target values $\tilde{y}_m(\vec{x})$ from sub-models ($m$) \\
+standard deviation of the predicted targets $\sigma_m(\vec{x})$ \\
+sharpe ratio $S_m$ (\ref{eq: sharpe_ratio}) with risk free yield 0 \% \\
 maximum drawdown $MDD$ (\ref{eq: mdd}) \\
-mean correlation $C_{iCyrus}$ with \textit{target cyrus} \\}
+mean correlation $C_{m/Cyrus}$ with \textit{target cyrus} \\}
 \label{table: summary_metric_predictions_ensemble}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textit{targets} & mean[$\tilde{y}_i(\vec{x})$] / 1 & $\sigma_i(\vec{x})$ / 1 & $S_i$ / 1 & $MDD$ / \% & $C_{iCyrus}$ / 1 \\ \hline
+\textit{targets} & mean[$\tilde{y}_m(\vec{x})$] / 1 & $\sigma_m(\vec{x})$ / 1 & $S_m$ / 1 & $MDD$ / \% & $C_{m/Cyrus}$ / 1 \\ \hline
 \hline
 \hline
 \textit{cyrus} & 0,0137 & 0,0206 & 0,6656 & -7,00 & 1,0  \\ \hline
@@ -1389,7 +1401,7 @@ At model \textit{bravo} this feature is ranked on place 2, whereby feature \text
     \label{fig: fi_bravo}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The individual trained GBM-DT$^{\ast}$ models are used to create the ensemble model as it was already visible in figure [\ref{fig: cum_corr_val_preds_ensemble}]. As stated the model weights $\omega_i$ will be set all equally to $\frac{1}{N=5}$ and the resulting prediction values $\tilde{y}$ will be ranked by percentile because of normalization. As it was already said, the goal of this model combination (ensemble modeling) is to reduce the risk of a single model and to diversify predictions based on different features. \\
+The individual trained GBM-DT$^{\ast}$ models are used to create the ensemble model as it was already visible in figure [\ref{fig: cum_corr_val_preds_ensemble}]. As stated the model weights $\omega_m$ will be set all equally and the resulting prediction values $\tilde{y}$ will be ranked by percentile because of normalization. As it was already said, the goal of this model combination (ensemble modeling) is to reduce the risk of a single model and to diversify predictions based on different features. \\
 As stated in section [\ref{sec: neutralizing}] \textit{feature neutralization} proposed by \textit{Numer.ai} can be another very important step in that type of stochastical prediction problem towards a better behaving model over the long run. \textit{Numer.ai} proposes here an elegant way to reduce the feature exposure by neutralizing a whole feature group [Fig. \ref{fig: cum_corr_val_preds_ensemble_neutral}]. Because of this untypical metric at machine learning tasks we'll take a closer look towards the resulting effects. \\
 \begin{figure}[!htpb]
     \centering
@@ -1399,22 +1411,22 @@ As stated in section [\ref{sec: neutralizing}] \textit{feature neutralization} p
 \end{figure}
 We can see that by \textit{neutralizing} the feature group \textit{serenity} one gets the best cumulative per era correlation $\Sigma_i \text{corr}(\tilde{y}_i,y_i)$ within the targets. It has to be noted once that the neutralization process is carried out on the ensemble model, so on multiple targets (in total $N = 5$). \\
 Projecting this one the per era correlation of the whole \textit{serenity} group which was plotted in figure [\ref{fig: per_era_correlation}] one can definitely obtain features with higher fluctuations (a higher variance) and less per era correlation and that is indeed interesting: by \textit{neutralizing} the feature group which had the least per era correlation with the target results in the best overall performance of the model. So by removing the linear part of the feature group with the least linear correlation one gets the best performance and in addition the specific ``feature exposure'' of this group will be reduced. Consequently consistency in the predictions by the model will be increased and therefor the scoring ratios as shown in table [\ref{table: summary_metric_predictions_neutral_ensemble}]. \\
-It is clearly evident that the Sharpe ratio results in a higher value of $S_{n.Ens.} = 0{,}7002$ over the given validation time-period (eras). The volatilities $\sigma_{i}(\vec{x})$ of the models are nearly identical. The maximum drawdown $MDD$ is higher for the neutralized model which ultimately results in a higher correction. \\
+It is clearly evident that the Sharpe ratio results in a higher value of $S_{n.Ens.} = 0{,}7002$ over the given validation time-period (eras). The volatilities $\sigma_{m}(\vec{x})$ of the models are nearly identical. The maximum drawdown $MDD$ is higher for the neutralized model which ultimately results in a higher correction. \\
 The correlation with \textit{target cyrus} over the validation period is indeed lower but because of the higher performance of the model. \\
 Another possible optimization of the model would be the neutralization of multiple feature groups instead of a single one. One would argue that if the neutralization of two seperated groups give better predictions results than the ensemble model solely, neutralizing multiple groups can only lead to better performance. But one has to keep in mind that due the fact that the dataset gets updated weekly (non-stationary) this might change over time. Therefor the continuously review of the model performance is mandatory for getting consistent results.
 Finally one can achieve descent performance results with this built and trained model on this financial prediction problem which was provided by \textit{Numer.ai} \cite{Numerai}.
 \begin{table}[!htbp]
 \centering
 \caption{Summary Metrics of prediction values from the ensemble and neutralized ensemble model \\
-predicted target values $\tilde{y}_i(\vec{x})$ \\
-standard deviation of the predicted targets $\sigma_i(\vec{x})$ \\
-sharpe ratio $S_i$ (\ref{eq: sharpe_ratio}) with risk free yield 0 \% \\
+predicted target values $\tilde{y}_m(\vec{x})$ \\
+standard deviation of the predicted targets $\sigma_m(\vec{x})$ \\
+sharpe ratio $S_m$ (\ref{eq: sharpe_ratio}) with risk free yield 0 \% \\
 maximum drawdown $MDD$ (\ref{eq: mdd}) \\
-mean correlation $C_{iCyrus}$ with \textit{target cyrus} \\}
+mean correlation $C_{m/Cyrus}$ with \textit{target cyrus} \\}
 \label{table: summary_metric_predictions_neutral_ensemble}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textit{targets} & mean[$\tilde{y}_i(\vec{x})$] / 1 & $\sigma_i(\vec{x})$ / 1 & $S_i$ / 1 & $MDD$ / \% & $C_{iCyrus}$ / 1 \\ \hline
+\textit{targets} & mean[$\tilde{y}_m(\vec{x})$] / 1 & $\sigma_m(\vec{x})$ / 1 & $S_m$ / 1 & $MDD$ / \% & $C_{m/Cyrus}$ / 1 \\ \hline
 \hline
 \hline
 \textit{ensemble} & 0,0139 & 0,0208 & 0,6664 & -7,48 & 0,9337 \\ \hline
@@ -1422,6 +1434,7 @@ mean correlation $C_{iCyrus}$ with \textit{target cyrus} \\}
 \textit{neutral. ensemble} & 0,0145 & 0,0208 & 0,7002 & -9,60 & 0,9254 \\ \hline
 \end{tabular}
 \end{table}
+The ensemble model $F_E(\vec{x})$ is built upon different target values, which is is possible due to a similar property. If for example, hypothetically one model gets trained versus the normalized \textit{market cap} and one model gets trained versus the normalized \textit{sector performance} and if the individual targets are unitless, the combination of multiple sub-models indeed make sense. But the individual targets must have the same unit domain for making this conclusion, otherwise a combination of models would not make sense if they do not predict into the same space. \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Conclusion}
@@ -1430,7 +1443,7 @@ Because of the design of the framework one can easily analyze the decision branc
 Bayesian Optimization acts from an abstract point of view as the inner clock working for tuning the model with the right hyper-parameters, which is key for finding the best possible model as shown. For prediction tasks where multiple targets are given one has to evaluate clearly which one to choose. Here is the possibility to use further informative algorithms like Bayesian Model Averaging (BMA) to dynamically adjust the current sub-models by assigning them optimal weights for the given set. Furthermore there's always the possibility to use other supervised machine learning algorithms like Recurrent Neural Networks (RNN), Support Vector Machines (SVM) or Random Forests (RF).
 Here, of course, it is also necessary to optimize the parameters or tune the layout in general.\\
 When dealing specifically with time-series datasets like the one from \textit{Numer.ai} it can be for sure a good alternative to go with a statistical time-series analysis tool (e.g. ARMA). It must be said that normally a GBM-DT framework will not be the first choice solution when predicting a time-series problem. Nevertheless it can be a powerful and even useful tool when the data is aligned in a tabular form. \\
-In general one has to keep in mind when preparing the data on its own for a machine learning task that normalization or standardization plays a significant role for preventing overfitting. Here, in addition the Bias-Variance trade-off has to be considered very inherently. The trade-off between the complexity of a model and the capability of generalization to a new dataset is key when dealing with supervised machine learning tasks. A too simple model can have a high bias and can not represent the complexity of the data well. Consequently a complex model can have low bias but a high variance, what would result also in overfitting and in a poor generaliszation of the data. But when using a ensemble machine learning algorithm like GBM-DT with the right cross-validation metric and an informative hyperparameter optimization technique one gets a huge step closer to a robust and predictive model. \\
+In general one has to keep in mind when preparing the data on its own for a machine learning task that normalization or standardization plays a significant role for preventing overfitting. Here, in addition the Bias-Variance trade-off has to be considered very inherently. The trade-off between the complexity of a model and the capability of generalization to a new dataset is key when dealing with supervised machine learning tasks. A too simple model can have a high bias and can not represent the complexity of the data well. Consequently a complex model can have low bias but a high variance, what would result also in overfitting and in a poor generaliszation of the predictions. But when using a ensemble machine learning algorithm like GBM-DT with the right cross-validation metric and an informative hyperparameter optimization technique one gets a huge step closer to a robust and predictive model. \\
 Finally, it must be said that due to the constant updating of the data (non-stationary data inference problem) of \textit{Numer.ai} \cite{Numerai}, the evaluations will change over time.
 \section{Final thoughts and acknowledgment}
 First, I would like to thank my supervisor Prof. Dr. Wolfgang Von der Linden and Dr. Sascha Ranftl for giving me this opportunity to work on a present and still growing topic in the field of machine learning. Even if it's not specifically a pure physics topic the application of modern prediction algorithms can be mandatory when dealing with a huge amount of data. \\

@@ -152,7 +152,7 @@ def plot_bo_iterations(X_sample, Y_sample, plot_save = True):
     plt.subplots_adjust(hspace = 0.2)
 
     for i in range(number_iterations):
-        #Step 1 : updating the Gaussian process with existing samples
+        #Step 1 : updating the Gaussian process (surrogate model) with existing samples
         gpr.fit(X_sample, Y_sample)
 
         #Step 2 : obtaining the next Sampling Point from the acquisition function (expected_improvement) = (EI)

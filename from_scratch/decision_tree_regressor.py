@@ -35,10 +35,12 @@ class TreeRegressor():
 	predict(X,Y):
 		predicts the function through the regression model built up on the training
 	"""
-	def __init__(self, X : pd.DataFrame, Y : list, min_samples_split = None, 
+	print("hi")
+	def __init__(self, X : pd.DataFrame, Y : np.array, min_samples_split = None, 
+		
 		max_depth = None, depth = None, node_type = None, rule = None):
-
-		#data assignment for specific node
+		print("hi2")
+		#input and output space data assignment for specific node
 		self.X = X
 		self.Y = Y
 
@@ -144,7 +146,7 @@ class TreeRegressor():
 
 			x_conv = self.ma(df_X[feature].unique(), 2)
 
-			#iterating for all calculated xi's from the convulution / moving average
+			#iterating for all calculated xi's from the convolution / moving average
 			for xi in x_conv:
 				#subsampling the X-dataframe into left and right sub-space
 				y_l = df_X[df_X[feature] < xi]['Y'].values 
